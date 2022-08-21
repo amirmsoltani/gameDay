@@ -1,0 +1,2045 @@
+{
+    "categories": [
+        {
+            "id": 0,
+            "name": "Ankle & foot",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 0,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 0,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 0,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 0,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 0,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 0,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 0,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 0,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 0,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 0,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 0,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 0,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 0,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "Cervical",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 1,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 1,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 1,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 1,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 1,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 1,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 1,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 1,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 1,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 1,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 1,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 1,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 1,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Elbow and hand",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 2,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 2,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 2,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 2,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 2,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 2,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 2,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 2,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 2,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 2,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 2,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 2,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 2,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Hip & knee",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 3,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 3,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 3,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 3,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 3,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 3,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 3,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 3,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 3,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 3,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 3,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 3,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 3,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Lumbar thoracic",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 4,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 4,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 4,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 4,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 4,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 4,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 4,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 4,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 4,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 4,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 4,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 4,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 4,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Shoulder",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 5,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 5,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 5,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 5,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 5,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 5,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 5,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 5,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 5,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 5,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 5,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 5,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 5,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "Special",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 6,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 6,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 6,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 6,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 6,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 6,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 6,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 6,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 6,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 6,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 6,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 6,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 6,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "Education",
+            "isDeleted": false,
+            "subCategories": [
+                {
+                    "id": 0,
+                    "categoryId": 7,
+                    "name": "Arom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1,
+                    "categoryId": 7,
+                    "name": "Closed chain",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "categoryId": 7,
+                    "name": "Elastic taping",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "categoryId": 7,
+                    "name": "Flexbar",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "categoryId": 7,
+                    "name": "Gripper",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "categoryId": 7,
+                    "name": "Miscellaneous",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "categoryId": 7,
+                    "name": "Prom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 7,
+                    "categoryId": 7,
+                    "name": "Stretches",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "categoryId": 7,
+                    "name": "Aarom",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 9,
+                    "categoryId": 7,
+                    "name": "Ball",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "categoryId": 7,
+                    "name": "Elastic band",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 11,
+                    "categoryId": 7,
+                    "name": "Fine motor",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                },
+                {
+                    "id": 12,
+                    "categoryId": 7,
+                    "name": "Free weight",
+                    "isDeleted": false,
+                    "exercises": [
+                        {
+                            "id": 0,
+                            "name": "Exercise",
+                            "note": "Note",
+                            "reps": 0,
+                            "isDeleted": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "exercises": [
+        {
+            "exercise": {
+                "id": 0,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": true,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 0,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 0,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 0,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 1,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item2.png",
+                "video": ""
+            },
+            "isFavorite": false,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 1,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 1,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 1,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 2,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": false,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 2,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 2,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 2,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 3,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": false,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 3,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 3,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 3,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 4,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item2.png",
+                "video": ""
+            },
+            "isFavorite": false,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 4,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 4,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 4,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 5,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": true,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 5,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 5,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 5,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 6,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": true,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 6,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 6,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 6,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 7,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item2.png",
+                "video": ""
+            },
+            "isFavorite": false,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 7,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 7,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 7,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "exercise": {
+                "id": 8,
+                "name": "Exercise name",
+                "photoUrl": "/images/temp/exercise-mock-item1.png",
+                "video": ""
+            },
+            "isFavorite": true,
+            "products": [
+                {
+                    "id": 1,
+                    "exerciseId": 8,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "exerciseId": 8,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                },
+                {
+                    "id": 3,
+                    "exerciseId": 8,
+                    "productId": 1,
+                    "product": {
+                        "name": "Product name",
+                        "price": 50,
+                        "photoUrl": "/images/temp/product-mock-item1.png",
+                        "colors": ["#A44FAD", "#6FCBDF", "#D5623D"],
+                        "id": 1
+                    }
+                }
+            ]
+        }
+    ]
+}

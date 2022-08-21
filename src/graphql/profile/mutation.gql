@@ -1,0 +1,16 @@
+mutation UpdateUser($input: UserInput) {
+    user_updateUser(input: $input) {
+        result {
+            platformType
+            language
+            fullName
+            gender
+            id
+            favoriteExercises {
+                userId
+                id
+            }
+        }
+        status
+    }
+}

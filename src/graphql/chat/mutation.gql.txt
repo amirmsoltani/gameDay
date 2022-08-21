@@ -1,0 +1,5 @@
+mutation message_createMessage($messageInput:MessageInput) {
+  message_createMessage(messageInput: $messageInput) {
+    status
+  }
+}

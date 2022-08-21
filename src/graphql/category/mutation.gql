@@ -1,0 +1,57 @@
+mutation CreateCategory($input: CategoryInput) {
+    category_createCategory(input: $input) {
+        result {
+            name
+            id
+            subCategories {
+                name
+                categoryId
+                id
+                isDeleted
+            }
+            isDeleted
+            lastModifiedDate
+        }
+        status
+    }
+}
+
+mutation CreateSubCategory($input: SubCategoryInput) {
+    subcategory_createSubcategory(input: $input) {
+        result {
+            name
+            categoryId
+            id
+            isDeleted
+            category {
+                id
+                name
+                isDeleted
+                lastModifiedDate
+            }
+            isDeleted
+            lastModifiedDate
+        }
+        status
+    }
+}
+
+mutation UpdateSubCategory($input: SubCategoryInput) {
+    subcategory_updateSubcategory(input: $input) {
+        result {
+            name
+            categoryId
+            id
+            isDeleted
+            category {
+                id
+                name
+                isDeleted
+                lastModifiedDate
+            }
+            isDeleted
+            lastModifiedDate
+        }
+        status
+    }
+}

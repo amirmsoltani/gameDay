@@ -1,0 +1,51 @@
+mutation CreateProduct($input: ProductInput) {
+    product_createProduct(input: $input) {
+        result {
+            id
+            name
+            description
+            photoUrl
+            otherMediaUrl
+            price
+            colors
+            exerciseProducts {
+                id
+            }
+            requestProducts {
+                count
+            }
+            isDeleted
+            lastModifiedDate
+        }
+        status
+    }
+}
+
+mutation UpdateProduct($input: ProductInput) {
+    product_updateProduct(input: $input) {
+        result {
+            id
+            name
+            description
+            photoUrl
+            otherMediaUrl
+            price
+            colors
+            exerciseProducts {
+                id
+            }
+            requestProducts {
+                count
+            }
+            isDeleted
+            lastModifiedDate
+        }
+        status
+    }
+}
+
+mutation RemoveProduct($input: Int!) {
+    product_deleteProduct(entityId: $input) {
+        status
+    }
+}

@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    margin: auto;
+    min-width: 320px;
+}
+
+#nprogress .bar {
+    z-index: 99999 !important;
+    background-color: #ff9645 !important;
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #d6e1ff;
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #97a7d1;
+}
+
+@media (max-width: 900px) {
+    *::-webkit-scrollbar {
+        display: none;
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(/images/calender-time.png) no-repeat;
+    width: 25px;
+    height: 25px;
+    border-width: thin;
+}
+
+input[type='date']::before {
+    color: #999999;
+    content: attr(placeholder);
+}
+input[type='date'] {
+    color: #ffffff;
+}
+input[type='date']:focus,
+input[type='date']:valid {
+    color: #666666;
+}
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+    content: '' !important;
+}
+
+input,
+textarea,
+button,
+select,
+a,
+div {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.session-details .swiper-button-next {
+    color: black;
+    top: 27%;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 50px 20px;
+    right: 0px;
+    /* background: url(/icon/left.png) no-repeat; */
+    background-position: center;
+}
+.session-details .swiper-button-next::after {
+}
+
+.session-details .swiper-button-prev {
+    color: black;
+    top: 27%;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 50px 20px;
+    left: 0px;
+    /* background: url(/icon/right.png) no-repeat; */
+    background-position: center;
+}
+.session-details .swiper-button-prev::after {
+}
