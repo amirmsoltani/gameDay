@@ -38,7 +38,6 @@ const LoginComponent: FC = () => {
         login(value.email, value.password);
     }, []);
 
-    console.log(state);
     return (
         <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gap={0}>
             <S.LeftSide gridColumn='span 8'>
