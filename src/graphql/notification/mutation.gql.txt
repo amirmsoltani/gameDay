@@ -1,5 +1,0 @@
-mutation notification_readNotification($notificationId: Int!) {
-    notification_readNotification(notificationId: $notificationId) {
-        status
-    }
-}

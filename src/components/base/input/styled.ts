@@ -11,14 +11,14 @@ export interface StyledInputValueProps {
 
 export const BSInput = styled.input<AppBaseColorType & AppTypographyVariant & AppTypographyWeight>(
     ({
-        theme,
-        fontWeight: weight = 'medium',
-        variant = 'body1',
-        palette,
-        degree,
-        css,
-        disabled
-    }) => ({
+         theme,
+         fontWeight: weight = 'medium',
+         variant = 'body1',
+         palette,
+         degree,
+         css,
+         disabled
+     }) => ({
         ...(css && css),
         color: getTextColor({ degree, palette }),
         ...(disabled && { opacity: 0.7 }),
@@ -41,9 +41,14 @@ export const BSInput = styled.input<AppBaseColorType & AppTypographyVariant & Ap
     })
 );
 
-export const BSTextArea = styled.textarea<
-    AppBaseColorType & AppTypographyVariant & AppTypographyWeight
->(({ theme, fontWeight: weight = 'medium', variant = 'body1', palette, degree, css }) => ({
+export const BSTextArea = styled.textarea<AppBaseColorType & AppTypographyVariant & AppTypographyWeight>(({
+                                                                                                              theme,
+                                                                                                              fontWeight: weight = 'medium',
+                                                                                                              variant = 'body1',
+                                                                                                              palette,
+                                                                                                              degree,
+                                                                                                              css
+                                                                                                          }) => ({
     ...(css && css),
     color: getTextColor({ degree, palette }),
     fontWeight: textWeight[weight],
@@ -69,12 +74,6 @@ export const BSInputContainer = styled.div<StyledInputValueProps>(({ theme, css 
     minWidth: 100,
     position: 'relative',
     width: '100%',
-    '& > p': {
-        margin: 0,
-        marginBottom: 8,
-        // transform: theme.typography.transform.small,
-        transformOrigin: 'bottom left'
-    }
 }));
 
 export const CommonInputRoot = styled(BSInputContainer)(({ theme }) => ({
@@ -115,10 +114,12 @@ export const CommonSelectRoot = styled(BSInputContainer)<{ rounded: boolean }>(
 export const CommonInputWrapper = styled.div<{ error?: boolean; fullWidth: boolean }>(
     ({ theme, error, css, fullWidth }) => ({
         ...(css && css),
-        border: '1px solid',
-        borderColor: theme.palette.primary.dark,
+
+        boxShadow: '0px 2px 4px #1717172E',
+        backgroundColor:theme.palette.grey.lighter,
         borderRadius: theme.shape.borderRadius.common,
         display: 'flex',
+        minHeight:55,
         alignItems: 'center',
         '& > button': {
             padding: 0
@@ -163,8 +164,8 @@ export const BSTwoDigitInputContainer = styled.div<StyledInputValueProps>(
 );
 
 export const BSLabel = styled(MText)(({ theme }) => ({
-    ...theme.typography.h6,
-    margin: '8px 0 ',
+    ...theme.typography.body2,
+    margin: '12px 0 ',
     // transform: theme.typography.transform.small,
     transformOrigin: 'bottom left'
 }));

@@ -1,4 +1,3 @@
-import { FavoriteExercises, Gender, Memberships, Requests, Routines } from 'src/graphql/generated';
 import { ResStatusType } from './graphql.type';
 // import { ProviderType } from './provider';
 import { GenderType, LanguageType, CollectionSegmentInfo } from './util.type';
@@ -25,16 +24,11 @@ export type UserType = {
     userType: UserTypes;
     language?: string;
     address?: String;
-    gender: Gender;
     occupation?: String;
     city?: String;
     state?: String;
     zipCide?: String;
     yearsOfExperience?: Number;
-    favoriteExercises?: FavoriteExercises[];
-    memberships?: Memberships[];
-    requests?: Requests[];
-    routines?: Routines[];
     // notifications?: [Notification];
     externalId?: String;
     createdDate: Date;
@@ -42,7 +36,6 @@ export type UserType = {
     isDeleted: Boolean;
 };
 
-export type LoginType = 'GOOGLE' | 'FACE_BOOK';
 
 export type UserTypes = 'ADMIN' | 'NORMAL_USER';
 

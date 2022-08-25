@@ -1,21 +1,16 @@
-import { LanguageProvider } from '@/i18n/LanguageContext';
-// import DirectionProvider from '@/provider/DirectionProvider';
+import React, { FC,ReactNode } from 'react';
 import Modals from '@/components/shared/modals/modals';
 
-interface Props extends AppLocalization {
-    children: React.ReactNode;
+interface Props  {
+    children: ReactNode;
 }
 
-const BaseLayout = ({ children }: {children: React.ReactNode}) => {
+const BaseLayout:FC<Props> = ({ children }) => {
     return (
-        // <DirectionProvider localization={localization}>
-        // <LanguageProvider localization={localization}>
         <>
             {children}
             <Modals />
         </>
-        // </LanguageProvider>
-        // </DirectionProvider>
     );
 };
 

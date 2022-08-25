@@ -1,5 +1,4 @@
 import { AppLoadingPage } from '@/components/base/loader/LoadingPage';
-import { StyledCenter } from '@/components/base/view-container/Center';
 import { AutorizeTypes } from 'src/@types/auth.type';
 import { useOnUserStateChanged } from 'src/auth/useRedirectOnToken';
 import { useGetMaybeUser } from './UserProvider';

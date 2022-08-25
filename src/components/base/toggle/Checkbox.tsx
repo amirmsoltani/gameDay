@@ -8,11 +8,8 @@ import { StyledRow } from '../view-container/Row';
 import { forwardRef, memo, useMemo } from 'react';
 import { StyledColumn } from '../view-container/Column';
 import { CheckboxTickSquareIcon } from 'src/assets/common/TickSquare';
-import { MButton } from '../MButton';
-import styled from '@emotion/styled';
 import { BSLabel } from '../input/styled';
 import { memoCompareChanges } from '../input/utils';
-import { Checkbox } from '@mui/material';
 
 export interface CheckboxProps extends FormikCheckboxProps {
     value: string;
@@ -31,26 +28,26 @@ interface FormikCheckboxProps {
 export const MCheckbox = memo(
     forwardRef(
         ({
-            label,
-            optionName,
-            direction,
-            onChange,
-            value,
-            meta,
-            degree = 'main',
-            palette2 = 'text',
-            degree2 = 'main',
-            errorSpaceOn = false,
-            palette = "palette",
-            withoutErr = false,
-            ...props
-        }: CheckboxProps & AppBaseColorType & { errorSpaceOn?: boolean, withoutErr?: boolean }, ref) => {
+             label,
+             optionName,
+             direction,
+             onChange,
+             value,
+             meta,
+             degree = 'main',
+             palette2 = 'text',
+             degree2 = 'main',
+             errorSpaceOn = false,
+             palette = 'palette',
+             withoutErr = false,
+             ...props
+         }: CheckboxProps & AppBaseColorType & { errorSpaceOn?: boolean, withoutErr?: boolean }, ref) => {
             const Wrapper = useMemo(() => {
                 return direction === 'row' ? StyledRow : StyledColumn;
             }, [direction]);
             return (
                 <>
-                    {label && <BSLabel fontWeight="semibold">{label}</BSLabel>}
+                    {label && <BSLabel fontWeight='semibold'>{label}</BSLabel>}
                     <Wrapper ref={ref as any}>
                         <StyledCheckbox
                             selected={true}
@@ -59,17 +56,24 @@ export const MCheckbox = memo(
                             }}
                             {...props}>
                             <CheckboxTickSquareIcon
+                                style={{
+                                    width: 16,
+                                    height: 16,
+                                    backgroundColor: '#FAFAFA',
+                                    boxShadow: '0px 2px 4px #1717172E',
+                                    border: 'none'
+                                }}
                                 checked={Boolean(value)}
                             />
                             {/* <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 38 } }}/> */}
                             <input
                                 {...props}
-                                type="checkbox"
+                                type='checkbox'
                                 onChange={onChange}
                                 value={value}
                                 checked={Boolean(value)}
                             />
-                            <MText>{optionName}</MText>
+                            <MText style={{ fontSize: 14 }}>{optionName}</MText>
                         </StyledCheckbox>
                     </Wrapper>
                     {meta && !withoutErr && <InputErrorText meta={meta} errorSpaceOn={errorSpaceOn} />}
