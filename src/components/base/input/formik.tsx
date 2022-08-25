@@ -2,14 +2,11 @@ import { FieldProps, useField } from 'formik';
 import React, { forwardRef, memo, useMemo, useState } from 'react';
 import NumberFormat from 'react-number-format';
 
-import ShowIcon from 'src/assets/common/ShowIcon';
-import HideIcon from 'src/assets/common/HideIcon';
 import { MInput } from '.';
 import { MButton } from '../MButton';
-import { BSInput } from './styled';
 import { MInputProps } from './type.input';
 
-export const MInputFormik = 
+export const MInputFormik =
     forwardRef((props: MInputProps & { fullWidth?: boolean }, ref) => {
         const [field, meta] = useField(props.name);
 
@@ -58,28 +55,28 @@ export const MInputPasswordFormik = memo(
     )
 );
 
-export const MPhoneNumberFormik = memo(
-    forwardRef(
-        ({ form, field, name, placeholder, label }: FieldProps<string> & MInputProps, ref) => {
-            const meta = useMemo(() => {
-                return form.getFieldMeta(field.name);
-            }, [form, field]);
-
-            return (
-                <NumberFormat
-                    ref={ref as any}
-                    customInput={MInput}
-                    format="(+###) ####-#####"
-                    {...field}
-                    name={name}
-                    placeholder={placeholder}
-                    label={label}
-                    meta={meta}
-                    onChange={(e) => {
-                        form.setFieldValue(field.name, e.target.value);
-                    }}
-                />
-            );
-        }
-    )
-);
+// export const MPhoneNumberFormik = memo(
+//     forwardRef(
+//         ({ form, field, name, placeholder, label }: FieldProps<string> & MInputProps, ref) => {
+//             const meta = useMemo(() => {
+//                 return form.getFieldMeta(field.name);
+//             }, [form, field]);
+//
+//             return (
+//                 <NumberFormat
+//                     ref={ref as any}
+//                     customInput={MInput}
+//                     format="(+###) ####-#####"
+//                     {...field}
+//                     name={name}
+//                     placeholder={placeholder}
+//                     label={label}
+//                     meta={meta}
+//                     onChange={(e) => {
+//                         form.setFieldValue(field.name, e.target.value);
+//                     }}
+//                 />
+//             );
+//         }
+//     )
+// );

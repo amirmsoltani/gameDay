@@ -1,8 +1,9 @@
-export const CheckboxTickSquareIcon = ({ checked }: CommonIconProps & { checked: boolean }) => {
+export const CheckboxTickSquareIcon = ({ checked,...props }: CommonIconProps & { checked: boolean }) => {
     return (
         <>
             {checked ? (
                 <svg
+                    {...props}
                     id="Component_39_1"
                     data-name="Component 39 – 1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -31,6 +32,7 @@ export const CheckboxTickSquareIcon = ({ checked }: CommonIconProps & { checked:
                 </svg>
             ) : (
                 <svg
+                    {...props}
                     id="Component_40_1"
                     data-name="Component 40 – 1"
                     xmlns="http://www.w3.org/2000/svg"

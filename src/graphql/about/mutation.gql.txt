@@ -1,5 +1,0 @@
-mutation usersQuestions_addUsersQuestions($usersQuestions: UsersQuestionsInput) {
-    usersQuestions_addUsersQuestions(usersQuestions: $usersQuestions) {
-        status
-    }
-}

@@ -1,0 +1,2801 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+    subscription: Subscription
+}
+
+"The `@defer` directive may be provided for fragment spreads and inline fragments to inform the executor to delay the execution of the current fragment to indicate deprioritization of the current fragment. A query with `@defer` directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred is delivered in a subsequent response. `@include` and `@skip` take precedence over `@defer`."
+directive @defer(
+    "Deferred when true."
+    if: Boolean,
+    "If this argument label has a value other than null, it will be passed on to the result of this defer directive. This label is intended to give client applications a way to identify to which fragment a deferred result belongs to."
+    label: String
+) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
+"The `@stream` directive may be provided for a field of `List` type so that the backend can leverage technology such as asynchronous iterators to provide a partial list in the initial response, and additional list items in subsequent responses. `@include` and `@skip` take precedence over `@stream`."
+directive @stream(
+    "Streamed when true."
+    if: Boolean,
+    "The initial elements that shall be send down to the consumer."
+    initialCount: Int! = 0,
+    "If this argument label has a value other than null, it will be passed on to the result of this stream directive. This label is intended to give client applications a way to identify to which fragment a streamed result belongs to."
+    label: String
+) on FIELD
+
+directive @authorize(
+    "Defines when when the resolver shall be executed.By default the resolver is executed after the policy has determined that the current user is allowed to access the field."
+    apply: ApplyPolicy! = BEFORE_RESOLVER,
+    "The name of the authorization policy that determines access to the annotated resource."
+    policy: String,
+    "Roles that are allowed to access the annotated resource."
+    roles: [String!]
+) on SCHEMA | OBJECT | FIELD_DEFINITION
+
+"Information about the offset pagination."
+type CollectionSegmentInfo {
+    "Indicates whether more items exist following the set defined by the clients arguments."
+    hasNextPage: Boolean!
+    "Indicates whether more items exist prior the set defined by the clients arguments."
+    hasPreviousPage: Boolean!
+}
+
+type Comment {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    lesson: Lesson
+    lessonId: Int
+    rate: Int!
+    replyText: String
+    skillCategory: SkillCategory
+    skillCategoryId: Int
+    status: CommentStatus!
+    text: String
+    user: User
+    userId: Int!
+}
+
+type CommentCollectionSegment {
+    items: [Comment]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Company {
+    createdDate: DateTime!
+    iconUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    jobs: [Job]
+    title: String
+}
+
+type CompanyCollectionSegment {
+    items: [Company]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type ConsultForm {
+    address: String
+    createdDate: DateTime!
+    email: String
+    id: Int!
+    isDeleted: Boolean!
+    name: String
+    phoneNumber: String
+    text: String
+    user: User
+    userId: Int!
+}
+
+type ConsultFormCollectionSegment {
+    items: [ConsultForm]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type ConversationDto {
+    conversationId: Int!
+    latestMessageDate: DateTime!
+    subject: String
+    unreadCount: Int!
+    user: User
+    userEmail: String
+    userId: Int!
+}
+
+type ConversationDtoCollectionSegment {
+    items: [ConversationDto]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Conversations {
+    createdDate: DateTime!
+    firstUnreadCount: Int!
+    firstUser: User
+    firstUserId: Int!
+    id: Int!
+    isDeleted: Boolean!
+    latestMessageDate: DateTime!
+    messages: [Messages]
+    secondUnreadCount: Int!
+    secondUser: User
+    secondUserId: Int!
+    subject: String
+}
+
+type CourseDto {
+    iconUrl: String
+    id: Int!
+    lessons: [LessonDto]
+    rate: Int!
+    title: String
+}
+
+type InterviewCategory {
+    createdDate: DateTime!
+    id: Int!
+    interviewQuestions: [InterviewQuestion]
+    isDeleted: Boolean!
+    title: String
+}
+
+type InterviewCategoryCollectionSegment {
+    items: [InterviewCategory]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type InterviewQuestion {
+    createdDate: DateTime!
+    description: String
+    id: Int!
+    interviewCategory: InterviewCategory
+    interviewCategoryId: Int!
+    isDeleted: Boolean!
+    title: String
+    userInterviewQuestions: [UserInterviewQuestion]
+}
+
+type InterviewQuestionCollectionSegment {
+    items: [InterviewQuestion]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Job {
+    city: String
+    company: Company
+    companyId: Int!
+    country: String
+    createdDate: DateTime!
+    description: String
+    education: Education!
+    experienceLevel: ExperienceLevel!
+    id: Int!
+    isDeleted: Boolean!
+    jobCategory: JobCategory
+    jobCategoryId: Int!
+    jobRequests: [JobRequest]
+    jobSkills: [JobSkill]
+    jobType: JobType!
+    salary: Float!
+    status: ShowStatus!
+    title: String
+    userFavoriteJobs: [UserFavoriteJob]
+}
+
+type JobCategory {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    jobs: [Job]
+    title: String
+}
+
+type JobCategoryCollectionSegment {
+    items: [JobCategory]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type JobCollectionSegment {
+    items: [Job]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type JobRequest {
+    cVFileUrl: String
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    job: Job
+    jobId: Int!
+    status: JobStatus!
+    user: User
+    userId: Int!
+}
+
+type JobRequestCollectionSegment {
+    items: [JobRequest]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type JobSkill {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    job: Job
+    jobId: Int!
+    skill: Skill
+    skillId: Int!
+}
+
+type JobSkillCollectionSegment {
+    items: [JobSkill]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Lesson {
+    comments: [Comment]
+    createdDate: DateTime!
+    description: String
+    id: Int!
+    isDeleted: Boolean!
+    skillCategory: SkillCategory
+    skillCategoryId: Int!
+    time: Int!
+    title: String
+    topics: [Topic]
+}
+
+type LessonCollectionSegment {
+    items: [Lesson]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type LessonDto {
+    comments: [Comment]
+    description: String
+    id: Int!
+    skillCategoryId: Int!
+    time: Int!
+    title: String
+    topics: [Topic]
+    totalTopicViewd: Int!
+}
+
+type ListResponseBaseOfComment {
+    result(order: [CommentSortInput!], skip: Int, take: Int, where: CommentFilterInput): CommentCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfCompany {
+    result(order: [CompanySortInput!], skip: Int, take: Int, where: CompanyFilterInput): CompanyCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfConsultForm {
+    result(order: [ConsultFormSortInput!], skip: Int, take: Int, where: ConsultFormFilterInput): ConsultFormCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfConversationDto {
+    result(order: [ConversationDtoSortInput!], skip: Int, take: Int, where: ConversationDtoFilterInput): ConversationDtoCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfInterviewCategory {
+    result(order: [InterviewCategorySortInput!], skip: Int, take: Int, where: InterviewCategoryFilterInput): InterviewCategoryCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfInterviewQuestion {
+    result(order: [InterviewQuestionSortInput!], skip: Int, take: Int, where: InterviewQuestionFilterInput): InterviewQuestionCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfJob {
+    result(order: [JobSortInput!], skip: Int, take: Int, where: JobFilterInput): JobCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfJobCategory {
+    result(order: [JobCategorySortInput!], skip: Int, take: Int, where: JobCategoryFilterInput): JobCategoryCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfJobRequest {
+    result(order: [JobRequestSortInput!], skip: Int, take: Int, where: JobRequestFilterInput): JobRequestCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfJobSkill {
+    result(order: [JobSkillSortInput!], skip: Int, take: Int, where: JobSkillFilterInput): JobSkillCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfLesson {
+    result(order: [LessonSortInput!], skip: Int, take: Int, where: LessonFilterInput): LessonCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfMessages {
+    result(order: [MessagesSortInput!], skip: Int, take: Int, where: MessagesFilterInput): MessagesCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfReport {
+    result(order: [ReportSortInput!], skip: Int, take: Int, where: ReportFilterInput): ReportCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfRole {
+    result(order: [RoleSortInput!], skip: Int, take: Int, where: RoleFilterInput): RoleCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfSettings {
+    result(order: [SettingsSortInput!], skip: Int, take: Int, where: SettingsFilterInput): SettingsCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfSkill {
+    result(order: [SkillSortInput!], skip: Int, take: Int, where: SkillFilterInput): SkillCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfSkillCategory {
+    result(order: [SkillCategorySortInput!], skip: Int, take: Int, where: SkillCategoryFilterInput): SkillCategoryCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfSkillDto {
+    result(order: [SkillDtoSortInput!], skip: Int, take: Int, where: SkillDtoFilterInput): SkillDtoCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfSkillQuestion {
+    result(order: [SkillQuestionSortInput!], skip: Int, take: Int, where: SkillQuestionFilterInput): SkillQuestionCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfTopic {
+    result(order: [TopicSortInput!], skip: Int, take: Int, where: TopicFilterInput): TopicCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUser {
+    result(order: [UserSortInput!], skip: Int, take: Int, where: UserFilterInput): UserCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserBadge {
+    result(order: [UserBadgeSortInput!], skip: Int, take: Int, where: UserBadgeFilterInput): UserBadgeCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserCertificate {
+    result(order: [UserCertificateSortInput!], skip: Int, take: Int, where: UserCertificateFilterInput): UserCertificateCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserCourse {
+    result(order: [UserCourseSortInput!], skip: Int, take: Int, where: UserCourseFilterInput): UserCourseCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserCourseHistory {
+    result(order: [UserCourseHistorySortInput!], skip: Int, take: Int, where: UserCourseHistoryFilterInput): UserCourseHistoryCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserEducation {
+    result(order: [UserEducationSortInput!], skip: Int, take: Int, where: UserEducationFilterInput): UserEducationCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserFavoriteJob {
+    result(order: [UserFavoriteJobSortInput!], skip: Int, take: Int, where: UserFavoriteJobFilterInput): UserFavoriteJobCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserInterviewQuestion {
+    result(order: [UserInterviewQuestionSortInput!], skip: Int, take: Int, where: UserInterviewQuestionFilterInput): UserInterviewQuestionCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserProfessionalSkill {
+    result(order: [UserProfessionalSkillSortInput!], skip: Int, take: Int, where: UserProfessionalSkillFilterInput): UserProfessionalSkillCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserSkill {
+    result(order: [UserSkillSortInput!], skip: Int, take: Int, where: UserSkillFilterInput): UserSkillCollectionSegment
+    status: ResponseStatus!
+}
+
+type ListResponseBaseOfUserWorkExperience {
+    result(order: [UserWorkExperienceSortInput!], skip: Int, take: Int, where: UserWorkExperienceFilterInput): UserWorkExperienceCollectionSegment
+    status: ResponseStatus!
+}
+
+type Messages {
+    conversation: Conversations
+    conversationId: Int!
+    createdAt: DateTime!
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    messageType: MessageType!
+    photoUrl: String
+    sender: User
+    senderId: Int!
+    text: String
+}
+
+type MessagesCollectionSegment {
+    items: [Messages]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Mutation {
+    comment_addComment(input: CommentInput): ResponseBaseOfComment
+    comment_deleteComment(id: Int!): ResponseBase
+    comment_updateComment(id: Int!, input: UpdateCommentInput): ResponseBaseOfComment
+    company_addCompany(input: CompanyInput): ResponseBaseOfCompany
+    company_deleteCompany(id: Int!): ResponseBase
+    company_updateCompany(id: Int!, input: CompanyInput): ResponseBaseOfCompany
+    consult_addConsultForm(input: ConsultFormInput): ResponseBaseOfConsultForm
+    create(input: ReportInput): ResponseBaseOfReport
+    delete(entityId: Int!): ResponseBase
+    interviewCategory_addCategory(input: InterviewCategoryInput): ResponseBaseOfInterviewCategory
+    interviewCategory_deleteCategory(id: Int!): ResponseBase
+    interviewCategory_updateCategory(id: Int!, input: InterviewCategoryInput): ResponseBaseOfInterviewCategory
+    interviewQuestion_addQuestion(input: InterviewQuestionInput): ResponseBaseOfInterviewQuestion
+    interviewQuestion_deleteQuestion(id: Int!): ResponseBase
+    interviewQuestion_updateQuestion(id: Int!, input: InterviewQuestionInput): ResponseBaseOfInterviewQuestion
+    jobCategory_addJobCategory(input: JobCategoryInput): ResponseBaseOfJobCategory
+    jobCategory_deleteJobCategory(id: Int!): ResponseBase
+    jobCategory_updateJobCategory(id: Int!, input: JobCategoryInput): ResponseBaseOfJobCategory
+    jobRequest_applyJobRequest(input: JobRequestInput): ResponseBaseOfJobRequest
+    jobRequest_deleteJobRequest(id: Int!): ResponseBase
+    jobRequest_setStatusJobRequest(input: SetStatusJobRequestInput): ResponseBase
+    jobSkill_addJobSkill(input: JobSkillInput): ResponseBaseOfJobSkill
+    jobSkill_deleteJobSkill(id: Int!): ResponseBase
+    jobSkill_updateJobSkill(id: Int!, input: JobSkillInput): ResponseBaseOfJobSkill
+    job_addJob(input: JobInput): ResponseBaseOfJob
+    job_changeStatus(input: JobStatusInput): ResponseBase
+    job_deleteJob(id: Int!): ResponseBase
+    job_updateJob(id: Int!, input: JobInput): ResponseBaseOfJob
+    lesson_addLesson(input: LessonInput): ResponseBaseOfLesson
+    lesson_deleteLesson(id: Int!): ResponseBase
+    lesson_updateLesson(id: Int!, input: LessonInput): ResponseBaseOfLesson
+    message_createMessage(messageInput: MessageInput): ResponseBaseOfMessages
+    message_deleteMessage(messageId: Int!): ResponseBaseOfMessages
+    message_removeConversation(conversationId: Int!): ResponseBase
+    report_addReport(iMEI: String): ResponseBaseOfReport
+    settings_update(input: SettingsInput): ResponseBaseOfSettings
+    skillCategory_addSkillCategory(input: SkillCategoryInput): ResponseBaseOfSkillCategory
+    skillCategory_deleteSkillCategory(id: Int!): ResponseBase
+    skillCategory_updateSkillCategory(id: Int!, input: SkillCategoryInput): ResponseBaseOfSkillCategory
+    skillQuestion_addQuestion(input: SkillQuestionInput): ResponseBaseOfSkillQuestion
+    skillQuestion_deleteQuestion(id: Int!): ResponseBase
+    skillQuestion_updateQuestion(id: Int!, input: SkillQuestionInput): ResponseBaseOfSkillQuestion
+    skill_addSkill(input: SkillInput): ResponseBaseOfSkill
+    skill_addSkillOfDay(skillId: Int!): ResponseBase
+    skill_deleteSkill(id: Int!): ResponseBase
+    skill_removeSkillOfDay(skillId: Int!): ResponseBase
+    skill_updateSkill(id: Int!, input: SkillInput): ResponseBaseOfSkill
+    topic_addTopic(input: TopicInput): ResponseBaseOfTopic
+    topic_addViewedTopic(topicId: Int!): ResponseBase
+    topic_deleteTopic(id: Int!): ResponseBase
+    topic_saveTopic(topicId: Int!): ResponseBase
+    topic_updateTopic(id: Int!, input: TopicInput): ResponseBaseOfTopic
+    update(input: ReportInput): ResponseBaseOfReport
+    userBadge_add(input: UserBadgeInput): ResponseBaseOfUserBadge
+    userCertificate_add(input: UserCertificateInput): ResponseBaseOfUserCertificate
+    userCourseHistory_add(skillCategoryId: Int!): ResponseBase
+    userCourse_add(skillCategoryId: Int!): ResponseBase
+    userCourse_updateStatusToCompleted(skillCategoryId: Int!): ResponseBase
+    userEducation_add(input: UserEducationInput): ResponseBaseOfUserEducation
+    userFavoriteJob_addOrRemoveFavorite(input: UserFavoriteJobInput): ResponseBase
+    userInterviewQuestion_add(input: UserInterviewQuestionInput): ResponseBaseOfUserInterviewQuestion
+    userInterviewQuestion_delete(id: Int!): ResponseBase
+    userProfessionalSkill_addSkills(input: UserProfessionalSkillInput): ResponseBaseOfUserProfessionalSkill
+    userProfessionalSkill_deleteSkills(id: Int!): ResponseBase
+    userSkill_addInterestedSkills(ids: [Int!]): ListResponseBaseOfUserSkill
+    userWorkExperience_add(input: UserWorkExperienceInput): ResponseBaseOfUserWorkExperience
+    user_createAdmin(input: CreateAdminInput): ResponseBaseOfUser
+    user_deleteAccount: ResponseBase
+    user_deleteAdmin(id: Int!): ResponseBase
+    user_signUp(registerInput: RegisterInput): ResponseBaseOfUser
+    user_suspendAccount(userId: Int!): ResponseBase
+    user_updateAdmin(id: Int!, input: UpdateAdminInput): ResponseBaseOfUser
+    user_updateProfile(input: UserInput): ResponseBaseOfUser
+}
+
+type Query {
+    comment_getComment(commentId: Int!): SingleResponseBaseOfComment
+    comment_getComments: ListResponseBaseOfComment
+    company_getCompanies: ListResponseBaseOfCompany
+    company_getCompany(companyId: Int!): ResponseBaseOfCompany
+    consult_getConsultForm(consultFormId: Int!): SingleResponseBaseOfConsultForm
+    consult_getConsultForms: ListResponseBaseOfConsultForm
+    get(entityId: Int!): ResponseBaseOfReport
+    interviewCategory_getInterviewCategories: ListResponseBaseOfInterviewCategory
+    interviewCategory_getInterviewCategory(interviewCategoryId: Int!): SingleResponseBaseOfInterviewCategory
+    interviewQuestion_getInterviewQuestion(interviewQuestionId: Int!): SingleResponseBaseOfInterviewQuestion
+    interviewQuestion_getInterviewQuestions: ListResponseBaseOfInterviewQuestion
+    items: ListResponseBaseOfUserBadge
+    jobSkill_getJobSkill(jobskillId: Int!): SingleResponseBaseOfJobSkill
+    jobSkill_getJobSkills: ListResponseBaseOfJobSkill
+    jobSkill_getJobSkilsByJobId(jobId: Int!): ListResponseBaseOfJobSkill
+    job_getAllActiveJobs: ListResponseBaseOfJob
+    job_getFollowedJobs: ListResponseBaseOfJob
+    job_getJob(jobId: Int!): ResponseBaseOfJob
+    job_getJobs: ListResponseBaseOfJob
+    jobcategory_getJobCategories: ListResponseBaseOfJobCategory
+    jobcategory_getJobCategory(jobcategoryId: Int!): ResponseBaseOfJobCategory
+    jobrequest_getJobRequest(jobRequestId: Int!): SingleResponseBaseOfJobRequest
+    jobrequest_getJobRequests: ListResponseBaseOfJobRequest
+    jobrequest_getJobRequestsJobCurrentUser: ListResponseBaseOfJobRequest
+    lesson_getLesson(lessonId: Int!): SingleResponseBaseOfLesson
+    lesson_getLessons: ListResponseBaseOfLesson
+    message_getConversation(conversationId: Int!): ListResponseBaseOfMessages
+    message_getConversationForUser(otherUserId: Int!): ResponseBaseOfConversations
+    message_getUserMessages: ListResponseBaseOfConversationDto
+    report_getReports: ListResponseBaseOfReport
+    role_getRoles: ListResponseBaseOfRole
+    settings_getSetting(settingId: Int!): SingleResponseBaseOfSettings
+    settings_getSettings: ListResponseBaseOfSettings
+    skillQuestion_getQuestionsRandom(skillId: Int!): ListResponseBaseOfSkillQuestion
+    skillQuestion_getSkillQuestion(skillQuestionId: Int!): SingleResponseBaseOfSkillQuestion
+    skillQuestion_getSkillQuestions: ListResponseBaseOfSkillQuestion
+    skill_getCategoryById(skillCategoryId: Int!): ResponseBaseOfCourseDto
+    skill_getPopularCategorySkills: ListResponseBaseOfSkillCategory
+    skill_getPopularSkills: ListResponseBaseOfSkill
+    skill_getRecommendedSkills: ListResponseBaseOfSkillDto
+    skill_getSkill(skillId: Int!): SingleResponseBaseOfSkill
+    skill_getSkillPercentage(skillId: Int!): ResponseBaseOfSkillLevelDto
+    skill_getSkills: ListResponseBaseOfSkill
+    skill_getSkillsOfDay: ListResponseBaseOfSkill
+    skillcategory_getSkillCategories: ListResponseBaseOfSkillCategory
+    skillcategory_getSkillCategory(skillCategoryId: Int!): SingleResponseBaseOfSkillCategory
+    topic_getTopic(topicId: Int!): SingleResponseBaseOfTopic
+    topic_getTopics: ListResponseBaseOfTopic
+    topic_savedTopics: ListResponseBaseOfTopic
+    userBadge_getBadges: ListResponseBaseOfUserBadge
+    userBadge_getBadgesByUserId(userId: Int!): ListResponseBaseOfUserBadge
+    userCourseHistory_getAllCourses: ListResponseBaseOfUserCourseHistory
+    userInterviewQuestion_getAllByUserId(userId: Int!): ListResponseBaseOfUserInterviewQuestion
+    userProfessionalSkill_getAllProfessionalSkills(userId: Int!): ListResponseBaseOfUserProfessionalSkill
+    userProfessionalSkill_getProfessionalSkills: ListResponseBaseOfUserProfessionalSkill
+    userWorkExperience_getAllUserWorkExperiences(userId: Int!): ListResponseBaseOfUserWorkExperience
+    userWorkExperience_getUserWorkExperiences: ListResponseBaseOfUserWorkExperience
+    user_getProfile: SingleResponseBaseOfUser
+    user_getReportBoxes: ResponseBaseOfReportBoxDto
+    user_getTopUsers: ListResponseBaseOfUser
+    user_getUser(userId: Int!): SingleResponseBaseOfUser
+    user_getUsers: ListResponseBaseOfUser
+    user_login: SingleResponseBaseOfUser
+    user_signIn: ResponseBaseOfUser
+    usercertificate_getAllUserCertificates(userId: Int!): ListResponseBaseOfUserCertificate
+    usercertificate_getUserCertificates: ListResponseBaseOfUserCertificate
+    usercourse_getAllUserCourses(userId: Int!): ListResponseBaseOfUserCourse
+    usercourse_getUserCourses: ListResponseBaseOfUserCourse
+    usereEucation_getAllUserEducations(userId: Int!): ListResponseBaseOfUserEducation
+    usereEucation_getUserEducations: ListResponseBaseOfUserEducation
+    userfavoritejob_getExistFavoiteJob(jobId: Int!): ResponseBaseOfUserFavoriteJob
+    userskill_getAllUserSkills(userId: Int!): ListResponseBaseOfUserSkill
+    userskill_getUserSkills: ListResponseBaseOfUserSkill
+}
+
+type Report {
+    createdDate: DateTime!
+    iMEI: String
+    id: Int!
+    isDeleted: Boolean!
+}
+
+type ReportBoxDto {
+    totalCourses: Int!
+    totalJobs: Int!
+    totalSkills: Int!
+    totalUsers: Int!
+}
+
+type ReportCollectionSegment {
+    items: [Report]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type ResponseBase {
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfComment {
+    result: Comment
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfCompany {
+    result: Company
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfConsultForm {
+    result: ConsultForm
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfConversations {
+    result: Conversations
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfCourseDto {
+    result: CourseDto
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfInterviewCategory {
+    result: InterviewCategory
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfInterviewQuestion {
+    result: InterviewQuestion
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfJob {
+    result: Job
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfJobCategory {
+    result: JobCategory
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfJobRequest {
+    result: JobRequest
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfJobSkill {
+    result: JobSkill
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfLesson {
+    result: Lesson
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfMessages {
+    result: Messages
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfReport {
+    result: Report
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfReportBoxDto {
+    result: ReportBoxDto
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfRole {
+    result: Role
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfSettings {
+    result: Settings
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfSkill {
+    result: Skill
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfSkillCategory {
+    result: SkillCategory
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfSkillLevelDto {
+    result: SkillLevelDto
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfSkillQuestion {
+    result: SkillQuestion
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfTopic {
+    result: Topic
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUser {
+    result: User
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserBadge {
+    result: UserBadge
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserCertificate {
+    result: UserCertificate
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserCourse {
+    result: UserCourse
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserCourseHistory {
+    result: UserCourseHistory
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserEducation {
+    result: UserEducation
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserFavoriteJob {
+    result: UserFavoriteJob
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserInterviewQuestion {
+    result: UserInterviewQuestion
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserProfessionalSkill {
+    result: UserProfessionalSkill
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserSkill {
+    result: UserSkill
+    status: ResponseStatus!
+}
+
+type ResponseBaseOfUserWorkExperience {
+    result: UserWorkExperience
+    status: ResponseStatus!
+}
+
+type Role {
+    createdDate: DateTime!
+    iconUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    title: String
+    userRoles: [UserRole]
+}
+
+type RoleCollectionSegment {
+    items: [Role]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type Settings {
+    createdDate: DateTime!
+    firstPercent: Int!
+    id: Int!
+    isDeleted: Boolean!
+    secondPercent: Int!
+    thirdPercent: Int!
+}
+
+type SettingsCollectionSegment {
+    items: [Settings]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type SingleResponseBaseOfComment {
+    result: Comment
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfConsultForm {
+    result: ConsultForm
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfInterviewCategory {
+    result: InterviewCategory
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfInterviewQuestion {
+    result: InterviewQuestion
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfJobRequest {
+    result: JobRequest
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfJobSkill {
+    result: JobSkill
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfLesson {
+    result: Lesson
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfSettings {
+    result: Settings
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfSkill {
+    result: Skill
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfSkillCategory {
+    result: SkillCategory
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfSkillQuestion {
+    result: SkillQuestion
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfTopic {
+    result: Topic
+    status: ResponseStatus!
+}
+
+type SingleResponseBaseOfUser {
+    result: User
+    status: ResponseStatus!
+}
+
+type Skill {
+    createdDate: DateTime!
+    iconUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    isToday: Boolean!
+    jobSkills: [JobSkill]
+    skillCategory: SkillCategory
+    skillCategoryId: Int!
+    skillQuestions: [SkillQuestion]
+    title: String
+    updateDate: DateTime!
+    userSkills: [UserSkill]
+}
+
+type SkillCategory {
+    comments: [Comment]
+    createdDate: DateTime!
+    iconUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    lessons: [Lesson]
+    rate: Int!
+    skills: [Skill]
+    title: String
+    userCourseHistories: [UserCourseHistory]
+    userCourses: [UserCourse]
+}
+
+type SkillCategoryCollectionSegment {
+    items: [SkillCategory]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type SkillCollectionSegment {
+    items: [Skill]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type SkillDto {
+    categoryTitle: String
+    iconUrl: String
+    id: Int!
+    title: String
+}
+
+type SkillDtoCollectionSegment {
+    items: [SkillDto]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type SkillLevelDto {
+    level: SkillLevel!
+}
+
+type SkillQuestion {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    skill: Skill
+    skillId: Int!
+    skillQuestionOptions: [SkillQuestionOption]
+    title: String
+}
+
+type SkillQuestionCollectionSegment {
+    items: [SkillQuestion]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type SkillQuestionOption {
+    createdDate: DateTime!
+    id: Int!
+    isCorrect: Boolean!
+    isDeleted: Boolean!
+    skillQuestion: SkillQuestion
+    skillQuestionId: Int!
+    title: String
+}
+
+type Subscription {
+    messageAdded(userId: Int!): Messages
+}
+
+type Topic {
+    createdDate: DateTime!
+    description: String
+    fileUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    isMain: Boolean!
+    lesson: Lesson
+    lessonId: Int!
+    title: String
+    userTopicVieweds: [UserTopicViewed]
+}
+
+type TopicCollectionSegment {
+    items: [Topic]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type User {
+    activeStatus: ActiveStatus!
+    address: String
+    age: Int!
+    cVFileUrl: String
+    city: String
+    comments: [Comment]
+    consultForms: [ConsultForm]
+    country: String
+    createdDate: DateTime!
+    email: String
+    externalId: String
+    firstName: String
+    id: Int!
+    isDeleted: Boolean!
+    jobRequests: [JobRequest]
+    lastName: String
+    lastSeen: DateTime!
+    phoneNumber: String
+    pictureUrl: String
+    point: Int!
+    postalCode: String
+    rejectReason: String
+    userCertificates: [UserCertificate]
+    userCourseHistories: [UserCourseHistory]
+    userCourses: [UserCourse]
+    userEducations: [UserEducation]
+    userFavoriteJobs: [UserFavoriteJob]
+    userInterviewQuestions: [UserInterviewQuestion]
+    userProfessionalSkills: [UserProfessionalSkill]
+    userRoles: [UserRole]
+    userSkills: [UserSkill]
+    userTopicVieweds: [UserTopicViewed]
+    userType: UserType!
+    userWorkExperiences: [UserWorkExperience]
+}
+
+type UserBadge {
+    createdDate: DateTime!
+    id: Int!
+    isBadge: Boolean!
+    isDeleted: Boolean!
+    rightCount: Int!
+    score: Int!
+    skill: Skill
+    skillId: Int!
+    user: User
+    userId: Int!
+    wrongCount: Int!
+}
+
+type UserBadgeCollectionSegment {
+    items: [UserBadge]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserCertificate {
+    createdDate: DateTime!
+    fileUrl: String
+    id: Int!
+    isDeleted: Boolean!
+    user: User
+    userId: Int!
+}
+
+type UserCertificateCollectionSegment {
+    items: [UserCertificate]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserCollectionSegment {
+    items: [User]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserCourse {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    skillCategory: SkillCategory
+    skillCategoryId: Int!
+    status: UserCourseStatus!
+    user: User
+    userId: Int!
+}
+
+type UserCourseCollectionSegment {
+    items: [UserCourse]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserCourseHistory {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    skillCategory: SkillCategory
+    skillCategoryId: Int!
+    user: User
+    userId: Int!
+}
+
+type UserCourseHistoryCollectionSegment {
+    items: [UserCourseHistory]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserEducation {
+    city: String
+    country: String
+    createdDate: DateTime!
+    field: String
+    from: DateTime
+    id: Int!
+    isDeleted: Boolean!
+    level: String
+    to: DateTime
+    university: String
+    user: User
+    userId: Int!
+}
+
+type UserEducationCollectionSegment {
+    items: [UserEducation]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserFavoriteJob {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    job: Job
+    jobId: Int!
+    user: User
+    userId: Int!
+}
+
+type UserFavoriteJobCollectionSegment {
+    items: [UserFavoriteJob]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserInterviewQuestion {
+    createdDate: DateTime!
+    id: Int!
+    interviewQuestion: InterviewQuestion
+    interviewQuestionId: Int!
+    isDeleted: Boolean!
+    user: User
+    userId: Int!
+    videoUrl: String
+}
+
+type UserInterviewQuestionCollectionSegment {
+    items: [UserInterviewQuestion]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserProfessionalSkill {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    title: String
+    user: User
+    userId: Int!
+}
+
+type UserProfessionalSkillCollectionSegment {
+    items: [UserProfessionalSkill]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserRole {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    role: Role
+    roleId: Int!
+    user: User
+    userId: Int!
+}
+
+type UserSkill {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    skill: Skill
+    skillId: Int!
+    user: User
+    userId: Int!
+}
+
+type UserSkillCollectionSegment {
+    items: [UserSkill]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+type UserTopicViewed {
+    createdDate: DateTime!
+    id: Int!
+    isDeleted: Boolean!
+    isSaved: Boolean!
+    topic: Topic
+    topicId: Int!
+    user: User
+    userId: Int!
+}
+
+type UserWorkExperience {
+    city: String
+    companyName: String
+    country: String
+    createdDate: DateTime!
+    from: DateTime
+    id: Int!
+    isDeleted: Boolean!
+    isWorking: Boolean!
+    jobTitle: String
+    to: DateTime
+    user: User
+    userId: Int!
+}
+
+type UserWorkExperienceCollectionSegment {
+    items: [UserWorkExperience]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
+enum ActiveStatus {
+    ACCEPTED
+    PENDING
+    REJECTED
+    SUSPEND
+}
+
+enum ApplyPolicy {
+    AFTER_RESOLVER
+    BEFORE_RESOLVER
+}
+
+enum CommentStatus {
+    ACCEPTED
+    IN_PREGRESS
+}
+
+enum Education {
+    ALL
+    ASSOCIATE
+    BACHELOR
+    DOCTORAL
+    HIGH_SCHOOL
+    MASTER
+}
+
+enum ExperienceLevel {
+    ALL
+    ENTRY
+    JUNIOR
+    MID
+    NO_EXPERIENCE
+    SENIOR
+}
+
+enum JobStatus {
+    ACCEPTED
+    INTERVIEW
+    NOT_QUALIFIED
+    PENDING
+}
+
+enum JobType {
+    ALL
+    CONTRACT
+    FREELANCE
+    FULL_TIME
+    INTERSHIP
+    PART_TIME
+    TEMPORARY
+}
+
+enum LoginType {
+    FACE_BOOK
+    GOOGLE
+    NONE
+}
+
+enum MessageType {
+    FILE
+    PHOTO
+    TEXT
+    VIDEO
+    VOICE
+}
+
+enum ResponseStatus {
+    ACCESS_DENIED
+    ACTIVE_BIDS_EXIST
+    ALREADY_EXIST
+    ALREADY_FOLLOWED
+    ALREADY_REMOVED
+    AUTHENTICATION_FAILED
+    COMMENT_NOT_FOUND
+    DIFFRENET_IDS
+    DURATION_IS_REQUIRED
+    FAILED
+    FAILED_PAYMENT
+    FAILED_TO_WIDTHRAW
+    HOST_NOT_FOUND
+    HUDUR_ACCOUNT_NEEDS_TO_HAVE_TRANSFER_ENABLED
+    INVALID_TIME_RANGE
+    INVALID_TIME_SYNTAX
+    IN_PROGRESS_BID_EXIST
+    IN_VALID_AMOUNT_FOR_STRIPE_PAYMENT
+    NOT_ALLOWED
+    NOT_ENOUGH_DATA
+    NOT_FOUND
+    PLAT_FORM_DONT_HAVE_ENOUGH_BALANCE_IN_STRIP_ACCOUNT
+    POST_NOT_FOUND
+    SAME_ID
+    SELF_BID_NOT_ALLOWED
+    SELF_MESSAGE_NOT_ALLOWED
+    SESSION_NOT_FOUND
+    STRIPE_ACCOUNT_NOT_EXIST
+    SUCCESS
+    TIME_CONFLICT
+    UNKNOWN_ERROR
+    USERNAME_ALREADY_EXIST
+    USER_DONT_HAVE_ENOUGH_BALANCE_IN_STRIP_ACCOUNT
+    USER_DONT_HAVE_STRIPE_ACCOUNT
+    USER_IS_NOT_ACTIVE
+    USER_NOT_FOUND
+}
+
+enum ShowStatus {
+    ACTIVE
+    INACTIVE
+}
+
+enum SkillLevel {
+    HIGH
+    LOW
+    MEDIUM
+}
+
+enum SortEnumType {
+    ASC
+    DESC
+}
+
+enum UserCourseStatus {
+    COMPLETED
+    IN_PROGRESS
+}
+
+enum UserType {
+    ADMIN
+    ADMIN2_LEVEL
+    CLIENT
+}
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime
+
+input ActiveStatusOperationFilterInput {
+    eq: ActiveStatus
+    in: [ActiveStatus!]
+    neq: ActiveStatus
+    nin: [ActiveStatus!]
+}
+
+input BooleanOperationFilterInput {
+    eq: Boolean
+    neq: Boolean
+}
+
+input CommentFilterInput {
+    and: [CommentFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    lesson: LessonFilterInput
+    lessonId: ComparableNullableOfInt32OperationFilterInput
+    or: [CommentFilterInput!]
+    rate: ComparableInt32OperationFilterInput
+    replyText: StringOperationFilterInput
+    skillCategory: SkillCategoryFilterInput
+    skillCategoryId: ComparableNullableOfInt32OperationFilterInput
+    status: CommentStatusOperationFilterInput
+    text: StringOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input CommentInput {
+    lessonId: Int!
+    rate: Int!
+    text: String
+}
+
+input CommentSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    lesson: LessonSortInput
+    lessonId: SortEnumType
+    rate: SortEnumType
+    replyText: SortEnumType
+    skillCategory: SkillCategorySortInput
+    skillCategoryId: SortEnumType
+    status: SortEnumType
+    text: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input CommentStatusOperationFilterInput {
+    eq: CommentStatus
+    in: [CommentStatus!]
+    neq: CommentStatus
+    nin: [CommentStatus!]
+}
+
+input CompanyFilterInput {
+    and: [CompanyFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    iconUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    jobs: ListFilterInputTypeOfJobFilterInput
+    or: [CompanyFilterInput!]
+    title: StringOperationFilterInput
+}
+
+input CompanyInput {
+    iconUrl: String
+    title: String
+}
+
+input CompanySortInput {
+    createdDate: SortEnumType
+    iconUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+}
+
+input ComparableDateTimeOperationFilterInput {
+    eq: DateTime
+    gt: DateTime
+    gte: DateTime
+    in: [DateTime!]
+    lt: DateTime
+    lte: DateTime
+    neq: DateTime
+    ngt: DateTime
+    ngte: DateTime
+    nin: [DateTime!]
+    nlt: DateTime
+    nlte: DateTime
+}
+
+input ComparableDoubleOperationFilterInput {
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float!]
+    lt: Float
+    lte: Float
+    neq: Float
+    ngt: Float
+    ngte: Float
+    nin: [Float!]
+    nlt: Float
+    nlte: Float
+}
+
+input ComparableInt32OperationFilterInput {
+    eq: Int
+    gt: Int
+    gte: Int
+    in: [Int!]
+    lt: Int
+    lte: Int
+    neq: Int
+    ngt: Int
+    ngte: Int
+    nin: [Int!]
+    nlt: Int
+    nlte: Int
+}
+
+input ComparableNullableOfDateTimeOperationFilterInput {
+    eq: DateTime
+    gt: DateTime
+    gte: DateTime
+    in: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    neq: DateTime
+    ngt: DateTime
+    ngte: DateTime
+    nin: [DateTime]
+    nlt: DateTime
+    nlte: DateTime
+}
+
+input ComparableNullableOfInt32OperationFilterInput {
+    eq: Int
+    gt: Int
+    gte: Int
+    in: [Int]
+    lt: Int
+    lte: Int
+    neq: Int
+    ngt: Int
+    ngte: Int
+    nin: [Int]
+    nlt: Int
+    nlte: Int
+}
+
+input ConsultFormFilterInput {
+    address: StringOperationFilterInput
+    and: [ConsultFormFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    email: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    name: StringOperationFilterInput
+    or: [ConsultFormFilterInput!]
+    phoneNumber: StringOperationFilterInput
+    text: StringOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input ConsultFormInput {
+    address: String
+    email: String
+    name: String
+    phoneNumber: String
+    text: String
+}
+
+input ConsultFormSortInput {
+    address: SortEnumType
+    createdDate: SortEnumType
+    email: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    name: SortEnumType
+    phoneNumber: SortEnumType
+    text: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input ConversationDtoFilterInput {
+    and: [ConversationDtoFilterInput!]
+    conversationId: ComparableInt32OperationFilterInput
+    latestMessageDate: ComparableDateTimeOperationFilterInput
+    or: [ConversationDtoFilterInput!]
+    subject: StringOperationFilterInput
+    unreadCount: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userEmail: StringOperationFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input ConversationDtoSortInput {
+    conversationId: SortEnumType
+    latestMessageDate: SortEnumType
+    subject: SortEnumType
+    unreadCount: SortEnumType
+    user: UserSortInput
+    userEmail: SortEnumType
+    userId: SortEnumType
+}
+
+input ConversationsFilterInput {
+    and: [ConversationsFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    firstUnreadCount: ComparableInt32OperationFilterInput
+    firstUser: UserFilterInput
+    firstUserId: ComparableInt32OperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    latestMessageDate: ComparableDateTimeOperationFilterInput
+    messages: ListFilterInputTypeOfMessagesFilterInput
+    or: [ConversationsFilterInput!]
+    secondUnreadCount: ComparableInt32OperationFilterInput
+    secondUser: UserFilterInput
+    secondUserId: ComparableInt32OperationFilterInput
+    subject: StringOperationFilterInput
+}
+
+input ConversationsSortInput {
+    createdDate: SortEnumType
+    firstUnreadCount: SortEnumType
+    firstUser: UserSortInput
+    firstUserId: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    latestMessageDate: SortEnumType
+    secondUnreadCount: SortEnumType
+    secondUser: UserSortInput
+    secondUserId: SortEnumType
+    subject: SortEnumType
+}
+
+input CreateAdminInput {
+    email: String
+    firebaseToken: String
+    firstName: String
+    lastName: String
+    phoneNumber: String
+    roleIds: [Int!]
+}
+
+input EducationOperationFilterInput {
+    eq: Education
+    in: [Education!]
+    neq: Education
+    nin: [Education!]
+}
+
+input ExperienceLevelOperationFilterInput {
+    eq: ExperienceLevel
+    in: [ExperienceLevel!]
+    neq: ExperienceLevel
+    nin: [ExperienceLevel!]
+}
+
+input InterviewCategoryFilterInput {
+    and: [InterviewCategoryFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    interviewQuestions: ListFilterInputTypeOfInterviewQuestionFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [InterviewCategoryFilterInput!]
+    title: StringOperationFilterInput
+}
+
+input InterviewCategoryInput {
+    title: String
+}
+
+input InterviewCategorySortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+}
+
+input InterviewQuestionFilterInput {
+    and: [InterviewQuestionFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    description: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    interviewCategory: InterviewCategoryFilterInput
+    interviewCategoryId: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [InterviewQuestionFilterInput!]
+    title: StringOperationFilterInput
+    userInterviewQuestions: ListFilterInputTypeOfUserInterviewQuestionFilterInput
+}
+
+input InterviewQuestionInput {
+    description: String
+    interviewCategoryId: Int!
+    title: String
+}
+
+input InterviewQuestionSortInput {
+    createdDate: SortEnumType
+    description: SortEnumType
+    id: SortEnumType
+    interviewCategory: InterviewCategorySortInput
+    interviewCategoryId: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+}
+
+input JobCategoryFilterInput {
+    and: [JobCategoryFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    jobs: ListFilterInputTypeOfJobFilterInput
+    or: [JobCategoryFilterInput!]
+    title: StringOperationFilterInput
+}
+
+input JobCategoryInput {
+    title: String
+}
+
+input JobCategorySortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+}
+
+input JobFilterInput {
+    and: [JobFilterInput!]
+    city: StringOperationFilterInput
+    company: CompanyFilterInput
+    companyId: ComparableInt32OperationFilterInput
+    country: StringOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    description: StringOperationFilterInput
+    education: EducationOperationFilterInput
+    experienceLevel: ExperienceLevelOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    jobCategory: JobCategoryFilterInput
+    jobCategoryId: ComparableInt32OperationFilterInput
+    jobRequests: ListFilterInputTypeOfJobRequestFilterInput
+    jobSkills: ListFilterInputTypeOfJobSkillFilterInput
+    jobType: JobTypeOperationFilterInput
+    or: [JobFilterInput!]
+    salary: ComparableDoubleOperationFilterInput
+    status: ShowStatusOperationFilterInput
+    title: StringOperationFilterInput
+    userFavoriteJobs: ListFilterInputTypeOfUserFavoriteJobFilterInput
+}
+
+input JobInput {
+    city: String
+    companyId: Int
+    country: String
+    description: String
+    education: Int
+    experienceLevel: Int
+    jobCategoryId: Int
+    jobType: Int
+    salary: Float
+    title: String
+}
+
+input JobRequestFilterInput {
+    and: [JobRequestFilterInput!]
+    cVFileUrl: StringOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    job: JobFilterInput
+    jobId: ComparableInt32OperationFilterInput
+    or: [JobRequestFilterInput!]
+    status: JobStatusOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input JobRequestInput {
+    cVFileUrl: String
+    jobId: Int!
+}
+
+input JobRequestSortInput {
+    cVFileUrl: SortEnumType
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    job: JobSortInput
+    jobId: SortEnumType
+    status: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input JobSkillFilterInput {
+    and: [JobSkillFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    job: JobFilterInput
+    jobId: ComparableInt32OperationFilterInput
+    or: [JobSkillFilterInput!]
+    skill: SkillFilterInput
+    skillId: ComparableInt32OperationFilterInput
+}
+
+input JobSkillInput {
+    jobId: Int!
+    skillId: Int!
+}
+
+input JobSkillSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    job: JobSortInput
+    jobId: SortEnumType
+    skill: SkillSortInput
+    skillId: SortEnumType
+}
+
+input JobSortInput {
+    city: SortEnumType
+    company: CompanySortInput
+    companyId: SortEnumType
+    country: SortEnumType
+    createdDate: SortEnumType
+    description: SortEnumType
+    education: SortEnumType
+    experienceLevel: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    jobCategory: JobCategorySortInput
+    jobCategoryId: SortEnumType
+    jobType: SortEnumType
+    salary: SortEnumType
+    status: SortEnumType
+    title: SortEnumType
+}
+
+input JobStatusInput {
+    id: Int!
+    status: ShowStatus!
+}
+
+input JobStatusOperationFilterInput {
+    eq: JobStatus
+    in: [JobStatus!]
+    neq: JobStatus
+    nin: [JobStatus!]
+}
+
+input JobTypeOperationFilterInput {
+    eq: JobType
+    in: [JobType!]
+    neq: JobType
+    nin: [JobType!]
+}
+
+input LessonFilterInput {
+    and: [LessonFilterInput!]
+    comments: ListFilterInputTypeOfCommentFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    description: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [LessonFilterInput!]
+    skillCategory: SkillCategoryFilterInput
+    skillCategoryId: ComparableInt32OperationFilterInput
+    time: ComparableInt32OperationFilterInput
+    title: StringOperationFilterInput
+    topics: ListFilterInputTypeOfTopicFilterInput
+}
+
+input LessonInput {
+    description: String
+    skillCategoryId: Int!
+    time: Int!
+    title: String
+}
+
+input LessonSortInput {
+    createdDate: SortEnumType
+    description: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    skillCategory: SkillCategorySortInput
+    skillCategoryId: SortEnumType
+    time: SortEnumType
+    title: SortEnumType
+}
+
+input ListFilterInputTypeOfCommentFilterInput {
+    all: CommentFilterInput
+    any: Boolean
+    none: CommentFilterInput
+    some: CommentFilterInput
+}
+
+input ListFilterInputTypeOfConsultFormFilterInput {
+    all: ConsultFormFilterInput
+    any: Boolean
+    none: ConsultFormFilterInput
+    some: ConsultFormFilterInput
+}
+
+input ListFilterInputTypeOfInterviewQuestionFilterInput {
+    all: InterviewQuestionFilterInput
+    any: Boolean
+    none: InterviewQuestionFilterInput
+    some: InterviewQuestionFilterInput
+}
+
+input ListFilterInputTypeOfJobFilterInput {
+    all: JobFilterInput
+    any: Boolean
+    none: JobFilterInput
+    some: JobFilterInput
+}
+
+input ListFilterInputTypeOfJobRequestFilterInput {
+    all: JobRequestFilterInput
+    any: Boolean
+    none: JobRequestFilterInput
+    some: JobRequestFilterInput
+}
+
+input ListFilterInputTypeOfJobSkillFilterInput {
+    all: JobSkillFilterInput
+    any: Boolean
+    none: JobSkillFilterInput
+    some: JobSkillFilterInput
+}
+
+input ListFilterInputTypeOfLessonFilterInput {
+    all: LessonFilterInput
+    any: Boolean
+    none: LessonFilterInput
+    some: LessonFilterInput
+}
+
+input ListFilterInputTypeOfMessagesFilterInput {
+    all: MessagesFilterInput
+    any: Boolean
+    none: MessagesFilterInput
+    some: MessagesFilterInput
+}
+
+input ListFilterInputTypeOfSkillFilterInput {
+    all: SkillFilterInput
+    any: Boolean
+    none: SkillFilterInput
+    some: SkillFilterInput
+}
+
+input ListFilterInputTypeOfSkillQuestionFilterInput {
+    all: SkillQuestionFilterInput
+    any: Boolean
+    none: SkillQuestionFilterInput
+    some: SkillQuestionFilterInput
+}
+
+input ListFilterInputTypeOfSkillQuestionOptionFilterInput {
+    all: SkillQuestionOptionFilterInput
+    any: Boolean
+    none: SkillQuestionOptionFilterInput
+    some: SkillQuestionOptionFilterInput
+}
+
+input ListFilterInputTypeOfTopicFilterInput {
+    all: TopicFilterInput
+    any: Boolean
+    none: TopicFilterInput
+    some: TopicFilterInput
+}
+
+input ListFilterInputTypeOfUserCertificateFilterInput {
+    all: UserCertificateFilterInput
+    any: Boolean
+    none: UserCertificateFilterInput
+    some: UserCertificateFilterInput
+}
+
+input ListFilterInputTypeOfUserCourseFilterInput {
+    all: UserCourseFilterInput
+    any: Boolean
+    none: UserCourseFilterInput
+    some: UserCourseFilterInput
+}
+
+input ListFilterInputTypeOfUserCourseHistoryFilterInput {
+    all: UserCourseHistoryFilterInput
+    any: Boolean
+    none: UserCourseHistoryFilterInput
+    some: UserCourseHistoryFilterInput
+}
+
+input ListFilterInputTypeOfUserEducationFilterInput {
+    all: UserEducationFilterInput
+    any: Boolean
+    none: UserEducationFilterInput
+    some: UserEducationFilterInput
+}
+
+input ListFilterInputTypeOfUserFavoriteJobFilterInput {
+    all: UserFavoriteJobFilterInput
+    any: Boolean
+    none: UserFavoriteJobFilterInput
+    some: UserFavoriteJobFilterInput
+}
+
+input ListFilterInputTypeOfUserInterviewQuestionFilterInput {
+    all: UserInterviewQuestionFilterInput
+    any: Boolean
+    none: UserInterviewQuestionFilterInput
+    some: UserInterviewQuestionFilterInput
+}
+
+input ListFilterInputTypeOfUserProfessionalSkillFilterInput {
+    all: UserProfessionalSkillFilterInput
+    any: Boolean
+    none: UserProfessionalSkillFilterInput
+    some: UserProfessionalSkillFilterInput
+}
+
+input ListFilterInputTypeOfUserRoleFilterInput {
+    all: UserRoleFilterInput
+    any: Boolean
+    none: UserRoleFilterInput
+    some: UserRoleFilterInput
+}
+
+input ListFilterInputTypeOfUserSkillFilterInput {
+    all: UserSkillFilterInput
+    any: Boolean
+    none: UserSkillFilterInput
+    some: UserSkillFilterInput
+}
+
+input ListFilterInputTypeOfUserTopicViewedFilterInput {
+    all: UserTopicViewedFilterInput
+    any: Boolean
+    none: UserTopicViewedFilterInput
+    some: UserTopicViewedFilterInput
+}
+
+input ListFilterInputTypeOfUserWorkExperienceFilterInput {
+    all: UserWorkExperienceFilterInput
+    any: Boolean
+    none: UserWorkExperienceFilterInput
+    some: UserWorkExperienceFilterInput
+}
+
+input MessageInput {
+    conversationId: Int
+    messageType: MessageType!
+    photoUrl: String
+    receiverId: Int
+    subject: String
+    text: String
+}
+
+input MessageTypeOperationFilterInput {
+    eq: MessageType
+    in: [MessageType!]
+    neq: MessageType
+    nin: [MessageType!]
+}
+
+input MessagesFilterInput {
+    and: [MessagesFilterInput!]
+    conversation: ConversationsFilterInput
+    conversationId: ComparableInt32OperationFilterInput
+    createdAt: ComparableDateTimeOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    messageType: MessageTypeOperationFilterInput
+    or: [MessagesFilterInput!]
+    photoUrl: StringOperationFilterInput
+    sender: UserFilterInput
+    senderId: ComparableInt32OperationFilterInput
+    text: StringOperationFilterInput
+}
+
+input MessagesSortInput {
+    conversation: ConversationsSortInput
+    conversationId: SortEnumType
+    createdAt: SortEnumType
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    messageType: SortEnumType
+    photoUrl: SortEnumType
+    sender: UserSortInput
+    senderId: SortEnumType
+    text: SortEnumType
+}
+
+input RegisterInput {
+    loginType: LoginType!
+    name: String
+    userType: UserType!
+}
+
+input ReportFilterInput {
+    and: [ReportFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    iMEI: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [ReportFilterInput!]
+}
+
+input ReportInput {
+    iMEI: String
+}
+
+input ReportSortInput {
+    createdDate: SortEnumType
+    iMEI: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+}
+
+input RoleFilterInput {
+    and: [RoleFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    iconUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [RoleFilterInput!]
+    title: StringOperationFilterInput
+    userRoles: ListFilterInputTypeOfUserRoleFilterInput
+}
+
+input RoleSortInput {
+    createdDate: SortEnumType
+    iconUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+}
+
+input SetStatusJobRequestInput {
+    id: Int!
+    status: Int!
+}
+
+input SettingsFilterInput {
+    and: [SettingsFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    firstPercent: ComparableInt32OperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [SettingsFilterInput!]
+    secondPercent: ComparableInt32OperationFilterInput
+    thirdPercent: ComparableInt32OperationFilterInput
+}
+
+input SettingsInput {
+    firstPercent: Int!
+    secondPercent: Int!
+    thirdPercent: Int!
+}
+
+input SettingsSortInput {
+    createdDate: SortEnumType
+    firstPercent: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    secondPercent: SortEnumType
+    thirdPercent: SortEnumType
+}
+
+input ShowStatusOperationFilterInput {
+    eq: ShowStatus
+    in: [ShowStatus!]
+    neq: ShowStatus
+    nin: [ShowStatus!]
+}
+
+input SkillCategoryFilterInput {
+    and: [SkillCategoryFilterInput!]
+    comments: ListFilterInputTypeOfCommentFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    iconUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    lessons: ListFilterInputTypeOfLessonFilterInput
+    or: [SkillCategoryFilterInput!]
+    rate: ComparableInt32OperationFilterInput
+    skills: ListFilterInputTypeOfSkillFilterInput
+    title: StringOperationFilterInput
+    userCourseHistories: ListFilterInputTypeOfUserCourseHistoryFilterInput
+    userCourses: ListFilterInputTypeOfUserCourseFilterInput
+}
+
+input SkillCategoryInput {
+    iconUrl: String
+    title: String
+}
+
+input SkillCategorySortInput {
+    createdDate: SortEnumType
+    iconUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    rate: SortEnumType
+    title: SortEnumType
+}
+
+input SkillDtoFilterInput {
+    and: [SkillDtoFilterInput!]
+    categoryTitle: StringOperationFilterInput
+    iconUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    or: [SkillDtoFilterInput!]
+    title: StringOperationFilterInput
+}
+
+input SkillDtoSortInput {
+    categoryTitle: SortEnumType
+    iconUrl: SortEnumType
+    id: SortEnumType
+    title: SortEnumType
+}
+
+input SkillFilterInput {
+    and: [SkillFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    iconUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    isToday: BooleanOperationFilterInput
+    jobSkills: ListFilterInputTypeOfJobSkillFilterInput
+    or: [SkillFilterInput!]
+    skillCategory: SkillCategoryFilterInput
+    skillCategoryId: ComparableInt32OperationFilterInput
+    skillQuestions: ListFilterInputTypeOfSkillQuestionFilterInput
+    title: StringOperationFilterInput
+    updateDate: ComparableDateTimeOperationFilterInput
+    userSkills: ListFilterInputTypeOfUserSkillFilterInput
+}
+
+input SkillInput {
+    iconUrl: String
+    skillCategoryId: Int!
+    title: String
+}
+
+input SkillQuestionFilterInput {
+    and: [SkillQuestionFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [SkillQuestionFilterInput!]
+    skill: SkillFilterInput
+    skillId: ComparableInt32OperationFilterInput
+    skillQuestionOptions: ListFilterInputTypeOfSkillQuestionOptionFilterInput
+    title: StringOperationFilterInput
+}
+
+input SkillQuestionInput {
+    options: [SkillQuestionOptionInput]
+    skillId: Int!
+    title: String
+}
+
+input SkillQuestionOptionFilterInput {
+    and: [SkillQuestionOptionFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isCorrect: BooleanOperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [SkillQuestionOptionFilterInput!]
+    skillQuestion: SkillQuestionFilterInput
+    skillQuestionId: ComparableInt32OperationFilterInput
+    title: StringOperationFilterInput
+}
+
+input SkillQuestionOptionInput {
+    isCorrect: Boolean!
+    title: String
+}
+
+input SkillQuestionSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    skill: SkillSortInput
+    skillId: SortEnumType
+    title: SortEnumType
+}
+
+input SkillSortInput {
+    createdDate: SortEnumType
+    iconUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    isToday: SortEnumType
+    skillCategory: SkillCategorySortInput
+    skillCategoryId: SortEnumType
+    title: SortEnumType
+    updateDate: SortEnumType
+}
+
+input StringOperationFilterInput {
+    and: [StringOperationFilterInput!]
+    contains: String
+    endsWith: String
+    eq: String
+    in: [String]
+    ncontains: String
+    nendsWith: String
+    neq: String
+    nin: [String]
+    nstartsWith: String
+    or: [StringOperationFilterInput!]
+    startsWith: String
+}
+
+input TopicFilterInput {
+    and: [TopicFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    description: StringOperationFilterInput
+    fileUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    isMain: BooleanOperationFilterInput
+    lesson: LessonFilterInput
+    lessonId: ComparableInt32OperationFilterInput
+    or: [TopicFilterInput!]
+    title: StringOperationFilterInput
+    userTopicVieweds: ListFilterInputTypeOfUserTopicViewedFilterInput
+}
+
+input TopicInput {
+    description: String
+    fileUrl: String
+    isMain: Boolean!
+    lessonId: Int!
+    title: String
+}
+
+input TopicSortInput {
+    createdDate: SortEnumType
+    description: SortEnumType
+    fileUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    isMain: SortEnumType
+    lesson: LessonSortInput
+    lessonId: SortEnumType
+    title: SortEnumType
+}
+
+input UpdateAdminInput {
+    firstName: String
+    lastName: String
+    phoneNumber: String
+    roleIds: [Int!]
+}
+
+input UpdateCommentInput {
+    replyText: String
+    status: CommentStatus!
+}
+
+input UserBadgeFilterInput {
+    and: [UserBadgeFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isBadge: BooleanOperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserBadgeFilterInput!]
+    rightCount: ComparableInt32OperationFilterInput
+    score: ComparableInt32OperationFilterInput
+    skill: SkillFilterInput
+    skillId: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+    wrongCount: ComparableInt32OperationFilterInput
+}
+
+input UserBadgeInput {
+    rightCount: Int!
+    skillId: Int!
+    wrongCount: Int!
+}
+
+input UserBadgeSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isBadge: SortEnumType
+    isDeleted: SortEnumType
+    rightCount: SortEnumType
+    score: SortEnumType
+    skill: SkillSortInput
+    skillId: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+    wrongCount: SortEnumType
+}
+
+input UserCertificateFilterInput {
+    and: [UserCertificateFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    fileUrl: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserCertificateFilterInput!]
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserCertificateInput {
+    fileUrl: String
+}
+
+input UserCertificateSortInput {
+    createdDate: SortEnumType
+    fileUrl: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserCourseFilterInput {
+    and: [UserCourseFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserCourseFilterInput!]
+    skillCategory: SkillCategoryFilterInput
+    skillCategoryId: ComparableInt32OperationFilterInput
+    status: UserCourseStatusOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserCourseHistoryFilterInput {
+    and: [UserCourseHistoryFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserCourseHistoryFilterInput!]
+    skillCategory: SkillCategoryFilterInput
+    skillCategoryId: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserCourseHistoryInput {
+    skillCategoryId: Int!
+    userId: Int!
+}
+
+input UserCourseHistorySortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    skillCategory: SkillCategorySortInput
+    skillCategoryId: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserCourseInput {
+    skillCategoryId: Int
+    status: UserCourseStatus
+    userId: Int
+}
+
+input UserCourseSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    skillCategory: SkillCategorySortInput
+    skillCategoryId: SortEnumType
+    status: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserCourseStatusOperationFilterInput {
+    eq: UserCourseStatus
+    in: [UserCourseStatus!]
+    neq: UserCourseStatus
+    nin: [UserCourseStatus!]
+}
+
+input UserEducationFilterInput {
+    and: [UserEducationFilterInput!]
+    city: StringOperationFilterInput
+    country: StringOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    field: StringOperationFilterInput
+    from: ComparableNullableOfDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    level: StringOperationFilterInput
+    or: [UserEducationFilterInput!]
+    to: ComparableNullableOfDateTimeOperationFilterInput
+    university: StringOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserEducationInput {
+    city: String
+    country: String
+    field: String
+    from: DateTime
+    level: String
+    to: DateTime
+    university: String
+}
+
+input UserEducationSortInput {
+    city: SortEnumType
+    country: SortEnumType
+    createdDate: SortEnumType
+    field: SortEnumType
+    from: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    level: SortEnumType
+    to: SortEnumType
+    university: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserFavoriteJobFilterInput {
+    and: [UserFavoriteJobFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    job: JobFilterInput
+    jobId: ComparableInt32OperationFilterInput
+    or: [UserFavoriteJobFilterInput!]
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserFavoriteJobInput {
+    jobId: Int!
+}
+
+input UserFavoriteJobSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    job: JobSortInput
+    jobId: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserFilterInput {
+    activeStatus: ActiveStatusOperationFilterInput
+    address: StringOperationFilterInput
+    age: ComparableInt32OperationFilterInput
+    and: [UserFilterInput!]
+    cVFileUrl: StringOperationFilterInput
+    city: StringOperationFilterInput
+    comments: ListFilterInputTypeOfCommentFilterInput
+    consultForms: ListFilterInputTypeOfConsultFormFilterInput
+    country: StringOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    email: StringOperationFilterInput
+    externalId: StringOperationFilterInput
+    firstName: StringOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    jobRequests: ListFilterInputTypeOfJobRequestFilterInput
+    lastName: StringOperationFilterInput
+    lastSeen: ComparableDateTimeOperationFilterInput
+    or: [UserFilterInput!]
+    phoneNumber: StringOperationFilterInput
+    pictureUrl: StringOperationFilterInput
+    point: ComparableInt32OperationFilterInput
+    postalCode: StringOperationFilterInput
+    rejectReason: StringOperationFilterInput
+    userCertificates: ListFilterInputTypeOfUserCertificateFilterInput
+    userCourseHistories: ListFilterInputTypeOfUserCourseHistoryFilterInput
+    userCourses: ListFilterInputTypeOfUserCourseFilterInput
+    userEducations: ListFilterInputTypeOfUserEducationFilterInput
+    userFavoriteJobs: ListFilterInputTypeOfUserFavoriteJobFilterInput
+    userInterviewQuestions: ListFilterInputTypeOfUserInterviewQuestionFilterInput
+    userProfessionalSkills: ListFilterInputTypeOfUserProfessionalSkillFilterInput
+    userRoles: ListFilterInputTypeOfUserRoleFilterInput
+    userSkills: ListFilterInputTypeOfUserSkillFilterInput
+    userTopicVieweds: ListFilterInputTypeOfUserTopicViewedFilterInput
+    userType: UserTypeOperationFilterInput
+    userWorkExperiences: ListFilterInputTypeOfUserWorkExperienceFilterInput
+}
+
+input UserInput {
+    address: String
+    age: Int
+    cVFileUrl: String
+    city: String
+    country: String
+    firstName: String
+    lastName: String
+    pictureUrl: String
+    postalCode: String
+}
+
+input UserInterviewQuestionFilterInput {
+    and: [UserInterviewQuestionFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    interviewQuestion: InterviewQuestionFilterInput
+    interviewQuestionId: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserInterviewQuestionFilterInput!]
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+    videoUrl: StringOperationFilterInput
+}
+
+input UserInterviewQuestionInput {
+    interviewQuestionId: Int!
+    videoUrl: String
+}
+
+input UserInterviewQuestionSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    interviewQuestion: InterviewQuestionSortInput
+    interviewQuestionId: SortEnumType
+    isDeleted: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+    videoUrl: SortEnumType
+}
+
+input UserProfessionalSkillFilterInput {
+    and: [UserProfessionalSkillFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserProfessionalSkillFilterInput!]
+    title: StringOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserProfessionalSkillInput {
+    title: String
+}
+
+input UserProfessionalSkillSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    title: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserRoleFilterInput {
+    and: [UserRoleFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserRoleFilterInput!]
+    role: RoleFilterInput
+    roleId: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserSkillFilterInput {
+    and: [UserSkillFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    or: [UserSkillFilterInput!]
+    skill: SkillFilterInput
+    skillId: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserSkillInput {
+    skillId: Int
+    type: Int
+    userId: Int
+}
+
+input UserSkillSortInput {
+    createdDate: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    skill: SkillSortInput
+    skillId: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}
+
+input UserSortInput {
+    activeStatus: SortEnumType
+    address: SortEnumType
+    age: SortEnumType
+    cVFileUrl: SortEnumType
+    city: SortEnumType
+    country: SortEnumType
+    createdDate: SortEnumType
+    email: SortEnumType
+    externalId: SortEnumType
+    firstName: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    lastName: SortEnumType
+    lastSeen: SortEnumType
+    phoneNumber: SortEnumType
+    pictureUrl: SortEnumType
+    point: SortEnumType
+    postalCode: SortEnumType
+    rejectReason: SortEnumType
+    userType: SortEnumType
+}
+
+input UserTopicViewedFilterInput {
+    and: [UserTopicViewedFilterInput!]
+    createdDate: ComparableDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    isSaved: BooleanOperationFilterInput
+    or: [UserTopicViewedFilterInput!]
+    topic: TopicFilterInput
+    topicId: ComparableInt32OperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserTypeOperationFilterInput {
+    eq: UserType
+    in: [UserType!]
+    neq: UserType
+    nin: [UserType!]
+}
+
+input UserWorkExperienceFilterInput {
+    and: [UserWorkExperienceFilterInput!]
+    city: StringOperationFilterInput
+    companyName: StringOperationFilterInput
+    country: StringOperationFilterInput
+    createdDate: ComparableDateTimeOperationFilterInput
+    from: ComparableNullableOfDateTimeOperationFilterInput
+    id: ComparableInt32OperationFilterInput
+    isDeleted: BooleanOperationFilterInput
+    isWorking: BooleanOperationFilterInput
+    jobTitle: StringOperationFilterInput
+    or: [UserWorkExperienceFilterInput!]
+    to: ComparableNullableOfDateTimeOperationFilterInput
+    user: UserFilterInput
+    userId: ComparableInt32OperationFilterInput
+}
+
+input UserWorkExperienceInput {
+    city: String
+    companyName: String
+    country: String
+    from: DateTime
+    isWorking: Boolean!
+    jobTitle: String
+    to: DateTime
+}
+
+input UserWorkExperienceSortInput {
+    city: SortEnumType
+    companyName: SortEnumType
+    country: SortEnumType
+    createdDate: SortEnumType
+    from: SortEnumType
+    id: SortEnumType
+    isDeleted: SortEnumType
+    isWorking: SortEnumType
+    jobTitle: SortEnumType
+    to: SortEnumType
+    user: UserSortInput
+    userId: SortEnumType
+}

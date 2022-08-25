@@ -1,21 +1,18 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { getInitialLocale } from '@/i18n/getInitialLocale';
 import { NO_QUERY_ID } from './route.constant';
-import { useGetUser } from 'src/auth/UserProvider';
 import { UserType } from 'src/@types/user.type';
 
 export function useRedirectOnEnterOnRole() {
     const router = useRouter();
-    const lang = getInitialLocale();
-    const tailRoute = 'admin/dashboard';
+    const tailRoute = '/';
 
     const checkUserType = (passedUser: UserType) =>
         passedUser.userType === 'NORMAL_USER' ? '' : tailRoute;
 
     const redirectUserOnSignup = useCallback(() => {
         router.push(`/`, undefined, { shallow: true });
-    }, [lang, router]);
+    }, [ router]);
 
     const redirectUserOnEnter = (passedUser?: UserType) => {
         router.push('/' + checkUserType(passedUser));

@@ -7,22 +7,7 @@ import { CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material';
 import createEmotionCache from '@/utils/createEmotionCache';
 const clientSideEmotionCache = createEmotionCache();
 
-export const PRIMARY_COLOR = '#6FCBDF';
-export const SUCCESS_COLOR = '#D5623D';
-export const baseFontSize = 16;
-// import '@mui/material/styles/createPalette';
 
-declare module '@mui/material/styles/createPalette' {
-    interface CommonColors {
-        success: string;
-        info: string;
-        warning: string;
-    }
-    interface SecondaryColors {
-        dark: string;
-        darker: string;
-    }
-}
 
 const theme = createTheme({
     breakpoints: {
@@ -43,54 +28,27 @@ const theme = createTheme({
             warning: '#FFBD0A'
         },
         primary: {
-            main: PRIMARY_COLOR,
+            main: '#7251b2',
             light: '#EAFCFF',
-            dark: '#06677C'
+            dark: '#414358'
         },
         secondary: {
-            main: SUCCESS_COLOR,
+            main: '#172B4D',
             light: '#E7F1FC',
-            dark: '#75B0EA',
-            darker: '#222222'
+            dark: '#3D3D3D',
         },
         grey: {
             main: '#828282',
             text: '#4F4F4F',
             dark: '#828282',
             light: '#AEAFB4',
-            lighter: '#DEE0E5'
+            lighter: '#FAFAFA'
         },
         error: { main: '#BF1A1A' },
         paginate: { main: '#8B8B8B' }
     },
     components: {
         MuiButton: {
-            //       variants: [
-            //         {
-            //           props: { variant: 'submit' },
-            //           style: {
-            //             'borderRadius': 10,
-            //             'textTransform': 'none',
-            //             'padding': '8px 24px',
-            //             'backgroundColor': PRIMARY_COLOR,
-            //             'color': '#FFF',
-            //             '&:hover': {
-            //               backgroundColor: `${PRIMARY_COLOR}AA`,
-            //             },
-            //           },
-            //         },
-            //         {
-            //           props: { variant: 'cancel' },
-            //           style: {
-            //             borderRadius: 10,
-            //             boxShadow: '0 0 1px 1px #191A23',
-
-            //             backgroundColor: '#FFF',
-            //             padding: '8px 24px',
-            //           },
-            //         },
-            //       ],
-
             styleOverrides: {
                 root: {
                     textTransform: 'none'

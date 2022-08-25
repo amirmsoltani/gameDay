@@ -15,10 +15,8 @@ import {
     fbSignInGoogleToken,
     fbSignInToken,
     fbSignOut,
-    fbSignUpToken
 } from 'src/auth/firebase';
 import { useSnackbar } from 'notistack';
-import { UserInput } from 'src/graphql/generated';
 
 export const authFormInitialValues = {
     email: '',
@@ -67,8 +65,8 @@ const slice = createSlice({
 
 export function useAuthPage() {
     const [state, dispatch] = useReducer(slice.reducer, initialState);
-    const { onIdTokenFailed, onSignupToken, onIdToken } = useAuthMutation();
-    const { redirectUserOnSignup, redirectUserOnLogin, redirectUserOnEnter } =
+    const { onIdTokenFailed, onIdToken } = useAuthMutation();
+    const {  redirectUserOnLogin, redirectUserOnEnter } =
         useRedirectOnEnterOnRole();
 
     const setUser = useSetUser();
@@ -107,7 +105,6 @@ export function useAuthPage() {
             const idToken = await fbSignInToken(email, password);
 
             const user = await onIdToken(idToken);
-
             if (user) {
                 redirectUserOnEnter(user);
             } else {
@@ -168,27 +165,6 @@ export function useAuthPage() {
         }
     }, []);
 
-    const signUp = async (data: UserInput, email, password) => {
-        try {
-            dispatch(slice.actions.setLoading());
-            let idToken;
-            idToken = await fbSignUpToken(email, password);
-            const user = await onSignupToken(idToken, data);
-            if (user) {
-                setTimeout(() => {
-                    redirectUserOnEnter(user);
-                }, 3000);
-            } else {
-                dispatch(slice.actions.setError(onErrorMessage('')));
-            }
-        } catch (err) {
-            dispatch(slice.actions.setError(onErrorMessage(err)));
-            onIdTokenFailed();
-            clearCookie(ACCESS_TOKEN_KEY);
-        } finally {
-            dispatch(slice.actions.setLoadingOff());
-        }
-    };
 
     const getFbRedirectResult = async () => {
         return new Promise(async (resolve, reject) => {
@@ -237,7 +213,6 @@ export function useAuthPage() {
         onAuthenticate,
         signOut,
         isSignOutLoading,
-        signUp,
         getFbRedirectResult,
         createError,
         changePassword

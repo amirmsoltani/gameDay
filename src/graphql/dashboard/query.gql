@@ -1,0 +1,8 @@
+query getDashboard($where: JobFilterInput){
+  job_getJobs{
+     result(where:$where){
+      totalCount
+    }
+  }
+    user_getUsers{result{totalCount}status}
+}

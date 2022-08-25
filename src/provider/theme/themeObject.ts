@@ -2,8 +2,9 @@
 import { BP_DN, BP_UP, BP_UP_H, BP_DN_H, breakpointsKeys } from './breakpoint';
 import { variants } from './typographySettings';
 export const TOOLBAR_HEIGHT = 70;
-export const PRIMARY_COLOR = '#6FCBDF';
+export const PRIMARY_COLOR = '#7251b2';
 const SHADOW_COLOR = 'rgb(0, 0, 0,0.43)';
+
 const themeObj = {
     palette: {
         palette: {
@@ -17,20 +18,19 @@ const themeObj = {
             primary: {
                 main: PRIMARY_COLOR,
                 light: '#EAFCFF',
-                dark: '#06677C'
+                dark: '#414358'
             },
             secondary: {
-                main: '#D5623D',
+                main: '#172B4D',
                 light: '#E7F1FC',
-                dark: '#75B0EA',
-                darker: '#213950'
+                dark: '#3D3D3D',
             },
             grey: {
                 main: '#828282',
                 text: '#4F4F4F',
                 dark: '#828282',
                 light: '#AEAFB4',
-                lighter: '#DEE0E5'
+                lighter: '#FAFAFA'
             },
             error: { main: '#BF1A1A' },
             paginate: { main: '#8B8B8B' }
@@ -53,7 +53,7 @@ const themeObj = {
     },
     shape: {
         borderRadius: {
-            common: 4,
+            common: 5,
             tiny: 4,
             small: 8,
             medium: 12,

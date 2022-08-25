@@ -46,10 +46,7 @@ export type CommonResponse<T extends string, S = any> = Record<
     T,
     {
         result: S;
-        status: {
-            value: ResStatusType;
-            code: number;
-        };
+        status: ResStatusType;
     }
 >;
 

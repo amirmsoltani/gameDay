@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'https://aps-hep-now-dev.azurewebsites.net/graphql/'
+schema: 'https://aps-game-day-dev.azurewebsites.net/graphql/'
 documents: 'src/graphql/**/*.gql'
 generates:
     src/graphql/generated.tsx:

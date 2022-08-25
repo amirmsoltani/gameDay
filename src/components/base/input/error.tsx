@@ -9,8 +9,8 @@ const BSInputError = styled(Typography, { shouldForwardProp: isPropValid })<{
     errorSpaceOn?: boolean;
 }>(({ theme, show, errorSpaceOn }) => ({
     color: show ? theme.palette.error.main : 'transparent',
-    margin: '1px 0',
-    fontSize: 13,
+    margin: '12px 0 0 0',
+    fontSize: 12,
     display: errorSpaceOn && !show ? 'none' : 'block'
 }));
 
