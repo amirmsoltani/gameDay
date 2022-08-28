@@ -2,15 +2,16 @@ subscription messageAdded($userId: Int!) {
     messageAdded(userId: $userId) {
         id
         text
-        # messageType
-        # photoUrl
+        messageType
+        photoUrl
         createdAt
         conversationId
         senderId
         sender {
             id
-            name
-            imageAddress
+            firstName
+            lastName
+            pictureUrl
             email
         }
     }

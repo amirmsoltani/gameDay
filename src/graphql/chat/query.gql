@@ -10,9 +10,10 @@ query message_getUserMessages(
                 subject
                 conversationId
                 user {
-                    name
+                    firstName
+                    lastName
                     id
-                    imageAddress
+                    pictureUrl
                 }
                 unreadCount
             }

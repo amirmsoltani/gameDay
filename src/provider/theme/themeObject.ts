@@ -10,7 +10,7 @@ const themeObj = {
         palette: {
             common: {
                 black: '#002434',
-                white: '#F9FEFF',
+                white: '#FFF',
                 success: '#1CA24A',
                 info: '#3583EB',
                 warning: '#FFBD0A'
