@@ -34,7 +34,9 @@ export const Sidebar = styled(Box)`
 
   }
 `;
-
+export const Content = styled(Box)`
+  
+`
 export const SidebarItem = styled.a`
   cursor: pointer;
   display: flex;

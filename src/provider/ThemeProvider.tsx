@@ -96,7 +96,7 @@ const theme = createTheme({
             }
         },
         allVariants: {
-            fontFamily: ['Roboto', 'Yeseva One'].join(','), // font aval va bishtar in proje roboto na Yeseva One
+            fontFamily: ['Poppins', 'Lato'].join(','), // font aval va bishtar in proje roboto na Yeseva One
             color: '#213950'
         }
     }
@@ -119,7 +119,7 @@ export default function AppThemeProvider({
                 styles={css`
                     * {
                         box-sizing: border-box;
-                        font-family: Roboto;
+                        font-family: Poppins;
                     }
 
                     html,

@@ -1,4 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* poppins-regular - latin */
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/static/fonts/poppins-v20-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('/static/fonts/poppins-v20-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/static/fonts/poppins-v20-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/static/fonts/poppins-v20-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('/static/fonts/poppins-v20-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/static/fonts/poppins-v20-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
+  }
+  /* poppins-800 - latin */
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 800;
+    src: url('/static/fonts/poppins-v20-latin-800.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('/static/fonts/poppins-v20-latin-800.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/static/fonts/poppins-v20-latin-800.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/static/fonts/poppins-v20-latin-800.woff') format('woff'), /* Modern Browsers */
+         url('/static/fonts/poppins-v20-latin-800.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/static/fonts/poppins-v20-latin-800.svg#Poppins') format('svg'); /* Legacy iOS */
+  }
+
+/* lato-regular - latin */
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/static/fontslato-v23-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('/static/fontslato-v23-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/static/fontslato-v23-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/static/fontslato-v23-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('/static/fontslato-v23-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/static/fontslato-v23-latin-regular.svg#Lato') format('svg'); /* Legacy iOS */
+  }
+  /* lato-700 - latin */
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/static/fontslato-v23-latin-700.eot'); /* IE9 Compat Modes */
+    src: local(''),
+         url('/static/fontslato-v23-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('/static/fontslato-v23-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+         url('/static/fontslato-v23-latin-700.woff') format('woff'), /* Modern Browsers */
+         url('/static/fontslato-v23-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('/static/fontslato-v23-latin-700.svg#Lato') format('svg'); /* Legacy iOS */
+  }
 body {
     margin: auto;
     min-width: 320px;

@@ -93,7 +93,7 @@ const AppLayout: FC<PropsType> = ({ children }) => {
 
     return (
         <Box display='grid' gridTemplateColumns='repeat(24, 1fr)' gap={0}>
-            <S.Sidebar gridColumn={'span 3'}>
+            <S.Sidebar gridColumn={'span 4'}>
                 <div className='sidebar-header'>
                     <S.LogoBox>
                         <S.Logo resources={{ src: '/images/gd-logo.png' }} />
@@ -114,7 +114,7 @@ const AppLayout: FC<PropsType> = ({ children }) => {
                     </S.SidebarItem>
                 </div>
             </S.Sidebar>
-            <Box gridColumn='span 21'>{children}</Box>
+            <Box gridColumn='span 20'>{children}</Box>
         </Box>
     );
 };
