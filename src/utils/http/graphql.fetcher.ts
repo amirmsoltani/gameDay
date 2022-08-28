@@ -12,7 +12,7 @@ type QueryType = {
 };
 
 function handleResponse(res: any, resolve: any, reject: any) {
-    const success = Object.keys(res).some((key: string) => res[key].status?.value === "Success");
+    const success = Object.keys(res).some((key: string) => res[key].status === "SUCCESS");
     if (success) {
         resolve(res);
     } else {
@@ -30,7 +30,7 @@ export function graphqlFetcher<T extends QueryType>(GQL: string, args?: T['args'
                 (res.user_GetUser.result.deactivationDateTime ||
                     res.user_GetUser.status === 'USER_NOT_FOUND')
             ) {
-                document.location.href = `/${window.location.pathname.split('/')[1]}/signin/`;
+                document.location.href = `/login`;
             }
 
             //token expired || no token exist

@@ -1,0 +1,14 @@
+query getCurrentUser{
+    user_login {
+        result {
+            userType
+            userRoles {
+                role {
+                    id
+                    title
+                }
+            }
+        }
+        status
+    }
+}

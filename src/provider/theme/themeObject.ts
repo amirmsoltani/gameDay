@@ -10,7 +10,7 @@ const themeObj = {
         palette: {
             common: {
                 black: '#002434',
-                white: '#F9FEFF',
+                white: '#FFF',
                 success: '#1CA24A',
                 info: '#3583EB',
                 warning: '#FFBD0A'
@@ -80,7 +80,7 @@ const themeObj = {
     },
     typography: {
         // useNextVariants: true,
-        fontFamily: ['Yeseva One', 'roboto-reg'].join(','),
+        fontFamily: ['Poppins', 'Lato'].join(','),
         allVariants: { fontWeight: 'normal' },
         transform: { small: 'scale(0.85)', xsmall: 'scale(0.75)' },
         ...variants

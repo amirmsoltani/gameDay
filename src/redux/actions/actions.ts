@@ -1,5 +1,4 @@
 import { Modal } from 'src/components/shared/modals/types.modals';
-import { IQuickListExercise, IQuickListStoreCard, PageDataType } from '../reducer/reducer';
 
 export const types = {
     ACTIVE_SIDEBAR: 'ACTIVE_SIDEBAR',
@@ -74,56 +73,3 @@ export function resetChatCount() {
     };
 }
 
-export function setPageData(pageData: { pageData: PageDataType, type: string}) {
-    return {
-        type: types.SET_PAGE_DATA,
-        payload: pageData
-    };
-}
-
-export function setIsDirtyForm(isDirty: boolean) {
-    return {
-        type: types.SET_DIRTY_FORM,
-        payload: isDirty
-    };
-}
-
-export function setStoreCard(storeCard: []) {
-    return {
-        type: types.SET_STORE_CARD,
-        payload: storeCard
-    };
-}
-
-export function addStoreCard(product: IQuickListStoreCard['storeCard'][number]) {
-    return {
-        type: types.ADD_STORE_CARD,
-        payload: product
-    };
-}
-export function removeStoreCard(productId: number) {
-    return {
-        type: types.REMOVE_STORE_CARD,
-        payload: productId
-    };
-}
-
-export function setBoardExercise(exercises: []) {
-    return {
-        type: types.SET_BOARD_EXERCISE,
-        payload: exercises
-    };
-}
-
-export function addBoardExercise(exercise: IQuickListExercise['exerciseBoard'][number]) {
-    return {
-        type: types.ADD_BOARD_EXERCISE,
-        payload: exercise
-    };
-}
-export function removeBoardExercise(exerciseId: number) {
-    return {
-        type: types.REMOVE_BOARD_EXERCISE,
-        payload: exerciseId
-    };
-}

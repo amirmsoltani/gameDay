@@ -11,8 +11,6 @@ import { clearCookie } from '@/utils/storage/cookie';
 import { useSetUser } from 'src/auth/UserProvider';
 import {
     fbPasswordReset,
-    fbSignInFacebookToken,
-    fbSignInGoogleToken,
     fbSignInToken,
     fbSignOut,
 } from 'src/auth/firebase';
@@ -72,7 +70,6 @@ export function useAuthPage() {
     const setUser = useSetUser();
     const { showLoading } = useModalState();
     const { enqueueSnackbar } = useSnackbar();
-    // const handleModal = useFullscreenLoader();
 
     const onAuthenticatePassword = async (values: typeof authFormInitialValues) => {
         try {
@@ -119,21 +116,6 @@ export function useAuthPage() {
         }
     };
 
-    const onAuthenticateGoogle = async () => {
-        try {
-            await fbSignInGoogleToken();
-        } catch (err) {
-            dispatch(slice.actions.setError(onErrorMessage(err)));
-        }
-    };
-
-    const onAuthenticateFacebook = async () => {
-        try {
-            await fbSignInFacebookToken().catch((err) => console.log(err, 'fbk err'));
-        } catch (err) {
-            dispatch(slice.actions.setError(onErrorMessage(err)));
-        }
-    };
 
     const onAuthenticate = async (token) => {
         try {
@@ -206,8 +188,6 @@ export function useAuthPage() {
 
     return {
         onAuthenticatePassword,
-        onAuthenticateFacebook,
-        onAuthenticateGoogle,
         state,
         login,
         onAuthenticate,

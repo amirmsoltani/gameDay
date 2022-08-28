@@ -34,6 +34,7 @@ export type UserType = {
     createdDate: Date;
     lastModifiedDate: Date;
     isDeleted: Boolean;
+    userRoles: Array<{ role: { title: string, id: number } }>
 };
 
 

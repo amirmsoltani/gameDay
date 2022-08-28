@@ -7,7 +7,6 @@ import {
     MessageAddedSubscription,
     SortEnumType,
 } from 'src/graphql/generated';
-import { useRouter } from 'next/router';
 import { updateChatCount } from 'src/redux/actions/actions';
 import { useDispatch,useSelector } from 'react-redux';
 
@@ -15,7 +14,7 @@ import { useDispatch,useSelector } from 'react-redux';
 export function useSubscribeMessages() {
     const user = useGetUser();
     const queryClient = useQueryClient();
-    const {activeTabParent} = useSelector(({ pageData }: any) => pageData);
+    // const {activeTabParent} = useSelector(({ pageData }: any) => pageData);
     const dispatch = useDispatch();
 
   
@@ -34,10 +33,10 @@ export function useSubscribeMessages() {
                 const message: MessageAddedSubscription = data?.payload?.data;
 
                 if (!message?.messageAdded) return;
-
-                if(activeTabParent?.id !== "chat"){
-                    dispatch(updateChatCount());
-                }
+                //
+                // if(activeTabParent?.id !== "chat"){
+                //     dispatch(updateChatCount());
+                // }
 
                 const senderId = message.messageAdded.senderId;
                 const conversationId = message.messageAdded.conversationId;
