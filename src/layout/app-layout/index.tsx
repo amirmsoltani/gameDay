@@ -14,6 +14,7 @@ import LogoutIcon from '../../assets/icons/logout-icon';
 import { useGetCurrentUserQuery, UserRole } from '../../graphql/generated';
 import { useRouter } from 'next/router';
 import { AppLoadingPage } from '@/components/base/loader/LoadingPage';
+import Modals from '@/components/modals';
 
 const bodyItems = {
     dashboard: {
@@ -83,29 +84,28 @@ const map = (section: 'body' | 'footer', path: string) => (role: UserRole) => {
 type PropsType = { children: ReactNode };
 
 const AppLayout: FC<PropsType> = ({ children }) => {
-    const { data, status, error } = useGetCurrentUserQuery();
+    const { data, status } = useGetCurrentUserQuery();
     const { asPath } = useRouter();
-
 
     if (status === 'loading') {
         return <AppLoadingPage />;
     }
 
     return (
-        <Box display='grid' gridTemplateColumns='repeat(24, 1fr)' gap={0}>
+        <Box display="grid" gridTemplateColumns="repeat(24, 1fr)" gap={0}>
             <S.Sidebar gridColumn={'span 4'}>
-                <div className='sidebar-header'>
+                <div className="sidebar-header">
                     <S.LogoBox>
                         <S.Logo resources={{ src: '/images/gd-logo.png' }} />
                         <S.TextLogo resources={{ src: '/images/logo-text.png' }} />
                     </S.LogoBox>
                 </div>
-                <div className='sidebar-body'>
+                <div className="sidebar-body">
                     {data?.user_login.result?.userRoles
                         .filter(filter('body'))
                         .map(map('body', asPath))}
                 </div>
-                <div className='sidebar-footer'>
+                <div className="sidebar-footer">
                     {data?.user_login.result?.userRoles
                         .filter(filter('footer'))
                         .map(map('footer', asPath))}
@@ -114,7 +114,10 @@ const AppLayout: FC<PropsType> = ({ children }) => {
                     </S.SidebarItem>
                 </div>
             </S.Sidebar>
-            <Box gridColumn='span 20'>{children}</Box>
+            <S.Content gridColumn="span 20">
+                <Modals />
+                {children}
+            </S.Content>
         </Box>
     );
 };
