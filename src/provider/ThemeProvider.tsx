@@ -7,9 +7,7 @@ import { CssBaseline, ThemeProvider as MuiThemeProvider } from '@mui/material';
 import createEmotionCache from '@/utils/createEmotionCache';
 const clientSideEmotionCache = createEmotionCache();
 
-
-
-const theme = createTheme({
+export const theme = createTheme({
     breakpoints: {
         values: {
             xs: 0,
@@ -21,7 +19,7 @@ const theme = createTheme({
     },
     palette: {
         common: {
-            black: '#002434',
+            black: '#3d3d3d',
             white: '#FFF',
             success: '#1CA24A',
             info: '#3583EB',
@@ -35,17 +33,24 @@ const theme = createTheme({
         secondary: {
             main: '#172B4D',
             light: '#E7F1FC',
-            dark: '#3D3D3D',
+            dark: '#3D3D3D'
         },
         grey: {
-            main: '#828282',
-            text: '#4F4F4F',
+            main: '#EBEBEB',
+            text: '#F8F8F8',
+            border:'#EBF2F7',
             dark: '#828282',
-            light: '#AEAFB4',
+            light: '#F8F8F8',
             lighter: '#FAFAFA'
         },
         error: { main: '#BF1A1A' },
-        paginate: { main: '#8B8B8B' }
+        paginate: { main: '#8B8B8B' },
+        text: {
+            main: '#3d3d3d',
+            placeholder: '#B3B8BD',
+            100: '#6270DD',
+            700: '#424242'
+        }
     },
     components: {
         MuiButton: {
@@ -97,7 +102,7 @@ const theme = createTheme({
         },
         allVariants: {
             fontFamily: ['Poppins', 'Lato'].join(','), // font aval va bishtar in proje roboto na Yeseva One
-            color: '#213950'
+            color: '#3d3d3d'
         }
     }
 } as any);

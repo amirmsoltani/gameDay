@@ -26,17 +26,18 @@ const themeObj = {
                 dark: '#3D3D3D',
             },
             grey: {
-                main: '#828282',
-                text: '#4F4F4F',
+                main: '#EBEBEB',
+                text: '#B3B8BD',
+                border:'#EBF2F7',
                 dark: '#828282',
-                light: '#AEAFB4',
+                light: '#F8F8F8',
                 lighter: '#FAFAFA'
             },
             error: { main: '#BF1A1A' },
             paginate: { main: '#8B8B8B' }
         },
         text: {
-            main: '#002434',
+            main: '#B3B8BD',
             placeholder: '#A8A8A8',
             100: '#6270DD',
             700: '#424242'

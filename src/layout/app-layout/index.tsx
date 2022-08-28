@@ -28,27 +28,27 @@ const bodyItems = {
         title: 'Catalog'
     },
     jobs: {
-        href: '#',
+        href: '/jobs',
         icon: JobIcon,
         title: 'Jobs'
     },
     'check-resume': {
-        href: '/',
+        href: '/check-resume',
         icon: CheckResumeIcon,
         title: 'Check resume'
     },
     'interview-practice': {
-        href: '/',
+        href: '/interview-practice',
         icon: InterviewIcon,
         title: 'Interview practice'
     },
     'career-coach': {
-        href: '/',
+        href: '/career-coach',
         icon: CareerCoachIcon,
         title: 'Career coach'
     },
     users: {
-        href: '/',
+        href: '/users',
         icon: UserIcon,
         title: 'Users'
     }
@@ -56,7 +56,7 @@ const bodyItems = {
 
 const footerItems = {
     'admin-management': {
-        href: '/',
+        href: '/admin-management',
         icon: ManagementIcon,
         title: 'Admin Management'
     }
@@ -92,7 +92,7 @@ const AppLayout: FC<PropsType> = ({ children }) => {
     }
 
     return (
-        <Box display="grid" gridTemplateColumns="repeat(24, 1fr)" gap={0}>
+        <S.Container display="grid" gridTemplateColumns="repeat(24, 1fr)" gap={0}>
             <S.Sidebar gridColumn={'span 4'}>
                 <div className="sidebar-header">
                     <S.LogoBox>
@@ -118,7 +118,7 @@ const AppLayout: FC<PropsType> = ({ children }) => {
                 <Modals />
                 {children}
             </S.Content>
-        </Box>
+        </S.Container>
     );
 };
 

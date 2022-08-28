@@ -2,6 +2,12 @@ import styled from '@emotion/styled';
 import { Box } from '@mui/material';
 import { MImage } from '@/components/base/image/MImage';
 
+export const Container = styled(Box)`
+    max-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+`;
+
 export const Sidebar = styled(Box)`
     ${({ theme }) => `
     background-color:${theme.palette.primary.dark};
@@ -33,8 +39,17 @@ export const Sidebar = styled(Box)`
         flex-direction: column;
     }
 `;
+export const Header = styled(Box)`
+    background-color: ${({ theme }) => theme.palette.grey.main};
+`;
+
 export const Content = styled(Box)`
     background-color: #f8f8f8;
+    max-height: 100vh;
+`;
+
+export const Body = styled(Box)`
+    overflow-y: scroll;
 `;
 
 export const SidebarItem = styled.a`
