@@ -1,8 +1,42 @@
-query getDashboard($where: JobFilterInput){
-  job_getJobs{
-     result(where:$where){
-      totalCount
+query getDashboard {
+    user_getReportBoxes {
+        result {
+            totalSkills
+            totalCourses
+            totalUsers
+            totalJobs
+        }
+        status
     }
-  }
-    user_getUsers{result{totalCount}status}
+    user_getTopUsers {
+        result(take: 4) {
+            items {
+                firstName
+                lastName
+                pictureUrl
+                point
+            }
+        }
+        status
+    }
+    skill_getSkills {
+        result(where: { isToday: { eq: true } }, take: 5) {
+            items {
+                title
+                iconUrl
+                skillCategory {
+                    title
+                }
+            }
+        }
+        status
+    }
+    report_getReports {
+        result {
+            items {
+                iMEI
+            }
+        }
+        status
+    }
 }

@@ -1,5 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react';
-import { Box } from '@mui/material';
+import React, { FC, ReactNode } from 'react';
 import * as S from './app-layout-style';
 import DashboardIcon from '../../assets/icons/dashboard-icon';
 import Link from 'next/link';
@@ -28,27 +27,27 @@ const bodyItems = {
         title: 'Catalog'
     },
     jobs: {
-        href: '#',
+        href: '/jobs',
         icon: JobIcon,
         title: 'Jobs'
     },
     'check-resume': {
-        href: '/',
+        href: '/check-resume',
         icon: CheckResumeIcon,
         title: 'Check resume'
     },
     'interview-practice': {
-        href: '/',
+        href: '/interview-practice',
         icon: InterviewIcon,
         title: 'Interview practice'
     },
     'career-coach': {
-        href: '/',
+        href: '/career-coach',
         icon: CareerCoachIcon,
         title: 'Career coach'
     },
     users: {
-        href: '/',
+        href: '/users',
         icon: UserIcon,
         title: 'Users'
     }
@@ -56,7 +55,7 @@ const bodyItems = {
 
 const footerItems = {
     'admin-management': {
-        href: '/',
+        href: '/admin-management',
         icon: ManagementIcon,
         title: 'Admin Management'
     }
@@ -81,9 +80,9 @@ const map = (section: 'body' | 'footer', path: string) => (role: UserRole) => {
     );
 };
 
-type PropsType = { children: ReactNode };
+type PropsType = { children: ReactNode; headerContent?: ReactNode };
 
-const AppLayout: FC<PropsType> = ({ children }) => {
+const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
     const { data, status } = useGetCurrentUserQuery();
     const { asPath } = useRouter();
 
@@ -92,7 +91,11 @@ const AppLayout: FC<PropsType> = ({ children }) => {
     }
 
     return (
-        <Box display="grid" gridTemplateColumns="repeat(24, 1fr)" gap={0}>
+        <S.Container
+            display="grid"
+            gridTemplateColumns="repeat(24, 1fr)"
+            gridTemplateRows="repeat(12, 1fr)"
+            gap={0}>
             <S.Sidebar gridColumn={'span 4'}>
                 <div className="sidebar-header">
                     <S.LogoBox>
@@ -114,11 +117,12 @@ const AppLayout: FC<PropsType> = ({ children }) => {
                     </S.SidebarItem>
                 </div>
             </S.Sidebar>
-            <S.Content gridColumn="span 20">
+            <S.Content gridColumn="span 20" gridTemplateRows="repeat(12, 1fr)" display={'grid'}>
                 <Modals />
-                {children}
+                <S.Header gridRow={'span 1'}>{headerContent}</S.Header>
+                <S.Body gridRow={'span 11'}>{children}</S.Body>
             </S.Content>
-        </Box>
+        </S.Container>
     );
 };
 
