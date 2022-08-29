@@ -1,5 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react';
-import { Box } from '@mui/material';
+import React, { FC, ReactNode } from 'react';
 import * as S from './app-layout-style';
 import DashboardIcon from '../../assets/icons/dashboard-icon';
 import Link from 'next/link';
@@ -81,9 +80,9 @@ const map = (section: 'body' | 'footer', path: string) => (role: UserRole) => {
     );
 };
 
-type PropsType = { children: ReactNode };
+type PropsType = { children: ReactNode; headerContent?: ReactNode };
 
-const AppLayout: FC<PropsType> = ({ children }) => {
+const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
     const { data, status } = useGetCurrentUserQuery();
     const { asPath } = useRouter();
 
@@ -92,7 +91,11 @@ const AppLayout: FC<PropsType> = ({ children }) => {
     }
 
     return (
-        <S.Container display="grid" gridTemplateColumns="repeat(24, 1fr)" gap={0}>
+        <S.Container
+            display="grid"
+            gridTemplateColumns="repeat(24, 1fr)"
+            gridTemplateRows="repeat(12, 1fr)"
+            gap={0}>
             <S.Sidebar gridColumn={'span 4'}>
                 <div className="sidebar-header">
                     <S.LogoBox>
@@ -114,9 +117,10 @@ const AppLayout: FC<PropsType> = ({ children }) => {
                     </S.SidebarItem>
                 </div>
             </S.Sidebar>
-            <S.Content gridColumn="span 20">
+            <S.Content gridColumn="span 20" gridTemplateRows="repeat(12, 1fr)" display={'grid'}>
                 <Modals />
-                {children}
+                <S.Header gridRow={'span 1'}>{headerContent}</S.Header>
+                <S.Body gridRow={'span 11'}>{children}</S.Body>
             </S.Content>
         </S.Container>
     );

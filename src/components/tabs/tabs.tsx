@@ -61,7 +61,7 @@ const Tabs = ({
                         style={{
                             cursor: 'pointer',
                             fontSize: isMedium ? '18px' : navbarTab ? '17px' : '28px',
-                            color: '#213950',
+                            color: '#3d3d3d',
                             marginRight: isMedium ? '20px' : navbarTab ? 0 : '40px',
                             marginBottom: 0,
                         }}
