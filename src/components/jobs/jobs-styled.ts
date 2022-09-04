@@ -16,20 +16,22 @@ export const CardJobs = styled(Box)({
     borderRadius: '20px',
     color: '#000',
     padding: '10px',
-    fontSize: '20px',
-    fontWeight: '600',
     transition: ' transform 550ms',
     '&:hover': {
         backgroundColor: '#7251b2 ',
         transform: 'translateX(20px)',
         color: '#fff'
-    }
+    },
+    '::-webkit-scrollbar ': { display: 'none' }
 });
 
 export const ScrollBarJobs = styled(Box)({
     height: '100vh',
     overflowY: 'scroll',
-    backgroundColor: ' #dcd0f3 0% 0% no-repeat padding-box'
+    backgroundColor: ' #dcd0f3 0% 0% no-repeat padding-box',
+    '&.focusFromKey': {
+        color: '#fff'
+    }
 });
 
 export const BoxJobText = styled(Typography)({

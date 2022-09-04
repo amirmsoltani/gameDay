@@ -1,0 +1,184 @@
+import styled from '@emotion/styled';
+import { Grid } from '@mui/material';
+
+export const Header = styled(Grid)`
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 46px;
+
+    .header__info-box {
+        font-size: 15px;
+        padding-right: 15px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        margin-right: 31px;
+
+        .header__back-btn {
+            border-radius: 50%;
+            height: 43px;
+            width: 43px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 55px;
+            padding: 0;
+        }
+    }
+
+    .headerd__search-input{
+        background-color: 'red';
+    }
+
+    ${({ theme: { palette } }) => `
+    .header__info-box{
+        border-right: 2px solid ${palette.primary.light}80;
+        .header__back-btn{
+            background-color:${palette.primary.main};
+
+            svg{
+                fill: ${palette.common.white};
+            }
+        }
+    }
+    `}
+`;
+
+export const ListWarpper = styled(Grid)`
+    padding: 18px 15px 0 15px;
+    height: 100%;
+`;
+
+export const ListHeader = styled(Grid)`
+    border-radius: 6px;
+    height: 45px;
+    margin-bottom: 16px;
+    align-items: center;
+
+    .list-header__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        &.no-center {
+            justify-content: flex-start !important;
+        }
+    }
+
+    ${({ theme: { palette } }) => `
+    background-color:${palette.grey.main};
+`}
+`;
+
+export const ListBody = styled(Grid)`
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+`;
+
+export const ListItem = styled(Grid)`
+    border-radius: 20px;
+    min-height: 105px;
+    box-shadow: '1px 1px 10px #0000000D';
+    margin-bottom: 10px;
+    padding: 10px 10px;
+
+    .list-item__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        &.no-border {
+            border: none !important;
+        }
+        &.no-center {
+            justify-content: flex-start;
+            padding-left: 20px;
+        }
+        .list-item__of-day {
+            padding: 0;
+            border-radius: 6px;
+            min-width: 200px;
+            width: 13.5vw;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+
+            svg {
+                margin-right: 10px;
+            }
+        }
+    }
+    .list-item__title {
+        justify-content: flex-start !important;
+
+        .list-item__image {
+            width: 100px;
+            margin-right: 20px;
+        }
+        .list-item__text-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+            font-size: 15px;
+        }
+    }
+
+    ${({ theme: { palette, breakpoints } }) => `
+        background-color:${palette.common.white};
+        .list-item__item {
+            border-right: 2.5px solid ${palette.primary.light}80;       
+            .list-item__of-day{
+                background-color: ${palette.primary.main};
+                color: ${palette.common.white};
+
+                svg{
+                    width: 25px;
+                    fill:${palette.common.white};
+                }
+            }
+        }
+
+        .list-item__last-border {
+            border-radius: 20px;
+            background-color: ${palette.primary.main};
+        }
+
+        &.primary{
+            background-color:${palette.primary.main};
+            .list-item__item {
+                color:${palette.common.white};  
+                .list-item__of-day{
+                    background-color: ${palette.primary.light};
+                    color:${palette.primary.main};
+                    svg{
+                        width: 10px;
+                        fill:${palette.primary.main};
+                    }
+                }     
+            }
+            .list-item__last-border {
+                background-color: ${palette.common.white};
+            }
+            .list-item__title .list-item__text-box *{
+                color:${palette.common.white};
+            }
+        }
+
+        ${breakpoints.down('lg')}{
+            .list-item__item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start !important;
+                font-size: 15px;
+            }
+        }
+    `}
+`;
