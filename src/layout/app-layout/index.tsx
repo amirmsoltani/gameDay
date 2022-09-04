@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useCallback, useRef, useState } from 'react';
 import * as S from './app-layout-style';
 import DashboardIcon from '../../assets/icons/dashboard-icon';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ import { useGetCurrentUserQuery, UserRole } from '../../graphql/generated';
 import { useRouter } from 'next/router';
 import { AppLoadingPage } from '@/components/base/loader/LoadingPage';
 import Modals from '@/components/modals';
+import { LayoutContext } from './layout-context';
 
 const bodyItems = {
     dashboard: {
@@ -83,6 +84,8 @@ const map = (section: 'body' | 'footer', path: string) => (role: UserRole) => {
 type PropsType = { children: ReactNode; headerContent?: ReactNode };
 
 const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
+    const [headerChildren, setHeaderChildren] = useState<ReactNode | null>(null);
+
     const { data, status } = useGetCurrentUserQuery();
     const { asPath } = useRouter();
 
@@ -91,38 +94,40 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
     }
 
     return (
-        <S.Container
-            display="grid"
-            gridTemplateColumns="repeat(24, 1fr)"
-            gridTemplateRows="repeat(12, 1fr)"
-            gap={0}>
-            <S.Sidebar gridColumn={'span 4'}>
-                <div className="sidebar-header">
-                    <S.LogoBox>
-                        <S.Logo resources={{ src: '/images/gd-logo.png' }} />
-                        <S.TextLogo resources={{ src: '/images/logo-text.png' }} />
-                    </S.LogoBox>
-                </div>
-                <div className="sidebar-body">
-                    {data?.user_login.result?.userRoles
-                        .filter(filter('body'))
-                        .map(map('body', asPath))}
-                </div>
-                <div className="sidebar-footer">
-                    {data?.user_login.result?.userRoles
-                        .filter(filter('footer'))
-                        .map(map('footer', asPath))}
-                    <S.SidebarItem>
-                        <LogoutIcon /> Logout
-                    </S.SidebarItem>
-                </div>
-            </S.Sidebar>
-            <S.Content gridColumn="span 20" gridTemplateRows="repeat(12, 1fr)" display={'grid'}>
-                <Modals />
-                <S.Header gridRow={'span 1'}>{headerContent}</S.Header>
-                <S.Body gridRow={'span 11'}>{children}</S.Body>
-            </S.Content>
-        </S.Container>
+        <LayoutContext.Provider value={{ setChildren: setHeaderChildren }}>
+            <S.Container
+                display="grid"
+                gridTemplateColumns="repeat(24, 1fr)"
+                gridTemplateRows="repeat(12, 1fr)"
+                gap={0}>
+                <S.Sidebar gridColumn={'span 4'}>
+                    <div className="sidebar-header">
+                        <S.LogoBox>
+                            <S.Logo resources={{ src: '/images/gd-logo.png' }} />
+                            <S.TextLogo resources={{ src: '/images/logo-text.png' }} />
+                        </S.LogoBox>
+                    </div>
+                    <div className="sidebar-body">
+                        {data?.user_login.result?.userRoles
+                            .filter(filter('body'))
+                            .map(map('body', asPath))}
+                    </div>
+                    <div className="sidebar-footer">
+                        {data?.user_login.result?.userRoles
+                            .filter(filter('footer'))
+                            .map(map('footer', asPath))}
+                        <S.SidebarItem>
+                            <LogoutIcon /> Logout
+                        </S.SidebarItem>
+                    </div>
+                </S.Sidebar>
+                <S.Content gridColumn="span 20" gridTemplateRows="repeat(12, 1fr)" display={'grid'}>
+                    <Modals />
+                    <S.Header gridRow={'span 1'}>{headerContent || headerChildren}</S.Header>
+                    <S.Body gridRow={'span 11'}>{children}</S.Body>
+                </S.Content>
+            </S.Container>
+        </LayoutContext.Provider>
     );
 };
 

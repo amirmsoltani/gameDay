@@ -40,3 +40,14 @@ query getDashboard {
         status
     }
 }
+
+query getSkills($take:Int,$skip:Int,$where:SkillFilterInput,$order:[SkillSortInput!]){
+  skill_getSkills{
+    result(take:$take,skip:$skip,where:$where,order:$order){
+      items{id title  iconUrl isToday isToday createdDate skillCategory{title}}
+      pageInfo{hasNextPage hasPreviousPage}
+      totalCount
+    }
+    status
+  }
+}
