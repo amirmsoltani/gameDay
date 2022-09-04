@@ -21,8 +21,7 @@ export const CardJobs = styled(Box)({
         backgroundColor: '#7251b2 ',
         transform: 'translateX(20px)',
         color: '#fff'
-    },
-    '::-webkit-scrollbar ': { display: 'none' }
+    }
 });
 
 export const ScrollBarJobs = styled(Box)({
@@ -31,7 +30,10 @@ export const ScrollBarJobs = styled(Box)({
     backgroundColor: ' #dcd0f3 0% 0% no-repeat padding-box',
     '&.focusFromKey': {
         color: '#fff'
-    }
+    },
+    '&::-webkit-scrollbar': { display: 'none' }
+    // -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    // scrollbar-width: none;  /* Firefox */
 });
 
 export const BoxJobText = styled(Typography)({

@@ -68,13 +68,12 @@ export const JobCard = () => {
                     </Grid>
                     <Grid item>
                         <div>
-                            <div>
-                                UI UX Designer
-                                <br /> Amsterdam <br />
-                                Full time <br /> Exp. level: Senior <br />
-                            </div>
-                            <S.BoxJobDay>10 days ago</S.BoxJobDay>
+                            UI UX Designer
+                            <br /> Amsterdam <br />
+                            Full time <br />
+                            xp. level: Senior <br />
                         </div>
+                        <S.BoxJobDay>10 days ago</S.BoxJobDay>
                     </Grid>
                 </Grid>
             </S.CardJobs>
