@@ -1,0 +1,12 @@
+mutation addSkillOfDay($id:Int!){
+  skill_addSkillOfDay(skillId:$id){
+    status
+  }
+}
+
+mutation removeSkillOfDay($id:Int!)
+{
+  skill_removeSkillOfDay(skillId:$id){
+    status
+  }
+}
