@@ -94,9 +94,12 @@ export const DashboardPage = () => {
                 <S.UserBody display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={9}>
                     {data.user_getTopUsers.result.items.map((user, index) => (
                         <Box gridColumn={'span 1'} key={user.firstName}>
-                            <div className='user-body__imagebox'>
+                            <div className="user-body__imagebox">
                                 {!index && (
-                                    <MImage resources={{ src: '/images/dashboard/crown.png' }} className="user-body__crown" />
+                                    <MImage
+                                        resources={{ src: '/images/dashboard/crown.png' }}
+                                        className="user-body__crown"
+                                    />
                                 )}
                                 <MImage
                                     resources={{

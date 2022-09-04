@@ -1,0 +1,121 @@
+query JobGetJob($skip: Int, $take: Int, $where: JobFilterInput, $order: [JobSortInput!]) {
+    job_getJobs {
+        status
+        result(skip: $skip, take: $take, where: $where, order: $order) {
+            items {
+                title
+                jobType
+                experienceLevel
+                education
+                salary
+                country
+                city
+                description
+                jobCategory
+                company
+                jobSkills
+                jobRequests
+                userFavoriteJobs
+                jobCategoryId
+                companyId
+                status
+                id
+                isDeleted
+                createdDate
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
+
+query JobRequestGetJobRequests(
+    $skip: Int
+    $take: Int
+    $where: JobRequestFilterInput
+    $order: [JobRequestSortInput!]
+) {
+    jobrequest_getJobRequests {
+        status
+        result(skip: $skip, take: $take, where: $where, order: $order) {
+            items {
+                status
+                job {
+                    title
+                    jobType
+                    experienceLevel
+                    education
+                    salary
+                    country
+                    city
+                    description
+                    jobCategory {
+                        title
+                        jobs
+                        id
+                        isDeleted
+                        createdDate
+                    }
+                    company {
+                        title
+                        iconUrl
+                        jobs
+                        id
+                        isDeleted
+                        createdDate
+                    }
+                    jobSkills {
+                        skill
+                        job
+                        skillId
+                        jobId
+                        id
+                        isDeleted
+                        createdDate
+                    }
+                    jobRequests {
+                        status
+                        job
+                        user
+                        jobId
+                        userId
+                        cVFileUrl
+                        id
+                        isDeleted
+                        createdDate
+                    }
+                    userFavoriteJobs {
+                        job
+                        user
+                        jobId
+                        userId
+                        id
+                        isDeleted
+                        createdDate
+                    }
+                    jobCategoryId
+                    companyId
+                    status
+                    id
+                    isDeleted
+                    createdDate
+                }
+                user
+                jobId
+                userId
+                cVFileUrl
+                id
+                isDeleted
+                createdDate
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
