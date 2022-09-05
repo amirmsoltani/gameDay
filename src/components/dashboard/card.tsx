@@ -20,12 +20,12 @@ export const Card: FC<PropsType> = ({
     headerOptions
 }) => {
     return (
-        <S.CardWarpper gridColumn={column} className={primary && 'primary'} gridRow={row} >
+        <S.CardWrapper gridColumn={column} className={primary && 'primary'} gridRow={row}>
             <S.CardHeader className={primary && 'primary'}>
                 <Typography className="card__header__title">{title}</Typography>
                 <div>{headerOptions}</div>
             </S.CardHeader>
             {children}
-        </S.CardWarpper>
+        </S.CardWrapper>
     );
 };

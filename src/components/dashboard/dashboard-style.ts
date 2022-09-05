@@ -1,14 +1,13 @@
 import { theme } from '@/provider/ThemeProvider';
 import styled from '@emotion/styled';
 import { Box } from '@mui/system';
-import { MButton } from '../base/MButton';
 
 export const Content = styled(Box)`
     padding: 34px 80px 44px 43px;
     height: 100%;
 `;
 
-export const CardWarpper = styled(Box)`
+export const CardWrapper = styled(Box)`
     border-radius: 20px;
     min-height: 200px;
     box-shadow: 0px 5px 25px #52575d1a;
@@ -67,18 +66,25 @@ export const ReportBody = styled.div`
     }
 `;
 
-export const AddSkill = styled(MButton)`
+export const AddSkill = styled.a`
     font-size: 14px;
     border-radius: 6px;
-    margin: 0;
-    .plus {
-        font-weight: bold;
-        font-size: 21px;
-    }
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding:0 14px;
+    cursor: pointer;
+    text-decoration: none;
     ${({ theme }) => `
         color:${theme.palette.primary.main};
         background-color:${theme.palette.common.white};
-        
+        .plus{
+            fill:${theme.palette.primary.main};
+            display:inline;
+            width:21px;
+            margin-right:14px;
+        }
     `}
 `;
 
@@ -147,5 +153,25 @@ export const UserBody = styled(Box)`
         white-space: nowrap;
         color: #8ce2ee;
         font-size: 1.2vh;
+    }
+`;
+
+export const ChartBody = styled.div`
+    padding: 0 30px;
+    height: 60%;
+
+    .chart-body__chart-map {
+        margin-left: 15px;
+        font-size: 15px;
+
+        ::before {
+            display: inline-block;
+            width: 25px;
+            height: 10px;
+            content: '';
+            background-color: ${({ theme: { palette } }) => palette.primary.main};
+            margin-right: 10px;
+            border-radius: 5px;
+        }
     }
 `;
