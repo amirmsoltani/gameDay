@@ -10,3 +10,9 @@ mutation removeSkillOfDay($id:Int!)
     status
   }
 }
+
+mutation removeAllSkillOfDay($ids:[Int!]){
+  skill_removeAllSkillOfDay(skillIds:$ids) {
+    status
+  }
+}
