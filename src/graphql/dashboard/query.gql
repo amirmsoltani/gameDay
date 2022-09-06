@@ -31,14 +31,16 @@ query getDashboard {
         }
         status
     }
-    report_getReports {
-        result {
-            items {
-                iMEI
-            }
+    report_getChartViewApp{
+      result{
+        items{
+          timeStamp
+          total
         }
-        status
+      }
+      status
     }
+  	
 }
 
 query getSkills($take:Int,$skip:Int,$where:SkillFilterInput,$order:[SkillSortInput!]){

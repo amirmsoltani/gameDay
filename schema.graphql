@@ -33,6 +33,18 @@ directive @authorize(
     roles: [String!]
 ) on SCHEMA | OBJECT | FIELD_DEFINITION
 
+type ChartDto {
+    timeStamp: DateTime!
+    total: Int!
+}
+
+type ChartDtoCollectionSegment {
+    items: [ChartDto]
+    "Information to aid in pagination."
+    pageInfo: CollectionSegmentInfo!
+    totalCount: Int!
+}
+
 "Information about the offset pagination."
 type CollectionSegmentInfo {
     "Indicates whether more items exist following the set defined by the clients arguments."
@@ -284,6 +296,11 @@ type LessonDto {
     totalTopicViewd: Int!
 }
 
+type ListResponseBaseOfChartDto {
+    result(order: [ChartDtoSortInput!], skip: Int, take: Int, where: ChartDtoFilterInput): ChartDtoCollectionSegment
+    status: ResponseStatus!
+}
+
 type ListResponseBaseOfComment {
     result(order: [CommentSortInput!], skip: Int, take: Int, where: CommentFilterInput): CommentCollectionSegment
     status: ResponseStatus!
@@ -506,6 +523,7 @@ type Mutation {
     skill_addSkill(input: SkillInput): ResponseBaseOfSkill
     skill_addSkillOfDay(skillId: Int!): ResponseBase
     skill_deleteSkill(id: Int!): ResponseBase
+    skill_removeAllSkillOfDay(skillIds: [Int!]): ResponseBase
     skill_removeSkillOfDay(skillId: Int!): ResponseBase
     skill_updateSkill(id: Int!, input: SkillInput): ResponseBaseOfSkill
     topic_addTopic(input: TopicInput): ResponseBaseOfTopic
@@ -566,6 +584,7 @@ type Query {
     message_getConversation(conversationId: Int!): ListResponseBaseOfMessages
     message_getConversationForUser(otherUserId: Int!): ResponseBaseOfConversations
     message_getUserMessages: ListResponseBaseOfConversationDto
+    report_getChartViewApp: ListResponseBaseOfChartDto
     report_getReports: ListResponseBaseOfReport
     role_getRoles: ListResponseBaseOfRole
     settings_getSetting(settingId: Int!): SingleResponseBaseOfSettings
@@ -1405,6 +1424,18 @@ input ActiveStatusOperationFilterInput {
 input BooleanOperationFilterInput {
     eq: Boolean
     neq: Boolean
+}
+
+input ChartDtoFilterInput {
+    and: [ChartDtoFilterInput!]
+    or: [ChartDtoFilterInput!]
+    timeStamp: ComparableDateTimeOperationFilterInput
+    total: ComparableInt32OperationFilterInput
+}
+
+input ChartDtoSortInput {
+    timeStamp: SortEnumType
+    total: SortEnumType
 }
 
 input CommentFilterInput {

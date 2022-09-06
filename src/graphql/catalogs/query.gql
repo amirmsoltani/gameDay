@@ -1,0 +1,28 @@
+query getCategories(
+    $take: Int
+    $skip: Int
+    $where: SkillCategoryFilterInput
+    $order: [SkillCategorySortInput!]
+) {
+    skillcategory_getSkillCategories {
+        result(take: $take, skip: $skip, where: $where, order: $order) {
+            items {
+                id
+                title
+                rate
+                iconUrl
+                lessons {
+                    id
+                }
+                comments {
+                    status
+                }
+            }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
+        }
+        status
+    }
+}
