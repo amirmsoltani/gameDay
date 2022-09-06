@@ -3,6 +3,11 @@ import { Grid } from '@mui/material';
 
 export const Content = styled(Grid)`
     height: 100%;
+
+    svg {
+        position: static;
+        transform: translate(0, 0);
+    }
 `;
 
 export const LeftSide = styled(Grid)`
@@ -15,14 +20,7 @@ export const LeftSide = styled(Grid)`
     .left-side__cards {
         display: flex;
         flex-direction: column;
-        padding:30px 14px;
-    }
-    .left-side__column {
-        /* background-color: red; */
-    }
-
-    input{
-        /* transform: translateX(1.5vw); */
+        padding: 30px 14px;
     }
 
     ${({ theme: { palette } }) => `
@@ -32,7 +30,4 @@ export const LeftSide = styled(Grid)`
     `}
 `;
 
-
-export const RightSide = styled(Grid)`
-
-`
+export const RightSide = styled(Grid)``;

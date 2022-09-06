@@ -10,7 +10,7 @@ export const CardWrapper = styled.div`
     font-size: 15px;
     transition: all 500ms;
     cursor: pointer;
-
+    position: relative;
 
     .catalog-card__colum1 {
         display: flex;
@@ -69,6 +69,35 @@ export const CardWrapper = styled.div`
                 height:100%;
                 background-color:${palette.primary.light}40;
             }
+
+            .catalog-card__footer__btn{
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                width:50%;
+                height:50px;
+                color:${palette.common.white};
+                fill:${palette.common.white};
+                border-radius:6px;
+                margin: 5px;
+                &.active,:hover{
+                    background-color:${palette.primary.light}40;
+                }
+                svg{
+                    margin-right:15px;
+                    width:22px;
+                }
+            }
+        }
+
+        .catalog-card__badge{
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left:-7.5px;
+            top:    calc(50% - 7.5px);
+            border-radius:50%;
+            background-color:${palette.error.main};
         }
         
     `}
