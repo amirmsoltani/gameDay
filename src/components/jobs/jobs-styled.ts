@@ -18,7 +18,7 @@ export const CardJobs = styled(Card)<{ boxActive: boolean }>(({ theme, boxActive
         backgroundColor: boxActive ? '#7251b2 ' : '#fff 0% 0% no-repeat padding-box',
         transform: boxActive ? 'translateX(20px)' : 'translateX(0px)',
         color: boxActive ? '#fff' : '#000',
-        '&:hover': {
+        '&:hover,&:p': {
             backgroundColor: '#7251b2',
             transform: 'translateX(20px)',
             color: '#fff'
