@@ -1,5 +1,5 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
-import { Grid, Input, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import React, { Fragment, useCallback, useState } from 'react';
@@ -17,23 +17,29 @@ import {
     GetSkillsQuery,
     useAddSkillOfDayMutation,
     useInfiniteGetSkillsQuery,
+    useRemoveAllSkillOfDayMutation,
     useRemoveSkillOfDayMutation
 } from 'src/graphql/generated';
 import { MImage } from '../base/image/MImage';
 import { MButton } from '../base/MButton';
 import * as S from './skill-style';
+import { SearchIconExercise } from 'src/assets/exercise/search-icon';
+import useDebounce from 'src/hooks/useDebounce';
 
 const SkillPage = () => {
     const [itemList, setItemList] = useState<GetSkillsQuery['skill_getSkills']['result']['items']>(
         []
     );
+    const [searchText, setSearchText] = useState<string>('');
+    const finalSearchText = useDebounce(searchText, 500);
+
     const [end, setEnd] = useState(false);
 
     const { data, isFetchingNextPage, fetchNextPage } = useInfiniteGetSkillsQuery(
         {
             take: 10,
             skip: 0,
-            where: { title: { contains: '' } }
+            where: { title: { contains: finalSearchText } }
         },
         {
             keepPreviousData: true,
@@ -81,6 +87,22 @@ const SkillPage = () => {
         }
     });
 
+    const {
+        mutate: removeAllMutate,
+        variables: removeAllVar,
+        isLoading: removeAllLoading
+    } = useRemoveAllSkillOfDayMutation({
+        onSuccess: (_, { ids }) => {
+            const newList = [...itemList];
+            itemList.forEach((item, index) => {
+                if (typeof ids === 'number' ? item.id === ids : ids.includes(item.id)) {
+                    newList[index] = { ...newList[index], isToday: false };
+                }
+            });
+            setItemList(newList);
+        }
+    });
+
     const handleDrop = (droppedItem: DropResult) => {
         if (!droppedItem.destination) return;
         var updatedList = [...itemList];
@@ -99,16 +121,13 @@ const SkillPage = () => {
                     gridTemplateRows="repeat(12, 1fr)">
                     <S.ListHeader container gridRow={'span 1'}>
                         <Grid lg={1} xs={12} item />
-                        <Grid lg={2.9} xs={12} className={'list-header__item no-center'} item>
+                        <Grid lg={3.9} xs={12} className={'list-header__item no-center'} item>
                             Skill Title
                         </Grid>
                         <Grid lg={4} xs={12} className={'list-header__item'} item>
                             Added to the list on
                         </Grid>
-                        <Grid lg={1.5} xs={12} className={'list-header__item'} item>
-                            Number of times added
-                        </Grid>
-                        <Grid lg={2.5} xs={12} className={'list-header__item'} item>
+                        <Grid lg={3} xs={12} className={'list-header__item'} item>
                             situation
                         </Grid>
                     </S.ListHeader>
@@ -145,7 +164,7 @@ const SkillPage = () => {
                                             {item.id}
                                         </Grid>
                                         <Grid
-                                            lg={2.9}
+                                            lg={3.9}
                                             xs={12}
                                             className="list-item__item list-item__title"
                                             item>
@@ -164,18 +183,21 @@ const SkillPage = () => {
                                         <Grid lg={4} xs={12} className="list-item__item" item>
                                             {dayjs(item.createdDate).format('MM/DD/YY')}
                                         </Grid>
-                                        <Grid lg={1.5} xs={12} className="list-item__item" item>
-                                            -
-                                        </Grid>
                                         <Grid
-                                            lg={2.5}
+                                            lg={3}
                                             xs={12}
                                             className="list-item__item no-border"
                                             item>
                                             <MButton
                                                 loading={
-                                                    (addVar?.id === item.id && addLoading) ||
-                                                    (removeVar?.id === item.id && removeLoading)
+                                                    (addLoading && addVar?.id === item.id) ||
+                                                    (removeLoading && removeVar?.id === item.id) ||
+                                                    (removeAllLoading &&
+                                                        (typeof removeAllVar?.ids === 'number'
+                                                            ? item.id === removeAllVar.ids
+                                                            : (
+                                                                  removeAllVar?.ids as number[]
+                                                              )?.includes(item.id)))
                                                 }
                                                 className="list-item__of-day"
                                                 onClick={() => {
@@ -209,7 +231,16 @@ const SkillPage = () => {
                 </S.ListWarpper>
             );
         },
-        [itemList, addLoading, removeLoading, isFetchingNextPage, fetchNextPage, end]
+        [
+            itemList,
+            addLoading,
+            removeLoading,
+            isFetchingNextPage,
+            fetchNextPage,
+            removeAllLoading,
+            removeAllVar,
+            end
+        ]
     );
 
     return (
@@ -227,9 +258,29 @@ const SkillPage = () => {
                     <Typography>
                         {data?.pages?.[0].skill_getSkills.result.totalCount} items Listed
                     </Typography>
-                    <div style={{ width: 250 }}>
-                        <Input className="headerd__search-input" />
+                    <div className="input-box">
+                        <SearchIconExercise />
+                        <span className="input-box__search-text">search |</span>
+                        <input
+                            className="input-box__input"
+                            onChange={(event) => {
+                                setSearchText(event.target.value || '');
+                            }}
+                        />
                     </div>
+                    <MButton
+                        className="header__remove-button"
+                        onClick={() => {
+                            removeAllMutate({
+                                ids: itemList.filter((item) => item.isToday).map((item) => item.id)
+                            });
+                        }}
+                        loading={removeAllLoading}>
+                        Remove all selected skill
+                    </MButton>
+                    <Link href="/dashboard">
+                        <a className="header__publish-button">Publish</a>
+                    </Link>
                 </S.Header>
             </LayoutHeader>
             <DragDropContext onDragEnd={handleDrop}>
