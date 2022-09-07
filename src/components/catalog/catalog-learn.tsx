@@ -67,13 +67,13 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
             <span className="catalog-learn__description-title">Description</span>
             <p className="catalog-learn__description-text">lorem ipsome</p>
             {itemList.map((lesson, index) => (
-                <Fragment>
+                <Fragment key={lesson.title}>
                     <div className="catalog-learn__card-header">
                         <span className="card-header__index">{index + 1}</span>{' '}
                         <span>{lesson.title}</span>
                     </div>
                     {lesson.topics.map((topic) => (
-                        <div className="catalog-learn__card-lesson">
+                        <div className="catalog-learn__card-lesson" key={topic.title}>
                             <div className="card-lesson__box-left">
                                 <PlayIcon />
                                 <span className="box-left__file-name">{topic.fileUrl}</span>

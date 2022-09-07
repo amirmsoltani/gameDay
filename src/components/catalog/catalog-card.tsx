@@ -36,8 +36,8 @@ const CatalogCard: FC<PropsType> = ({ active, data, onChangeTab, onClick }) => {
 
                 <span className="catalog-card__lesson-text">{data.lesson} Lessons</span>
                 <div>
-                    {[...new Array(data.star)].map(() => (
-                        <StarFillIcon className="catalog-card__star-icon" />
+                    {[...new Array(data.star)].map((_, index) => (
+                        <StarFillIcon className="catalog-card__star-icon" key={index} />
                     ))}
                 </div>
             </div>

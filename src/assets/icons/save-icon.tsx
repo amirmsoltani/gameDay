@@ -10,7 +10,7 @@ const SaveIcon: FC<SvgIconProps> = (props) => {
             width="30"
             height="30"
             viewBox="0 0 30 30">
-            <g id="Boundary" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+            <g id="Boundary" stroke="rgba(0,0,0,0)" strokeWidth="1" opacity="0">
                 <rect width="30" height="30" stroke="none" />
                 <rect x="0.5" y="0.5" width="29" height="29" fill="none" />
             </g>
