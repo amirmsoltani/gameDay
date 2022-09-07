@@ -8,6 +8,7 @@ import {
 import useDebounce from 'src/hooks/useDebounce';
 import { PrimarySpinner } from '../base/loader/spinner';
 import CatalogCard from './catalog-card';
+import CatalogLearnSection from './catalog-learn';
 import * as S from './catalog-style';
 
 function CatalogPage() {
@@ -21,9 +22,12 @@ function CatalogPage() {
     const [state, setState] = useState<{ tab: 'skills' | 'learn'; activeCategory?: number } | null>(
         null
     );
+
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetCategoriesQuery(
-        { take: 5, skip: 0, where: { title: { contains: finalSearchText } } },
+        { take: 10, skip: 0, where: { title: { contains: finalSearchText } } },
         {
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
             keepPreviousData: true,
             onSuccess: ({ pages }) => {
                 const length = pages.length;
@@ -47,11 +51,11 @@ function CatalogPage() {
                     setEnd(true);
                 }
             },
-            getNextPageParam: (_, pages) => ({ skip: pages.length * 5 })
+            getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
         }
     );
 
-    if (isLoading)
+    if (isLoading || !state)
         return (
             <S.Content display={'flex'} justifyContent="center" alignItems="center">
                 <PrimarySpinner />
@@ -63,7 +67,8 @@ function CatalogPage() {
             <S.LeftSide
                 item
                 container
-                xl={4.5}
+                md={4.5}
+                xs={12}
                 onScroll={(event: any) => {
                     const { scrollTop, scrollHeight, clientHeight } = event.target;
                     if (
@@ -74,7 +79,7 @@ function CatalogPage() {
                         fetchNextPage();
                     }
                 }}>
-                <Grid item lg={11} className="left-side__cards">
+                <Grid item xs={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <CatalogCard
                             key={item.title}
@@ -101,9 +106,11 @@ function CatalogPage() {
                         />
                     ))}
                 </Grid>
-                <Grid item lg={1} className="left-side__column" />
+                <Grid item xs={1} className="left-side__column" />
             </S.LeftSide>
-            <S.RightSide></S.RightSide>
+            <S.RightSide container item md={7.5}>
+                {state.tab === 'learn' ? <CatalogLearnSection id={state.activeCategory} /> : null}
+            </S.RightSide>
         </S.Content>
     );
 }
