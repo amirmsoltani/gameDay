@@ -1,17 +1,23 @@
+import LayoutHeader from '@/layout/app-layout/layout-header';
 import { Grid } from '@mui/material';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { useRef, useState } from 'react';
+import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
     CommentStatus,
     GetCategoriesQuery,
     useInfiniteGetCategoriesQuery
 } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
+import SearchInput from '../base/input/search-input';
 import { PrimarySpinner } from '../base/loader/spinner';
 import CatalogCard from './catalog-card';
 import CatalogLearnSection from './catalog-learn';
+import CatalogSkillSection from './catalog-skills';
 import * as S from './catalog-style';
 
 function CatalogPage() {
+    const totalItems = useRef<number | null>(null);
     const [itemList, setItemList] = useState<
         GetCategoriesQuery['skillcategory_getSkillCategories']['result']['items']
     >([]);
@@ -32,6 +38,8 @@ function CatalogPage() {
             onSuccess: ({ pages }) => {
                 const length = pages.length;
                 if (length === 1) {
+                    totalItems.current =
+                        pages[0].skillcategory_getSkillCategories!.result!.totalCount;
                     setItemList([...pages[0].skillcategory_getSkillCategories.result.items]);
                     setState({
                         tab: 'learn',
@@ -64,6 +72,33 @@ function CatalogPage() {
 
     return (
         <S.Content container>
+            <LayoutHeader>
+                <S.Header>
+                    <div className="header__info-box">Catalog</div>
+                    <span>{totalItems.current} items Listed</span>
+                    <SearchInput
+                        onChange={(event: any) => {
+                            setSearchText(event.target.value);
+                        }}
+                        wrapperClassName="header__search-input"
+                    />
+                    <Link href="/dashboard">
+                        <a className="header__link-button">
+                            <PlusIcon className="link-button__plus" /> Add New catalog
+                        </a>
+                    </Link>
+                    <Link href="/dashboard">
+                        <a className="header__link-button">
+                            <PlusIcon className="link-button__plus" /> Add New course
+                        </a>
+                    </Link>
+                    <Link href="/dashboard">
+                        <a className="header__link-button">
+                            <PlusIcon className="link-button__plus" /> Add New skill
+                        </a>
+                    </Link>
+                </S.Header>
+            </LayoutHeader>
             <S.LeftSide
                 item
                 container
@@ -79,7 +114,7 @@ function CatalogPage() {
                         fetchNextPage();
                     }
                 }}>
-                <Grid item xs={11} className="left-side__cards">
+                <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <CatalogCard
                             key={item.title}
@@ -106,10 +141,14 @@ function CatalogPage() {
                         />
                     ))}
                 </Grid>
-                <Grid item xs={1} className="left-side__column" />
+                <Grid item xs={0} md={1} className="left-side__column" />
             </S.LeftSide>
-            <S.RightSide container item md={7.5}>
-                {state.tab === 'learn' ? <CatalogLearnSection id={state.activeCategory} /> : null}
+            <S.RightSide container item md={7.5} xs={12}>
+                {state.tab === 'learn' ? (
+                    <CatalogLearnSection id={state.activeCategory} />
+                ) : (
+                    <CatalogSkillSection id={state.activeCategory} />
+                )}
             </S.RightSide>
         </S.Content>
     );
