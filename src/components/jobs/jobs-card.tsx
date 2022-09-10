@@ -1,48 +1,53 @@
 import { useRouter } from 'next/router';
-import React, { FC, useState } from 'react';
-import { StarFillIcon } from 'src/assets/common/StarIcon';
-import FlagIcon from 'src/assets/icons/flag-icon';
-import LearnIcon from 'src/assets/icons/learn-icon';
+import React, { FC } from 'react';
 import { LocationIcon } from 'src/assets/icons/location-icon';
 import { PublishIcon } from 'src/assets/icons/publish-icon';
 import { TimeIcon } from 'src/assets/icons/time-icon';
 import { MImage } from '../base/image/MImage';
-import { MButton } from '../base/MButton';
 import * as S from './jobs-card-style';
-
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
 type PropsType = {
     active?: boolean;
-    onChangeTab: (tab: 'learn' | 'skills') => void;
     onClick: () => void;
     children?: undefined;
     data: {
-        image: string;
-        title: string;
-        lesson: number;
-        star: number;
-        notification: boolean;
+        company?: {
+            title?: string;
+            iconUrl?: string;
+        };
+        jobType?: string;
+        title?: string;
+        city?: string;
+        experienceLevel?: string;
+        createdDate?: string;
+        notification?: boolean;
     };
 };
+
+// type CompanyType = GetJobsQuery['job_getJobs']['result']['items'];
+
 const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
-    width: 36,
+    width: 35,
     height: 19,
     padding: 0,
-    margin: 0,
+    margin: 5,
     '& .MuiSwitch-switchBase': {
         padding: 0,
-        margin: 2,
+        margin: 2.5,
+
         transitionDuration: '300ms',
         '&.Mui-checked': {
             transform: 'translateX(16px)',
-            color: '#fff',
+            color: 'theme.palette.primary.main',
             '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#7251B2',
+                backgroundColor: theme.palette.common.white,
+                // theme.palette.mode === 'dark' ? '#2ECA45' : theme.palette.common.white,
                 opacity: 1,
                 border: 0
             },
@@ -69,7 +74,9 @@ const IOSSwitch = styled((props: SwitchProps) => (
     },
     '.MuiSwitch-track': {
         borderRadius: 20 / 2,
-        backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+        border: '1px solid #fff',
+        backgroundColor: theme.palette.primary.main,
+        // backgroundColor: theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.primary.light,
         opacity: 1,
         transition: theme.transitions.create(['background-color'], {
             duration: 500
@@ -77,94 +84,49 @@ const IOSSwitch = styled((props: SwitchProps) => (
     }
 }));
 
-const CatalogCard: FC<PropsType> = ({
-    active,
-    data,
-    onChangeTab,
-    onClick,
-    title,
-    city,
-    level,
-    time,
-    publish,
-    id,
-    activeJobId,
-    seActiveJobId
-}) => {
+const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
     const router = useRouter();
 
-    const handelClick = () => {
-        router.query.jobId = id;
-        router.push(router);
-    };
     return (
         <S.CardWrapper className={active && 'active'} onClick={onClick}>
-            <div className="catalog-card__colum1">
-                <span>
-                    UI UX Designer <br />
-                    <LocationIcon />
-                    Amsterdam <br />
-                    <TimeIcon />
-                    Full time <br />
-                    <PublishIcon />
-                    xp. level: Senior <br />
-                </span>
+            <div className="Jobs-card__row1">
+                <div className="jobs-card__companyLogo">
+                    <MImage
+                        resources={{ src: data?.company?.iconUrl, fallback: '/images/user.jpg' }}
+                        className="jobs-card__logo"
+                    />
+                    <span className="jobs-card__text">Zendesk{data?.company?.title}</span>
+                </div>
+                <div className="jobs-card__toggle">
+                    <FormControlLabel
+                        control={<IOSSwitch defaultChecked />}
+                        label={
+                            <Typography sx={{ color: '#fff' }} variant="caption">
+                                Active
+                            </Typography>
+                        }
+                    />
+                </div>
             </div>
-            <div className="catalog-card__colum2">
-                <FormControlLabel control={<IOSSwitch defaultChecked />} label="Active" />
+            <div className="jobs-card__row2 ">
+                <span className="jobs-card__title">{data.title}</span>
             </div>
-            <div className="catalog-card__footer">
-                <S.BoxJobDay>10 days ago</S.BoxJobDay>
+            <div className="jobs-card__row3">
+                <LocationIcon />
+                <span className="jobs-card__item">Amsterdam{data.city}</span>
+                <br />
+                <TimeIcon />
+                <span className="jobs-card__item">Full time{data.jobType}</span>
+                <br />
+                <PublishIcon />
+                <span className="jobs-card__item">Exp. level: Senior{data.experienceLevel}</span>
+                <br />
+            </div>
+            <div className="jobs-card__row4">
+                <span className="jobs-card__title">{data.createdDate}10 days ago</span>
             </div>
         </S.CardWrapper>
     );
 };
 
-export default CatalogCard;
-
-// import { Grid, Typography } from '@mui/material';
-// import React from 'react';
-// import { MImage } from '../base/image/MImage';
-// import * as S from './jobs-styled';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Switch, { SwitchProps } from '@mui/material/Switch';
-// import { styled } from '@mui/material/styles';
-// import { Spacer } from '../base/spacer';
-// import { useRouter } from 'next/router';
-// import { LocationIcon } from '../../assets/icons/location-icon';
-// import { TimeIcon } from 'src/assets/icons/time-icon';
-// import { PublishIcon } from 'src/assets/icons/publish-icon';
-
-// export const JobCard = ({ title, city, level, time, publish, id, activeJobId, seActiveJobId }) => {
-//     const router = useRouter();
-
-//     const handelClick = () => {
-//         router.query.jobId = id;
-//         router.push(router);
-//     };
-
-//     console.log(router.query.jobId === String(id), String(id), router.query.jobId);
-//     return (
-//         <Grid container sx={{ padding: '10px' }}>
-//             <S.CardJobs onClick={handelClick} boxActive={router.query.jobId === String(id)}>
-//                 <Grid container justifyContent="space-between">
-//                     <MImage width="30" margin="10px"></MImage>
-//                     <FormControlLabel control={<IOSSwitch defaultChecked />} label="Active" />
-//                 </Grid>
-//                 <Grid item>
-//                     <div>
-//                         UI UX Designer
-//                         <br />
-//                         <LocationIcon />
-//                         Amsterdam <br />
-//                         <TimeIcon />
-//                         Full time <br />
-//                         <PublishIcon />
-//                         xp. level: Senior <br />
-//                     </div>
-//                     <S.BoxJobDay>10 days ago</S.BoxJobDay>
-//                 </Grid>
-//             </S.CardJobs>
-//         </Grid>
-//     );
-// };
+export default JobsCard;

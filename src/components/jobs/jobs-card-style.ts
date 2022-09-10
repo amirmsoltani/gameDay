@@ -1,110 +1,67 @@
 import styled from '@emotion/styled';
-import { Typography } from '@mui/material';
 
 export const CardWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
-    padding: 30px 14px 14px 14px;
+    padding: 14px 14px;
     border-radius: 20px;
     margin-top: 15px;
-    font-size: 15px;
+    font-size: 14px;
     transition: all 500ms;
     cursor: pointer;
     position: relative;
 
-    .catalog-card__colum1 {
+    .Jobs-card__row1 {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
-    }
 
-    .catalog-card__colum2 {
-        padding-right: 30px;
-        .catalog-card__image {
-            width: 105px;
-            height: 105px;
+        .jobs-card__companyLogo {
+            .jobs-card__logo {
+                width: 30px;
+                height: 30px;
+            }
+            .jobs-card__text {
+                padding-left: 10px;
+            }
+        }
+
+        .jobs-card__toggle {
+            flex-direction: column;
+            justify-content: space-between;
         }
     }
 
-    .catalog-card__footer {
-        display: none;
+    .jobs-card__row2 {
+        display: flex;
+        font-size: 14px;
+        flex-direction: column;
         justify-content: space-between;
+        .jobs-card__title {
+            font-weight: 600;
+        }
+    }
+
+    .jobs-card__row3 {
+        padding: 10px 0px;
+        .jobs-card__item {
+            font-size: 14px;
+            padding-left: 10px;
+        }
     }
 
     ${({ theme: { palette } }) => `
-
+     .jobs-card__row4 {
+        color: ${palette.paginate.main};
+    }
         background-color:${palette.common.white};
-
-        .catalog-card__lesson-text {
-            margin-top:30px;
-            color:${palette.grey.dark};
-            font-size:12px;
-        }
-
-        .catalog-card__star-icon{
-            width:20px;
-            fill:${palette.primary.light};
-        }
-
         &.active{
             background-color:${palette.primary.main};
             margin-top:30px;
             transform: translateX(2.5vw);
             color:${palette.common.white};
-        
-            .catalog-card__lesson-text {
-                color:${palette.primary.light};
-            }
-
-            .catalog-card__footer{
-                display:flex;
-                width: 100%;
-                border-top: 2px solid ${palette.primary.light}40;
-                margin-top: 25px;
-                
-            }
-
-            .catalog-card__footer__separator{
-                width:2px;
-                height:100%;
-                background-color:${palette.primary.light}40;
-            }
-
-            .catalog-card__footer__btn{
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                width:50%;
-                height:50px;
-                color:${palette.common.white};
-                fill:${palette.common.white};
-                border-radius:6px;
-                margin: 5px;
-                &.active,:hover{
-                    background-color:${palette.primary.light}40;
-                }
-                svg{
-                    margin-right:15px;
-                    width:22px;
-                }
-            }
         }
-
-        .catalog-card__badge{
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            left:-7.5px;
-            top:    calc(50% - 7.5px);
-            border-radius:50%;
-            background-color:${palette.error.main};
-        }
-        
     `}
 `;
-export const BoxJobDay = styled(Typography)({
-    fontSize: '14px',
-    color: '#B9BFCA',
-    marginTop: '10px'
-});
