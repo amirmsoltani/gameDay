@@ -35,10 +35,11 @@ export const theme = createTheme({
             light: '#E7F1FC',
             dark: '#3D3D3D'
         },
+
         grey: {
             main: '#EBEBEB',
             text: '#F8F8F8',
-            border:'#EBF2F7',
+            border: '#EBF2F7',
             dark: '#828282',
             light: '#F8F8F8',
             lighter: '#FAFAFA'
@@ -48,6 +49,7 @@ export const theme = createTheme({
         text: {
             main: '#3d3d3d',
             placeholder: '#B3B8BD',
+
             100: '#6270DD',
             700: '#424242'
         }

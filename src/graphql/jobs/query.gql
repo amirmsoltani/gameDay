@@ -1,0 +1,56 @@
+query getJobs($where: JobFilterInput, $take: Int, $skip: Int) {
+    job_getJobs {
+        result(where: $where, take: $take, skip: $skip) {
+            items {
+                id
+                company {
+                    title
+                    iconUrl
+                }
+                status
+                title
+                country
+                city
+                jobType
+                experienceLevel
+                createdDate
+            }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
+        }
+        status
+    }
+}
+
+query jobRequestGetJobRequests(
+    $skip: Int
+    $take: Int
+    $where: JobRequestFilterInput
+    $order: [JobRequestSortInput!]
+) {
+    jobrequest_getJobRequests {
+        status
+        result(skip: $skip, take: $take, where: $where, order: $order) {
+            items {
+                user {
+                    firstName
+                    lastName
+                    pictureUrl
+                    email
+                }
+                jobId
+                userId
+                cVFileUrl
+                id
+                createdDate
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
+    }
+}
