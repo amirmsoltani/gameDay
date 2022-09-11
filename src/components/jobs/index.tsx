@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
 import React, { useState } from 'react';
-import { CommentStatus, GetJobsQuery, useInfiniteGetJobsQuery } from 'src/graphql/generated';
+import { GetJobsQuery, useInfiniteGetJobsQuery } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
 import { PrimarySpinner } from '../base/loader/spinner';
-import CatalogLearnSection from './applicant-list';
+import ApplicantList from './applicant-list';
 import JobsCard from './jobs-card';
 import * as S from './jobs-style';
 
@@ -18,12 +18,19 @@ function JobsPage() {
     );
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetJobsQuery(
         { take: 5, skip: 0, where: { title: { contains: finalSearchText } } },
+
         {
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
             keepPreviousData: true,
             onSuccess: ({ pages }) => {
                 const length = pages.length;
                 if (length === 1) {
                     setItemList([...pages[0].job_getJobs.result.items]);
+                    setState({
+                        tab: 'learn',
+                        activeCategory: pages[0].job_getJobs.result.items[0]?.id
+                    });
                 } else {
                     setItemList([
                         ...itemList,
@@ -34,7 +41,7 @@ function JobsPage() {
                     setEnd(true);
                 }
             },
-            getNextPageParam: (_, pages) => ({ skip: pages.length * 5 })
+            getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
         }
     );
 
@@ -62,112 +69,36 @@ function JobsPage() {
                         fetchNextPage();
                     }
                 }}>
-                <Grid item lg={11} className="left-side__cards">
+                <Grid item xs={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <JobsCard
                             key={item.title}
-                            onChangeTab={() => {
-                                setState({ ...state, tab });
+                            onClick={() => {
+                                if (item.id !== state.activeCategory)
+                                    setState({
+                                        tab: 'learn',
+                                        activeCategory: item.id
+                                    });
                             }}
-                            onClick={() => {}}
-                            active={item?.id === state?.activeCategory}
+                            active={item.id === state.activeCategory}
                             data={{
-                                title: item.title
+                                title: item.title,
+                                jobType: item.jobType,
+                                city: item.city,
+                                experienceLevel: item.experienceLevel,
+                                createdDate: item.createdDate,
+                                company: item.company
                             }}
                         />
                     ))}
                 </Grid>
-                <Grid item lg={1} className="left-side__column" />
+                <Grid item xs={1} className="left-side__column" />
             </S.LeftSide>
             <S.RightSide container item md={7.5}>
-                <CatalogLearnSection id={state?.activeCategory} />
+                {state.tab === 'learn' ? <ApplicantList id={state?.activeCategory} /> : null}
             </S.RightSide>
         </S.Content>
     );
 }
 
 export default JobsPage;
-
-// import { Box, Grid, Typography } from '@mui/material';
-// import React, { useState } from 'react';
-// import { ApplicantList } from './applicant-list';
-// import * as S from './jobs-styled';
-// import { JobCard } from './jods-card';
-
-// export const JobsPage = () => {
-//     // const [activeJobId, setActiveJobId] = useState();
-//     // const data = [
-//     //     {
-//     //         id: 1,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     },
-//     //     {
-//     //         id: 2,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     },
-//     //     {
-//     //         id: 3,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     },
-//     //     {
-//     //         id: 4,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     },
-//     //     {
-//     //         id: 5,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     },
-//     //     {
-//     //         id: 6,
-//     //         title: 'UI UX Designer',
-//     //         city: 'Amsterdam',
-//     //         time: 'Full time',
-//     //         level: ' xp. level: Senior',
-//     //         publish: '10 days ago'
-//     //     }
-//     // ];
-//     return (
-//         // <Grid container>
-//         //     <Grid item xs={12} md={5} lg={3}>
-//         //         <S.ScrollBarJobs>
-//         //             {data?.map((dt) => {
-//         //                 return (
-//         //                     <JobCard
-//         //                         id={dt.id}
-//         //                         key={dt.id}
-//         //                         title={dt.title}
-//         //                         city={dt.city}
-//         //                         time={dt.time}
-//         //                         level={dt.level}
-//         //                         publish={dt.publish}
-//         //                     />
-//         //                 );
-//         //             })}
-//         //         </S.ScrollBarJobs>
-//         //     </Grid>
-//         //     <Grid item xs={12} md={7} lg={9}>
-//         //         {/* <ApplicantList /> */}
-//         //     </Grid>
-//         // </Grid>
-//     );
-// };

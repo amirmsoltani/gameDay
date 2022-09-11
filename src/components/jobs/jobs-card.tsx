@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { FC } from 'react';
 import { LocationIcon } from 'src/assets/icons/location-icon';
 import { PublishIcon } from 'src/assets/icons/publish-icon';
@@ -85,8 +84,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
 }));
 
 const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
-    const router = useRouter();
-
     return (
         <S.CardWrapper className={active && 'active'} onClick={onClick}>
             <div className="Jobs-card__row1">
@@ -95,7 +92,7 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                         resources={{ src: data?.company?.iconUrl, fallback: '/images/user.jpg' }}
                         className="jobs-card__logo"
                     />
-                    <span className="jobs-card__text">Zendesk{data?.company?.title}</span>
+                    <span className="jobs-card__text">{data?.company?.title}</span>
                 </div>
                 <div className="jobs-card__toggle">
                     <FormControlLabel
@@ -113,17 +110,17 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
             </div>
             <div className="jobs-card__row3">
                 <LocationIcon />
-                <span className="jobs-card__item">Amsterdam{data.city}</span>
+                <span className="jobs-card__item">{data.city}</span>
                 <br />
                 <TimeIcon />
-                <span className="jobs-card__item">Full time{data.jobType}</span>
+                <span className="jobs-card__item">{data.jobType}</span>
                 <br />
                 <PublishIcon />
-                <span className="jobs-card__item">Exp. level: Senior{data.experienceLevel}</span>
+                <span className="jobs-card__item">{data.experienceLevel}</span>
                 <br />
             </div>
             <div className="jobs-card__row4">
-                <span className="jobs-card__title">{data.createdDate}10 days ago</span>
+                <span className="jobs-card__title">{data.createdDate}</span>
             </div>
         </S.CardWrapper>
     );

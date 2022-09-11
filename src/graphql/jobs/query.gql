@@ -2,6 +2,7 @@ query getJobs($where: JobFilterInput, $take: Int, $skip: Int) {
     job_getJobs {
         result(where: $where, take: $take, skip: $skip) {
             items {
+                id
                 company {
                     title
                     iconUrl
@@ -20,5 +21,36 @@ query getJobs($where: JobFilterInput, $take: Int, $skip: Int) {
             totalCount
         }
         status
+    }
+}
+
+query jobRequestGetJobRequests(
+    $skip: Int
+    $take: Int
+    $where: JobRequestFilterInput
+    $order: [JobRequestSortInput!]
+) {
+    jobrequest_getJobRequests {
+        status
+        result(skip: $skip, take: $take, where: $where, order: $order) {
+            items {
+                user {
+                    firstName
+                    lastName
+                    pictureUrl
+                    email
+                }
+                jobId
+                userId
+                cVFileUrl
+                id
+                createdDate
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+        }
     }
 }
