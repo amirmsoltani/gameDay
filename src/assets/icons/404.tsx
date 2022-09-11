@@ -1,12 +1,11 @@
 import React from 'react';
 
-export const NotFoundPage = () => {
+export const NotFoundIcon = () => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            width="1027.118"
-            height="960.984"
+            width="700"
+            height="600"
             viewBox="0 0 1027.118 960.984">
             <defs>
                 <linearGradient
@@ -35,7 +34,7 @@ export const NotFoundPage = () => {
                     y1="0.339"
                     x2="0.816"
                     y2="0.77"
-                    xlink:href="#linear-gradient-2"
+                    // xlink:href="#linear-gradient-2"
                 />
                 <linearGradient
                     id="linear-gradient-4"
@@ -53,7 +52,7 @@ export const NotFoundPage = () => {
                     y1="1.348"
                     x2="0.247"
                     y2="0.055"
-                    xlink:href="#linear-gradient-4"
+                    // xlink:href="#linear-gradient-4"
                 />
                 <linearGradient
                     id="linear-gradient-6"
