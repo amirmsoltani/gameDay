@@ -9,8 +9,6 @@ import { MInputFormik, MInputPasswordFormik } from '@/components/base/input/form
 import { Spacer } from '@/components/base/spacer';
 import { MCheckboxFormik } from '@/components/base/toggle/Checkbox';
 import { useAuthPage } from '@/components/auth/services/useAuth';
-import ForgetPassword from './forget-password';
-import Link from 'next/link';
 
 // Form Schema
 const schema = Yup.object({
@@ -24,16 +22,14 @@ type ValueType = InferType<typeof schema>;
 
 // form initial Value
 const initialValues: ValueType = {
-    email: '',
-    password: '',
-    remember: false
+    email: ''
 };
 
-const LoginComponent: FC = () => {
-    const { login, state } = useAuthPage();
+const ForgetPassword: FC = () => {
+    const { state, changePassword } = useAuthPage();
 
     const onSubmit = useCallback((value: ValueType) => {
-        login(value.email, value.password);
+        changePassword(value.email);
     }, []);
 
     return (
@@ -45,25 +41,15 @@ const LoginComponent: FC = () => {
                 <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
                     <Form>
                         <S.FormCard>
+                            <S.ForgetTitle>Forgot password?</S.ForgetTitle>
+                            <S.ForgetText>
+                                Enter your email below and we will send you a reset email.
+                            </S.ForgetText>
                             {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
-                            <MInputFormik name="email" fullWidth label="Username" />
+                            <MInputFormik name="email" fullWidth label="" />
                             <Spacer space={40} />
-                            <MInputPasswordFormik
-                                name="password"
-                                fullWidth
-                                label="Password"
-                                errorSpaceOn={true}
-                            />
-                            <Spacer space={10} />
-                            <Box display="flex" justifyContent="space-between" alignItems="center">
-                                <MCheckboxFormik name="remember" optionName="Remember Me" />
-                                <S.ForgetButton>
-                                    <Link href="/forget-password">Forget Password? </Link>
-                                </S.ForgetButton>
-                            </Box>
-                            <Spacer space={57} />
                             <S.SubmitButton loading={state.loading} type={'submit'}>
-                                Login
+                                Submit
                             </S.SubmitButton>
                         </S.FormCard>
                     </Form>
@@ -73,4 +59,4 @@ const LoginComponent: FC = () => {
     );
 };
 
-export default LoginComponent;
+export default ForgetPassword;
