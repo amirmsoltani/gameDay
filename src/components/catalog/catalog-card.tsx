@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { StarFillIcon } from 'src/assets/common/StarIcon';
 import FlagIcon from 'src/assets/icons/flag-icon';
 import LearnIcon from 'src/assets/icons/learn-icon';
@@ -22,6 +22,12 @@ type PropsType = {
 
 const CatalogCard: FC<PropsType> = ({ active, data, onChangeTab, onClick }) => {
     const [activeTab, setActiveTab] = useState<'learn' | 'skills'>('learn');
+
+    useEffect(() => {
+        if (active) {
+            onChangeTab(activeTab);
+        }
+    }, [active]);
 
     const onChange = (tab: 'skills' | 'learn') => () => {
         setActiveTab(tab);
