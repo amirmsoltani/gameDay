@@ -9,7 +9,6 @@ import { MInputFormik, MInputPasswordFormik } from '@/components/base/input/form
 import { Spacer } from '@/components/base/spacer';
 import { MCheckboxFormik } from '@/components/base/toggle/Checkbox';
 import { useAuthPage } from '@/components/auth/services/useAuth';
-import ForgetPassword from './forget-password';
 import Link from 'next/link';
 
 // Form Schema
@@ -58,7 +57,9 @@ const LoginComponent: FC = () => {
                             <Box display="flex" justifyContent="space-between" alignItems="center">
                                 <MCheckboxFormik name="remember" optionName="Remember Me" />
                                 <S.ForgetButton>
-                                    <Link href="/forget-password">Forget Password? </Link>
+                                    <Link href="/forget-password">
+                                        <a className="link-color">Forget Password?</a>
+                                    </Link>
                                 </S.ForgetButton>
                             </Box>
                             <Spacer space={57} />

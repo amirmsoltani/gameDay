@@ -31,6 +31,10 @@ export const ForgetButton = styled(Typography)`
     font-size: 14px;
     color: ${({ theme }) => theme.palette.primary.main};
     cursor: pointer;
+
+    .link-color {
+        color: ${({ theme }) => theme.palette.primary.main};
+    }
 `;
 
 export const SubmitButton = styled(MButton)`

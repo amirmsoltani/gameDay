@@ -5,16 +5,13 @@ import { MImage } from '@/components/base/image/MImage';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
-import { MInputFormik, MInputPasswordFormik } from '@/components/base/input/formik';
+import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
-import { MCheckboxFormik } from '@/components/base/toggle/Checkbox';
 import { useAuthPage } from '@/components/auth/services/useAuth';
 
 // Form Schema
 const schema = Yup.object({
-    email: Yup.string().email('Must be a valid email').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-    remember: Yup.boolean()
+    email: Yup.string().email('Must be a valid email').required('Email is required')
 });
 
 // Form Value Type
