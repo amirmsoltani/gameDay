@@ -2,7 +2,7 @@ import React, { FC, Fragment, useState } from 'react';
 import CommentIcon from 'src/assets/icons/comment-icon';
 import PlayIcon from 'src/assets/icons/play-icon';
 import SaveIcon from 'src/assets/icons/save-icon';
-import { GetLessonQuery, useInfiniteGetLessonQuery, Lesson } from 'src/graphql/generated';
+import { GetLessonQuery, useInfiniteGetLessonQuery } from 'src/graphql/generated';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
 import * as S from './catalog-style';
@@ -79,7 +79,7 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                                 <span className="box-left__file-name">{topic.fileUrl}</span>
                             </div>
                             <div>
-                                <span>5:30</span>
+                                <span>{lesson.time}:00</span>
                             </div>
                         </div>
                     ))}

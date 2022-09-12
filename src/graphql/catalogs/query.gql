@@ -47,3 +47,26 @@ query getLesson($where: LessonFilterInput, $take: Int, $skip: Int) {
         status
     }
 }
+
+query getCatalogSkill($where: SkillFilterInput, $take: Int, $skip: Int) {
+    skill_getSkills {
+        result(where: $where, take: $take, skip: $skip) {
+            items {
+                id
+                iconUrl
+                title
+                skillCategory {
+                    title
+                }
+                skillQuestions {
+                    id
+                }
+            }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
+        }
+        status
+    }
+}
