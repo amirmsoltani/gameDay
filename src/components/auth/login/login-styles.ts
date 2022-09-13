@@ -51,6 +51,6 @@ export const ForgetTitle = styled(Typography)`
 
 export const ForgetText = styled(Typography)`
     font-size: 15px;
-    margin-top: 10px;
+    margin: 10px 0px;
     color: ${({ theme }) => theme.palette.grey.dark};
 `;

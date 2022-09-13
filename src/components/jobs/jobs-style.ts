@@ -31,6 +31,7 @@ export const RightSide = styled(Grid)`
 `;
 
 export const JobLearn = styled.div`
+    ${({ theme: { palette } }) => `
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -41,16 +42,35 @@ export const JobLearn = styled.div`
         display: none;
     }
 
+    .catalog-skill__list-body{
+        height:100%;
+        overflow: hidden scroll;
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    } 
     .job__box-header {
         display: flex;
-        justify-content: flex-start;
+        flexDirection:row;
         align-items: center;
-    }
-    .job__title {
-        font-size: 15px;
-        padding: 10px 40px 10px 5px;
+        overflow: hidden scroll;
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
     }
 
+    .job__box-title {
+        background-color:${palette.grey.main};
+        display: flex;
+        flexDirection:row;
+        flex-wrap: nowrap;
+        border-radius: 6px;
+        font-size: 15px;
+        padding:15px 0px;
+    }
+    
     .box-btn__btn {
         padding: 0;
         margin-left: 10px;
@@ -60,31 +80,70 @@ export const JobLearn = styled.div`
         align-items: center;
         width: 50px;
         height: 50px;
+        background-color: ${palette.primary.main};
+        fill:${palette.common.white};
     }
 
-    .job__box-title {
-        display: flex;
-        justify-content: space-evenly;
-        border-radius: 6px;
-    }
-    ${({ theme: { palette } }) => `
 
-        .job__box-title {
-            background-color:${palette.grey.main};
+    
+    .catalog-skill__list-header{
+        background-color:${palette.grey.main};
+        height:45px;
+        display:flex;
+        align-items:center;
+        border-radius:6px;
+        font-size:15px;
+
+        .list-header__center{
+            display:flex;
+            justify-content:center;
         }
+    }
 
-        .box-btn__btn{
-            background-color: ${palette.primary.main};
-            fill:${palette.common.white};
+   
+    .catalog-skill__card-body{
+        margin-top:10px;
+        height:105px;
+        background-color:${palette.common.white};
+        border-radius:20px;
+        padding: 15px 0;
+        box-shadow: 1px 1px 10px ${palette.common.black}0D;
+        cursor:pointer;
+
+        :hover,&.active{
+            background-color:${palette.primary.main};
+            color:${palette.common.white}
         }
     
-    `}
-`;
+        .card-body__item{
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-right: 3px solid ${palette.primary.light};
 
-export const UserCV = styled.div`
-    /* padding-top: 30px;
-    .test {
-        display: flex;
-        flex-direction: row;
-    } */
+            :first-of-type , :last-child{
+                border:none;
+            }
+        }
+
+        .card-body__title{
+            justify-content:flex-start;
+            
+            .title__icon{
+                height:85px;
+                margin-right:20px;
+            }
+
+            .title__text-box{
+                height:100%;
+                display:flex;
+                flex-direction:column;
+                justify-content:space-evenly;
+                font-size:16px;
+            }
+        }
+    }
+   
+    `}
 `;
