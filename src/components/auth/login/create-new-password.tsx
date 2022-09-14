@@ -1,15 +1,13 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Alert, Box, InputLabel, Typography } from '@mui/material';
+import { Alert, Box, Button, InputLabel, Typography } from '@mui/material';
 import * as S from './login-styles';
 import { MImage } from '@/components/base/image/MImage';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
-import { MInputFormik } from '@/components/base/input/formik';
+import { MInputPasswordFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
-
-import { InputAdornment, IconButton } from '@material-ui/core';
 import { ShowPasswordEyeSvgIcon } from 'src/assets/icons/show-password-visibility';
 
 // Form Schema
@@ -26,9 +24,8 @@ const initialValues: ValueType = {
 };
 
 const CreateNewPassWord: FC = () => {
-    const [showPassword, setShowPassword] = useState(false);
-    const handleClickShowPassword = () => setShowPassword(!showPassword);
-    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+    const [toggleType, setIsToggle] = useState(false);
+    const toggleShow = () => setIsToggle((toggleType) => !toggleType);
 
     const { state, changePassword } = useAuthPage();
 
@@ -48,33 +45,35 @@ const CreateNewPassWord: FC = () => {
                             <S.ForgetTitle>Create a new password</S.ForgetTitle>
                             <S.ForgetText>Choose a strong password.</S.ForgetText>
                             {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
-                            <InputLabel shrink htmlFor="bootstrap-input">
-                                New Password
-                            </InputLabel>
-                            <MInputFormik
-                                name="email"
-                                fullWidth
-                                label=""
-                                type={showPassword ? 'text' : 'password'}
-                                // onChange={someChangeHandler}
-                                InputProps={{
-                                    // <-- This is where the toggle button is added.
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}>
-                                                {showPassword ? <ShowPasswordEyeSvgIcon /> : null}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                            <InputLabel shrink htmlFor="bootstrap-input">
-                                Repeat Password
-                            </InputLabel>
-                            <MInputFormik name="email" fullWidth label="" />
+
+                            <InputLabel shrink>New Password</InputLabel>
+                            <S.ForgetPasswordBox>
+                                <MInputPasswordFormik
+                                    name="password"
+                                    fullWidth
+                                    type={toggleType ? 'text' : 'password'}
+                                />
+                                <S.ForgetPasswordIcon>
+                                    <Button variant="text" onClick={toggleShow}>
+                                        <ShowPasswordEyeSvgIcon />
+                                    </Button>
+                                </S.ForgetPasswordIcon>
+                            </S.ForgetPasswordBox>
+
+                            <InputLabel shrink>Repeat Password</InputLabel>
+                            <S.ForgetPasswordBox>
+                                <MInputPasswordFormik
+                                    name="repeatPassword"
+                                    fullWidth
+                                    type={toggleType ? 'text' : 'password'}
+                                />
+                                <S.ForgetPasswordIcon>
+                                    <Button variant="text" onClick={toggleShow}>
+                                        <ShowPasswordEyeSvgIcon />
+                                    </Button>
+                                </S.ForgetPasswordIcon>
+                            </S.ForgetPasswordBox>
+
                             <Spacer space={5} />
                             <S.SubmitButton loading={state.loading} type={'submit'}>
                                 sign in
