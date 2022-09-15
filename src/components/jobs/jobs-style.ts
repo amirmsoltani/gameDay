@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Grid, Typography } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 
 export const Content = styled(Grid)`
     height: 100%;
@@ -42,14 +42,7 @@ export const JobLearn = styled.div`
         display: none;
     }
 
-    .catalog-skill__list-body{
-        height:100%;
-        overflow: hidden scroll;
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-    } 
+   
     .job__box-header {
         display: flex;
         flexDirection:row;
@@ -61,89 +54,78 @@ export const JobLearn = styled.div`
         }
     }
 
-    .job__box-title {
+       .job__box-title {
         background-color:${palette.grey.main};
         display: flex;
         flexDirection:row;
+        textAlign:center;
         flex-wrap: nowrap;
         border-radius: 6px;
         font-size: 15px;
-        padding:15px 0px;
+        padding:15px 10px;
     }
     
     .box-btn__btn {
         padding: 0;
-        margin-left: 10px;
+        margin-left: 5px;
         border-radius: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50px;
+        width: 55px;
         height: 50px;
         background-color: ${palette.primary.main};
         fill:${palette.common.white};
     }
 
 
-    
-    .catalog-skill__list-header{
-        background-color:${palette.grey.main};
-        height:45px;
-        display:flex;
-        align-items:center;
-        border-radius:6px;
-        font-size:15px;
-
-        .list-header__center{
-            display:flex;
-            justify-content:center;
-        }
-    }
-
-   
-    .catalog-skill__card-body{
+    .jobs__card-body{
+        display: flex;
+        flexDirection:row;
+        align-items: center;
         margin-top:10px;
-        height:105px;
         background-color:${palette.common.white};
         border-radius:20px;
         padding: 15px 0;
         box-shadow: 1px 1px 10px ${palette.common.black}0D;
         cursor:pointer;
-
+        ::-webkit-scrollbar {
+            display: none;
+        }
         :hover,&.active{
             background-color:${palette.primary.main};
             color:${palette.common.white}
         }
     
-        .card-body__item{
-            height:100%;
+    .card-body__item{
             display:flex;
-            align-items:center;
-            justify-content:center;
-            border-right: 3px solid ${palette.primary.light};
+            flexDirection:row;
+            textAlign:center;
+            align-items: center;
+            flex-wrap: nowrap;
+            font-size: 14px;
+            overflow: hidden scroll;
 
+            ::-webkit-scrollbar {
+                display: none;
+            }
+            
             :first-of-type , :last-child{
                 border:none;
             }
-        }
-
-        .card-body__title{
-            justify-content:flex-start;
-            
             .title__icon{
-                height:85px;
-                margin-right:20px;
+                height:35px;
+                border-radius:50%;
+                margin:0px 10px;
             }
-
-            .title__text-box{
-                height:100%;
-                display:flex;
-                flex-direction:column;
-                justify-content:space-evenly;
-                font-size:16px;
-            }
-        }
+        }  
     }
    
     `}
 `;
+
+export const CvButton = styled(Button)(({ theme }) => ({
+    width: 120,
+    height: 38,
+    backgroundColor: theme.palette.primary.light
+}));

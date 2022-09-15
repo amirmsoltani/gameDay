@@ -9,6 +9,7 @@ import { MImage } from '../base/image/MImage';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
 import * as S from './jobs-style';
+import Situation from './situation';
 
 type PropsType = {
     id: number;
@@ -68,6 +69,7 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                     <Grid md={3.5} xs={3.5} item className="list-header__center">
                         Applicant Email
                     </Grid>
+
                     <Grid md={3.5} xs={3.5} item className="list-header__center">
                         Applicant CV
                     </Grid>
@@ -94,36 +96,39 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                         fetchNextPage();
                     }
                 }}>
-                <Grid container className="catalog-skill__card-body">
-                    <Grid md={1} xs={1} className="card-body__item card-body__index " item></Grid>
-                    <Grid md={4} xs={4} className="card-body__item card-body__title" item>
-                        <MImage
-                            className="title__icon"
-                            resources={{
-                                // src: user.user.pictureUrl,
-                                fallback: '/images/user.jpg'
-                            }}
-                        />
-                        <div className="title__text-box">
-                            <span>
-                                bardia bastami
-                                {/* {user.user.firstName} {user.user.lastName} */}
-                            </span>
-                        </div>
+                <div className="jobs__card-body">
+                    <Grid container className="card-body__item ">
+                        <Grid md={3.5} xs={3.5} className="card-body__item card-body__title" item>
+                            <MImage
+                                className="title__icon"
+                                resources={{
+                                    // src: user.user.pictureUrl,
+                                    fallback: '/images/user.jpg'
+                                }}
+                            />
+                            <div className="card-body__item">
+                                <span>
+                                    bardia bastami
+                                    {/* {user.user.firstName} {user.user.lastName} */}
+                                </span>
+                            </div>
+                        </Grid>
+                        <Grid md={3.5} xs={3.5} item className="list-header__center">
+                            20/03/2020
+                        </Grid>
+                        <Grid md={3.5} xs={3.5} item className="list-header__center">
+                            sampleemail@gmail.com
+                        </Grid>
+                        <Grid md={1} xs={1} item className="list-header__center"></Grid>
+                        <Grid md={3.5} xs={3.5} item className="list-header__center">
+                            <S.CvButton>Download CV</S.CvButton>
+                        </Grid>
+                        <Grid md={1} xs={1} item className="list-header__center"></Grid>
+                        <Grid md={3.5} xs={3.5} item className="list-header__center">
+                            <Situation />
+                        </Grid>
                     </Grid>
-                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
-                        bardia bastami
-                    </Grid>
-                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
-                        bardia bastami
-                    </Grid>
-                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
-                        bardia bastami
-                    </Grid>
-                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
-                        bardia bastami
-                    </Grid>
-                </Grid>
+                </div>
             </div>
         </S.JobLearn>
     );

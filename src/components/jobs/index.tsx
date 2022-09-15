@@ -57,7 +57,7 @@ function JobsPage() {
             <S.LeftSide
                 item
                 container
-                md={3.5}
+                md={3}
                 xs={12}
                 onScroll={(event: any) => {
                     const { scrollTop, scrollHeight, clientHeight } = event.target;
