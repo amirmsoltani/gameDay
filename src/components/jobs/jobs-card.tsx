@@ -8,6 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
+import dayjs from 'dayjs';
 
 type PropsType = {
     active?: boolean;
@@ -46,7 +47,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
             color: 'theme.palette.primary.main',
             '& + .MuiSwitch-track': {
                 backgroundColor: theme.palette.common.white,
-                // theme.palette.mode === 'dark' ? '#2ECA45' : theme.palette.common.white,
                 opacity: 1,
                 border: 0
             },
@@ -75,7 +75,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
         borderRadius: 20 / 2,
         border: '1px solid #fff',
         backgroundColor: theme.palette.primary.main,
-        // backgroundColor: theme.palette.mode === 'light' ? theme.palette.primary.main : theme.palette.primary.light,
         opacity: 1,
         transition: theme.transitions.create(['background-color'], {
             duration: 500
@@ -89,7 +88,7 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
             <div className="Jobs-card__row1">
                 <div className="jobs-card__companyLogo">
                     <MImage
-                        resources={{ src: data?.company?.iconUrl, fallback: '/images/user.jpg' }}
+                        resources={{ src: data?.company.iconUrl, fallback: '/images/user.jpg' }}
                         className="jobs-card__logo"
                     />
                     <span className="jobs-card__text">{data?.company?.title}</span>
@@ -98,7 +97,7 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                     <FormControlLabel
                         control={<IOSSwitch defaultChecked />}
                         label={
-                            <Typography sx={{ color: '#fff' }} variant="caption">
+                            <Typography className="labelText" variant="caption">
                                 Active
                             </Typography>
                         }
@@ -120,7 +119,9 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                 <br />
             </div>
             <div className="jobs-card__row4">
-                <span className="jobs-card__title">{data.createdDate}</span>
+                <span className="jobs-card__title">
+                    {dayjs(data.createdDate).format('DD')} days ago
+                </span>
             </div>
         </S.CardWrapper>
     );

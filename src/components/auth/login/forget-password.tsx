@@ -8,6 +8,7 @@ import { InferType } from 'yup';
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
+import Link from 'next/link';
 
 // Form Schema
 const schema = Yup.object({
@@ -44,10 +45,14 @@ const ForgetPassword: FC = () => {
                             </S.ForgetText>
                             {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
                             <MInputFormik name="email" fullWidth label="" />
-                            <Spacer space={40} />
-                            <S.SubmitButton loading={state.loading} type={'submit'}>
-                                Submit
-                            </S.SubmitButton>
+                            <Spacer space={5} />
+                            <Link href="/create-new-password">
+                                <a className="link-color">
+                                    <S.SubmitButton loading={state.loading} type={'submit'}>
+                                        Submit
+                                    </S.SubmitButton>
+                                </a>
+                            </Link>
                         </S.FormCard>
                     </Form>
                 </Formik>

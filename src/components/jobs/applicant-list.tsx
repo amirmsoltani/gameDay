@@ -1,6 +1,5 @@
-import React, { FC, Fragment, useState } from 'react';
-import CommentIcon from 'src/assets/icons/comment-icon';
-import PlayIcon from 'src/assets/icons/play-icon';
+import { Grid } from '@mui/material';
+import React, { FC, useState } from 'react';
 import SaveIcon from 'src/assets/icons/save-icon';
 import {
     JobRequestGetJobRequestsQuery,
@@ -10,7 +9,6 @@ import { MImage } from '../base/image/MImage';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
 import * as S from './jobs-style';
-import UserCv from './user-cv';
 
 type PropsType = {
     id: number;
@@ -58,21 +56,25 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
         );
 
     return (
-        <S.JobLearn
-            onScroll={(event: any) => {
-                const { scrollTop, scrollHeight, clientHeight } = event.target;
-                if (scrollTop + clientHeight >= scrollHeight * 0.5 && !end && !isFetchingNextPage) {
-                    fetchNextPage();
-                }
-            }}>
+        <S.JobLearn>
             <div className="job__box-header">
-                <div className="job__box-title">
-                    <span className="job__title">applicant</span>
-                    <span className="job__title">apply Date</span>
-                    <span className="job__title">Applicant Email</span>
-                    <span className="job__title">Applicant CV</span>
-                    <span className="job__title">situation</span>
-                </div>
+                <Grid container className="job__box-title">
+                    <Grid md={3.5} xs={3.5} item>
+                        applicant
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} item className="list-header__center">
+                        apply Date
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} item className="list-header__center">
+                        Applicant Email
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} item className="list-header__center">
+                        Applicant CV
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} item className="list-header__center">
+                        situation
+                    </Grid>
+                </Grid>
                 <div className="box-btn__btn">
                     <MButton>
                         <SaveIcon />
@@ -80,11 +82,49 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                 </div>
             </div>
 
-            {/* <div className="">
-                {itemList.map((item) => (
-                    <UserCv key={item.user.pictureUrl} data={{}} />
-                ))}
-            </div> */}
+            <div
+                className="catalog-skill__list-body"
+                onScroll={(event: any) => {
+                    const { scrollTop, scrollHeight, clientHeight } = event.target;
+                    if (
+                        scrollTop + clientHeight >= scrollHeight * 0.5 &&
+                        !end &&
+                        !isFetchingNextPage
+                    ) {
+                        fetchNextPage();
+                    }
+                }}>
+                <Grid container className="catalog-skill__card-body">
+                    <Grid md={1} xs={1} className="card-body__item card-body__index " item></Grid>
+                    <Grid md={4} xs={4} className="card-body__item card-body__title" item>
+                        <MImage
+                            className="title__icon"
+                            resources={{
+                                // src: user.user.pictureUrl,
+                                fallback: '/images/user.jpg'
+                            }}
+                        />
+                        <div className="title__text-box">
+                            <span>
+                                bardia bastami
+                                {/* {user.user.firstName} {user.user.lastName} */}
+                            </span>
+                        </div>
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
+                        bardia bastami
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
+                        bardia bastami
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
+                        bardia bastami
+                    </Grid>
+                    <Grid md={3.5} xs={3.5} className="card-body__item" item>
+                        bardia bastami
+                    </Grid>
+                </Grid>
+            </div>
         </S.JobLearn>
     );
 };

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Box, Typography } from '@mui/material';
 import { MButton } from '@/components/base/MButton';
+import { style } from '@mui/system';
 
 export const LeftSide = styled(Box)`
     display: flex;
@@ -23,6 +24,9 @@ export const FormCard = styled(Box)`
     max-width: 380px;
     width: 380px;
     fedropshadow: above-level;
+    .link-color {
+        text-decoration: none;
+    }
 `;
 
 export const ForgetButton = styled(Typography)`
@@ -51,6 +55,17 @@ export const ForgetTitle = styled(Typography)`
 
 export const ForgetText = styled(Typography)`
     font-size: 15px;
-    margin-top: 10px;
+    margin: 10px 0px;
     color: ${({ theme }) => theme.palette.grey.dark};
+`;
+
+export const ForgetPasswordBox = styled(Box)`
+    position: relative;
+    width: 100%;
+`;
+
+export const ForgetPasswordIcon = styled(Box)`
+    position: absolute;
+    right: 10px;
+    top: 10px;
 `;
