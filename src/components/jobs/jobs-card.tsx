@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { LocationIcon } from 'src/assets/icons/location-icon';
 import { PublishIcon } from 'src/assets/icons/publish-icon';
 import { TimeIcon } from 'src/assets/icons/time-icon';
@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 type PropsType = {
     active?: boolean;
     onClick: () => void;
+    onChange: (checked: boolean) => void;
     children?: undefined;
     data: {
         company?: {
@@ -95,7 +96,15 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                 </div>
                 <div className="jobs-card__toggle">
                     <FormControlLabel
-                        control={<IOSSwitch defaultChecked />}
+                        control={
+                            <IOSSwitch
+                                defaultChecked
+                                onChange={(event) => {
+                                    event.target.checked;
+                                }}
+                            />
+                        }
+                        labelPlacement="start"
                         label={
                             <Typography className="labelText" variant="caption">
                                 Active

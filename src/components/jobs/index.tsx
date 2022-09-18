@@ -69,7 +69,7 @@ function JobsPage() {
                         fetchNextPage();
                     }
                 }}>
-                <Grid item xs={11} className="left-side__cards">
+                <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <JobsCard
                             key={item.title}
@@ -80,6 +80,7 @@ function JobsPage() {
                                         activeCategory: item.id
                                     });
                             }}
+                            onChange={(checked) => {}}
                             active={item.id === state.activeCategory}
                             data={{
                                 title: item.title,
@@ -92,9 +93,9 @@ function JobsPage() {
                         />
                     ))}
                 </Grid>
-                <Grid item xs={1} className="left-side__column" />
+                <Grid item xs={0} md={1} className="left-side__column" />
             </S.LeftSide>
-            <S.RightSide container item md={7.5}>
+            <S.RightSide container item md={9} xs={12}>
                 {state.tab === 'learn' ? <ApplicantList id={state?.activeCategory} /> : null}
             </S.RightSide>
         </S.Content>

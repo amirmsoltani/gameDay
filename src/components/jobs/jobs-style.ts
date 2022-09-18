@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Grid } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 
 export const Content = styled(Grid)`
     height: 100%;
@@ -27,7 +27,7 @@ export const LeftSide = styled(Grid)`
 `;
 
 export const RightSide = styled(Grid)`
-    padding-top: 30px;
+    padding-top: 50px;
 `;
 
 export const JobLearn = styled.div`
@@ -35,6 +35,7 @@ export const JobLearn = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
+    padding:0px 20px;
     height: 100%;
     overflow: hidden scroll;
 
@@ -47,35 +48,28 @@ export const JobLearn = styled.div`
         display: flex;
         flexDirection:row;
         align-items: center;
-        overflow: hidden scroll;
-
-        ::-webkit-scrollbar {
-            display: none;
+       
+        .job__box-title {
+            background-color:${palette.grey.main};
+            display: flex;
+            flexDirection:row;
+            textAlign:center;
+            justify-content:center;
+            flex-wrap: nowrap;
+            border-radius: 6px;
+            font-size: 15px;
+            padding:15px 0px;
         }
-    }
 
-       .job__box-title {
-        background-color:${palette.grey.main};
-        display: flex;
-        flexDirection:row;
-        textAlign:center;
-        flex-wrap: nowrap;
-        border-radius: 6px;
-        font-size: 15px;
-        padding:15px 10px;
-    }
-    
-    .box-btn__btn {
-        padding: 0;
-        margin-left: 5px;
-        border-radius: 6px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 55px;
-        height: 50px;
-        background-color: ${palette.primary.main};
-        fill:${palette.common.white};
+        .box-btn__btn {
+            padding: 0;
+            margin-left: 5px;
+            border-radius: 6px;
+            width: 55px;
+            height: 50px;
+            background-color: ${palette.primary.main};
+            fill:${palette.common.white};
+        }
     }
 
 
@@ -92,26 +86,42 @@ export const JobLearn = styled.div`
         ::-webkit-scrollbar {
             display: none;
         }
+
         :hover,&.active{
             background-color:${palette.primary.main};
             color:${palette.common.white}
         }
     
-    .card-body__item{
+        .card-body__item{
             display:flex;
             flexDirection:row;
             textAlign:center;
             align-items: center;
+            justify-content:flex-start;
             flex-wrap: nowrap;
             font-size: 14px;
             overflow: hidden scroll;
 
+            .detail__item {
+
+            }
             ::-webkit-scrollbar {
                 display: none;
             }
             
             :first-of-type , :last-child{
                 border:none;
+            }
+            .detail__item {
+                padding:0px 10px;
+            }
+            .user-icon{
+                display:flex;
+            flexDirection:row;
+            textAlign:center;
+            align-items: center;
+            justify-content:flex-start;
+            flex-wrap: nowrap;
             }
             .title__icon{
                 height:35px;
@@ -120,12 +130,16 @@ export const JobLearn = styled.div`
             }
         }  
     }
-   
     `}
 `;
+
+export const EmailLink = styled(Typography)(({ theme, active }) => ({
+    color: active === 'true' ? '#fff000' : '#fff'
+}));
 
 export const CvButton = styled(Button)(({ theme }) => ({
     width: 120,
     height: 38,
+    color: theme.palette.common.black,
     backgroundColor: theme.palette.primary.light
 }));
