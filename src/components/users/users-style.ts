@@ -52,6 +52,12 @@ export const ListHeader = styled(Grid)`
         &.no-center {
             justify-content: flex-start !important;
         }
+        .User-info {
+            .user-img {
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 
     ${({ theme: { palette } }) => `

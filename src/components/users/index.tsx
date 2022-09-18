@@ -6,24 +6,23 @@ import * as S from './users-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import { UserList } from './user-list';
-import { PrimarySpinner } from '../base/loader/spinner';
 
 function UsersPage() {
-    const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
+    // const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
     // console.log('itemList', itemList);
 
-    const [searchText, setSearchText] = useState<string>('');
-    const finalSearchText = useDebounce(searchText, 500);
+    // const [searchText, setSearchText] = useState<string>('');
+    // const finalSearchText = useDebounce(searchText, 500);
 
-    const [end, setEnd] = useState(false);
+    // const [end, setEnd] = useState(false);
 
-    const { isLoading } = useInfiniteGetUsersQuery({ take: 5, skip: 0 });
-    if (isLoading)
-        return (
-            <S.Content display={'flex'} justifyContent="center" alignItems="center">
-                <PrimarySpinner />
-            </S.Content>
-        );
+    // const { isLoading } = useInfiniteGetUsersQuery({ take: 5, skip: 0 });
+    // if (isLoading)
+    //     return (
+    //         <S.Content display={'flex'} justifyContent="center" alignItems="center">
+    //             <PrimarySpinner />
+    //         </S.Content>
+    //     );
 
     return (
         <S.Content>
@@ -58,19 +57,7 @@ function UsersPage() {
                     <Grid lg={0.5} xs={12} className={'list-header__item'} item></Grid>
                 </S.ListHeader>
                 <S.ListBody gridRow={'span 11'}>
-                    {itemList.map((item, index) => (
-                        <UserList
-                            key={item.activeStatus}
-                            data={{
-                                pictureUrl: item.pictureUrl,
-                                firstName: item.firstName,
-                                lastName: item.lastName,
-                                phoneNumber: item.phoneNumber,
-                                email: item.email,
-                                activeStatus: item.activeStatus
-                            }}
-                        />
-                    ))}
+                    <UserList></UserList>
                 </S.ListBody>
             </S.ListWrapper>
         </S.Content>
