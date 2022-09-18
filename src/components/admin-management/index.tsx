@@ -1,36 +1,25 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
-import { GetUsersQuery, useInfiniteGetUsersQuery } from 'src/graphql/generated';
+import { GetUsersQuery } from 'src/graphql/generated';
 import { Grid } from '@mui/material';
 import React, { useRef, useState } from 'react';
-import * as S from './users-style';
+import * as S from './admin-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
-import { UserList } from './user-list';
-import { PrimarySpinner } from '../base/loader/spinner';
+import AdminManagement from './admin-list';
 
 function UsersPage() {
     const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
-    // console.log('itemList', itemList);
+    const totalItems = useRef<number | null>(null);
 
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
-
-    const [end, setEnd] = useState(false);
-
-    const { isLoading } = useInfiniteGetUsersQuery({ take: 5, skip: 0 });
-    if (isLoading)
-        return (
-            <S.Content display={'flex'} justifyContent="center" alignItems="center">
-                <PrimarySpinner />
-            </S.Content>
-        );
 
     return (
         <S.Content>
             <LayoutHeader>
                 <S.Header>
                     <div className="header__info-box">User List</div>
-                    <span>items Listed</span>
+                    <span>{totalItems.current} items Listed</span>
                     <SearchInput
                         onChange={(event: any) => {
                             setSearchText(event.target.value);
@@ -58,9 +47,9 @@ function UsersPage() {
                     <Grid lg={0.5} xs={12} className={'list-header__item'} item></Grid>
                 </S.ListHeader>
                 <S.ListBody gridRow={'span 11'}>
-                    {itemList.map((item, index) => (
-                        <UserList
-                            key={item.activeStatus}
+                    {itemList.map((item) => (
+                        <AdminManagement
+                            key={item.firstName}
                             data={{
                                 pictureUrl: item.pictureUrl,
                                 firstName: item.firstName,

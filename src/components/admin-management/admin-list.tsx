@@ -1,33 +1,30 @@
 import { Divider, Grid } from '@mui/material';
 import React, { FC } from 'react';
-import * as S from './users-style';
-import MoreMenu from './user-more-menu';
+import * as S from './admin-style';
+
 import { MImage } from '../base/image/MImage';
 
 type PropsType = {
-    active?: boolean;
-    onClick: () => void;
     children?: undefined;
     data: {
         pictureUrl: string;
         firstName: string;
         lastName: string;
-        phoneNumber: string;
+        phoneNumber: number;
         email: string;
         activeStatus: string;
     };
 };
-
-const UserList: FC<PropsType> = ({ data, active, onClick }) => {
+const AdminManagement: FC<PropsType> = ({ data }) => {
     return (
         <Grid>
-            <S.ListBodyUser container gridRow={'span 1'} className={'active'} onClick={onClick}>
+            <S.ListBodyUser container gridRow={'span 1'}>
                 <Grid lg={0.5} xs={12} item />
                 <Grid lg={2.5} xs={12} className={'list-header__item no-center'} item>
                     <Grid className="User-info">
                         <MImage
                             resources={{ src: data?.pictureUrl, fallback: '/images/user.jpg' }}
-                            className="user-card__logo"></MImage>
+                            className="jobs-card__logo"></MImage>
                         <span>
                             {data.firstName}
                             {data.lastName}
@@ -51,4 +48,4 @@ const UserList: FC<PropsType> = ({ data, active, onClick }) => {
         </Grid>
     );
 };
-export default UserList;
+export default AdminManagement;

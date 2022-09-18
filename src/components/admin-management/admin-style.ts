@@ -27,9 +27,27 @@ export const Header = styled(Grid)`
         align-items: center;
         margin-right: 31px;
     }
+    .header__link-button {
+        margin-left: 15px;
+        height: 45px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-size: 14px;
+    }
 
     ${({ theme: { palette } }) => `
-    
+      .header__link-button{
+        background-color:${palette.primary.main};
+        padding: 0 25px;
+        color:${palette.common.white};
+
+        .link-button__plus{
+            fill:${palette.common.white};
+            margin-right:10px;
+        }
+    }
     `}
 `;
 
@@ -79,10 +97,6 @@ export const ListBodyUser = styled(Grid)`
         font-size: 15px;
         &.no-center {
             justify-content: flex-start !important;
-        }
-        .user-card__logo {
-            width: 30px;
-            height: 30px;
         }
     }
 
