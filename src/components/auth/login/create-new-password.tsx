@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Alert, Box, Button, InputLabel, Typography } from '@mui/material';
 import * as S from './login-styles';
 import { MImage } from '@/components/base/image/MImage';
@@ -12,7 +12,8 @@ import { ShowPasswordEyeSvgIcon } from 'src/assets/icons/show-password-visibilit
 
 // Form Schema
 const schema = Yup.object({
-    email: Yup.string().email('Must be a valid email').required('Email is required')
+    firstPassword: Yup.string().required('New Password is required'),
+    secondPassword: Yup.string().required('Repeat Password is required')
 });
 
 // Form Value Type
@@ -20,17 +21,33 @@ type ValueType = InferType<typeof schema>;
 
 // form initial Value
 const initialValues: ValueType = {
-    email: ''
+    firstPassword: '',
+    secondPassword: ''
 };
 
 const CreateNewPassWord: FC = () => {
+    const [password, setPassword] = useState({
+        firstPassword: '',
+        secondPassword: ''
+    });
+
+    // handleSubmit = () => {
+    //     const { firstPassword, secondPassword } = this.state;
+
+    //     if (firstPassword !== secondPassword) {
+    //         alert("Passwords don't match");
+    //     } else {
+    //         // make API call
+    //     }
+    // };
+
     const [toggleType, setIsToggle] = useState(false);
     const toggleShow = () => setIsToggle((toggleType) => !toggleType);
 
     const { state, changePassword } = useAuthPage();
 
     const onSubmit = useCallback((value: ValueType) => {
-        changePassword(value.email);
+        changePassword(value.firstPassword);
     }, []);
 
     return (
@@ -46,26 +63,17 @@ const CreateNewPassWord: FC = () => {
                             <S.ForgetText>Choose a strong password.</S.ForgetText>
                             {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
 
-                            <InputLabel shrink>New Password</InputLabel>
+                            <InputLabel htmlFor="firstPassword">New Password</InputLabel>
                             <S.ForgetPasswordBox>
-                                <MInputPasswordFormik
-                                    name="password"
-                                    fullWidth
-                                    type={toggleType ? 'text' : 'password'}
-                                />
-                                <S.ForgetPasswordIcon>
-                                    <Button variant="text" onClick={toggleShow}>
-                                        <ShowPasswordEyeSvgIcon />
-                                    </Button>
-                                </S.ForgetPasswordIcon>
+                                <MInputPasswordFormik name="firstPassword" fullWidth />
                             </S.ForgetPasswordBox>
 
-                            <InputLabel shrink>Repeat Password</InputLabel>
+                            <InputLabel htmlFor="secondPassword">Repeat Password</InputLabel>
                             <S.ForgetPasswordBox>
                                 <MInputPasswordFormik
-                                    name="repeatPassword"
-                                    fullWidth
+                                    name="secondPassword"
                                     type={toggleType ? 'text' : 'password'}
+                                    fullWidth
                                 />
                                 <S.ForgetPasswordIcon>
                                     <Button variant="text" onClick={toggleShow}>

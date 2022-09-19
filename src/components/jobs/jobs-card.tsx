@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 type PropsType = {
     active?: boolean;
     onClick: () => void;
+    onChange: (checked: boolean) => void;
     children?: undefined;
     data: {
         company?: {
@@ -27,8 +28,6 @@ type PropsType = {
         notification?: boolean;
     };
 };
-
-// type CompanyType = GetJobsQuery['job_getJobs']['result']['items'];
 
 const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -55,7 +54,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
             }
         },
         '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
             border: '6px solid #fff'
         },
         '&.Mui-disabled .MuiSwitch-thumb': {
@@ -95,7 +93,15 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                 </div>
                 <div className="jobs-card__toggle">
                     <FormControlLabel
-                        control={<IOSSwitch defaultChecked />}
+                        control={
+                            <IOSSwitch
+                                defaultChecked
+                                onChange={(event) => {
+                                    event.target.checked;
+                                }}
+                            />
+                        }
+                        labelPlacement="start"
                         label={
                             <Typography className="labelText" variant="caption">
                                 Active

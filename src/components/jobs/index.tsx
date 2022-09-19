@@ -1,7 +1,11 @@
+import LayoutHeader from '@/layout/app-layout/layout-header';
 import { Grid } from '@mui/material';
+import Link from 'next/link';
 import React, { useState } from 'react';
+import { PlusIcon } from 'src/assets/common/PlusIcon';
 import { GetJobsQuery, useInfiniteGetJobsQuery } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
+import SearchInput from '../base/input/search-input';
 import { PrimarySpinner } from '../base/loader/spinner';
 import ApplicantList from './applicant-list';
 import JobsCard from './jobs-card';
@@ -13,9 +17,7 @@ function JobsPage() {
     const finalSearchText = useDebounce(searchText, 500);
 
     const [end, setEnd] = useState(false);
-    const [state, setState] = useState<{ tab: 'skills' | 'learn'; activeCategory?: number } | null>(
-        null
-    );
+    const [state, setState] = useState<{ activeCategory?: number } | null>(null);
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetJobsQuery(
         { take: 5, skip: 0, where: { title: { contains: finalSearchText } } },
 
@@ -28,7 +30,6 @@ function JobsPage() {
                 if (length === 1) {
                     setItemList([...pages[0].job_getJobs.result.items]);
                     setState({
-                        tab: 'learn',
                         activeCategory: pages[0].job_getJobs.result.items[0]?.id
                     });
                 } else {
@@ -54,10 +55,27 @@ function JobsPage() {
 
     return (
         <S.Content container>
+            <LayoutHeader>
+                <S.Header>
+                    <div className="header__info-box">Jobs list</div>
+                    <span> items Listed</span>
+                    <SearchInput
+                        onChange={(event: any) => {
+                            setSearchText(event.target.value);
+                        }}
+                        wrapperClassName="header__search-input"
+                    />
+                    <Link href={'/jobs/add-jobs'}>
+                        <a className="header__link-button">
+                            <PlusIcon className="link-button__plus" /> Add New Job
+                        </a>
+                    </Link>
+                </S.Header>
+            </LayoutHeader>
             <S.LeftSide
                 item
                 container
-                md={3.5}
+                md={3}
                 xs={12}
                 onScroll={(event: any) => {
                     const { scrollTop, scrollHeight, clientHeight } = event.target;
@@ -69,17 +87,17 @@ function JobsPage() {
                         fetchNextPage();
                     }
                 }}>
-                <Grid item xs={11} className="left-side__cards">
+                <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <JobsCard
                             key={item.title}
                             onClick={() => {
                                 if (item.id !== state.activeCategory)
                                     setState({
-                                        tab: 'learn',
                                         activeCategory: item.id
                                     });
                             }}
+                            onChange={(checked) => {}}
                             active={item.id === state.activeCategory}
                             data={{
                                 title: item.title,
@@ -92,10 +110,10 @@ function JobsPage() {
                         />
                     ))}
                 </Grid>
-                <Grid item xs={1} className="left-side__column" />
+                <Grid item xs={0} md={1} />
             </S.LeftSide>
-            <S.RightSide container item md={7.5}>
-                {state.tab === 'learn' ? <ApplicantList id={state?.activeCategory} /> : null}
+            <S.RightSide container item md={9} xs={12}>
+                <ApplicantList id={state?.activeCategory} />
             </S.RightSide>
         </S.Content>
     );
