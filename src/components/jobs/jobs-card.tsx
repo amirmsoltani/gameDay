@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { LocationIcon } from 'src/assets/icons/location-icon';
 import { PublishIcon } from 'src/assets/icons/publish-icon';
 import { TimeIcon } from 'src/assets/icons/time-icon';
@@ -29,8 +29,6 @@ type PropsType = {
     };
 };
 
-// type CompanyType = GetJobsQuery['job_getJobs']['result']['items'];
-
 const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
@@ -56,7 +54,6 @@ const IOSSwitch = styled((props: SwitchProps) => (
             }
         },
         '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
             border: '6px solid #fff'
         },
         '&.Mui-disabled .MuiSwitch-thumb': {

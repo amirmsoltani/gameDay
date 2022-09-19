@@ -20,7 +20,7 @@ export const Header = styled(Grid)`
 
     .header__info-box {
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 600;
         padding-right: 15px;
         height: 60px;
         display: flex;
@@ -46,6 +46,16 @@ export const Header = styled(Grid)`
         .link-button__plus{
             fill:${palette.common.white};
             margin-right:10px;
+        }
+    }
+    .header__info-box{
+        border-right: 2px solid ${palette.primary.light}80;
+        .header__back-btn{
+            background-color:${palette.primary.main};
+
+            svg{
+                fill: ${palette.common.white};
+            }
         }
     }
     `}

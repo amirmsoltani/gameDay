@@ -8,7 +8,7 @@ import {
 import { MImage } from '../base/image/MImage';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
-import * as S from './jobs-style';
+import * as S from './applicant-style';
 import Situation from './situation';
 
 type PropsType = {
@@ -112,10 +112,10 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                                 </span>
                             </div>
                         </Grid>
-                        <Grid md={2} xs={2.4} className="detail__item" item>
+                        <Grid md={2} xs={2.4} className="detail__item card-body__item" item>
                             20/03/2020
                         </Grid>
-                        <Grid md={3.1} xs={2.4} item>
+                        <Grid md={3.1} xs={2.4} className=" detail__item card-body__item" item>
                             <S.EmailLink>sampleemail@gmail.com</S.EmailLink>
                         </Grid>
 

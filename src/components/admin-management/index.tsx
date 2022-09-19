@@ -5,9 +5,11 @@ import React, { useRef, useState } from 'react';
 import * as S from './admin-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
-import AdminManagement from './admin-list';
+import Link from 'next/link';
+import { PlusIcon } from 'src/assets/common/PlusIcon';
+import AdminManagementList from './admin-list';
 
-function UsersPage() {
+function AdminManagement() {
     const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
     const totalItems = useRef<number | null>(null);
 
@@ -18,7 +20,7 @@ function UsersPage() {
         <S.Content>
             <LayoutHeader>
                 <S.Header>
-                    <div className="header__info-box">User List</div>
+                    <div className="header__info-box">Admin Management</div>
                     <span>{totalItems.current} items Listed</span>
                     <SearchInput
                         onChange={(event: any) => {
@@ -26,6 +28,11 @@ function UsersPage() {
                         }}
                         wrapperClassName="header__search-input"
                     />
+                    <Link href="/dashboard">
+                        <a className="header__link-button">
+                            <PlusIcon className="link-button__plus" /> Add admin
+                        </a>
+                    </Link>
                 </S.Header>
             </LayoutHeader>
 
@@ -42,28 +49,16 @@ function UsersPage() {
                         User Phone number
                     </Grid>
                     <Grid lg={2.5} xs={12} className={'list-header__item'} item>
-                        situation
+                        ccess
                     </Grid>
                     <Grid lg={0.5} xs={12} className={'list-header__item'} item></Grid>
                 </S.ListHeader>
                 <S.ListBody gridRow={'span 11'}>
-                    {itemList.map((item) => (
-                        <AdminManagement
-                            key={item.firstName}
-                            data={{
-                                pictureUrl: item.pictureUrl,
-                                firstName: item.firstName,
-                                lastName: item.lastName,
-                                phoneNumber: item.phoneNumber,
-                                email: item.email,
-                                activeStatus: item.activeStatus
-                            }}
-                        />
-                    ))}
+                    <AdminManagementList />
                 </S.ListBody>
             </S.ListWrapper>
         </S.Content>
     );
 }
 
-export default UsersPage;
+export default AdminManagement;

@@ -1,5 +1,4 @@
 import AdminManagement from '@/components/admin-management';
-import JobsPage from '@/components/jobs';
 import AppLayout from '@/layout/app-layout';
 import React, { FC } from 'react';
 

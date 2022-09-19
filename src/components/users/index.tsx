@@ -1,29 +1,12 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
-import { GetUsersQuery, useInfiniteGetUsersQuery } from 'src/graphql/generated';
 import { Grid } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import * as S from './users-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import { UserList } from './user-list';
 
 function UsersPage() {
-    // const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
-    // console.log('itemList', itemList);
-
-    // const [searchText, setSearchText] = useState<string>('');
-    // const finalSearchText = useDebounce(searchText, 500);
-
-    // const [end, setEnd] = useState(false);
-
-    // const { isLoading } = useInfiniteGetUsersQuery({ take: 5, skip: 0 });
-    // if (isLoading)
-    //     return (
-    //         <S.Content display={'flex'} justifyContent="center" alignItems="center">
-    //             <PrimarySpinner />
-    //         </S.Content>
-    //     );
-
     return (
         <S.Content>
             <LayoutHeader>

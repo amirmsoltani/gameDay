@@ -22,6 +22,7 @@ export const Header = styled(Grid)`
         font-size: 16px;
         font-weight: 400;
         padding-right: 15px;
+        font-weight: 600;
         height: 60px;
         display: flex;
         align-items: center;
@@ -29,7 +30,20 @@ export const Header = styled(Grid)`
     }
 
     ${({ theme: { palette } }) => `
-    
+       background-color:${palette.primary.main};
+       padding: 0 25px;
+       color:${palette.common.white};
+   }
+   .header__info-box{
+       border-right: 2px solid ${palette.primary.light}80;
+       .header__back-btn{
+           background-color:${palette.primary.main};
+
+           svg{
+               fill: ${palette.common.white};
+           }
+       }
+   }
     `}
 `;
 

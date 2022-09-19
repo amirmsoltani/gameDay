@@ -23,7 +23,11 @@ export default function MoreMenu() {
     return (
         <div>
             <IconButton
-                sx={{ backgroundColor: 'white', color: theme.palette.primary.main }}
+                sx={{
+                    backgroundColor: 'white',
+                    boxShadow: '0px 3px 6px #2C28281C',
+                    color: theme.palette.primary.main
+                }}
                 aria-label="more"
                 id="long-button"
                 aria-controls={open ? 'long-menu' : undefined}
