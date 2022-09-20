@@ -1,9 +1,9 @@
-const baseUrl = 'https://gray-sea-05b034a1e.1.azurestaticapps.net';
-const baseCononicalUrl = 'https://gray-sea-05b034a1e.1.azurestaticapps.net';
-const apiUrl = 'https://aps-connect-4healing-stg.azurewebsites.net';
-const generatorUrl = 'https://aps-connect-4healing-stg.azurewebsites.net/graphql/';
-const subscriptionUrl = 'wss://aps-connect-4healing-stg.azurewebsites.net/graphql';
-const supportMail = 'support@mychimebeauty.com';
+const baseUrl = 'https://aps-game-day-stg.azurewebsites.net';
+const baseCononicalUrl = 'https://aps-game-day-stg.azurewebsites.net';
+const apiUrl = 'https://aps-game-day-stg.azurewebsites.net';
+const generatorUrl = 'https://aps-game-day-stg.azurewebsites.net/graphql/';
+const subscriptionUrl = 'wss://aps-game-day-stg.azurewebsites.net/graphql';
+const supportMail = 'fatemeh.karami@apsaaz.com';
 
 const config = {
     apiUrl,
