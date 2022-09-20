@@ -1,9 +1,9 @@
-const baseUrl = 'https://aps-hep-now-qa.azurewebsites.net';
-const baseCononicalUrl = 'https://aps-hep-now-qa.azurewebsites.net';
-const apiUrl = 'https://aps-hep-now-qa.azurewebsites.net';
-const generatorUrl = 'https://aps-hep-now-qa.azurewebsites.net/graphql';
-const subscriptionUrl = 'wss://aps-hep-now-qa.azurewebsites.net/graphql';
-const supportMail = 'support@mychimebeauty.com';
+const baseUrl = 'https://aps-game-day-qa.azurewebsites.net';
+const baseCononicalUrl = 'https://aps-game-day-qa.azurewebsites.net';
+const apiUrl = 'https://aps-game-day-qa.azurewebsites.net';
+const generatorUrl = 'https://aps-game-day-qa.azurewebsites.net/graphql/';
+const subscriptionUrl = 'wss://aps-game-day-qa.azurewebsites.net/graphql';
+const supportMail = 'fatemeh.karami@apsaaz.com';
 
 const config = {
     apiUrl,
