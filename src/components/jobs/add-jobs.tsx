@@ -5,6 +5,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import * as S from './add-jobs-style';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
+import { InputTextarea } from './input-textarea';
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
@@ -16,6 +17,7 @@ import { SearchIconExercise } from 'src/assets/exercise/search-icon';
 import { MButton } from '../base/MButton';
 import { Form, Formik } from 'formik';
 import { TestIcon } from 'src/assets/icons/test-add-jobs';
+import { NumberInput } from '../base/input/number-input';
 
 const schema = Yup.object({
     email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -208,7 +210,7 @@ function AddJobs() {
                                     {state.error !== '' && (
                                         <Alert severity="error">{state.error}</Alert>
                                     )}
-
+                                    <NumberInput min={0} max={100} sign="%" defaultValue={60} />
                                     <MInputFormik
                                         name="Soft skills required"
                                         fullWidth
@@ -231,6 +233,7 @@ function AddJobs() {
                                     {state.error !== '' && (
                                         <Alert severity="error">{state.error}</Alert>
                                     )}
+                                    <InputTextarea />
                                     <MInputFormik
                                         name="Job Description"
                                         fullWidth
