@@ -20,10 +20,18 @@ export default function Situation() {
                 value={situation}
                 label="Situation"
                 onChange={handleChange}>
-                <MenuItem value={10}>accepted</MenuItem>
-                <MenuItem value={20}>Interview</MenuItem>
-                <MenuItem value={30}>pending</MenuItem>
-                <MenuItem value={30}>not qualified</MenuItem>
+                <MenuItem sx={{ backgroundColor: '#02C954' }} value={10}>
+                    accepted
+                </MenuItem>
+                <MenuItem sx={{ backgroundColor: '#8CE2EE' }} value={20}>
+                    Interview
+                </MenuItem>
+                <MenuItem sx={{ backgroundColor: '#DCD0F3' }} value={30}>
+                    pending
+                </MenuItem>
+                <MenuItem sx={{ backgroundColor: '#FE3B59' }} value={30}>
+                    not qualified
+                </MenuItem>
             </Select>
         </FormControl>
     );

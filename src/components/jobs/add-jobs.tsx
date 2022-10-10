@@ -5,7 +5,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import * as S from './add-jobs-style';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
-import { InputTextarea } from './input-textarea';
+
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
@@ -18,6 +18,7 @@ import { MButton } from '../base/MButton';
 import { Form, Formik } from 'formik';
 import { TestIcon } from 'src/assets/icons/test-add-jobs';
 import { NumberInput } from '../base/input/number-input';
+import { InputTextarea } from '../base/input/input-textarea';
 
 const schema = Yup.object({
     email: Yup.string().email('Must be a valid email').required('Email is required'),
@@ -140,15 +141,15 @@ function AddJobs() {
                                     <MInputFormik
                                         name="Company Location"
                                         fullWidth
-                                        label="Amsterdam"
-                                        placeholder="Management skills"
+                                        label="Company Location"
+                                        placeholder="Industrial design - Graphic design"
                                     />
                                     <Spacer space={10} />
                                     <MInputFormik
                                         name="applicant Job"
                                         fullWidth
-                                        label="UI UX Designer"
-                                        placeholder="Management skills"
+                                        label="applicant Job"
+                                        placeholder="UI UX Designer"
                                     />
                                     <Spacer space={10} />
                                     <MInputFormik
@@ -210,36 +211,13 @@ function AddJobs() {
                                     {state.error !== '' && (
                                         <Alert severity="error">{state.error}</Alert>
                                     )}
-                                    <NumberInput min={0} max={100} sign="%" defaultValue={60} />
-                                    <MInputFormik
-                                        name="Soft skills required"
-                                        fullWidth
-                                        label="Job type"
-                                        placeholder="Full time / 8:00am - 5:00pm"
-                                        errorSpaceOn={true}
-                                    />
-                                </S.FormCard>
-                            </Form>
-                        </Formik>
-                    </Grid>
-
-                    <Grid lg={12} xs={12} className={'box-align'} item>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={schema}
-                            onSubmit={onSubmit}>
-                            <Form>
-                                <S.FormCard>
-                                    {state.error !== '' && (
-                                        <Alert severity="error">{state.error}</Alert>
-                                    )}
-                                    <InputTextarea />
-                                    <MInputFormik
-                                        name="Job Description"
-                                        fullWidth
+                                    {/* <InputTextarea /> */}
+                                    <InputTextarea
                                         label="Job Description"
-                                        placeholder="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque"
                                         errorSpaceOn={true}
+                                        name="message"
+                                        rows="5"
+                                        fullWidth
                                     />
                                 </S.FormCard>
                             </Form>
