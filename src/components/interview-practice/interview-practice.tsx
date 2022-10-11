@@ -4,69 +4,76 @@ import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
-    CommentStatus,
-    GetCategoriesQuery,
-    useInfiniteGetCategoriesQuery
+    Message_GetUserMessagesQuery,
+    useInfiniteMessage_GetUserMessagesQuery,
+    User
 } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
 import PersonCard from '../base/card/person-card';
 import SearchInput from '../base/input/search-input';
-import { PrimarySpinner } from '../base/loader/spinner';
+import ChatSection from '../chat/chat-section';
+import Loading from '../loading';
 import * as S from './interview-practice-style';
 
 function InterViewPracticePage() {
     const totalItems = useRef<number | null>(null);
     const [itemList, setItemList] = useState<
-        GetCategoriesQuery['skillcategory_getSkillCategories']['result']['items']
+    Message_GetUserMessagesQuery['message_getUserMessages']['result']['items']
     >([]);
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
 
     const [end, setEnd] = useState(false);
-    const [state, setState] = useState<{ tab: 'skills' | 'learn'; activeCategory?: number } | null>(
-        null
-    );
+    const [state, setState] = useState<{
+        activeChat?: number;
+        user?: Partial<User>;
+        date?: string;
+    } | null>(null);
 
-    const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetCategoriesQuery(
-        { take: 10, skip: 0, where: { title: { contains: finalSearchText } } },
-        {
-            refetchOnWindowFocus: false,
-            refetchOnReconnect: false,
-            keepPreviousData: true,
-            onSuccess: ({ pages }) => {
-                const length = pages.length;
-                if (length === 1) {
-                    totalItems.current =
-                        pages[0].skillcategory_getSkillCategories!.result!.totalCount;
-                    setItemList([...pages[0].skillcategory_getSkillCategories.result.items]);
-                    setState({
-                        tab: 'learn',
-                        activeCategory:
-                            pages[0].skillcategory_getSkillCategories.result.items[0]?.id
-                    });
-                } else {
-                    setItemList([
-                        ...itemList,
-                        ...(pages[length - 1].skillcategory_getSkillCategories.result.items || [])
-                    ]);
-                }
-                if (
-                    pages[length - 1].skillcategory_getSkillCategories.result.pageInfo
-                        .hasNextPage === false
-                ) {
-                    setEnd(true);
+    const { isLoading, isFetchingNextPage, fetchNextPage } =
+        useInfiniteMessage_GetUserMessagesQuery(
+            {
+                take: 10,
+                skip: 0,
+                where: {
+                    userEmail: { contains: finalSearchText },
+                    subject: { contains: 'Practice' }
                 }
             },
-            getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
-        }
-    );
+            {
+                refetchOnWindowFocus: false,
+                refetchOnReconnect: false,
+                keepPreviousData: true,
+                onSuccess: ({ pages }) => {
+                    const length = pages.length;
+                    if (length === 1) {
+                        totalItems.current = pages[0].message_getUserMessages!.result!.totalCount;
+                        setItemList([...pages[0].message_getUserMessages.result.items]);
+                        setState({
+                            activeChat:
+                                pages[0].message_getUserMessages.result.items[0]?.conversationId,
+                            user: pages[0].message_getUserMessages.result.items[0]?.user,
+                            date: pages[0].message_getUserMessages.result.items[0]?.latestMessageDate,
+                        });
+                    } else {
+                        setItemList([
+                            ...itemList,
+                            ...(pages[length - 1].message_getUserMessages.result.items || [])
+                        ]);
+                    }
+                    if (
+                        pages[length - 1].message_getUserMessages.result.pageInfo.hasNextPage ===
+                        false
+                    ) {
+                        setEnd(true);
+                    }
+                },
+                getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
+            }
+        );
 
     if (isLoading || !state)
-        return (
-            <S.Content display={'flex'} justifyContent="center" alignItems="center">
-                <PrimarySpinner />
-            </S.Content>
-        );
+        return <Loading />;
 
     return (
         <S.Content container>
@@ -79,12 +86,10 @@ function InterViewPracticePage() {
                         }}
                         wrapperClassName="header__search-input"
                     />
-                    <Link href="/dashboard">
-                        <a className="header__link-button">
-                            <PlusIcon className="link-button__plus" /> question preview
-                        </a>
+                    <Link href="/interview-practice/question-preview">
+                        <a className="header__link-button">question preview</a>
                     </Link>
-                    <Link href="/dashboard">
+                    <Link href="/interview-practice/question-preview/?add=true">
                         <a className="header__link-button">
                             <PlusIcon className="link-button__plus" /> Add New question
                         </a>
@@ -109,22 +114,24 @@ function InterViewPracticePage() {
                 <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <PersonCard
-                            key={item.title}
+                            key={item.conversationId}
                             onClick={() => {
-                                if (item.id !== state.activeCategory)
+                                if (item.conversationId !== state.activeChat)
                                     setState({
-                                        tab: 'learn',
-                                        activeCategory: item.id
+                                        activeChat: item.conversationId,
+                                        user: item.user,
+                                        date: item.latestMessageDate
                                     });
                             }}
-                            active={item.id === state.activeCategory}
+                            active={item.conversationId === state.activeChat}
                             data={{
-                                attachments: 1,
-                                date: '2022/10/12',
-                                fullName: 'amir soltani',
-                                description: 'im programmer',
-                                image: 'ss',
-                                title: 'developer'
+                                attachments: 0,
+                                date: item.latestMessageDate,
+                                fullName: item.user!.firstName + ' ' + item.user!.lastName,
+                                image: item.user.pictureUrl,
+                                title: 'LoremIpsum',
+                                description:
+                                    'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the'
                             }}
                         />
                     ))}
@@ -132,7 +139,15 @@ function InterViewPracticePage() {
                 <Grid item xs={0} md={1} className="left-side__column" />
             </S.LeftSide>
             <S.RightSide container item md={7.5} xs={12}>
-                aa
+                {state.activeChat ? (
+                    <ChatSection
+                        conversationId={state.activeChat}
+                        user={state.user}
+                        date={state.date}
+                    />
+                ) : (
+                    <Loading />
+                )}
             </S.RightSide>
         </S.Content>
     );

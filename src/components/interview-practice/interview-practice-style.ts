@@ -31,9 +31,10 @@ export const LeftSide = styled(Grid)`
 `;
 
 export const RightSide = styled(Grid)`
-    padding-left: calc(80px - 3vw);
     padding-right: 60px;
     padding-top: 30px;
+    max-height: 100%;
+    display: flex;
 `;
 
 export const CatalogLearn = styled.div`
@@ -272,3 +273,5 @@ export const Header = styled(Grid)`
     }
     `}
 `;
+
+

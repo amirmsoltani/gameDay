@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
 
 export const PersonCardWrapper = styled.div`
+    transition: all 500ms;
+    cursor: pointer;
     margin: 20px 10px 0 25px;
     border-radius: 20px;
-    height: 192px;
-    padding: 25px;
+    min-height: 192px;
+    padding: 25px 25px 10px 25px;
     display: flex;
     flex-wrap: wrap;
 
@@ -48,6 +50,7 @@ export const PersonCardWrapper = styled.div`
         .information__description {
             font-size: 16px;
             width: 100%;
+            min-height: 75px;
         }
 
         .information__attachment {
@@ -56,9 +59,9 @@ export const PersonCardWrapper = styled.div`
             display: flex;
             justify-items: center;
 
-            svg{
+            svg {
                 height: 22px;
-                margin-right:10px;
+                margin-right: 10px;
             }
         }
     }
@@ -71,6 +74,19 @@ export const PersonCardWrapper = styled.div`
                     color:${palette.grey.dark};
                     
                 }
+            }
+
+            &.active{
+                transform: translateX(2.5vw);
+                background-color:${palette.primary.main};
+                .person-card__information{
+                    color:${palette.common.white};
+                    .information__description {
+                        color:${palette.grey.light};
+                        
+                    }
+                }
+
             }
             
         `}

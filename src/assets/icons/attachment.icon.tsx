@@ -15,8 +15,8 @@ export default function AttachmentIcon(props: SVGAttributes<SVGElement>) {
                     d="M51.045,32.362V45.71a6.394,6.394,0,0,1-12.787-.082.413.413,0,0,1,0-.082h0V30.908a4.27,4.27,0,0,1,8.534.054V45.8a2.113,2.113,0,0,1-4.226,0h0V32.362"
                     transform="translate(0)"
                     fill="none"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
+                    strokeLinejoin="round"
+                    strokeWidth="1.5"
                 />
             </g>
         </svg>

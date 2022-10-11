@@ -33,7 +33,11 @@ const PersonCard: FC<PropsType> = ({ data,active,onClick }) => {
             <div className="person-card__information">
                 <div className="information__header">
                     <div className="header__name-box">
-                        <span className="name-box__full-name">{data.fullName}</span>
+                        <span className="name-box__full-name">
+                            {data.fullName.length > 15
+                                ? data.fullName.slice(0, 15) + '...'
+                                : data.fullName}
+                        </span>
                         <span className="name-box__title">{data.title}</span>
                     </div>
                     <span className="information__date">

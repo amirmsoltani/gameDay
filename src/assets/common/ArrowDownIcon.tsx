@@ -31,7 +31,6 @@ export const ArrowDownIcon = (props: CommonIconProps) => {
                 d="M0,4.512,6,0l6,4.512"
                 transform="translate(13.403 5.913) rotate(180)"
                 fill="none"
-                stroke="#213950"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"

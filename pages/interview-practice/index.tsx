@@ -2,7 +2,7 @@ import InterviewPracticePage from '@/components/interview-practice/interview-pra
 import AppLayout from '@/layout/app-layout';
 import React, { FC } from 'react';
 
-const Dashboard: FC = () => {
+const InterviewPractice: FC = () => {
     return (
         <AppLayout>
             <InterviewPracticePage />
@@ -10,4 +10,4 @@ const Dashboard: FC = () => {
     );
 };
 
-export default Dashboard;
+export default InterviewPractice;

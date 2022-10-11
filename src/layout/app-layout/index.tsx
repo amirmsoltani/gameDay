@@ -86,7 +86,12 @@ type PropsType = { children: ReactNode; headerContent?: ReactNode };
 const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
     const [headerChildren, setHeaderChildren] = useState<ReactNode | null>(null);
 
-    const { data, status } = useGetCurrentUserQuery();
+    const { data, status } = useGetCurrentUserQuery(undefined, {
+        cacheTime: -1,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        keepPreviousData: true
+    });
     const { asPath } = useRouter();
 
     if (status === 'loading') {

@@ -1,6 +1,9 @@
-query getCurrentUser{
+query getCurrentUser {
     user_login {
         result {
+            firstName
+            lastName
+            id
             userType
             userRoles {
                 role {
