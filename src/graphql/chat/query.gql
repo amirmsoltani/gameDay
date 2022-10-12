@@ -16,6 +16,7 @@ query message_getUserMessages(
                     id
                     pictureUrl
                     email
+                    cVFileUrl
                 }
                 unreadCount
             }

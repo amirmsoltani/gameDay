@@ -13,16 +13,29 @@ type PropsType = {
     conversationId: number;
     user: Partial<User>;
     date: string;
+    name:'Practice' | 'Problem' | 'Resume check';
 };
 
 
 
 type ListType = Message_GetConversationQuery['message_getConversation']['result']['items'];
-const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
+const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [itemList, setItemList] = useState<ListType>([]);
     const [end, setEnd] = useState(false);
     const chatDate = dayjs(date);
+
+    const { data } = useGetInterviewVideoQuery(
+        { userId: user.id },
+        {
+            enabled: name === 'Practice',
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+            keepPreviousData: true
+        }
+    );
+    const attachments = data?.userInterviewQuestion_getAllByUserId?.result;
+
     const { isFetching, isFetchingNextPage, fetchNextPage } =
         useInfiniteMessage_GetConversationQuery(
             { take: 10, skip: 0, conversationId, order: { createdAt: SortEnumType.Desc } },
@@ -51,7 +64,6 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
             }
         );
 
-
     const { mutate, variables, isLoading } = useMessage_CreateMessageMutation({
         onSuccess: ({ message_createMessage: { result } }) => {
             const list = [result, ...itemList];
@@ -59,8 +71,6 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
         }
     });
 
-        const { data } = useGetInterviewVideoQuery({ userId: user.id });
-        const attachments = data?.userInterviewQuestion_getAllByUserId?.result;
     if (isFetching && !isFetchingNextPage)
         return (
             <S.Content display={'flex'} justifyContent="center" alignItems="center">
@@ -109,15 +119,24 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
                         make a type specimen book. It has survived not only five centuries, but also
                         the leap into electronic
                     </p>
-                    {attachments?.totalCount ? (
+                    {(attachments?.totalCount || user.cVFileUrl) &&
+                    ['Practice', 'Resume check'].includes(name) ? (
                         <div className="info__attachment">
                             <AttachmentIcon />
-                            {attachments.totalCount} Attachments
+                            {attachments?.totalCount} Attachments
                         </div>
                     ) : null}
-                    {attachments?.items?.map((attachment) => (
-                        <VideoMessage key={attachment.createdDate} videoUrl={attachment.videoUrl} />
-                    ))}
+                    {name === 'Practice' && attachments
+                        ? attachments.items?.map((attachment) => (
+                              <VideoMessage
+                                  key={attachment.createdDate}
+                                  videoUrl={attachment.videoUrl}
+                              />
+                          ))
+                        : null}
+                    {name === 'Resume check' && user.cVFileUrl ? (
+                        <VideoMessage videoUrl={user.cVFileUrl} messageType={MessageType.File} />
+                    ) : null}
                     <div className="info__message-box">
                         {isLoading ? (
                             <div className={'message-box__message another'}>
@@ -134,8 +153,11 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
                                     }>
                                     <span>{message.text}</span>
                                 </div>
-                                {message.messageType !== 'TEXT' && (
-                                    <VideoMessage videoUrl={message.photoUrl} />
+                                {message.messageType !== MessageType.Text && message.photoUrl && (
+                                    <VideoMessage
+                                        videoUrl={message.photoUrl}
+                                        messageType={message.messageType}
+                                    />
                                 )}
                             </Fragment>
                         ))}
@@ -158,7 +180,7 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
                                     messageType: MessageType.Text,
                                     conversationId,
                                     receiverId: user.id,
-                                    subject: 'Practice',
+                                    subject: name,
                                     text: textareaRef.current.value
                                 }
                             });
@@ -169,6 +191,6 @@ const ChatSection:FC<PropsType> = ({conversationId,user,date}) => {
             </S.InputWrapper>
         </>
     );
-}
+};
 
 export default ChatSection

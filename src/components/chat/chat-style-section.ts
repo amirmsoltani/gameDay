@@ -10,6 +10,7 @@ export const Content = styled(Grid)`
 
 export const ChatWrapper = styled.div`
     display: flex;
+    height: calc(100% - 100px);
     max-height: calc(100% - 100px);
     overflow: hidden scroll;
 
@@ -79,8 +80,21 @@ export const ChatWrapper = styled.div`
                 fill:${palette.primary.main}B0;
                 text-decoration: none;
                 color:${palette.common.black};
+
+                &.file{
+                    background-color:${palette.primary.light};
+                }
+
                 svg{
                     margin: 0 20px;
+                }
+                .info__icon{
+                    background-color:${palette.common.white};
+                    width:60px;
+                    height:60px;
+                    border-radius:20px;
+                    box-shadow:0px 0px 32px #1227781F;
+                    margin: 0 10px;
                 }
             }
             .message-box__message {

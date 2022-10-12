@@ -2,12 +2,12 @@ import ChatPage from '@/components/chat/index';
 import AppLayout from '@/layout/app-layout';
 import React, { FC } from 'react';
 
-const InterviewPractice: FC = () => {
+const CheckResume: FC = () => {
     return (
         <AppLayout>
-            <ChatPage name={'Practice'} />
+            <ChatPage name={'Resume check'} />
         </AppLayout>
     );
 };
 
-export default InterviewPractice;
+export default CheckResume;
