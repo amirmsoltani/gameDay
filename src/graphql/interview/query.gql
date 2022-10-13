@@ -1,0 +1,47 @@
+query getInterviewVideo($userId: Int!) {
+    userInterviewQuestion_getAllByUserId(userId: $userId) {
+        result {
+            items {
+                createdDate
+                videoUrl
+                interviewQuestion {
+                    title
+                    description
+                }
+            }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
+        }
+        status
+    }
+}
+
+query getInterviewQuestion($take: Int, $skip: Int, $where: InterviewQuestionFilterInput) {
+    interviewQuestion_getInterviewQuestions {
+        result(where: $where, skip: $skip, take: $take, order: { createdDate: DESC }) {
+            items {
+                title
+                description
+            }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
+        }
+        status
+    }
+}
+
+query getInterviewCategory($where:InterviewCategoryFilterInput) {
+  interviewCategory_getInterviewCategories{
+    result(where:$where,take:40){
+      items{
+        id
+        title
+      }
+    }
+    status
+  }
+}

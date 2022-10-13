@@ -10,7 +10,6 @@ export const SetUserContext = createContext({} as React.Dispatch<React.SetStateA
 
 function UserProvider({ children }: any) {
     const [user, setUser] = useState<MaybeUser>('LOADING');
-    console.log(user);
     return (
         <SetUserContext.Provider value={setUser}>
             <UserContext.Provider value={user}>

@@ -9,15 +9,21 @@ query message_getUserMessages(
             items {
                 subject
                 conversationId
+                latestMessageDate
                 user {
                     firstName
                     lastName
                     id
                     pictureUrl
+                    email
+                    cVFileUrl
                 }
                 unreadCount
             }
             totalCount
+            pageInfo {
+                hasNextPage
+            }
         }
         status
     }
@@ -41,6 +47,9 @@ query message_getConversation(
                 photoUrl
             }
             totalCount
+            pageInfo {
+                hasNextPage
+            }
         }
         status
     }

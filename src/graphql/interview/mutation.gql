@@ -1,0 +1,10 @@
+mutation createInterviewQuestion($data:InterviewQuestionInput){
+  interviewQuestion_addQuestion(input:$data){
+    result{
+      title
+      description
+      interviewCategory{title id}
+    }
+    status
+  }
+}

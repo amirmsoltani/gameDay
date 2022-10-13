@@ -38,7 +38,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <UserProvider>
                         <AppThemeProvider>
                             <Component {...pageProps} />
-                            <SubscribeMessagesComponent />
                         </AppThemeProvider>
                     </UserProvider>
                 </SnackProvider>
