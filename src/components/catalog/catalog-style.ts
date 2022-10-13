@@ -230,8 +230,8 @@ export const Header = styled(Grid)`
     align-items: center;
     padding: 0 46px;
 
-    .header__search-input{
-        width:30vw ;
+    .header__search-input {
+        width: 30vw;
         margin-right: 30px;
     }
 

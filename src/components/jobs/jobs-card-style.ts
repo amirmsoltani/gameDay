@@ -6,6 +6,7 @@ export const CardWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 14px 14px;
+    height: 210px;
     border-radius: 20px;
     margin-top: 15px;
     font-size: 14px;
@@ -53,15 +54,21 @@ export const CardWrapper = styled.div`
     }
 
     ${({ theme: { palette } }) => `
-     .jobs-card__row4 {
+     .jobs-card__row4{
         color: ${palette.paginate.main};
     }
         background-color:${palette.common.white};
-        &.active{
+
+        &.active {
             background-color:${palette.primary.main};
             margin-top:30px;
             transform: translateX(2.5vw);
             color:${palette.common.white};
         }
+        &.active .labelText{
+            color:${palette.common.white};
+        }
+
+       
     `}
 `;
