@@ -140,17 +140,21 @@ export const ChatInput = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    height: 90px;
+    min-height: 58px;
+    max-height: 90px;
     padding: 5px 15px;
     .chat-input__input {
         border: none;
         background-color: transparent;
+        width: 100%;
         :focus {
             outline: none;
         }
         border-radius: 0;
         padding: 0;
         height: 100%;
+        max-height: 90px;
+        overflow-y: scroll;
     }
     .chat-input__send-button {
         cursor: pointer;

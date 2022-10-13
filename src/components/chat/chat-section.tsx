@@ -1,10 +1,10 @@
+import { TextareaAutosize } from '@mui/material';
 import dayjs from 'dayjs';
 import React, { FC, Fragment, useRef, useState } from 'react'
 import AttachmentIcon from 'src/assets/icons/attachment.icon';
 import SendIcon from 'src/assets/icons/send-icon';
 import { MessageType, Message_GetConversationQuery, SortEnumType, useGetInterviewVideoQuery, useInfiniteMessage_GetConversationQuery, useMessage_CreateMessageMutation, User } from 'src/graphql/generated';
 import { MImage } from '../base/image/MImage';
-import { TextArea } from '../base/input/styled';
 import { PrimarySpinner } from '../base/loader/spinner';
 import * as S from './chat-style-section';
 import VideoMessage from './video-message';
@@ -167,10 +167,11 @@ const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
 
             <S.InputWrapper>
                 <S.ChatInput className="chat-input">
-                    <TextArea
+                    <TextareaAutosize
                         placeholder="Type Message"
                         className="chat-input__input"
                         ref={textareaRef}
+                        maxRows={4}
                     />
                     <SendIcon
                         className="chat-input__send-button"
