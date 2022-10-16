@@ -5,7 +5,7 @@ import { MImage } from '@/components/base/image/MImage';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
-import { MInputPasswordFormik } from '@/components/base/input/formik';
+import { MInputFormikPasswords, MInputPasswordFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
 import { ShowPasswordEyeSvgIcon } from 'src/assets/icons/show-password-visibility';
@@ -65,12 +65,12 @@ const CreateNewPassWord: FC = () => {
 
                             <InputLabel htmlFor="firstPassword">New Password</InputLabel>
                             <S.ForgetPasswordBox>
-                                <MInputPasswordFormik name="firstPassword" fullWidth />
+                                <MInputFormikPasswords name="firstPassword" fullWidth />
                             </S.ForgetPasswordBox>
 
                             <InputLabel htmlFor="secondPassword">Repeat Password</InputLabel>
                             <S.ForgetPasswordBox>
-                                <MInputPasswordFormik
+                                <MInputFormikPasswords
                                     name="secondPassword"
                                     type={toggleType ? 'text' : 'password'}
                                     fullWidth
