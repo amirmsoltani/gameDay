@@ -65,7 +65,16 @@ const CreateNewPassWord: FC = () => {
 
                             <InputLabel htmlFor="firstPassword">New Password</InputLabel>
                             <S.ForgetPasswordBox>
-                                <MInputFormikPasswords name="firstPassword" fullWidth />
+                                <MInputFormikPasswords
+                                    name="firstPassword"
+                                    type={toggleType ? 'text' : 'password'}
+                                    fullWidth
+                                />
+                                <S.ForgetPasswordIcon>
+                                    <Button variant="text" onClick={toggleShow}>
+                                        <ShowPasswordEyeSvgIcon />
+                                    </Button>
+                                </S.ForgetPasswordIcon>
                             </S.ForgetPasswordBox>
 
                             <InputLabel htmlFor="secondPassword">Repeat Password</InputLabel>
