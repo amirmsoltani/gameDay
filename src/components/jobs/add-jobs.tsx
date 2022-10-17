@@ -52,12 +52,12 @@ function AddJobs() {
             <LayoutHeader>
                 <S.Header>
                     <div className="header__info-box">
-                        <Link href="/dashboard">
+                        <Link href="/jobs">
                             <a className="header__back-btn">
                                 <LeftArrowIcon />
                             </a>
                         </Link>
-                        <span className="title-back"> Jobs/Add new</span>
+                        <span className="title-back">Jobs/Add new</span>
                     </div>
                     <div className="input-box">
                         <SearchIconExercise />
@@ -76,155 +76,120 @@ function AddJobs() {
                 </S.Header>
             </LayoutHeader>
 
-            <S.ListWrapper display={'grid'} gridTemplateRows="repeat(12, 1fr)">
-                <S.ListHeader container gridRow={'span 1'}>
-                    <Grid lg={3} xs={12} className={'list-header__item no-center'} item>
-                        <TestIcon />
-                    </Grid>
+            {/* <S.ListWrapper display={'grid'} gridTemplateRows="repeat(12, 1fr)"> */}
+            <S.ListWrapper>
+                <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
+                    <Form>
+                        <Grid container>
+                            <Grid item lg={2.7}></Grid>
 
-                    <Grid lg={9} xs={12} className={'box-align'} item>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={schema}
-                            onSubmit={onSubmit}>
-                            <Form>
-                                <S.FormCard>
-                                    {state.error !== '' && (
-                                        <Alert severity="error">{state.error}</Alert>
-                                    )}
-
-                                    <MInputFormik
-                                        name="Company Name"
-                                        fullWidth
-                                        label="Company Name"
-                                        placeholder="ex. John"
-                                        errorSpaceOn={true}
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Email Address"
-                                        fullWidth
-                                        label="Email Address"
-                                        placeholder="Management skills"
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Phone Number"
-                                        fullWidth
-                                        label="Phone Number"
-                                        placeholder="Management skills"
-                                    />
-                                </S.FormCard>
-                            </Form>
-                        </Formik>
-                    </Grid>
-
-                    <Grid lg={12} xs={12} className={'box-align'} item>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={schema}
-                            onSubmit={onSubmit}>
-                            <Form>
-                                <S.FormCard>
-                                    {state.error !== '' && (
-                                        <Alert severity="error">{state.error}</Alert>
-                                    )}
-
-                                    <MInputFormik
-                                        name="Company Job"
-                                        fullWidth
-                                        label="Company Job"
-                                        placeholder="Media, Art & Design"
-                                        errorSpaceOn={true}
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Company Location"
-                                        fullWidth
-                                        label="Company Location"
-                                        placeholder="Industrial design - Graphic design"
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="applicant Job"
-                                        fullWidth
-                                        label="applicant Job"
-                                        placeholder="UI UX Designer"
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Experience level"
-                                        fullWidth
-                                        label="Experience level"
-                                        placeholder="Senior - 7 years of experience"
-                                    />
-                                </S.FormCard>
-                            </Form>
-                        </Formik>
-                    </Grid>
-
-                    <Grid lg={9.2} xs={12} className={'box-align'} item>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={schema}
-                            onSubmit={onSubmit}>
-                            <Form>
-                                <S.FormCard>
-                                    {state.error !== '' && (
-                                        <Alert severity="error">{state.error}</Alert>
-                                    )}
-
-                                    <MInputFormik
-                                        name="Job type"
-                                        fullWidth
-                                        label="Job type"
-                                        placeholder="Full time / 8:00am - 5:00pm"
-                                        errorSpaceOn={true}
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Education"
-                                        fullWidth
-                                        label="Education"
-                                        placeholder="Industrial design - Graphic design"
-                                    />
-                                    <Spacer space={10} />
-                                    <MInputFormik
-                                        name="Salary"
-                                        fullWidth
-                                        label="Salary"
-                                        placeholder="$2000"
-                                    />
-                                    <Spacer space={10} />
-                                </S.FormCard>
-                            </Form>
-                        </Formik>
-                    </Grid>
-
-                    <Grid lg={12} xs={12} className={'box-align'} item>
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={schema}
-                            onSubmit={onSubmit}>
-                            <Form>
-                                <S.FormCard>
-                                    {state.error !== '' && (
-                                        <Alert severity="error">{state.error}</Alert>
-                                    )}
-                                    {/* <InputTextarea /> */}
-                                    <InputTextarea
-                                        label="Job Description"
-                                        errorSpaceOn={true}
-                                        name="message"
-                                        rows="5"
-                                        fullWidth
-                                    />
-                                </S.FormCard>
-                            </Form>
-                        </Formik>
-                    </Grid>
-                </S.ListHeader>
-                <S.ListBody gridRow={'span 11'}></S.ListBody>
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Company Name"
+                                    fullWidth
+                                    label="Company Name"
+                                    placeholder="ex. John"
+                                    errorSpaceOn={true}
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Email Address"
+                                    fullWidth
+                                    label="Email Address"
+                                    placeholder="Management skills"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Phone Number"
+                                    fullWidth
+                                    label="Phone Number"
+                                    placeholder="Management skills"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={2.7}>
+                                <MInputFormik
+                                    name="Company Job"
+                                    fullWidth
+                                    label="Company Job"
+                                    placeholder="Media, Art & Design"
+                                    errorSpaceOn={true}
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Company Location"
+                                    fullWidth
+                                    label="Company Location"
+                                    placeholder="Industrial design - Graphic design"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="applicant Job"
+                                    fullWidth
+                                    label="applicant Job"
+                                    placeholder="UI UX Designer"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Experience level"
+                                    fullWidth
+                                    label="Experience level"
+                                    placeholder="Senior - 7 years of experience"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={2.7}>
+                                <MInputFormik
+                                    name="Job type"
+                                    fullWidth
+                                    label="Job type"
+                                    placeholder="Full time / 8:00am - 5:00pm"
+                                    errorSpaceOn={true}
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Education"
+                                    fullWidth
+                                    label="Education"
+                                    placeholder="Industrial design - Graphic design"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3}>
+                                <MInputFormik
+                                    name="Salary"
+                                    fullWidth
+                                    label="Salary"
+                                    placeholder="$2000"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={13}>
+                                <label>Job Description</label>
+                                <InputTextarea
+                                    label="Job Description"
+                                    errorSpaceOn={true}
+                                    name="Job Description"
+                                    rows="5"
+                                    placeholder="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque"
+                                    fullWidth
+                                />
+                            </Grid>
+                        </Grid>
+                    </Form>
+                </Formik>
             </S.ListWrapper>
         </S.Content>
     );

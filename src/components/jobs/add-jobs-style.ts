@@ -236,8 +236,8 @@ export const Content = styled(Grid)`
 `;
 
 export const ListWrapper = styled(Grid)`
-    display: flex;
-    flex-direction: row;
+    /* display: flex; */
+    /* flex-direction: row; */
 
     padding: 18px 15px 0 15px;
     height: 100%;
