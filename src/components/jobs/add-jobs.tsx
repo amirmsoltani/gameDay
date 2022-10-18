@@ -16,26 +16,66 @@ import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
 import { MButton } from '../base/MButton';
 import { Form, Formik } from 'formik';
-import { TestIcon } from 'src/assets/icons/test-add-jobs';
-import { NumberInput } from '../base/input/number-input';
 import { InputTextarea } from '../base/input/input-textarea';
+import { useGetUser } from 'src/auth/UserProvider';
+
+interface InitailValuesProps {
+    company: string;
+    email: string;
+    phone: string;
+    job: string;
+    location: string;
+    applicant: string;
+    experience: string;
+    jobType: string;
+    education: string;
+    salary: string;
+    skills: string;
+    jobDescription: string;
+}
+const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = Yup.object({
-    email: Yup.string().email('Must be a valid email').required('Email is required'),
-    password: Yup.string().required('Password is required'),
-    remember: Yup.boolean()
+    company: Yup.string(),
+    email: Yup.string()
+        .email('will not be display in the job application')
+        .required('Email is required'),
+    phone: Yup.string()
+        .max(11)
+        .matches(phoneRegExp, 'Phone number is not valid')
+        .required('This field is required'),
+    job: Yup.string(),
+    location: Yup.string(),
+    applicant: Yup.string(),
+    experience: Yup.string(),
+    jobType: Yup.string(),
+    education: Yup.string(),
+    skills: Yup.string(),
+    salary: Yup.string(),
+    jobDescription: Yup.string()
 });
 // Form Value Type
 type ValueType = InferType<typeof schema>;
 
 // form initial Value
 const initialValues: ValueType = {
+    company: '',
     email: '',
-    password: '',
-    remember: false
+    phone: '',
+    job: '',
+    location: '',
+    applicant: '',
+    experience: '',
+    jobType: '',
+    education: '',
+    salary: '',
+    skills: '',
+    jobDescription: ''
 };
 
 function AddJobs() {
+    const user = useGetUser();
     const { login, state } = useAuthPage();
 
     const onSubmit = useCallback((value: ValueType) => {
@@ -46,6 +86,9 @@ function AddJobs() {
 
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
+
+    const phoneRegExp =
+        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     return (
         <S.Content>
@@ -173,6 +216,15 @@ function AddJobs() {
                                     fullWidth
                                     label="Salary"
                                     placeholder="$2000"
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={13}>
+                                <MInputFormik
+                                    name="Soft skills required"
+                                    fullWidth
+                                    label="Soft skills required"
+                                    placeholder=""
                                 />
                             </Grid>
                             <Spacer space={3} />
