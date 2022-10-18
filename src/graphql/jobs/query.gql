@@ -30,7 +30,7 @@ query jobRequestGetJobRequests(
     $where: JobRequestFilterInput
     $order: [JobRequestSortInput!]
 ) {
-    jobrequest_getJobRequests {
+    jobRequest_getJobRequests {
         status
         result(skip: $skip, take: $take, where: $where, order: $order) {
             items {

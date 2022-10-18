@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Alert, Box, Typography } from '@mui/material';
 import * as S from './login-styles';
 import { MImage } from '@/components/base/image/MImage';
@@ -8,11 +8,14 @@ import { InferType } from 'yup';
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
-import Link from 'next/link';
+import { fbPasswordReset } from 'src/auth/firebase';
+import { useDispatch } from 'react-redux';
+import { newModal } from 'src/redux/actions/actions';
+import SuccessEmailModal, { SUCCESS_MAIL_ID } from './succeed-email';
 
 // Form Schema
 const schema = Yup.object({
-    email: Yup.string().email('Must be a valid email').required('Email is required')
+    email: Yup.string().email('This field should be an email').required('This field is required')
 });
 
 // Form Value Type
@@ -24,11 +27,19 @@ const initialValues: ValueType = {
 };
 
 const ForgetPassword: FC = () => {
-    const { state, changePassword } = useAuthPage();
-
-    const onSubmit = useCallback((value: ValueType) => {
-        changePassword(value.email);
+    const initialValues = React.useMemo(() => {
+        return {
+            email: ``
+        };
     }, []);
+    const { state, changePassword } = useAuthPage();
+    const [errors, setErrors] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+
+    // const onSubmit = useCallback((value: ValueType) => {
+    //     changePassword(value.email);
+    // }, []);
 
     return (
         <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={0}>
@@ -36,7 +47,30 @@ const ForgetPassword: FC = () => {
                 <MImage resources={{ src: '/images/auth/login-logo.png' }} />
             </S.LeftSide>
             <S.RightSide gridColumn="span 4">
-                <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={schema}
+                    onSubmit={async (v) => {
+                        setErrors(null);
+                        setLoading(true);
+                        try {
+                            console.log(v.email);
+                            const res = await fbPasswordReset(v.email);
+                            setLoading(false);
+                            dispatch(
+                                newModal({
+                                    id: SUCCESS_MAIL_ID,
+                                    closeButton: false,
+                                    Body: SuccessEmailModal
+                                })
+                            );
+                        } catch (err) {
+                            if (err.toString().includes('user-not-found')) {
+                                setErrors('Email Not Found');
+                            }
+                            console.error(err);
+                        }
+                    }}>
                     <Form>
                         <S.FormCard>
                             <S.ForgetTitle>Forgot password?</S.ForgetTitle>
@@ -46,13 +80,15 @@ const ForgetPassword: FC = () => {
                             {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
                             <MInputFormik name="email" fullWidth label="" />
                             <Spacer space={5} />
-                            <Link href="/create-new-password">
-                                <a className="link-color">
-                                    <S.SubmitButton loading={state.loading} type={'submit'}>
-                                        Submit
-                                    </S.SubmitButton>
-                                </a>
-                            </Link>
+                            <S.SubmitButton loading={loading} type={'submit'}>
+                                Submit
+                            </S.SubmitButton>
+                            <Spacer space={5} />
+                            {errors && (
+                                <Typography variant="subtitle1" color="green">
+                                    {errors}
+                                </Typography>
+                            )}
                         </S.FormCard>
                     </Form>
                 </Formik>

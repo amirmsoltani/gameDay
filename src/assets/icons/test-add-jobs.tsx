@@ -2,7 +2,7 @@ import React from 'react';
 
 export const TestIcon = () => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="430" height="193" viewBox="0 0 430 193">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 430 193">
             <defs>
                 <filter
                     id="card-bg"
