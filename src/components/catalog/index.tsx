@@ -74,7 +74,7 @@ function CatalogPage() {
         <S.Content container>
             <LayoutHeader>
                 <S.Header>
-                    <div className="header__info-box">Catalog</div>
+                    <div className="header__info-box">Catalogs</div>
                     <span>{totalItems.current} items Listed</span>
                     <SearchInput
                         onChange={(event: any) => {
@@ -87,7 +87,7 @@ function CatalogPage() {
                             <PlusIcon className="link-button__plus" /> Add New catalog
                         </a>
                     </Link>
-                    <Link href="/dashboard">
+                    <Link href={`/catalog/${state.activeCategory}/course`}>
                         <a className="header__link-button">
                             <PlusIcon className="link-button__plus" /> Add New course
                         </a>

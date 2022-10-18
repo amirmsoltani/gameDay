@@ -9,7 +9,6 @@ import { Router } from 'next/router';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import SubscribeMessagesComponent from 'src/components/chat/subscription_component';
 
 import '../public/css/global.css';
 import 'nprogress/nprogress.css';

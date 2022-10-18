@@ -69,19 +69,24 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
             {itemList.map((lesson, index) => (
                 <Fragment key={lesson.title}>
                     <div className="catalog-learn__card-header">
-                        <span className="card-header__index">{index + 1}</span>{' '}
-                        <span>{lesson.title}</span>
+                        <div className="header__item">
+                            <span className="card-header__index">{index + 1}</span>{' '}
+                            <span>{lesson.title}</span>
+                        </div>
+                        <div>
+                            <span>{lesson.time}:00</span>
+                        </div>
                     </div>
                     {lesson.topics.map((topic) => (
-                        <div className="catalog-learn__card-lesson" key={topic.title}>
+                        <a
+                            className="catalog-learn__card-lesson"
+                            key={topic.title}
+                            href={topic.fileUrl}>
                             <div className="card-lesson__box-left">
                                 <PlayIcon />
                                 <span className="box-left__file-name">{topic.fileUrl}</span>
                             </div>
-                            <div>
-                                <span>{lesson.time}:00</span>
-                            </div>
-                        </div>
+                        </a>
                     ))}
                 </Fragment>
             ))}

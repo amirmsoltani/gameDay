@@ -31,6 +31,7 @@ query getLesson($where: LessonFilterInput, $take: Int, $skip: Int) {
     lesson_getLessons {
         result(where: $where, take: $take, skip: $skip) {
             items {
+                id
                 title
                 description
                 time

@@ -15,8 +15,8 @@ export const NotFoundIcon = () => {
                     x2="1.636"
                     y2="0.253"
                     gradientUnits="objectBoundingBox">
-                    <stop offset="0" stop-color="#19034d" stop-opacity="0.914" />
-                    <stop offset="0.555" stop-color="#311573" stop-opacity="0" />
+                    <stop offset="0" stopColor="#19034d" stopOpacity="0.914" />
+                    <stop offset="0.555" stopColor="#311573" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient
                     id="linear-gradient-2"
@@ -25,8 +25,8 @@ export const NotFoundIcon = () => {
                     x2="0.58"
                     y2="0.086"
                     gradientUnits="objectBoundingBox">
-                    <stop offset="0" stop-color="#201b59" stop-opacity="0.914" />
-                    <stop offset="0.555" stop-color="#fc0" stop-opacity="0" />
+                    <stop offset="0" stopColor="#201b59" stopOpacity="0.914" />
+                    <stop offset="0.555" stopColor="#fc0" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient
                     id="linear-gradient-3"
@@ -43,8 +43,8 @@ export const NotFoundIcon = () => {
                     x2="-1.63"
                     y2="-0.878"
                     gradientUnits="objectBoundingBox">
-                    <stop offset="0.265" stop-color="#201b59" stop-opacity="0.914" />
-                    <stop offset="0.555" stop-color="#ff735f" stop-opacity="0" />
+                    <stop offset="0.265" stopColor="#201b59" stopOpacity="0.914" />
+                    <stop offset="0.555" stopColor="#ff735f" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient
                     id="linear-gradient-5"
@@ -61,10 +61,10 @@ export const NotFoundIcon = () => {
                     x2="-0.035"
                     y2="-0.005"
                     gradientUnits="objectBoundingBox">
-                    <stop offset="0.004" stop-color="#fff" />
-                    <stop offset="0.551" stop-color="#fff" stop-opacity="0.302" />
+                    <stop offset="0.004" stopColor="#fff" />
+                    <stop offset="0.551" stopColor="#fff" stopOpacity="0.302" />
                 </linearGradient>
-                <clipPath id="clip-path">
+                <clipPath id="clipPath">
                     <path
                         id="Path_294"
                         data-name="Path 294"
@@ -82,7 +82,7 @@ export const NotFoundIcon = () => {
                     transform="translate(162.325 471.496)"
                     fill="none"
                     stroke="#fff"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_244"
@@ -105,7 +105,7 @@ export const NotFoundIcon = () => {
                     transform="translate(201.475 458.446)"
                     fill="none"
                     stroke="#fff"
-                    stroke-width="1"
+                    strokeWidth="1"
                     opacity="0.75"
                 />
                 <path
@@ -115,7 +115,7 @@ export const NotFoundIcon = () => {
                     transform="translate(343.372 181.12)"
                     fill="none"
                     stroke="#fff"
-                    stroke-width="1"
+                    strokeWidth="1"
                     opacity="0.75"
                 />
                 <g id="Group_46" data-name="Group 46" transform="translate(120.896 592.518)">
@@ -176,7 +176,7 @@ export const NotFoundIcon = () => {
                     transform="translate(706.65 384.283)"
                     fill="none"
                     stroke="#fff"
-                    stroke-width="1"
+                    strokeWidth="1"
                     opacity="0.75"
                 />
                 <g id="Group_48" data-name="Group 48" transform="translate(369.386 446.276)">
@@ -250,7 +250,7 @@ export const NotFoundIcon = () => {
                         transform="translate(-27.071 -151.206)"
                         fill="none"
                         stroke="#19034d"
-                        stroke-width="1"
+                        strokeWidth="1"
                     />
                     <path
                         id="Path_263"
@@ -494,7 +494,7 @@ export const NotFoundIcon = () => {
                 </g>
                 <g id="Group_62" data-name="Group 62" transform="translate(877.176 621.228)">
                     <g id="Group_61" data-name="Group 61">
-                        <g id="Group_60" data-name="Group 60" clip-path="url(#clip-path)">
+                        <g id="Group_60" data-name="Group 60" clipPath="url(#clip-path)">
                             <g id="Group_59" data-name="Group 59">
                                 <g id="Group_58" data-name="Group 58">
                                     <path
@@ -511,7 +511,7 @@ export const NotFoundIcon = () => {
                                         transform="translate(-328.905 -271.121)"
                                         fill="none"
                                         stroke="#19034d"
-                                        stroke-width="1"
+                                        strokeWidth="1"
                                     />
                                     <path
                                         id="Path_290"
@@ -520,7 +520,7 @@ export const NotFoundIcon = () => {
                                         transform="translate(-337.732 -271.393)"
                                         fill="none"
                                         stroke="#19034d"
-                                        stroke-width="1"
+                                        strokeWidth="1"
                                     />
                                     <path
                                         id="Path_291"
@@ -529,7 +529,7 @@ export const NotFoundIcon = () => {
                                         transform="translate(-321.89 -237.794)"
                                         fill="none"
                                         stroke="#19034d"
-                                        stroke-width="1"
+                                        strokeWidth="1"
                                     />
                                     <path
                                         id="Path_292"
@@ -538,7 +538,7 @@ export const NotFoundIcon = () => {
                                         transform="translate(-355.106 -205.421)"
                                         fill="none"
                                         stroke="#19034d"
-                                        stroke-width="1"
+                                        strokeWidth="1"
                                     />
                                     <path
                                         id="Path_293"
@@ -547,7 +547,7 @@ export const NotFoundIcon = () => {
                                         transform="translate(-321.813 -241.448)"
                                         fill="none"
                                         stroke="#19034d"
-                                        stroke-width="1"
+                                        strokeWidth="1"
                                     />
                                 </g>
                             </g>
@@ -587,7 +587,7 @@ export const NotFoundIcon = () => {
                         transform="translate(205.944 215.216)"
                         fill="none"
                         stroke="#8054f6"
-                        stroke-width="2"
+                        strokeWidth="2"
                     />
                     <g id="Group_63" data-name="Group 63" transform="translate(231.376)">
                         <path
@@ -597,7 +597,7 @@ export const NotFoundIcon = () => {
                             transform="translate(-332.372 -210.598)"
                             fill="none"
                             stroke="#fff"
-                            stroke-width="2"
+                            strokeWidth="2"
                         />
                         <path
                             id="Path_298"
@@ -606,7 +606,7 @@ export const NotFoundIcon = () => {
                             transform="translate(-316.176 -239.68)"
                             fill="none"
                             stroke="#fff"
-                            stroke-width="2"
+                            strokeWidth="2"
                         />
                     </g>
                 </g>
@@ -626,7 +626,7 @@ export const NotFoundIcon = () => {
                     transform="translate(591.223 203.839)"
                     fill="none"
                     stroke="#addfff"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_300"
@@ -635,7 +635,7 @@ export const NotFoundIcon = () => {
                     transform="translate(0 161.594)"
                     fill="none"
                     stroke="#addfff"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_301"
@@ -644,7 +644,7 @@ export const NotFoundIcon = () => {
                     transform="translate(460.825 0.423)"
                     fill="none"
                     stroke="#addfff"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_302"
@@ -653,7 +653,7 @@ export const NotFoundIcon = () => {
                     transform="translate(94.429 538.868)"
                     fill="none"
                     stroke="#addfff"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_303"
@@ -662,7 +662,7 @@ export const NotFoundIcon = () => {
                     transform="translate(447.703 535.263)"
                     fill="none"
                     stroke="#69a4c9"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
                 <path
                     id="Path_304"
@@ -671,7 +671,7 @@ export const NotFoundIcon = () => {
                     transform="translate(330.205 554.131)"
                     fill="none"
                     stroke="#69a4c9"
-                    stroke-width="2"
+                    strokeWidth="2"
                 />
             </g>
         </svg>

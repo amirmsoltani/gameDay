@@ -36,7 +36,7 @@ export const TestIcon = () => {
                         transform="translate(19 158)"
                         fill="#fafcfd"
                         stroke="#dae1ed"
-                        stroke-width="1"
+                        strokeWidth="1"
                         stroke-dasharray="5 5">
                         <rect width="343" height="102" rx="4" stroke="none" />
                         <rect x="-0.5" y="-0.5" width="344" height="103" rx="4.5" fill="none" />

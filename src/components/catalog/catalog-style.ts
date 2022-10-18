@@ -83,6 +83,7 @@ export const CatalogLearn = styled.div`
         .catalog-learn__card-header{
             display: flex;
             align-items:center;
+            justify-content:space-between;
             height: 65px;
             padding:7px;
             border-radius:17px;
@@ -92,6 +93,11 @@ export const CatalogLearn = styled.div`
             font-size:16px;
             margin-top:15px;
             margin-bottom:10px;
+
+            .header__item{
+                display:flex;
+                align-items:center;
+            }
 
             .card-header__index{
                 width:50px;
@@ -117,6 +123,9 @@ export const CatalogLearn = styled.div`
             margin-top:15px;
             border-radius:20px;
             fill:${palette.primary.main}99;
+            cursor: pointer;
+            color:${palette.text.main};
+            text-decoration:none;
 
             .card-lesson__box-left{
                 display:flex;
