@@ -30,10 +30,7 @@ export const Header = styled(Grid)`
     }
 
     ${({ theme: { palette } }) => `
-       background-color:${palette.primary.main};
-       padding: 0 25px;
-       color:${palette.common.white};
-   }
+     
    .header__info-box{
        border-right: 2px solid ${palette.primary.light}80;
        .header__back-btn{
