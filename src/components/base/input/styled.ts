@@ -169,11 +169,13 @@ export const TextArea = styled('textarea')(({}) => ({
     padding: ' 0.65rem 0.5rem',
     width: '100%',
     borderRadius: '5px',
-    borderColor: '#fff',
-    boxShadow: '0px 2px 4px #8898AA',
+    backgroundColor: '#FAFAFA',
+    borderColor: '#fAfAfA',
+    boxShadow: '0px 2px 4px #1717172e',
     resize: 'none',
     fontSize: '1rem',
     '::placeholder': {
-        color: '#3d3d3d'
+        color: '#EBEBEB',
+        fontWeight: 400
     }
 }));

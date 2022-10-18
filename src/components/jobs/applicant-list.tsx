@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { FC, useState } from 'react';
 import SaveIcon from 'src/assets/icons/save-icon';
 import {
@@ -6,6 +6,7 @@ import {
     useInfiniteJobRequestGetJobRequestsQuery
 } from 'src/graphql/generated';
 import { MImage } from '../base/image/MImage';
+import { MSelectFormik } from '../base/input/MSelect';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
 import * as S from './applicant-style';
@@ -15,7 +16,7 @@ type PropsType = {
     id: number;
 };
 
-type ListType = JobRequestGetJobRequestsQuery['jobrequest_getJobRequests']['result']['items'];
+type ListType = JobRequestGetJobRequestsQuery['jobRequest_getJobRequests']['result']['items'];
 const ApplicantList: FC<PropsType> = ({ id }) => {
     const [itemList, setItemList] = useState<ListType>([]);
 
@@ -31,15 +32,15 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                 onSuccess: ({ pages }) => {
                     const length = pages.length;
                     if (length === 1) {
-                        setItemList([...pages[0]?.jobrequest_getJobRequests.result.items]);
+                        setItemList([...pages[0]?.jobRequest_getJobRequests.result.items]);
                     } else {
                         setItemList([
                             ...itemList,
-                            ...(pages[length - 1]?.jobrequest_getJobRequests.result.items || [])
+                            ...(pages[length - 1]?.jobRequest_getJobRequests.result.items || [])
                         ]);
                     }
                     if (
-                        pages[length - 1].jobrequest_getJobRequests.result.pageInfo.hasNextPage ===
+                        pages[length - 1].jobRequest_getJobRequests.result.pageInfo.hasNextPage ===
                         false
                     ) {
                         setEnd(true);
@@ -124,6 +125,13 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                         </Grid>
 
                         <Grid md={2.4} xs={2.4} className="detail__item" item>
+                            {/* <MSelectFormik
+                                holder
+                                label="Situation"
+                                options={[]}
+                                name="Situation"
+                                rounded
+                            /> */}
                             <Situation />
                         </Grid>
                     </Grid>

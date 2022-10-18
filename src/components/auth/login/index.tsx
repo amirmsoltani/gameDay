@@ -57,7 +57,7 @@ const LoginComponent: FC = () => {
                             <Box display="flex" justifyContent="space-between" alignItems="center">
                                 <MCheckboxFormik name="remember" optionName="Remember Me" />
                                 <S.ForgetButton>
-                                    <Link href="/forget-password">
+                                    <Link href={'/forget-password'}>
                                         <a className="link-color">Forget Password?</a>
                                     </Link>
                                 </S.ForgetButton>

@@ -1,18 +1,19 @@
 import { FieldProps, useField } from 'formik';
 import React, { forwardRef, memo, useMemo, useState } from 'react';
 import NumberFormat from 'react-number-format';
+import { IconButton, InputAdornment, TextField, TextFieldProps } from '@mui/material';
 
 import { MInput } from '.';
 import { MButton } from '../MButton';
 import { MInputProps } from './type.input';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export const MInputFormik =
-    forwardRef((props: MInputProps & { fullWidth?: boolean }, ref) => {
-        const [field, meta] = useField(props.name);
+export const MInputFormik = forwardRef((props: MInputProps & { fullWidth?: boolean }, ref) => {
+    const [field, meta] = useField(props.name);
 
-        return <MInput {...props} {...field} meta={meta} ref={ref as any} />;
-    })
-
+    return <MInput {...props} {...field} meta={meta} ref={ref as any} />;
+});
 
 export const MInputPasswordFormik = memo(
     forwardRef(
@@ -54,7 +55,32 @@ export const MInputPasswordFormik = memo(
         }
     )
 );
+export const MInputFormikPasswords = memo(
+    forwardRef((props: TextFieldProps & MInputProps, ref) => {
+        const [field, meta] = useField(props.name);
+        const [showPassword, setShowPassword] = useState(false);
 
+        return (
+            <MInputFormik
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            {' '}
+                            <IconButton onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <VisibilityOff /> : <Visibility />}{' '}
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
+                {...props}
+                {...field}
+                meta={meta}
+                ref={ref as any}
+            />
+        );
+    })
+);
 // export const MPhoneNumberFormik = memo(
 //     forwardRef(
 //         ({ form, field, name, placeholder, label }: FieldProps<string> & MInputProps, ref) => {
