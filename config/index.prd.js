@@ -1,4 +1,3 @@
-const apiUrl = 'https://aps-healthy-prd.azurewebsites.net';
 const baseUrl = 'https://aps-game-day-prd.azurewebsites.net';
 const baseCononicalUrl = 'https://aps-game-day-prd.azurewebsites.net';
 const apiUrl = 'https://aps-game-day-prd.azurewebsites.net';
