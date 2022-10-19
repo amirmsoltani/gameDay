@@ -5,6 +5,7 @@ import SaveIcon from 'src/assets/icons/save-icon';
 import { GetLessonQuery, useInfiniteGetLessonQuery } from 'src/graphql/generated';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
+import VideoPlayer from '../vide-player';
 import * as S from './catalog-style';
 
 type PropsType = {
@@ -13,12 +14,17 @@ type PropsType = {
 
 type ListType = GetLessonQuery['lesson_getLessons']['result']['items'];
 const CatalogLearnSection: FC<PropsType> = ({ id }) => {
+    const [play, setPlay] = useState<string | null>(null);
+    const onPlay = (url) => {
+        setPlay(url);
+    };
+
     const [itemList, setItemList] = useState<ListType>([]);
 
     const [end, setEnd] = useState(false);
 
     const { isFetching, isFetchingNextPage, fetchNextPage } = useInfiniteGetLessonQuery(
-        { take: 10, skip: 0, where: { skillCategoryId: { eq: id } } },
+        { take: 10, skip: 0, where: { skillCategoryId: { eq: id }, isDeleted: { eq: false } } },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
@@ -77,19 +83,31 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                             <span>{lesson.time}:00</span>
                         </div>
                     </div>
-                    {lesson.topics.map((topic) => (
-                        <a
-                            className="catalog-learn__card-lesson"
-                            key={topic.title}
-                            href={topic.fileUrl}>
-                            <div className="card-lesson__box-left">
-                                <PlayIcon />
-                                <span className="box-left__file-name">{topic.fileUrl}</span>
-                            </div>
-                        </a>
-                    ))}
+                    {lesson.topics
+                        .filter((topic) => !topic.isDeleted)
+                        .map((topic) => (
+                            <button
+                                className="catalog-learn__card-lesson"
+                                key={topic.title}
+                                onClick={() => {
+                                    setPlay(topic.fileUrl);
+                                }}>
+                                <div className="card-lesson__box-left">
+                                    <PlayIcon />
+                                    <span className="box-left__file-name">
+                                        {topic.description?.split('~')[0]}
+                                    </span>
+                                </div>
+                            </button>
+                        ))}
                 </Fragment>
             ))}
+            <VideoPlayer
+                url={play}
+                onClose={() => {
+                    setPlay(null);
+                }}
+            />
         </S.CatalogLearn>
     );
 };

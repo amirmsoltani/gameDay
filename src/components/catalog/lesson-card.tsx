@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
-import React, { FC, useRef, useState } from 'react';
+import { Field, Formik, FormikProps } from 'formik';
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import UploadComponent, { RefType } from '../upload/upload';
 import * as Yup from 'yup';
 import { LessonWrapper } from './lesson-card-style';
@@ -11,15 +11,31 @@ import { PrimarySpinner } from '../base/loader/spinner';
 import SaveIcon from 'src/assets/icons/save-icon';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import {
+    Topic,
+    useCreateLessonMutation,
+    useCreateTopicMutation,
+    useDeleteLessonMutation,
+    useDeleteTopicMutation,
+    useUpdateLessonMutation,
+    useUpdateTopicMutation
+} from 'src/graphql/generated';
 
 dayjs.extend(duration);
 
 export type LessonType = {
     id?: number;
-    time?: string;
+    time?: number;
     title?: string;
     description?: string;
     categoryId: number;
+    topics: Array<{
+        title?: string;
+        fileUrl?: string;
+        id?: number;
+        description?: string;
+        __typename?: string;
+    }>;
 };
 
 type PropsType = {
@@ -30,34 +46,134 @@ type PropsType = {
 };
 
 const schema = Yup.object().shape({
-    title: Yup.string().required('please Enter Title'),
-    description: Yup.string().required('please Enter description')
+    title: Yup.string(),
+    description: Yup.string()
 });
 
-const LessonCard: FC<PropsType> = ({ lesson, index, onPlay, onDelete }) => {
+const mapTopic = (topic: Topic) => {
+    const [name, duration] = topic.description?.split('~') || ['default', 0];
+
+    return { id: topic.id, name: name as string, duration: +(duration || 0), url: topic.fileUrl };
+};
+
+const filterTopic = (topic: Topic) => topic.isDeleted === false;
+
+const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props }) => {
     const uploader = useRef<RefType>();
+    const timeOut = useRef<NodeJS.Timeout>(null);
+    const formRef = useRef<FormikProps<typeof propLesson>>(null);
+    const videoUpdate = useRef<number>(null);
+    const [lesson, setLesson] = useState<typeof propLesson>(propLesson);
+
     const [files, setFiles] = useState<
         Array<{
             name: string;
             url?: string;
+            id?: number;
             duration: number;
         }>
-    >([]);
+    >(lesson.topics.filter(filterTopic).map(mapTopic));
+
+    const createLesson = useCreateLessonMutation({
+        onSuccess: (data) => {
+            setLesson({ ...lesson, id: data.lesson_addLesson.result.id });
+        }
+    });
+    const updateLesson = useUpdateLessonMutation({
+        onSuccess: (_, input) => {
+            setLesson({
+                ...lesson,
+                title: input.input.title,
+                description: input.input.description
+            });
+        }
+    });
+
+    const deleteLesson = useDeleteLessonMutation({
+        onSuccess: () => {
+            props.onDelete(index);
+        }
+    });
+
+    const createTopic = useCreateTopicMutation({
+        onSuccess: (data) => {
+            const id = data.topic_addTopic.result.id;
+            const index = files.findIndex((file) => file.id === id);
+            const newFiles = [...files];
+            newFiles[index] = { ...newFiles[index], id };
+            setFiles(newFiles);
+            formRef.current.submitForm();
+        }
+    });
+
+    const updateTopic = useUpdateTopicMutation({
+        onSuccess: () => {
+            formRef.current.submitForm();
+        }
+    });
+
+    const deleteTopic = useDeleteTopicMutation({
+        onSuccess: (_, { id }) => {
+            const index = files.findIndex((file) => file.id === id);
+            const newFiles = [...files];
+            newFiles.splice(index, 1);
+            setFiles(newFiles);
+            formRef.current.submitForm();
+        }
+    });
+
+    useEffect(() => {
+        if (!lesson.id) {
+            createLesson.mutate({ input: { skillCategoryId: lesson.categoryId, time: 0 } });
+        }
+    }, []);
+
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (timeOut.current) {
+            clearTimeout(timeOut.current);
+        }
+        timeOut.current = setTimeout(() => {
+            formRef.current.submitForm();
+        }, 3000);
+        formRef.current?.setFieldValue(event.target.name, event.target.value);
+    };
+
     return (
-        <Formik initialValues={lesson} validationSchema={schema} onSubmit={() => {}}>
+        <Formik
+            initialValues={lesson}
+            innerRef={formRef}
+            validationSchema={schema}
+            onSubmit={(values) => {
+                let time = 0;
+                files.forEach((file) => {
+                    time += file.duration;
+                });
+
+                updateLesson.mutate({
+                    id: lesson.id,
+                    input: {
+                        time: Math.floor(time),
+                        skillCategoryId: lesson.categoryId,
+                        description: values.description,
+                        title: values.title
+                    }
+                });
+            }}>
             <LessonWrapper>
                 <div className="lesson__header">
                     <span className="header__index">{index + 1}</span>
                     <button
+                        disabled={deleteLesson.isLoading || !lesson.id}
                         className="lesson__btn"
                         onClick={() => {
-                            onDelete(index);
-                        }}>
-                        <TrashIcon />
+                            deleteLesson.mutate({ id: lesson.id });
+                        }}
+                        type="button">
+                        {deleteLesson.isLoading ? <PrimarySpinner /> : <TrashIcon />}
                     </button>
                 </div>
 
-                {files.map((file) => (
+                {files.map((file, index) => (
                     <div key={file.name} className={`lesson__video ${file.url ? '' : 'disabled'}`}>
                         <div className="video__left">
                             {file.url ? (
@@ -76,11 +192,28 @@ const LessonCard: FC<PropsType> = ({ lesson, index, onPlay, onDelete }) => {
                             <span className="video__duration">
                                 {dayjs.duration(Math.floor(file.duration * 1000)).format('mm:ss')}
                             </span>
-                            <button className="lesson__btn primary">
+                            <button
+                                disabled={!file.url}
+                                className="lesson__btn primary"
+                                type="button"
+                                onClick={() => {
+                                    videoUpdate.current = index;
+                                    uploader.current.openSelector();
+                                }}>
                                 <SaveIcon />
                             </button>
-                            <button className="lesson__btn">
-                                <TrashIcon />
+                            <button
+                                className="lesson__btn"
+                                type="button"
+                                disabled={!file.url || deleteTopic.isLoading}
+                                onClick={() => {
+                                    deleteTopic.mutate({ id: file.id });
+                                }}>
+                                {deleteTopic.isLoading && deleteTopic.variables.id === file.id ? (
+                                    <PrimarySpinner />
+                                ) : (
+                                    <TrashIcon />
+                                )}
                             </button>
                         </div>
                     </div>
@@ -90,13 +223,47 @@ const LessonCard: FC<PropsType> = ({ lesson, index, onPlay, onDelete }) => {
                     <Grid item md={4}>
                         <UploadComponent
                             onSelect={(name, duration) => {
-                                setFiles([...files, { name, duration }]);
+                                const index = videoUpdate.current;
+                                if (typeof index === 'number') {
+                                    const newFiles = [...files];
+                                    newFiles[index] = {
+                                        id: newFiles[index].id,
+                                        name,
+                                        duration,
+                                        url: undefined
+                                    };
+                                    setFiles(newFiles);
+                                } else {
+                                    setFiles([...files, { name, duration }]);
+                                }
                             }}
                             onUpload={(name, url) => {
                                 setFiles((files) => {
                                     const newFiles = [...files];
-                                    const index = newFiles.findIndex((file) => file.name === name);
+                                    const index =
+                                        typeof videoUpdate.current === 'number'
+                                            ? videoUpdate.current
+                                            : newFiles.findIndex((file) => file.name === name);
                                     newFiles[index] = { ...newFiles[index], url };
+                                    const input = {
+                                        lessonId: lesson.id,
+                                        isMain: index === 0,
+                                        title: 'Topic ' + (index + 1),
+                                        description:
+                                            newFiles[index].name + '~' + newFiles[index].duration,
+                                        fileUrl: newFiles[index].url
+                                    };
+                                    if (typeof videoUpdate.current === 'number') {
+                                        updateTopic.mutate({
+                                            id: newFiles[index].id,
+                                            input
+                                        });
+                                        videoUpdate.current = null;
+                                    } else {
+                                        createTopic.mutate({
+                                            input
+                                        });
+                                    }
                                     return newFiles;
                                 });
                             }}
@@ -112,9 +279,9 @@ const LessonCard: FC<PropsType> = ({ lesson, index, onPlay, onDelete }) => {
                             placeholder="description"
                             as="textarea"
                             name="description"
-                            aria-hidden
                             className="description__input"
                             id={index + 'description'}
+                            onChange={onChange}
                         />
                     </Grid>
                     <Grid item md={2.5} className="lesson__title">
@@ -127,13 +294,15 @@ const LessonCard: FC<PropsType> = ({ lesson, index, onPlay, onDelete }) => {
                                 id={index + 'title'}
                                 className="title__input"
                                 placeholder="ex. Doe"
+                                onChange={onChange}
                             />
                         </div>
                         <button
                             className="lesson__add-video"
                             onClick={() => {
                                 uploader.current?.openSelector();
-                            }}>
+                            }}
+                            type="button">
                             <PlusIcon /> Add new Video
                         </button>
                     </Grid>

@@ -34,6 +34,9 @@ export const RightSide = styled(Grid)`
     padding-left: calc(80px - 3vw);
     padding-right: 60px;
     padding-top: 30px;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
 `;
 
 export const CatalogLearn = styled.div`
@@ -113,6 +116,7 @@ export const CatalogLearn = styled.div`
         }
 
         .catalog-learn__card-lesson{
+            border:none;
             height:115px;
             padding:38px;
             background-color:${palette.common.white};

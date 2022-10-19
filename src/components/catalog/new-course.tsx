@@ -1,34 +1,49 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
-import { NewCourseWrapper } from './new-course-style';
-import LessonCard, { LessonType } from './lesson-card';
+import { HeaderWrapper, NewCourseWrapper } from './new-course-style';
+import LessonCard from './lesson-card';
 import Loading from '../loading';
-import { GetLessonQuery, useInfiniteGetLessonQuery } from 'src/graphql/generated';
+import {
+    GetLessonQuery,
+    Lesson,
+    LessonInput,
+    useInfiniteGetLessonQuery
+} from 'src/graphql/generated';
 import { useRouter } from 'next/router';
+import LayoutHeader from '@/layout/app-layout/layout-header';
+import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
+import SearchInput from '../base/input/search-input';
+import Link from 'next/link';
+import useDebounce from 'src/hooks/useDebounce';
+import VideoPlayer from '../vide-player';
 
-type ListType = GetLessonQuery['lesson_getLessons']['result']['items'];
 const NewCoursePage = () => {
+    const totalItems = useRef<number | null>(null);
     const {
         query: { id }
     } = useRouter();
-    const [lessons, setLessons] = useState<Array<LessonType>>([{ categoryId: 1 }]);
     const [play, setPlay] = useState<string | null>(null);
     const onPlay = (url) => {
         setPlay(url);
     };
 
-    const deleteLesson = (index) => {
-        const newLessons = [...lessons];
-        newLessons.splice(index, 1);
-        setLessons(newLessons);
-    };
+    const [itemList, setItemList] = useState<Array<Partial<Lesson>>>([]);
 
-    const [itemList, setItemList] = useState<ListType>([]);
+    const [searchText, setSearchText] = useState<string>('');
+    const finalSearchText = useDebounce(searchText, 500);
 
     const [end, setEnd] = useState(false);
 
     const { isFetching, isFetchingNextPage, fetchNextPage } = useInfiniteGetLessonQuery(
-        { take: 10, skip: 0, where: { skillCategoryId: { eq: id } } },
+        {
+            take: 10,
+            skip: 0,
+            where: {
+                skillCategoryId: { eq: +id },
+                title: { contains: finalSearchText },
+                isDeleted: { eq: false }
+            }
+        },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
@@ -36,6 +51,7 @@ const NewCoursePage = () => {
             onSuccess: ({ pages }) => {
                 const length = pages.length;
                 if (length === 1) {
+                    totalItems.current = pages[0].lesson_getLessons!.result!.totalCount;
                     setItemList([...pages[0].lesson_getLessons.result.items]);
                 } else {
                     setItemList([
@@ -51,28 +67,59 @@ const NewCoursePage = () => {
         }
     );
 
+    const deleteLesson = (index: number) => {
+        const newLessons = [...itemList];
+        newLessons.splice(index, 1);
+        setItemList(newLessons);
+    };
+
     if (isFetching && !isFetchingNextPage) return <Loading />;
 
     return (
-        <NewCourseWrapper>
-            {play && (
-                <div
-                    className="video__player"
-                    onClick={(event) => {
-                        if (event.target === event.currentTarget) {
-                            setPlay(null);
-                        }
-                    }}>
-                    <video controls>
-                        <source src={play} />
-                    </video>
-                </div>
-            )}
+        <NewCourseWrapper
+            onScroll={(event: any) => {
+                const { scrollTop, scrollHeight, clientHeight } = event.target;
+                if (scrollTop + clientHeight >= scrollHeight * 0.5 && !end && !isFetchingNextPage) {
+                    fetchNextPage();
+                }
+            }}>
+            <LayoutHeader>
+                <HeaderWrapper>
+                    <Link href={'/catalog'}>
+                        <a className="back-btn">
+                            <LeftArrowIcon />
+                        </a>
+                    </Link>
+                    <span className="header__info-box">Learn/New course</span>
+                    <span>
+                        {totalItems.current < itemList.length
+                            ? itemList.length
+                            : totalItems.current}{' '}
+                        items Listed
+                    </span>
+                    <SearchInput
+                        onChange={(event: any) => {
+                            setSearchText(event.target.value);
+                        }}
+                        wrapperClassName="header__search-input"
+                    />
+                    <Link href="/catalog">
+                        <a className="header__link-button">Publish</a>
+                    </Link>
+                </HeaderWrapper>
+            </LayoutHeader>
+
+            <VideoPlayer
+                url={play}
+                onClose={() => {
+                    setPlay(null);
+                }}
+            />
             <div className="add__lesson__section">
                 <button
                     className="add-lesson__btn"
                     onClick={() => {
-                        setLessons([...lessons, { categoryId: 1 }]);
+                        setItemList([...itemList, { time: 0, topics: [] }]);
                     }}>
                     <PlusIcon />
                     Add new lesson
@@ -82,8 +129,9 @@ const NewCoursePage = () => {
                 <LessonCard
                     lesson={{
                         categoryId: +id,
-                        description: lesson.description,
+                        topics: lesson.topics,
                         title: lesson.title,
+                        description: lesson.description,
                         id: lesson.id
                     }}
                     index={index}

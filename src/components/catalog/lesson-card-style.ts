@@ -25,6 +25,7 @@ export const LessonWrapper = styled(Form)`
     }
 
     .lesson__btn {
+        position: relative;
         width: 34px;
         height: 34px;
         display: flex;

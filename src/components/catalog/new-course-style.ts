@@ -3,19 +3,15 @@ import { Grid } from '@mui/material';
 
 export const NewCourseWrapper = styled.div`
     padding: 41px 56px;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden scroll;
 
-    .video__player {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        /* transform: translate(-50%, -50%); */
-        background-color: #00000044;
-        z-index: 9999;
-        display: grid;
-        place-content: center;
+    ::-webkit-scrollbar {
+        display: none;
     }
+
+    
     .add__lesson__section {
         display: flex;
         width: 100%;
@@ -57,5 +53,79 @@ export const NewCourseWrapper = styled.div`
             color:${palette.common.white};
             fill:${palette.common.white};
         }
+    `}
+`;
+
+export const HeaderWrapper = styled.div`
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 46px;
+
+    .back-btn {
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        width: 43px;
+        height: 43px;
+        cursor: pointer;
+        margin-right: 30px;
+    }
+
+    .header__search-input {
+        width: 38vw;
+        margin-right: 30px;
+    }
+
+    .header__info-box {
+        font-size: 15px;
+        padding-right: 15px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        margin-right: 31px;
+        font-weight: bold;
+    }
+
+    .header__link-button {
+        margin-left: 15px;
+        height: 45px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 14px;
+        width: 275px;
+        font-size: 18px;
+    }
+
+    ${({ theme: { palette } }) => `
+
+    .back-btn{
+    background-color:${palette.primary.main};
+    fill:${palette.common.white};
+    }
+    
+    .header__info-box{
+        border-right: 2px solid ${palette.primary.light}80;
+    }
+
+    .header__link-button{
+        background-color:${palette.primary.main};
+        padding: 0 25px;
+        color:${palette.common.white};
+
+        .link-button__plus{
+            fill:${palette.common.white};
+            margin-right:10px;
+        }
+    }
+
+    
     `}
 `;

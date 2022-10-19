@@ -1,0 +1,41 @@
+mutation createLesson($input: LessonInput) {
+    lesson_addLesson(input: $input) {
+        result {
+            id
+        }
+        status
+    }
+}
+
+mutation updateLesson($id: Int!, $input: LessonInput!) {
+    lesson_updateLesson(id: $id, input: $input) {
+        status
+    }
+}
+
+mutation deleteLesson($id: Int!) {
+    lesson_deleteLesson(id: $id) {
+        status
+    }
+}
+
+mutation createTopic($input: TopicInput) {
+    topic_addTopic(input: $input) {
+        status
+        result {
+            id
+        }
+    }
+}
+
+mutation updateTopic($id: Int!, $input: TopicInput!) {
+    topic_updateTopic(id: $id, input: $input) {
+        status
+    }
+}
+
+mutation deleteTopic($id: Int!) {
+    topic_deleteTopic(id: $id) {
+        status
+    }
+}
