@@ -12,8 +12,19 @@ export const UploadWrapper = styled.div`
         height: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         padding: 0 30px;
         max-width: 440px;
+        position: relative;
+    }
+    .upload__preview {
+        height: 100px;
+        object-fit: contain;
+    }
+    .upload__preview-icon {
+        position: absolute;
+        right: 5px;
+        top: 5px;
     }
     .upload__text {
         flex: 1;
@@ -58,5 +69,9 @@ export const UploadWrapper = styled.div`
         border-radius:20px;
         height:183px;
         box-shadow: 12px 8px 20px #1B3A9229;
+        
+        .upload__preview-icon{
+            fill:${palette.primary.main};
+        }
     `}
 `;

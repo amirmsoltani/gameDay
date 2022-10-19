@@ -6,8 +6,8 @@ export const VideoPlayerWrapper = styled.div`
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: #00000044;
     z-index: 9999;
     display: grid;
     place-content: center;
+    backdrop-filter: blur(5px);
 `;

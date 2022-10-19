@@ -8,12 +8,14 @@ import React, {
     useCallback
 } from 'react';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
+import EditIcon from 'src/assets/icons/edit-icon';
 import UploadIcon from 'src/assets/icons/upload';
 import { useVideoUploader } from 'src/hooks/useMediaUploader';
+import { MImage } from '../base/image/MImage';
 import { UploadWrapper } from './upload-style';
 
 type PropsType = {
-    onSelect: (fileName: string, duration: number) => void;
+    onSelect?: (fileName: string, duration: number) => void;
     onUpload: (fileName: string, fileUrl: string) => void;
     type: 'image' | 'video';
 };
@@ -27,7 +29,7 @@ const UploadComponent = forwardRef<RefType | null, PropsType>(
         const fileInput = useRef<HTMLInputElement>(null);
         const [activeDrag, setActiveDrag] = useState<boolean>(false);
 
-        const { uploadOnFile } = useVideoUploader((status) => {
+        const { uploadOnFile, state } = useVideoUploader((status) => {
             onUpload(status.originalName, getFullImageUrl(status.url));
             fileInput.current.files = undefined;
         });
@@ -45,14 +47,16 @@ const UploadComponent = forwardRef<RefType | null, PropsType>(
         );
 
         const handleUpload = (file: File) => {
-            const video = document.createElement('video');
-            video.preload = 'metadata';
-            video.onloadedmetadata = () => {
-                window.URL.revokeObjectURL(video.src);
-                onSelect(file.name, video.duration);
-                video.remove();
-            };
-            video.src = URL.createObjectURL(file);
+            if (onSelect) {
+                const video = document.createElement('video');
+                video.preload = 'metadata';
+                video.onloadedmetadata = () => {
+                    window.URL.revokeObjectURL(video.src);
+                    onSelect(file.name, video.duration);
+                    video.remove();
+                };
+                video.src = URL.createObjectURL(file);
+            }
             uploadOnFile(file);
         };
 
@@ -102,15 +106,33 @@ const UploadComponent = forwardRef<RefType | null, PropsType>(
                             }}
                         />
                         <div className="upload__main">
-                            <UploadIcon />
-                            <div className="upload__text">
-                                <span className="text__title">Upload your video</span>
-                                <span className="text__description">
-                                    Drag and drop or{' '}
-                                    <span className="description__browse">browse</span> your file
-                                    here
-                                </span>
-                            </div>
+                            {state.items.length && type === 'image' ? (
+                                <>
+                                    <EditIcon className="upload__preview-icon" />
+                                    <MImage
+                                        resources={{
+                                            src: state.items[state.items.length - 1].localUrl
+                                        }}
+                                        className="upload__preview"
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <UploadIcon />
+                                    <div className="upload__text">
+                                        <span className="text__title">
+                                            {type === 'image'
+                                                ? 'Upload your illustrator'
+                                                : 'Upload your video'}
+                                        </span>
+                                        <span className="text__description">
+                                            Drag and drop or{' '}
+                                            <span className="description__browse">browse</span> your
+                                            file here
+                                        </span>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </>
                 ) : (

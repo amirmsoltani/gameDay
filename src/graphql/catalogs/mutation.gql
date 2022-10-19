@@ -39,3 +39,17 @@ mutation deleteTopic($id: Int!) {
         status
     }
 }
+
+mutation addCatalog($input:SkillCategoryInput){
+  skillCategory_addSkillCategory(input:$input){
+    result{
+      rate
+      comments{status}
+      lessons{id}
+      createdDate
+      iconUrl
+      id
+    }
+    status
+  }
+}

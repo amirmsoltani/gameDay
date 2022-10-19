@@ -8,6 +8,88 @@ export const Content = styled(Grid)`
         position: static;
         transform: translate(0, 0);
     }
+
+    .catalog__add {
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        backdrop-filter: blur(5px);
+        place-content: center;
+    }
+
+    .add__modal {
+        height: 682px;
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 93px;
+    }
+    .modal__close-icon {
+        align-self: flex-end;
+        cursor: pointer;
+    }
+    .modal__upload-wrapper {
+        margin-top: 48px;
+        margin-bottom: 60px;
+        width: 40%;
+
+        &.error {
+            border: 2px solid red;
+            border-radius: 17px;
+        }
+    }
+    .title__input {
+        width: 70%;
+        height: 55px;
+        border-radius: 5px;
+        margin-top: 10px;
+        border: none;
+        outline: none;
+        text-align: center;
+        ::placeholder {
+            text-align: center;
+        }
+
+        &.error {
+            border: 2px solid red;
+        }
+    }
+
+    ${({ theme: { palette } }) => `
+        .add__modal{
+            background-color:${palette.common.white};
+            box-shadow:12px 8px 20px #1B3A9229;
+        }
+
+        .title__input{
+            background-color:${palette.grey.lighter};
+            box-shadow: 0px 2px 4px #1717172e;
+        }
+
+        .add__btn{
+            background-color:${palette.primary.main};
+            color:${palette.common.white};
+            margin-top:100px;
+            border-radius:5px;
+            height:45px;
+            width:275px;
+            border:none;
+            cursor:pointer;
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            svg{
+                width:20px;
+                height:30px;
+            }
+        }
+    `}
 `;
 
 export const LeftSide = styled(Grid)`
@@ -266,6 +348,8 @@ export const Header = styled(Grid)`
         align-items: center;
         text-decoration: none;
         font-size: 14px;
+        border: none;
+        cursor: pointer;
     }
 
     ${({ theme: { palette } }) => `
