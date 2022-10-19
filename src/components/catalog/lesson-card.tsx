@@ -97,12 +97,14 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
 
     const createTopic = useCreateTopicMutation({
         onSuccess: (data) => {
-            const id = data.topic_addTopic.result.id;
-            const index = files.findIndex((file) => file.id === id);
-            const newFiles = [...files];
-            newFiles[index] = { ...newFiles[index], id };
-            setFiles(newFiles);
-            formRef.current.submitForm();
+            setFiles((files) => {
+                const id = data.topic_addTopic.result.id;
+                const index = files.findIndex((file) => file.id === id);
+                const newFiles = [...files];
+                newFiles[index] = { ...newFiles[index], id };
+                formRef.current.submitForm();
+                return files;
+            });
         }
     });
 

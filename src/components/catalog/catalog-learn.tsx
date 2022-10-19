@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 import React, { FC, Fragment, useState } from 'react';
 import CommentIcon from 'src/assets/icons/comment-icon';
 import PlayIcon from 'src/assets/icons/play-icon';
@@ -7,6 +9,8 @@ import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
 import VideoPlayer from '../vide-player';
 import * as S from './catalog-style';
+
+dayjs.extend(duration);
 
 type PropsType = {
     id: number;
@@ -80,7 +84,7 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                             <span>{lesson.title}</span>
                         </div>
                         <div>
-                            <span>{lesson.time}:00</span>
+                            <span>{dayjs.duration(lesson.time * 1000).format('mm:ss')}</span>
                         </div>
                     </div>
                     {lesson.topics
