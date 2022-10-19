@@ -3,12 +3,7 @@ import { PlusIcon } from 'src/assets/common/PlusIcon';
 import { HeaderWrapper, NewCourseWrapper } from './new-course-style';
 import LessonCard from './lesson-card';
 import Loading from '../loading';
-import {
-    GetLessonQuery,
-    Lesson,
-    LessonInput,
-    useInfiniteGetLessonQuery
-} from 'src/graphql/generated';
+import { Lesson, useInfiniteGetLessonQuery } from 'src/graphql/generated';
 import { useRouter } from 'next/router';
 import LayoutHeader from '@/layout/app-layout/layout-header';
 import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
@@ -27,7 +22,7 @@ const NewCoursePage = () => {
         setPlay(url);
     };
 
-    const [itemList, setItemList] = useState<Array<Partial<Lesson>>>([]);
+    const [itemList, setItemList] = useState<Array<Partial<Lesson> & { key?: string }>>([]);
 
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
@@ -119,7 +114,20 @@ const NewCoursePage = () => {
                 <button
                     className="add-lesson__btn"
                     onClick={() => {
-                        setItemList([...itemList, { time: 0, topics: [] }]);
+                        setItemList([
+                            ...itemList,
+                            {
+                                time: 0,
+                                topics: [],
+                                key: (Math.floor(Math.random() * 0xeeeeee) + 0x111111).toString(16),
+                                title: `lesson ${
+                                    (totalItems.current < itemList.length
+                                        ? itemList.length
+                                        : totalItems.current) + 1
+                                }`,
+                                description: ''
+                            }
+                        ]);
                     }}>
                     <PlusIcon />
                     Add new lesson
@@ -135,7 +143,7 @@ const NewCoursePage = () => {
                         id: lesson.id
                     }}
                     index={index}
-                    key={index}
+                    key={lesson.key || lesson.id}
                     onPlay={onPlay}
                     onDelete={deleteLesson}
                 />

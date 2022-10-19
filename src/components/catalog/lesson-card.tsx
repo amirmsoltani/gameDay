@@ -96,10 +96,10 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
     });
 
     const createTopic = useCreateTopicMutation({
-        onSuccess: (data) => {
+        onSuccess: (data, input) => {
             setFiles((files) => {
                 const id = data.topic_addTopic.result.id;
-                const index = files.findIndex((file) => file.id === id);
+                const index = files.findIndex((file) => file.url === input.input.fileUrl);
                 const newFiles = [...files];
                 newFiles[index] = { ...newFiles[index], id };
                 formRef.current.submitForm();
@@ -126,7 +126,9 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
 
     useEffect(() => {
         if (!lesson.id) {
-            createLesson.mutate({ input: { skillCategoryId: lesson.categoryId, time: 0 } });
+            createLesson.mutate({
+                input: { skillCategoryId: lesson.categoryId, time: 0, title: '', description: '' }
+            });
         }
     }, []);
 
@@ -195,7 +197,7 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
                                 {dayjs.duration(Math.floor(file.duration * 1000)).format('mm:ss')}
                             </span>
                             <button
-                                disabled={!file.url}
+                                disabled={!file.url || updateTopic.isLoading}
                                 className="lesson__btn primary"
                                 type="button"
                                 onClick={() => {
@@ -240,33 +242,39 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
                                 }
                             }}
                             onUpload={(name, url) => {
-                                setFiles((files) => {
-                                    const newFiles = [...files];
-                                    const index =
-                                        typeof videoUpdate.current === 'number'
-                                            ? videoUpdate.current
-                                            : newFiles.findIndex((file) => file.name === name);
-                                    newFiles[index] = { ...newFiles[index], url };
-                                    const input = {
-                                        lessonId: lesson.id,
-                                        isMain: index === 0,
-                                        title: 'Topic ' + (index + 1),
-                                        description:
-                                            newFiles[index].name + '~' + newFiles[index].duration,
-                                        fileUrl: newFiles[index].url
-                                    };
-                                    if (typeof videoUpdate.current === 'number') {
-                                        updateTopic.mutate({
-                                            id: newFiles[index].id,
-                                            input
-                                        });
-                                        videoUpdate.current = null;
-                                    } else {
-                                        createTopic.mutate({
-                                            input
-                                        });
-                                    }
-                                    return newFiles;
+                                setLesson((lesson) => {
+                                    setFiles((files) => {
+                                        const newFiles = [...files];
+                                        const index =
+                                            typeof videoUpdate.current === 'number'
+                                                ? videoUpdate.current
+                                                : newFiles.findIndex((file) => file.name === name);
+                                        newFiles[index] = { ...newFiles[index], url };
+                                        const input = {
+                                            lessonId: lesson.id,
+                                            isMain: index === 0,
+                                            title: 'Topic ' + (index + 1),
+                                            description:
+                                                newFiles[index].name +
+                                                '~' +
+                                                newFiles[index].duration,
+                                            fileUrl: newFiles[index].url
+                                        };
+                                        if (typeof videoUpdate.current === 'number') {
+                                            updateTopic.mutate({
+                                                id: newFiles[index].id,
+                                                input
+                                            });
+                                            videoUpdate.current = null;
+                                        } else {
+                                            createTopic.mutate({
+                                                input
+                                            });
+                                        }
+                                        return newFiles;
+                                    });
+
+                                    return lesson;
                                 });
                             }}
                             type={'video'}

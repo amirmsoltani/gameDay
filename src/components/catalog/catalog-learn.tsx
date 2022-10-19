@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import Link from 'next/link';
 import React, { FC, Fragment, useState } from 'react';
 import CommentIcon from 'src/assets/icons/comment-icon';
 import PlayIcon from 'src/assets/icons/play-icon';
@@ -19,9 +20,6 @@ type PropsType = {
 type ListType = GetLessonQuery['lesson_getLessons']['result']['items'];
 const CatalogLearnSection: FC<PropsType> = ({ id }) => {
     const [play, setPlay] = useState<string | null>(null);
-    const onPlay = (url) => {
-        setPlay(url);
-    };
 
     const [itemList, setItemList] = useState<ListType>([]);
 
@@ -70,9 +68,11 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                 <MButton className="box-btn__btn">
                     <CommentIcon />
                 </MButton>
-                <MButton className="box-btn__btn">
-                    <SaveIcon />
-                </MButton>
+                <Link href={`/catalog/${id}/course`}>
+                    <a className="box-btn__btn">
+                        <SaveIcon />
+                    </a>
+                </Link>
             </div>
             <span className="catalog-learn__description-title">Description</span>
             <p className="catalog-learn__description-text">lorem ipsome</p>
