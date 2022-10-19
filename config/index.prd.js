@@ -12,17 +12,17 @@ const config = {
     baseCononicalUrl,
     subscriptionUrl,
     supportMail,
-    blobBaseUrl: 'https://apsconnecthealingstorage.blob.core.windows.net/images',
+    blobBaseUrl: 'https://apsgamedaystorage.blob.core.windows.net/images',
     blobUrl:
-        'https://apsconnecthealingstorage.blob.core.windows.net/?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2032-06-13T17:52:28Z&st=2022-06-13T09:52:28Z&spr=https&sig=JXb%2BKm9C3ZWDQmJ1SoS%2BT4nc78X9RP0Nw8eX%2BCfoLak%3D',
+        'https://apsgamedaystorage.blob.core.windows.net/?sp=racwdli&st=2022-08-03T04:59:48Z&se=2122-08-03T12:59:48Z&spr=https&sv=2021-06-08&sr=c&sig=K7Vr7fRedsPdDPm7AZtnkU8XmHWmkZmPPlgdw2B8E%2F4%3D',
     containerName: 'images',
     firebase: {
-        apiKey: "AIzaSyBJSaOdM59d2QnzuHYq8IaojYmR8VW07a8",
-        authDomain: "aps-game-day-prd.firebaseapp.com",
-        projectId: "aps-game-day-prd",
-        storageBucket: "aps-game-day-prd.appspot.com",
-        messagingSenderId: "588566845999",
-        appId: "1:588566845999:web:0554c18549a17381f084da"
+        apiKey: 'AIzaSyBJSaOdM59d2QnzuHYq8IaojYmR8VW07a8',
+        authDomain: 'aps-game-day-prd.firebaseapp.com',
+        projectId: 'aps-game-day-prd',
+        storageBucket: 'aps-game-day-prd.appspot.com',
+        messagingSenderId: '588566845999',
+        appId: '1:588566845999:web:0554c18549a17381f084da'
     }
 };
 
