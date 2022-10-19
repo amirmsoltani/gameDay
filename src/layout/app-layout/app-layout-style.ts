@@ -46,6 +46,8 @@ export const Header = styled(Box)`
 export const Content = styled(Box)`
     background-color: #f8f8f8;
     max-height: 100vh;
+    position: relative;
+
 `;
 
 export const Body = styled(Box)`

@@ -14,8 +14,8 @@ export const NotFoundMaterial = () => {
                     transform="matrix(0.225, -0.974, 0.974, 0.225, 0, 34.584)"
                     fill="none"
                     stroke="#ff735f"
-                    stroke-linecap="round"
-                    stroke-width="6"
+                    strokeLinecap="round"
+                    strokeWidth="6"
                 />
                 <path
                     id="line2"
@@ -23,8 +23,8 @@ export const NotFoundMaterial = () => {
                     transform="translate(9.372 16.939) rotate(-60)"
                     fill="none"
                     stroke="#ff735f"
-                    stroke-linecap="round"
-                    stroke-width="6"
+                    strokeLinecap="round"
+                    strokeWidth="6"
                 />
                 <path
                     id="line1"
@@ -32,8 +32,8 @@ export const NotFoundMaterial = () => {
                     transform="translate(17.702 2.111) rotate(-43)"
                     fill="none"
                     stroke="#ff735f"
-                    stroke-linecap="round"
-                    stroke-width="6"
+                    strokeLinecap="round"
+                    strokeWidth="6"
                 />
             </g>
         </svg>

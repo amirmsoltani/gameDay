@@ -8,6 +8,88 @@ export const Content = styled(Grid)`
         position: static;
         transform: translate(0, 0);
     }
+
+    .catalog__add {
+        position: absolute;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        backdrop-filter: blur(5px);
+        place-content: center;
+    }
+
+    .add__modal {
+        height: 682px;
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 93px;
+    }
+    .modal__close-icon {
+        align-self: flex-end;
+        cursor: pointer;
+    }
+    .modal__upload-wrapper {
+        margin-top: 48px;
+        margin-bottom: 60px;
+        width: 40%;
+
+        &.error {
+            border: 2px solid red;
+            border-radius: 17px;
+        }
+    }
+    .title__input {
+        width: 70%;
+        height: 55px;
+        border-radius: 5px;
+        margin-top: 10px;
+        border: none;
+        outline: none;
+        text-align: center;
+        ::placeholder {
+            text-align: center;
+        }
+
+        &.error {
+            border: 2px solid red;
+        }
+    }
+
+    ${({ theme: { palette } }) => `
+        .add__modal{
+            background-color:${palette.common.white};
+            box-shadow:12px 8px 20px #1B3A9229;
+        }
+
+        .title__input{
+            background-color:${palette.grey.lighter};
+            box-shadow: 0px 2px 4px #1717172e;
+        }
+
+        .add__btn{
+            background-color:${palette.primary.main};
+            color:${palette.common.white};
+            margin-top:100px;
+            border-radius:5px;
+            height:45px;
+            width:275px;
+            border:none;
+            cursor:pointer;
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            svg{
+                width:20px;
+                height:30px;
+            }
+        }
+    `}
 `;
 
 export const LeftSide = styled(Grid)`
@@ -34,6 +116,9 @@ export const RightSide = styled(Grid)`
     padding-left: calc(80px - 3vw);
     padding-right: 60px;
     padding-top: 30px;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
 `;
 
 export const CatalogLearn = styled.div`
@@ -83,6 +168,7 @@ export const CatalogLearn = styled.div`
         .catalog-learn__card-header{
             display: flex;
             align-items:center;
+            justify-content:space-between;
             height: 65px;
             padding:7px;
             border-radius:17px;
@@ -92,6 +178,11 @@ export const CatalogLearn = styled.div`
             font-size:16px;
             margin-top:15px;
             margin-bottom:10px;
+
+            .header__item{
+                display:flex;
+                align-items:center;
+            }
 
             .card-header__index{
                 width:50px;
@@ -107,6 +198,7 @@ export const CatalogLearn = styled.div`
         }
 
         .catalog-learn__card-lesson{
+            border:none;
             height:115px;
             padding:38px;
             background-color:${palette.common.white};
@@ -117,6 +209,9 @@ export const CatalogLearn = styled.div`
             margin-top:15px;
             border-radius:20px;
             fill:${palette.primary.main}99;
+            cursor: pointer;
+            color:${palette.text.main};
+            text-decoration:none;
 
             .card-lesson__box-left{
                 display:flex;
@@ -253,6 +348,8 @@ export const Header = styled(Grid)`
         align-items: center;
         text-decoration: none;
         font-size: 14px;
+        border: none;
+        cursor: pointer;
     }
 
     ${({ theme: { palette } }) => `

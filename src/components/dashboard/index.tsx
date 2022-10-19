@@ -152,7 +152,7 @@ export const DashboardPage = () => {
             <Card
                 column="span 6"
                 row="span 5"
-                title="Courses"
+                title="skill of the day"
                 primary
                 headerOptions={
                     <Link href={'/dashboard/skills'} passHref>

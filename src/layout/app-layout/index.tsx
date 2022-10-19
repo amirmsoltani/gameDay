@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback, useRef, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import * as S from './app-layout-style';
 import DashboardIcon from '../../assets/icons/dashboard-icon';
 import Link from 'next/link';
@@ -15,6 +15,9 @@ import { useRouter } from 'next/router';
 import { AppLoadingPage } from '@/components/base/loader/LoadingPage';
 import Modals from '@/components/modals';
 import { LayoutContext } from './layout-context';
+import { useAuthPage } from '@/components/auth/services/useAuth';
+import { getCookieStorage } from '@/utils/storage/cookie';
+import { ACCESS_TOKEN_KEY } from '@/utils/storage/constant';
 
 const bodyItems = {
     dashboard: {
@@ -92,7 +95,12 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
         refetchOnReconnect: false,
         keepPreviousData: true
     });
-    const { asPath } = useRouter();
+    const { asPath, replace } = useRouter();
+    const { signOut } = useAuthPage();
+
+    useEffect(() => {
+        if (!getCookieStorage(ACCESS_TOKEN_KEY)) replace('/login');
+    }, []);
 
     if (status === 'loading') {
         return <AppLoadingPage />;
@@ -121,7 +129,11 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
                         {data?.user_login.result?.userRoles
                             .filter(filter('footer'))
                             .map(map('footer', asPath))}
-                        <S.SidebarItem>
+                        <S.SidebarItem
+                            onClick={(event) => {
+                                event.preventDefault();
+                                signOut();
+                            }}>
                             <LogoutIcon /> Logout
                         </S.SidebarItem>
                     </div>

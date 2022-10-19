@@ -2,15 +2,19 @@ import LayoutHeader from '@/layout/app-layout/layout-header';
 import { Grid } from '@mui/material';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
+import { CloseIcon } from 'src/assets/common/CloseIcon';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
     CommentStatus,
     GetCategoriesQuery,
+    SortEnumType,
+    useAddCatalogMutation,
     useInfiniteGetCategoriesQuery
 } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import { PrimarySpinner } from '../base/loader/spinner';
+import UploadComponent from '../upload/upload';
 import CatalogCard from './catalog-card';
 import CatalogLearnSection from './catalog-learn';
 import CatalogSkillSection from './catalog-skills';
@@ -28,9 +32,20 @@ function CatalogPage() {
     const [state, setState] = useState<{ tab: 'skills' | 'learn'; activeCategory?: number } | null>(
         null
     );
+    const [isShow, setIsShow] = useState(false);
+    const [newCatalog, setNewCatalog] = useState<{
+        image?: string;
+        title?: string;
+        submit: boolean;
+    }>({ submit: false });
 
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetCategoriesQuery(
-        { take: 10, skip: 0, where: { title: { contains: finalSearchText } } },
+        {
+            take: 10,
+            skip: 0,
+            where: { title: { contains: finalSearchText } },
+            order: { createdDate: SortEnumType.Desc }
+        },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
@@ -63,6 +78,14 @@ function CatalogPage() {
         }
     );
 
+    const addCategory = useAddCatalogMutation({
+        onSuccess: (data) => {
+            setItemList([data.skillCategory_addSkillCategory.result, ...itemList]);
+            setIsShow(false);
+            setNewCatalog({ submit: false });
+        }
+    });
+
     if (isLoading || !state)
         return (
             <S.Content display={'flex'} justifyContent="center" alignItems="center">
@@ -74,7 +97,7 @@ function CatalogPage() {
         <S.Content container>
             <LayoutHeader>
                 <S.Header>
-                    <div className="header__info-box">Catalog</div>
+                    <div className="header__info-box">Catalogs</div>
                     <span>{totalItems.current} items Listed</span>
                     <SearchInput
                         onChange={(event: any) => {
@@ -82,12 +105,14 @@ function CatalogPage() {
                         }}
                         wrapperClassName="header__search-input"
                     />
-                    <Link href="/dashboard">
-                        <a className="header__link-button">
-                            <PlusIcon className="link-button__plus" /> Add New catalog
-                        </a>
-                    </Link>
-                    <Link href="/dashboard">
+                    <button
+                        className="header__link-button"
+                        onClick={() => {
+                            setIsShow(true);
+                        }}>
+                        <PlusIcon className="link-button__plus" /> Add New catalog
+                    </button>
+                    <Link href={`/catalog/${state.activeCategory}/course`}>
                         <a className="header__link-button">
                             <PlusIcon className="link-button__plus" /> Add New course
                         </a>
@@ -131,10 +156,10 @@ function CatalogPage() {
                             active={item.id === state.activeCategory}
                             data={{
                                 image: item.iconUrl,
-                                lesson: item.lessons.length,
+                                lesson: item.lessons?.length || 0,
                                 star: item.rate,
                                 title: item.title,
-                                notification: !!item.comments.find(
+                                notification: !!item.comments?.find(
                                     (comment) => comment.status !== CommentStatus.Accepted
                                 )
                             }}
@@ -150,6 +175,65 @@ function CatalogPage() {
                     <CatalogSkillSection id={state.activeCategory} />
                 )}
             </S.RightSide>
+            {isShow && (
+                <Grid
+                    container
+                    className="catalog__add"
+                    onClick={(event) => {
+                        if (event.target === event.currentTarget) {
+                            setIsShow(false);
+                        }
+                    }}>
+                    <Grid item className="add__modal" md={8}>
+                        <CloseIcon
+                            className="modal__close-icon"
+                            onClick={() => {
+                                setIsShow(false);
+                            }}
+                        />
+                        <div
+                            className={`modal__upload-wrapper ${
+                                newCatalog.submit && !newCatalog.image ? 'error' : ''
+                            }`}>
+                            <UploadComponent
+                                type="image"
+                                onUpload={(_, fileUrl) => {
+                                    setNewCatalog({ ...newCatalog, image: fileUrl });
+                                }}
+                            />
+                        </div>
+                        <label htmlFor="title">catalog Title</label>
+                        <input
+                            id="title"
+                            name="title"
+                            className={`title__input ${
+                                newCatalog.submit && !newCatalog.title ? 'error' : ''
+                            }`}
+                            placeholder="ex. John"
+                            onChange={(event) => {
+                                setNewCatalog({ ...newCatalog, title: event.target.value });
+                            }}
+                        />
+
+                        <button
+                            className="add__btn"
+                            disabled={addCategory.isLoading}
+                            onClick={() => {
+                                setNewCatalog({ ...newCatalog, submit: true });
+                                if (newCatalog.title && newCatalog.image) {
+                                    addCategory.mutate({
+                                        input: {
+                                            iconUrl: newCatalog.image,
+                                            title: newCatalog.title
+                                        }
+                                    });
+                                }
+                            }}>
+                            {addCategory.isLoading ? <PrimarySpinner /> : 'Add'}
+                        </button>
+                    </Grid>
+                </Grid>
+            )}
         </S.Content>
     );
 }

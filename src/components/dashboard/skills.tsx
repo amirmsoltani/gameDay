@@ -256,7 +256,7 @@ const SkillPage = () => {
                         skill of the day
                     </div>
                     <Typography>
-                        {data?.pages?.[0].skill_getSkills.result.totalCount} items Listed
+                        {data?.pages?.[0].skill_getSkills.result.totalCount + 1} items Listed
                     </Typography>
                     <div className="input-box">
                         <SearchIconExercise />
