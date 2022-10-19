@@ -12,9 +12,9 @@ const config = {
     subscriptionUrl,
     generatorUrl,
     supportMail,
-    blobBaseUrl: 'https://apshealthystorage.blob.core.windows.net/images',
+    blobBaseUrl: 'https://apsgamedaystorage.blob.core.windows.net/images',
     blobUrl:
-        'https://apshealthystorage.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx&se=2032-02-01T15:20:31Z&st=2022-02-01T07:20:31Z&spr=https&sig=7NKKvTpHCROh5RshoAKiGHlXgJv5%2FpI3CmLAsAlW3tw%3D',
+        'https://apsgamedaystorage.blob.core.windows.net/?sp=racwdli&st=2022-08-03T04:59:48Z&se=2122-08-03T12:59:48Z&spr=https&sv=2021-06-08&sr=c&sig=K7Vr7fRedsPdDPm7AZtnkU8XmHWmkZmPPlgdw2B8E%2F4%3D',
     containerName: 'images',
     firebase: {
         apiKey: 'AIzaSyD5ACiY63e-NrL4qBB2-NywAmuJWJpFRLg',
