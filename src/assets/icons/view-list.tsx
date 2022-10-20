@@ -9,7 +9,7 @@ export const ViewListIcon = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24">
-            <g id="Boundary" fill="#7251b2" stroke="rgba(0,0,0,0)" stroke-width="1" opacity="0">
+            <g id="Boundary" fill="#7251b2" stroke="rgba(0,0,0,0)" strokeWidth="1" opacity="0">
                 <rect width="24" height="24" stroke="none" />
                 <rect x="0.5" y="0.5" width="23" height="23" fill="none" />
             </g>

@@ -5,14 +5,12 @@ import { UserType } from 'src/@types/user.type';
 
 export function useRedirectOnEnterOnRole() {
     const router = useRouter();
-    const tailRoute = '/';
 
-    const checkUserType = (passedUser: UserType) =>
-        passedUser.userType === 'NORMAL_USER' ? '' : tailRoute;
+    const checkUserType = (passedUser: UserType) => '/dashboard';
 
     const redirectUserOnSignup = useCallback(() => {
         router.push(`/`, undefined, { shallow: true });
-    }, [ router]);
+    }, [router]);
 
     const redirectUserOnEnter = (passedUser?: UserType) => {
         router.push('/' + checkUserType(passedUser));

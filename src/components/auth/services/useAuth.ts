@@ -136,7 +136,7 @@ export function useAuthPage() {
             await fbSignOut();
             clearCookie(ACCESS_TOKEN_KEY);
             setUser && setUser('NO_USER');
-            window.location.href = window.location.origin;
+            window.location.href = '/login';
             // redirectUserOnLogin();
         } catch (err) {
             // authSnack('AUTHENTICATION_FAILED', onErrorMessage(err));

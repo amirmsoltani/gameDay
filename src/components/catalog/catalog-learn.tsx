@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+import Link from 'next/link';
 import React, { FC, Fragment, useState } from 'react';
 import CommentIcon from 'src/assets/icons/comment-icon';
 import PlayIcon from 'src/assets/icons/play-icon';
@@ -5,7 +8,10 @@ import SaveIcon from 'src/assets/icons/save-icon';
 import { GetLessonQuery, useInfiniteGetLessonQuery } from 'src/graphql/generated';
 import { PrimarySpinner } from '../base/loader/spinner';
 import { MButton } from '../base/MButton';
+import VideoPlayer from '../vide-player';
 import * as S from './catalog-style';
+
+dayjs.extend(duration);
 
 type PropsType = {
     id: number;
@@ -13,12 +19,14 @@ type PropsType = {
 
 type ListType = GetLessonQuery['lesson_getLessons']['result']['items'];
 const CatalogLearnSection: FC<PropsType> = ({ id }) => {
+    const [play, setPlay] = useState<string | null>(null);
+
     const [itemList, setItemList] = useState<ListType>([]);
 
     const [end, setEnd] = useState(false);
 
     const { isFetching, isFetchingNextPage, fetchNextPage } = useInfiniteGetLessonQuery(
-        { take: 10, skip: 0, where: { skillCategoryId: { eq: id } } },
+        { take: 10, skip: 0, where: { skillCategoryId: { eq: id }, isDeleted: { eq: false } } },
         {
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,
@@ -60,31 +68,50 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                 <MButton className="box-btn__btn">
                     <CommentIcon />
                 </MButton>
-                <MButton className="box-btn__btn">
-                    <SaveIcon />
-                </MButton>
+                <Link href={`/catalog/${id}/course`}>
+                    <a className="box-btn__btn">
+                        <SaveIcon />
+                    </a>
+                </Link>
             </div>
             <span className="catalog-learn__description-title">Description</span>
             <p className="catalog-learn__description-text">lorem ipsome</p>
             {itemList.map((lesson, index) => (
                 <Fragment key={lesson.title}>
                     <div className="catalog-learn__card-header">
-                        <span className="card-header__index">{index + 1}</span>{' '}
-                        <span>{lesson.title}</span>
-                    </div>
-                    {lesson.topics.map((topic) => (
-                        <div className="catalog-learn__card-lesson" key={topic.title}>
-                            <div className="card-lesson__box-left">
-                                <PlayIcon />
-                                <span className="box-left__file-name">{topic.fileUrl}</span>
-                            </div>
-                            <div>
-                                <span>{lesson.time}:00</span>
-                            </div>
+                        <div className="header__item">
+                            <span className="card-header__index">{index + 1}</span>{' '}
+                            <span>{lesson.title}</span>
                         </div>
-                    ))}
+                        <div>
+                            <span>{dayjs.duration(lesson.time * 1000).format('mm:ss')}</span>
+                        </div>
+                    </div>
+                    {lesson.topics
+                        .filter((topic) => !topic.isDeleted)
+                        .map((topic) => (
+                            <button
+                                className="catalog-learn__card-lesson"
+                                key={topic.title}
+                                onClick={() => {
+                                    setPlay(topic.fileUrl);
+                                }}>
+                                <div className="card-lesson__box-left">
+                                    <PlayIcon />
+                                    <span className="box-left__file-name">
+                                        {topic.description?.split('~')[0]}
+                                    </span>
+                                </div>
+                            </button>
+                        ))}
                 </Fragment>
             ))}
+            <VideoPlayer
+                url={play}
+                onClose={() => {
+                    setPlay(null);
+                }}
+            />
         </S.CatalogLearn>
     );
 };

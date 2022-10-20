@@ -28,7 +28,7 @@ function AdminManagement() {
                         }}
                         wrapperClassName="header__search-input"
                     />
-                    <Link href="/add-admin">
+                    <Link href="/admin-management/add-admin">
                         <a className="header__link-button">
                             <PlusIcon className="link-button__plus" /> Add admin
                         </a>
