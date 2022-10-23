@@ -252,3 +252,20 @@ export const FormCard = styled(Box)`
         text-decoration: none;
     }
 `;
+
+export const UploadWrapper = styled.div`
+    width: 100%;
+    padding: 30px;
+    cursor: pointer;
+
+    ${({ theme: { palette } }) => `
+        background-color:${palette.common.white};
+        border-radius:20px;
+        height:20px;
+        box-shadow: 12px 8px 20px #1B3A9229;
+        
+        .upload__preview-icon{
+            fill:${palette.primary.main};
+        }
+    `}
+`;

@@ -1,7 +1,12 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
-import { GetUsersQuery } from 'src/graphql/generated';
+import {
+    GetUsersQuery,
+    Topic,
+    useCreateTopicMutation,
+    useUpdateTopicMutation
+} from 'src/graphql/generated';
 import { Grid, Typography, Alert, Box } from '@mui/material';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, FC } from 'react';
 import * as S from './add-jobs-style';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
@@ -13,9 +18,11 @@ import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import { InputTextarea } from '../base/input/input-textarea';
 import { useGetUser } from 'src/auth/UserProvider';
+import UploadComponent, { RefType } from '../upload/upload';
+import { height } from '@mui/system';
 
 interface InitailValuesProps {
     company: string;
@@ -56,6 +63,28 @@ const schema = Yup.object({
 // Form Value Type
 type ValueType = InferType<typeof schema>;
 
+export type LessonType = {
+    id?: number;
+    time?: number;
+    title?: string;
+    description?: string;
+    categoryId: number;
+    topics: Array<{
+        title?: string;
+        fileUrl?: string;
+        id?: number;
+        description?: string;
+        __typename?: string;
+    }>;
+};
+
+type PropsType = {
+    lesson: LessonType;
+    index: number;
+    onDelete: (index: number) => void;
+    onPlay: (url: string) => void;
+};
+
 // form initial Value
 const initialValues: ValueType = {
     company: '',
@@ -72,7 +101,48 @@ const initialValues: ValueType = {
     jobDescription: ''
 };
 
-function AddJobs() {
+const mapTopic = (topic: Topic) => {
+    const [name, duration] = topic.description?.split('~') || ['default', 0];
+
+    return { id: topic.id, name: name as string, duration: +(duration || 0), url: topic.fileUrl };
+};
+
+const filterTopic = (topic: Topic) => topic.isDeleted === false;
+
+// function AddJobs({ lesson: propLesson }) {
+const AddJobs: FC<PropsType> = ({ lesson: propLesson, index, ...props }) => {
+    const videoUpdate = useRef<number>(null);
+    const uploader = useRef<RefType>();
+    const formRef = useRef<FormikProps<typeof propLesson>>(null);
+    const lesson = useRef<typeof propLesson>(propLesson);
+    const [files, setFiles] = useState<
+        Array<{
+            name: string;
+            url?: string;
+            id?: number;
+            duration: number;
+        }>
+    >(lesson.current?.topics.filter(filterTopic).map(mapTopic));
+
+    const updateTopic = useUpdateTopicMutation({
+        onSuccess: () => {
+            formRef.current.submitForm();
+        }
+    });
+
+    const createTopic = useCreateTopicMutation({
+        onSuccess: (data, input) => {
+            setFiles((files) => {
+                const id = data.topic_addTopic.result.id;
+                const index = files.findIndex((file) => file.url === input.input.fileUrl);
+                const newFiles = [...files];
+                newFiles[index] = { ...newFiles[index], id };
+                formRef.current.submitForm();
+                return files;
+            });
+        }
+    });
+
     const user = useGetUser();
     const { login, state } = useAuthPage();
 
@@ -122,9 +192,63 @@ function AddJobs() {
                 <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
                     <Form>
                         <Grid container>
-                            <Grid item lg={2.7}></Grid>
-
-                            <Grid item lg={3}>
+                            <Grid item lg={2.8} sx={{ height: '100xp' }}>
+                                <UploadComponent
+                                    onSelect={(name, duration) => {
+                                        const index = videoUpdate.current;
+                                        if (typeof index === 'number') {
+                                            const newFiles = [...files];
+                                            newFiles[index] = {
+                                                id: newFiles[index].id,
+                                                name,
+                                                duration,
+                                                url: undefined
+                                            };
+                                            setFiles(newFiles);
+                                        } else {
+                                            setFiles([...files, { name, duration }]);
+                                        }
+                                    }}
+                                    onUpload={(name, url) => {
+                                        setFiles((files) => {
+                                            const newFiles = [...files];
+                                            const index =
+                                                typeof videoUpdate.current === 'number'
+                                                    ? videoUpdate.current
+                                                    : newFiles.findIndex(
+                                                          (file) => file.name === name
+                                                      );
+                                            newFiles[index] = { ...newFiles[index], url };
+                                            const input = {
+                                                lessonId: lesson.current.id,
+                                                isMain: index === 0,
+                                                title: 'Topic ' + (index + 1),
+                                                description:
+                                                    newFiles[index].name +
+                                                    '~' +
+                                                    newFiles[index].duration,
+                                                fileUrl: newFiles[index].url
+                                            };
+                                            if (typeof videoUpdate.current === 'number') {
+                                                updateTopic.mutate({
+                                                    id: newFiles[index].id,
+                                                    input
+                                                });
+                                                videoUpdate.current = null;
+                                            } else {
+                                                createTopic.mutate({
+                                                    input
+                                                });
+                                            }
+                                            return newFiles;
+                                        });
+                                    }}
+                                    type={'video'}
+                                    ref={uploader}
+                                />
+                            </Grid>
+                            <Spacer space={3} />
+                            <Grid item lg={3} sx={{ marginTop: '70px' }}>
                                 <MInputFormik
                                     name="Company Name"
                                     fullWidth
@@ -134,7 +258,8 @@ function AddJobs() {
                                 />
                             </Grid>
                             <Spacer space={3} />
-                            <Grid item lg={3}>
+
+                            <Grid item lg={3} sx={{ marginTop: '70px' }}>
                                 <MInputFormik
                                     name="Email Address"
                                     fullWidth
@@ -143,7 +268,8 @@ function AddJobs() {
                                 />
                             </Grid>
                             <Spacer space={3} />
-                            <Grid item lg={3}>
+
+                            <Grid item lg={3} sx={{ marginTop: '70px' }}>
                                 <MInputFormik
                                     name="Phone Number"
                                     fullWidth
@@ -152,7 +278,8 @@ function AddJobs() {
                                 />
                             </Grid>
                             <Spacer space={3} />
-                            <Grid item lg={2.7}>
+
+                            <Grid item lg={2.8}>
                                 <MInputFormik
                                     name="Company Job"
                                     fullWidth
@@ -189,7 +316,7 @@ function AddJobs() {
                                 />
                             </Grid>
                             <Spacer space={3} />
-                            <Grid item lg={2.7}>
+                            <Grid item lg={2.8}>
                                 <MInputFormik
                                     name="Job type"
                                     fullWidth
@@ -243,6 +370,6 @@ function AddJobs() {
             </S.ListWrapper>
         </S.Content>
     );
-}
+};
 
 export default AddJobs;
