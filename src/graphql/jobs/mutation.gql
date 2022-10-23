@@ -1,0 +1,19 @@
+mutation job_addJob($input: JobInput) {
+    job_addJob(input: $input) {
+        status
+        result {
+            city
+            company {
+                id
+                title
+            }
+            description
+            education
+            experienceLevel
+            salary
+            title
+            jobType
+            id
+        }
+    }
+}

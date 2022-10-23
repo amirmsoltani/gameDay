@@ -5,7 +5,6 @@ import React, { useCallback, useRef, useState } from 'react';
 import * as S from './add-jobs-style';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
-
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
@@ -14,7 +13,6 @@ import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
-import { MButton } from '../base/MButton';
 import { Form, Formik } from 'formik';
 import { InputTextarea } from '../base/input/input-textarea';
 import { useGetUser } from 'src/auth/UserProvider';
@@ -78,11 +76,11 @@ function AddJobs() {
     const user = useGetUser();
     const { login, state } = useAuthPage();
 
+    // const { mutateAsync, isLoading, status, error, isSuccess } = usejob_addJobMutation();
+
     const onSubmit = useCallback((value: ValueType) => {
-        login(value.email, value.password);
+        login(value.email, value.company);
     }, []);
-    const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
-    const totalItems = useRef<number | null>(null);
 
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
