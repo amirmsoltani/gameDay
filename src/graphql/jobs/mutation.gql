@@ -17,3 +17,9 @@ mutation job_addJob($input: JobInput) {
         }
     }
 }
+
+mutation JobChangeStatus($input: JobStatusInput) {
+    job_changeStatus(input: $input) {
+        status
+    }
+}

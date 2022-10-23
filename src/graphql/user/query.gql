@@ -15,3 +15,18 @@ query getCurrentUser {
         status
     }
 }
+
+query getUsers($take: Int, $skip: Int, $where: UserFilterInput) {
+    user_getUsers {
+        result(skip: $skip, take: $take, where: $where) {
+            items {
+                firstName
+                lastName
+                pictureUrl
+                phoneNumber
+                email
+                activeStatus
+            }
+        }
+    }
+}
