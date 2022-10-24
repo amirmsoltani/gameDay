@@ -10,8 +10,9 @@ import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
 import { fbPasswordReset } from 'src/auth/firebase';
 import { useDispatch } from 'react-redux';
-import { newModal } from 'src/redux/actions/actions';
+import { closeModal, newModal } from 'src/redux/actions/actions';
 import SuccessEmailModal, { SUCCESS_MAIL_ID } from './succeed-email';
+import { useTheme } from '@emotion/react';
 
 // Form Schema
 const schema = Yup.object({
@@ -50,27 +51,42 @@ const ForgetPassword: FC = () => {
                 <Formik
                     initialValues={initialValues}
                     validationSchema={schema}
-                    onSubmit={async (v) => {
-                        setErrors(null);
-                        setLoading(true);
-                        try {
-                            console.log(v.email);
-                            const res = await fbPasswordReset(v.email);
-                            setLoading(false);
+                    onSubmit={(v) =>
+                        changePassword(v.email).then(() => {
+                            dispatch(closeModal('Forgot_Pass'));
                             dispatch(
                                 newModal({
-                                    id: SUCCESS_MAIL_ID,
-                                    closeButton: false,
-                                    Body: SuccessEmailModal
+                                    id: 'ChangePassEmailSent',
+                                    Body: EmailSentSuccessfully,
+                                    closeButton: true,
+                                    top: 0
                                 })
                             );
-                        } catch (err) {
-                            if (err.toString().includes('user-not-found')) {
-                                setErrors('Email Not Found');
-                            }
-                            console.error(err);
-                        }
-                    }}>
+                        })
+                    }
+
+                    // onSubmit={async (v) => {
+                    //     setErrors(null);
+                    //     setLoading(true);
+                    //     try {
+                    //         console.log(v.email);
+                    //         const res = await fbPasswordReset(v.email);
+                    //         setLoading(false);
+                    //         dispatch(
+                    //             newModal({
+                    //                 id: SUCCESS_MAIL_ID,
+                    //                 closeButton: false,
+                    //                 Body: SuccessEmailModal
+                    //             })
+                    //         );
+                    //     } catch (err) {
+                    //         if (err.toString().includes('user-not-found')) {
+                    //             setErrors('Email Not Found');
+                    //         }
+                    //         console.error(err);
+                    //     }
+                    // }}
+                >
                     <Form>
                         <S.FormCard>
                             <S.ForgetTitle>Forgot password?</S.ForgetTitle>
@@ -98,3 +114,22 @@ const ForgetPassword: FC = () => {
 };
 
 export default ForgetPassword;
+
+export const EmailSentSuccessfully = () => {
+    const theme = useTheme();
+
+    return (
+        <Box display="flex" alignItems="center" sx={{ minWidth: '320px', width: '400px' }}>
+            <Box paddingX="20px">
+                <Typography color={theme.palette.primary.dark} fontSize={22}>
+                    You’ve Got Mail!
+                </Typography>
+                <Spacer space={15} />
+                <Typography color={theme.palette.primary.dark} fontSize={16}>
+                    Please check your emails! We just sent you an email with a temporary password
+                    recovery link.
+                </Typography>
+            </Box>
+        </Box>
+    );
+};
