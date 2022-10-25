@@ -49,21 +49,43 @@ const ForgetPassword: FC = () => {
             </S.LeftSide>
             <S.RightSide gridColumn="span 4">
                 <Formik
+                    enableReinitialize
                     initialValues={initialValues}
                     validationSchema={schema}
-                    onSubmit={(v) =>
-                        changePassword(v.email).then(() => {
-                            dispatch(closeModal('Forgot_Pass'));
+                    onSubmit={async (v) => {
+                        setErrors(null);
+                        setLoading(true);
+                        try {
+                            console.log(v.email);
+                            const res = await fbPasswordReset(v.email);
+                            setLoading(false);
                             dispatch(
                                 newModal({
-                                    id: 'ChangePassEmailSent',
-                                    Body: EmailSentSuccessfully,
-                                    closeButton: true,
-                                    top: 0
+                                    id: SUCCESS_MAIL_ID,
+                                    closeButton: false,
+                                    Body: SuccessEmailModal
                                 })
                             );
-                        })
-                    }
+                        } catch (err) {
+                            if (err.toString().includes('user-not-found')) {
+                                setErrors('Email Not Found.');
+                            }
+                            console.error(err);
+                        }
+                    }}
+                    // onSubmit={(v) =>
+                    //     changePassword(v.email).then(() => {
+                    //         dispatch(closeModal('Forgot_Pass'));
+                    //         dispatch(
+                    //             newModal({
+                    //                 id: 'ChangePassEmailSent',
+                    //                 Body: EmailSentSuccessfully,
+                    //                 closeButton: true,
+                    //                 top: 0
+                    //             })
+                    //         );
+                    //     })
+                    // }
 
                     // onSubmit={async (v) => {
                     //     setErrors(null);
@@ -93,13 +115,20 @@ const ForgetPassword: FC = () => {
                             <S.ForgetText>
                                 Enter your email below and we will send you a reset email.
                             </S.ForgetText>
-                            {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
+                            {/* {state.error !== '' && <Alert severity="error">{state.error}</Alert>} */}
+
                             <MInputFormik name="email" fullWidth label="" />
                             <Spacer space={5} />
                             <S.SubmitButton loading={loading} type={'submit'}>
                                 Submit
                             </S.SubmitButton>
                             <Spacer space={5} />
+                            {/* {errors && (
+                                <Typography variant="subtitle1" color="green">
+                                    {errors}
+                                </Typography>
+                            )} */}
+
                             {errors && (
                                 <Typography variant="subtitle1" color="green">
                                     {errors}
