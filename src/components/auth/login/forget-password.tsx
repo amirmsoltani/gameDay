@@ -73,6 +73,7 @@ const ForgetPassword: FC = () => {
                             console.error(err);
                         }
                     }}
+
                     // onSubmit={(v) =>
                     //     changePassword(v.email).then(() => {
                     //         dispatch(closeModal('Forgot_Pass'));
@@ -86,28 +87,6 @@ const ForgetPassword: FC = () => {
                     //         );
                     //     })
                     // }
-
-                    // onSubmit={async (v) => {
-                    //     setErrors(null);
-                    //     setLoading(true);
-                    //     try {
-                    //         console.log(v.email);
-                    //         const res = await fbPasswordReset(v.email);
-                    //         setLoading(false);
-                    //         dispatch(
-                    //             newModal({
-                    //                 id: SUCCESS_MAIL_ID,
-                    //                 closeButton: false,
-                    //                 Body: SuccessEmailModal
-                    //             })
-                    //         );
-                    //     } catch (err) {
-                    //         if (err.toString().includes('user-not-found')) {
-                    //             setErrors('Email Not Found');
-                    //         }
-                    //         console.error(err);
-                    //     }
-                    // }}
                 >
                     <Form>
                         <S.FormCard>
@@ -123,11 +102,6 @@ const ForgetPassword: FC = () => {
                                 Submit
                             </S.SubmitButton>
                             <Spacer space={5} />
-                            {/* {errors && (
-                                <Typography variant="subtitle1" color="green">
-                                    {errors}
-                                </Typography>
-                            )} */}
 
                             {errors && (
                                 <Typography variant="subtitle1" color="green">
@@ -144,21 +118,21 @@ const ForgetPassword: FC = () => {
 
 export default ForgetPassword;
 
-export const EmailSentSuccessfully = () => {
-    const theme = useTheme();
+// export const EmailSentSuccessfully = () => {
+//     const theme = useTheme();
 
-    return (
-        <Box display="flex" alignItems="center" sx={{ minWidth: '320px', width: '400px' }}>
-            <Box paddingX="20px">
-                <Typography color={theme.palette.primary.dark} fontSize={22}>
-                    You’ve Got Mail!
-                </Typography>
-                <Spacer space={15} />
-                <Typography color={theme.palette.primary.dark} fontSize={16}>
-                    Please check your emails! We just sent you an email with a temporary password
-                    recovery link.
-                </Typography>
-            </Box>
-        </Box>
-    );
-};
+//     return (
+//         <Box display="flex" alignItems="center" sx={{ minWidth: '320px', width: '400px' }}>
+//             <Box paddingX="20px">
+//                 <Typography color={theme.palette.primary.dark} fontSize={22}>
+//                     You’ve Got Mail!
+//                 </Typography>
+//                 <Spacer space={15} />
+//                 <Typography color={theme.palette.primary.dark} fontSize={16}>
+//                     Please check your emails! We just sent you an email with a temporary password
+//                     recovery link.
+//                 </Typography>
+//             </Box>
+//         </Box>
+//     );
+// };
