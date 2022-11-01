@@ -14,6 +14,11 @@ import Loading from '../loading';
 import SkillQuestionFrom, { NewSkillQuestion } from '../question/skill-question';
 import UploadComponent from '../upload/upload';
 import { NewSkillWrapper } from './new-skill-style';
+import LayoutHeader from '@/layout/app-layout/layout-header';
+import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
+import SearchInput from '../base/input/search-input';
+import { HeaderWrapper } from './new-course-style';
+import Link from 'next/link';
 
 // Form Schema
 const schema = Yup.object({
@@ -101,6 +106,24 @@ const NewSkillPage = () => {
 
     return (
         <NewSkillWrapper>
+            <LayoutHeader>
+                <HeaderWrapper>
+                    <Link href={'/catalog'}>
+                        <a className="back-btn">
+                            <LeftArrowIcon />
+                        </a>
+                    </Link>
+                    <span className="header__info-box">skill/Add new question</span>
+                    <span>
+                        {skill.data?.skill_getSkill.result.skillQuestions.length}
+                        items Listed
+                    </span>
+                    <SearchInput wrapperClassName="header__search-input" />
+                    <Link href="/catalog">
+                        <a className="header__link-button">Publish</a>
+                    </Link>
+                </HeaderWrapper>
+            </LayoutHeader>
             <Formik
                 initialValues={{ name: name || '', skillCategoryId: '', iconUrl: iconUrl || '' }}
                 validationSchema={schema}

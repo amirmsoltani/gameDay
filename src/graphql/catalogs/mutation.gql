@@ -44,6 +44,7 @@ mutation addCatalog($input: SkillCategoryInput) {
     skillCategory_addSkillCategory(input: $input) {
         result {
             rate
+            title
             comments {
                 status
             }

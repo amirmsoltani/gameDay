@@ -9,6 +9,7 @@ type PropsType = {
     primary?: boolean;
     title: string;
     headerOptions?: ReactNode;
+    minHeight?: number;
 };
 
 export const Card: FC<PropsType> = ({
@@ -17,10 +18,15 @@ export const Card: FC<PropsType> = ({
     row = 'span 3',
     primary,
     title,
-    headerOptions
+    headerOptions,
+    minHeight = 200
 }) => {
     return (
-        <S.CardWrapper gridColumn={column} className={primary && 'primary'} gridRow={row}>
+        <S.CardWrapper
+            gridColumn={column}
+            className={primary && 'primary'}
+            gridRow={row}
+            minHeight={minHeight}>
             <S.CardHeader className={primary && 'primary'}>
                 <Typography className="card__header__title">{title}</Typography>
                 <div>{headerOptions}</div>

@@ -204,7 +204,10 @@ function CatalogPage() {
                             <UploadComponent
                                 type="image"
                                 onUpload={(_, fileUrl) => {
-                                    setNewCatalog({ ...newCatalog, image: fileUrl });
+                                    setNewCatalog((newCatalog) => ({
+                                        ...newCatalog,
+                                        image: fileUrl
+                                    }));
                                 }}
                             />
                         </div>

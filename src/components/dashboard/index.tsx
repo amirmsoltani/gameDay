@@ -153,6 +153,7 @@ export const DashboardPage = () => {
                 column="span 6"
                 row="span 5"
                 title="skill of the day"
+                minHeight={250}
                 primary
                 headerOptions={
                     <Link href={'/dashboard/skills'} passHref>

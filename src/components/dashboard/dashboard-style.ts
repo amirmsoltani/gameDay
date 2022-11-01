@@ -9,7 +9,6 @@ export const Content = styled(Box)`
 
 export const CardWrapper = styled(Box)`
     border-radius: 20px;
-    min-height: 200px;
     box-shadow: 0px 5px 25px #52575d1a;
     ${({ theme }) =>
         `
@@ -91,10 +90,8 @@ export const AddSkill = styled.a`
 export const SkillBody = styled(Box)`
     max-width: 100%;
     padding: 5px 16px 0 16px;
-    display: flex;
     ${({ theme }) => `
     .item__box{
-        max-height:100%;
         width:100%;
         overflow: hidden;
     }
@@ -108,11 +105,11 @@ export const SkillBody = styled(Box)`
     }
 
     .skill-body__title{
-        font-size: 12px;
+        font-size: .65vmax;
         color:${theme.palette.common.white};
     }
     .skill-body__category{
-        font-size: 12px;
+        font-size: .65vmax;
         color:${theme.palette.text.placeholder};
     }
 
