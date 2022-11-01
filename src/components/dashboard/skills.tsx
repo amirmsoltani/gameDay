@@ -15,6 +15,8 @@ import CloseIcon from 'src/assets/icons/close-icon';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
     GetSkillsQuery,
+    SkillSortInput,
+    SortEnumType,
     useAddSkillOfDayMutation,
     useInfiniteGetSkillsQuery,
     useRemoveAllSkillOfDayMutation,
@@ -25,8 +27,20 @@ import { MButton } from '../base/MButton';
 import * as S from './skill-style';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
 import useDebounce from 'src/hooks/useDebounce';
+import Sort from '../sort';
 
 const SkillPage = () => {
+    const [sort, setSort] = useState<Omit<SkillSortInput, 'skillCategory'>>({
+        title: SortEnumType.Asc
+    });
+    const sorting = (name: keyof SkillSortInput) => () => {
+        if (sort[name] === SortEnumType.Asc) {
+            setSort({ [name]: SortEnumType.Desc });
+        } else {
+            setSort({ [name]: SortEnumType.Asc });
+        }
+    };
+
     const [itemList, setItemList] = useState<GetSkillsQuery['skill_getSkills']['result']['items']>(
         []
     );
@@ -39,7 +53,8 @@ const SkillPage = () => {
         {
             take: 10,
             skip: 0,
-            where: { title: { contains: finalSearchText } }
+            where: { title: { contains: finalSearchText } },
+            order: sort
         },
         {
             keepPreviousData: true,
@@ -121,14 +136,32 @@ const SkillPage = () => {
                     gridTemplateRows="repeat(12, 1fr)">
                     <S.ListHeader container gridRow={'span 1'}>
                         <Grid lg={1} xs={12} item />
-                        <Grid lg={3.9} xs={12} className={'list-header__item no-center'} item>
+                        <Grid
+                            lg={3.9}
+                            xs={12}
+                            className={'list-header__item no-center'}
+                            item
+                            onClick={sorting('title')}>
                             Skill Title
+                            <Sort name="title" sortObject={sort} />
                         </Grid>
-                        <Grid lg={4} xs={12} className={'list-header__item'} item>
+                        <Grid
+                            lg={4}
+                            xs={12}
+                            className={'list-header__item'}
+                            item
+                            onClick={sorting('createdDate')}>
                             Added to the list on
+                            <Sort name="createDate" sortObject={sort} />
                         </Grid>
-                        <Grid lg={3} xs={12} className={'list-header__item'} item>
+                        <Grid
+                            lg={3}
+                            xs={12}
+                            className={'list-header__item'}
+                            item
+                            onClick={sorting('isToday')}>
                             situation
+                            <Sort name="isToday" sortObject={sort} />
                         </Grid>
                     </S.ListHeader>
                     <S.ListBody

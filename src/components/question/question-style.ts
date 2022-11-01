@@ -1,5 +1,4 @@
-import styled from "@emotion/styled";
-
+import styled from '@emotion/styled';
 
 export const QuestionWrapper = styled.div`
     ${({ theme: { palette } }) => `
@@ -57,6 +56,7 @@ export const QuestionWrapper = styled.div`
 
             &.save{
                 width:175px;
+
             }
             
             svg{
@@ -116,11 +116,47 @@ export const QuestionWrapper = styled.div`
            }
         }
     }
+    .option-wrapper{
+        padding-right:45px;
+    }
+    .answer__option{
+        display:flex;
+        justify-content:space-between; 
+        box-shadow: 0px 2px 4px #1717172E;
+        padding:10px;      
+        background-color:${palette.common.white};
+        border-radius:5px;
+        height:55px;
+    }
+    .answer__input{
+        border:none;
+        width:85%;
+        font-size:13px;
+        outline:none;
+        color:${palette.grey.dark};
+    }
+
+    .answer__check{
+        width:33px;
+        height:33px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border: solid 1px ${palette.common.black};
+        border-radius:4px;
+        cursor:pointer;
+
+        &.checked{
+            background-color:#2BE33D;
+            color:${palette.common.white};
+            border:none;
+        }
+    }
 
     .question__form{
         display:flex;
         flex-direction:column;
+        
     }
 `}
 `;
-

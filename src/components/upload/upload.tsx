@@ -18,6 +18,8 @@ type PropsType = {
     onSelect?: (fileName: string, duration: number) => void;
     onUpload: (fileName: string, fileUrl: string) => void;
     type: 'image' | 'video';
+    size?: 'small' | 'large';
+    defaultImage?: string;
 };
 
 export type RefType = {
@@ -25,7 +27,7 @@ export type RefType = {
 };
 
 const UploadComponent = forwardRef<RefType | null, PropsType>(
-    ({ onSelect, onUpload, type }, ref) => {
+    ({ onSelect, onUpload, type, size = 'large', defaultImage }, ref) => {
         const fileInput = useRef<HTMLInputElement>(null);
         const [activeDrag, setActiveDrag] = useState<boolean>(false);
 
@@ -87,6 +89,7 @@ const UploadComponent = forwardRef<RefType | null, PropsType>(
 
         return (
             <UploadWrapper
+                className={size}
                 onClick={openSelector}
                 onDragEnter={handleDrag}
                 onDragOver={handleDrag}
@@ -106,12 +109,14 @@ const UploadComponent = forwardRef<RefType | null, PropsType>(
                             }}
                         />
                         <div className="upload__main">
-                            {state.items.length && type === 'image' ? (
+                            {(state.items.length || defaultImage) && type === 'image' ? (
                                 <>
                                     <EditIcon className="upload__preview-icon" />
                                     <MImage
                                         resources={{
-                                            src: state.items[state.items.length - 1].localUrl
+                                            src: state.items.length
+                                                ? state.items[state.items.length - 1].localUrl
+                                                : defaultImage
                                         }}
                                         className="upload__preview"
                                     />

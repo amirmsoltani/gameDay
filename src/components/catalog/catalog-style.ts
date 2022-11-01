@@ -258,6 +258,10 @@ export const CatalogSkills = styled.div`
                 display:flex;
                 justify-content:center;
             }
+
+            *{
+                cursor:pointer;
+            }
         }
 
         .catalog-skill__list-body{
@@ -365,6 +369,13 @@ export const Header = styled(Grid)`
         .link-button__plus{
             fill:${palette.common.white};
             margin-right:10px;
+
+            
+        }
+
+        &.disabled {
+            pointer-events: none;
+            background-color: ${palette.grey.dark};
         }
     }
     `}

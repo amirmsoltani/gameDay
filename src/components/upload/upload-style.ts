@@ -4,6 +4,9 @@ import { Form } from 'formik';
 export const UploadWrapper = styled.div`
     width: 100%;
     padding: 30px;
+    border-radius: 20px;
+    height: 183px;
+
     cursor: pointer;
     .upload__main {
         border: 1px #dae1ed dashed;
@@ -35,11 +38,11 @@ export const UploadWrapper = styled.div`
 
         .text__title {
             text-align: center;
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .text__description {
-            font-size: 12px;
+            font-size: 11px;
             text-align: center;
             margin-top: 7px;
             .description__browse {
@@ -64,10 +67,17 @@ export const UploadWrapper = styled.div`
         }
     }
 
+    &.small {
+        padding: 12.5px;
+        height: 133px;
+
+        .upload__main{
+            padding: 0 10px;
+        }
+    }
+
     ${({ theme: { palette } }) => `
         background-color:${palette.common.white};
-        border-radius:20px;
-        height:183px;
         box-shadow: 12px 8px 20px #1B3A9229;
         
         .upload__preview-icon{

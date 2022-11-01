@@ -163,7 +163,7 @@ export const DashboardPage = () => {
                 }>
                 <S.SkillBody display="grid" gridTemplateColumns="repeat(5, 1fr)" gap={2}>
                     {data.skill_getSkills.result.items.map((skill) => (
-                        <Box gridColumn={'span 1'} key={skill.title}>
+                        <Box gridColumn={'span 1'} key={skill.title} className={"item__box"}>
                             <MImage
                                 resources={{ src: skill.iconUrl, fallback: '/images/gd-logo.png' }}
                                 className="skill-body__image"

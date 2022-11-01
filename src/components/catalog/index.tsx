@@ -113,12 +113,18 @@ function CatalogPage() {
                         <PlusIcon className="link-button__plus" /> Add New catalog
                     </button>
                     <Link href={`/catalog/${state.activeCategory}/course`}>
-                        <a className="header__link-button">
+                        <a
+                            className={`header__link-button ${
+                                !state.activeCategory ? 'disabled' : ''
+                            }`}>
                             <PlusIcon className="link-button__plus" /> Add New course
                         </a>
                     </Link>
-                    <Link href="/dashboard">
-                        <a className="header__link-button">
+                    <Link href={`/catalog/${state.activeCategory}/add-skill`}>
+                        <a
+                            className={`header__link-button ${
+                                !state.activeCategory ? 'disabled' : ''
+                            }`}>
                             <PlusIcon className="link-button__plus" /> Add New skill
                         </a>
                     </Link>

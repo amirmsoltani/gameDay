@@ -73,7 +73,7 @@ export const AddSkill = styled.a`
     height: 40px;
     align-items: center;
     justify-content: center;
-    padding:0 14px;
+    padding: 0 14px;
     cursor: pointer;
     text-decoration: none;
     ${({ theme }) => `
@@ -91,8 +91,13 @@ export const AddSkill = styled.a`
 export const SkillBody = styled(Box)`
     max-width: 100%;
     padding: 5px 16px 0 16px;
-
+    display: flex;
     ${({ theme }) => `
+    .item__box{
+        max-height:100%;
+        width:100%;
+        overflow: hidden;
+    }
     .skill-body__image {
         width: 100%;
         border-radius: 20px;
@@ -132,6 +137,7 @@ export const UserBody = styled(Box)`
 
     .user-body__image {
         width: 4vw;
+        height: 4vw;
         border-radius: 50%;
         object-fit: scale-down;
         object-position: center;
