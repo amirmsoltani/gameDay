@@ -1,0 +1,5 @@
+mutation changeUserActiveStatus($id: Int!) {
+    user_suspendAccount(userId: $id) {
+        status
+    }
+}

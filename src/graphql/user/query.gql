@@ -16,10 +16,11 @@ query getCurrentUser {
     }
 }
 
-query getUsers($take: Int, $skip: Int, $where: UserFilterInput) {
+query getAllUsers($take: Int, $skip: Int, $where: UserFilterInput, $order: [UserSortInput!]) {
     user_getUsers {
-        result(skip: $skip, take: $take, where: $where) {
+        result(skip: $skip, take: $take, where: $where, order: $order) {
             items {
+                id
                 firstName
                 lastName
                 pictureUrl
@@ -27,6 +28,11 @@ query getUsers($take: Int, $skip: Int, $where: UserFilterInput) {
                 email
                 activeStatus
             }
+            pageInfo {
+                hasNextPage
+            }
+            totalCount
         }
+        status
     }
 }
