@@ -18,7 +18,6 @@ const MoreMenu: React.FC<PropsType> = ({ OnClick }) => {
     };
     const handleClose = () => {
         setAnchorEl(null);
-        OnClick();
     };
 
     return (
@@ -54,7 +53,10 @@ const MoreMenu: React.FC<PropsType> = ({ OnClick }) => {
                 {options.map((option) => (
                     <MenuItem
                         key={option}
-                        onClick={handleClose}
+                        onClick={() => {
+                            handleClose();
+                            OnClick();
+                        }}
                         sx={{ display: 'flex', justifyContent: 'center' }}>
                         {option}
                     </MenuItem>
