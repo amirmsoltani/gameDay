@@ -10,8 +10,9 @@ import { Spacer } from '@/components/base/spacer';
 import { useAuthPage } from '@/components/auth/services/useAuth';
 import { fbPasswordReset } from 'src/auth/firebase';
 import { useDispatch } from 'react-redux';
-import { newModal } from 'src/redux/actions/actions';
+import { closeModal, newModal } from 'src/redux/actions/actions';
 import SuccessEmailModal, { SUCCESS_MAIL_ID } from './succeed-email';
+import { useTheme } from '@emotion/react';
 
 // Form Schema
 const schema = Yup.object({
@@ -48,6 +49,7 @@ const ForgetPassword: FC = () => {
             </S.LeftSide>
             <S.RightSide gridColumn="span 4">
                 <Formik
+                    enableReinitialize
                     initialValues={initialValues}
                     validationSchema={schema}
                     onSubmit={async (v) => {
@@ -66,24 +68,41 @@ const ForgetPassword: FC = () => {
                             );
                         } catch (err) {
                             if (err.toString().includes('user-not-found')) {
-                                setErrors('Email Not Found');
+                                setErrors('Email Not Found.');
                             }
                             console.error(err);
                         }
-                    }}>
+                    }}
+
+                    // onSubmit={(v) =>
+                    //     changePassword(v.email).then(() => {
+                    //         dispatch(closeModal('Forgot_Pass'));
+                    //         dispatch(
+                    //             newModal({
+                    //                 id: 'ChangePassEmailSent',
+                    //                 Body: EmailSentSuccessfully,
+                    //                 closeButton: true,
+                    //                 top: 0
+                    //             })
+                    //         );
+                    //     })
+                    // }
+                >
                     <Form>
                         <S.FormCard>
                             <S.ForgetTitle>Forgot password?</S.ForgetTitle>
                             <S.ForgetText>
                                 Enter your email below and we will send you a reset email.
                             </S.ForgetText>
-                            {state.error !== '' && <Alert severity="error">{state.error}</Alert>}
+                            {/* {state.error !== '' && <Alert severity="error">{state.error}</Alert>} */}
+
                             <MInputFormik name="email" fullWidth label="" />
                             <Spacer space={5} />
                             <S.SubmitButton loading={loading} type={'submit'}>
                                 Submit
                             </S.SubmitButton>
                             <Spacer space={5} />
+
                             {errors && (
                                 <Typography variant="subtitle1" color="green">
                                     {errors}
@@ -98,3 +117,22 @@ const ForgetPassword: FC = () => {
 };
 
 export default ForgetPassword;
+
+// export const EmailSentSuccessfully = () => {
+//     const theme = useTheme();
+
+//     return (
+//         <Box display="flex" alignItems="center" sx={{ minWidth: '320px', width: '400px' }}>
+//             <Box paddingX="20px">
+//                 <Typography color={theme.palette.primary.dark} fontSize={22}>
+//                     You’ve Got Mail!
+//                 </Typography>
+//                 <Spacer space={15} />
+//                 <Typography color={theme.palette.primary.dark} fontSize={16}>
+//                     Please check your emails! We just sent you an email with a temporary password
+//                     recovery link.
+//                 </Typography>
+//             </Box>
+//         </Box>
+//     );
+// };
