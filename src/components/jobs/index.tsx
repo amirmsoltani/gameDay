@@ -1,7 +1,7 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
 import { Grid } from '@mui/material';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import { GetJobsQuery, useInfiniteGetJobsQuery } from 'src/graphql/generated';
 import useDebounce from 'src/hooks/useDebounce';
@@ -15,7 +15,7 @@ function JobsPage() {
     const [itemList, setItemList] = useState<GetJobsQuery['job_getJobs']['result']['items']>([]);
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
-
+    const totalItems = useRef<number | null>(null);
     const [end, setEnd] = useState(false);
     const [state, setState] = useState<{ activeCategory?: number } | null>(null);
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetJobsQuery(
@@ -28,6 +28,7 @@ function JobsPage() {
             onSuccess: ({ pages }) => {
                 const length = pages.length;
                 if (length === 1) {
+                    totalItems.current = pages[0].job_getJobs!.result!.totalCount;
                     setItemList([...pages[0].job_getJobs.result.items]);
                     setState({
                         activeCategory: pages[0].job_getJobs.result.items[0]?.id
@@ -58,7 +59,7 @@ function JobsPage() {
             <LayoutHeader>
                 <S.Header>
                     <div className="header__info-box">Jobs list</div>
-                    <span> items Listed</span>
+                    <span>{totalItems.current} items Listed</span>
                     <SearchInput
                         onChange={(event: any) => {
                             setSearchText(event.target.value);
@@ -90,7 +91,7 @@ function JobsPage() {
                 <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <JobsCard
-                            key={item.title}
+                            key={item.id}
                             onClick={() => {
                                 if (item.id !== state.activeCategory)
                                     setState({
@@ -100,6 +101,8 @@ function JobsPage() {
                             onChange={(checked) => {}}
                             active={item.id === state.activeCategory}
                             data={{
+                                id: item.id,
+                                status: item.status,
                                 title: item.title,
                                 jobType: item.jobType,
                                 city: item.city,

@@ -1,8 +1,6 @@
 import { Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { FC, useState } from 'react';
-import { ArrowDownBoldIcon, ArrowDownIcon } from 'src/assets/common/ArrowDownIcon';
-import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import {
     useInfiniteGetCatalogSkillQuery,
     GetCatalogSkillQuery,

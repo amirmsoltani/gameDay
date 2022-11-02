@@ -12,44 +12,23 @@ import * as Yup from 'yup';
 import { InferType } from 'yup';
 import { MInputFormik } from '@/components/base/input/formik';
 import { Spacer } from '@/components/base/spacer';
-import { useAuthPage } from '@/components/auth/services/useAuth';
 import Link from 'next/link';
-import useDebounce from 'src/hooks/useDebounce';
-import SearchInput from '../base/input/search-input';
 import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
 import { Form, Formik, FormikProps } from 'formik';
 import { InputTextarea } from '../base/input/input-textarea';
-import { useGetUser } from 'src/auth/UserProvider';
-import UploadComponent, { RefType } from '../upload/upload';
-import { height } from '@mui/system';
+import UploadComponent from '../upload/upload';
 
-interface InitailValuesProps {
-    company: string;
-    email: string;
-    phone: string;
-    job: string;
-    location: string;
-    applicant: string;
-    experience: string;
-    jobType: string;
-    education: string;
-    salary: string;
-    skills: string;
-    jobDescription: string;
-}
 const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = Yup.object({
-    company: Yup.string(),
-    email: Yup.string()
-        .email('will not be display in the job application')
-        .required('Email is required'),
+    company: Yup.string().required('Company name is required'),
+    email: Yup.string().email('Email is not valid').required('Email is required'),
     phone: Yup.string()
         .max(11)
         .matches(phoneRegExp, 'Phone number is not valid')
-        .required('This field is required'),
+        .required('Phone number is required'),
     job: Yup.string(),
     location: Yup.string(),
     applicant: Yup.string(),
@@ -101,63 +80,8 @@ const initialValues: ValueType = {
     jobDescription: ''
 };
 
-const mapTopic = (topic: Topic) => {
-    const [name, duration] = topic.description?.split('~') || ['default', 0];
-
-    return { id: topic.id, name: name as string, duration: +(duration || 0), url: topic.fileUrl };
-};
-
-const filterTopic = (topic: Topic) => topic.isDeleted === false;
-
-// function AddJobs({ lesson: propLesson }) {
-const AddJobs: FC<PropsType> = ({ lesson: propLesson, index, ...props }) => {
-    const videoUpdate = useRef<number>(null);
-    const uploader = useRef<RefType>();
-    const formRef = useRef<FormikProps<typeof propLesson>>(null);
-    const lesson = useRef<typeof propLesson>(propLesson);
-    const [files, setFiles] = useState<
-        Array<{
-            name: string;
-            url?: string;
-            id?: number;
-            duration: number;
-        }>
-    >(lesson.current?.topics.filter(filterTopic).map(mapTopic));
-
-    const updateTopic = useUpdateTopicMutation({
-        onSuccess: () => {
-            formRef.current.submitForm();
-        }
-    });
-
-    const createTopic = useCreateTopicMutation({
-        onSuccess: (data, input) => {
-            setFiles((files) => {
-                const id = data.topic_addTopic.result.id;
-                const index = files.findIndex((file) => file.url === input.input.fileUrl);
-                const newFiles = [...files];
-                newFiles[index] = { ...newFiles[index], id };
-                formRef.current.submitForm();
-                return files;
-            });
-        }
-    });
-
-    const user = useGetUser();
-    const { login, state } = useAuthPage();
-
-    // const { mutateAsync, isLoading, status, error, isSuccess } = usejob_addJobMutation();
-
-    const onSubmit = useCallback((value: ValueType) => {
-        login(value.email, value.company);
-    }, []);
-
-    const [searchText, setSearchText] = useState<string>('');
-    const finalSearchText = useDebounce(searchText, 500);
-
-    const phoneRegExp =
-        /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
+const AddJobs: FC<PropsType> = () => {
+    const formik = useRef<FormikProps<ValueType>>();
     return (
         <S.Content>
             <LayoutHeader>
@@ -173,12 +97,7 @@ const AddJobs: FC<PropsType> = ({ lesson: propLesson, index, ...props }) => {
                     <div className="input-box">
                         <SearchIconExercise />
                         <span className="input-box__search-text">search |</span>
-                        <input
-                            className="input-box__input"
-                            onChange={(event) => {
-                                setSearchText(event.target.value || '');
-                            }}
-                        />
+                        <input className="input-box__input" onChange={(event) => {}} />
                     </div>
 
                     <Link href="/dashboard">
@@ -187,64 +106,20 @@ const AddJobs: FC<PropsType> = ({ lesson: propLesson, index, ...props }) => {
                 </S.Header>
             </LayoutHeader>
 
-            {/* <S.ListWrapper display={'grid'} gridTemplateRows="repeat(12, 1fr)"> */}
             <S.ListWrapper>
-                <Formik initialValues={initialValues} validationSchema={schema} onSubmit={onSubmit}>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={schema}
+                    onSubmit={() => {}}
+                    innerRef={formik}>
                     <Form>
                         <Grid container>
-                            <Grid item lg={2.8} sx={{ height: '100xp' }}>
+                            <Grid item lg={2.8} display={'flex'} alignItems={'center'}>
                                 <UploadComponent
-                                    onSelect={(name, duration) => {
-                                        const index = videoUpdate.current;
-                                        if (typeof index === 'number') {
-                                            const newFiles = [...files];
-                                            newFiles[index] = {
-                                                id: newFiles[index].id,
-                                                name,
-                                                duration,
-                                                url: undefined
-                                            };
-                                            setFiles(newFiles);
-                                        } else {
-                                            setFiles([...files, { name, duration }]);
-                                        }
-                                    }}
-                                    onUpload={(name, url) => {
-                                        setFiles((files) => {
-                                            const newFiles = [...files];
-                                            const index =
-                                                typeof videoUpdate.current === 'number'
-                                                    ? videoUpdate.current
-                                                    : newFiles.findIndex(
-                                                          (file) => file.name === name
-                                                      );
-                                            newFiles[index] = { ...newFiles[index], url };
-                                            const input = {
-                                                lessonId: lesson.current.id,
-                                                isMain: index === 0,
-                                                title: 'Topic ' + (index + 1),
-                                                description:
-                                                    newFiles[index].name +
-                                                    '~' +
-                                                    newFiles[index].duration,
-                                                fileUrl: newFiles[index].url
-                                            };
-                                            if (typeof videoUpdate.current === 'number') {
-                                                updateTopic.mutate({
-                                                    id: newFiles[index].id,
-                                                    input
-                                                });
-                                                videoUpdate.current = null;
-                                            } else {
-                                                createTopic.mutate({
-                                                    input
-                                                });
-                                            }
-                                            return newFiles;
-                                        });
-                                    }}
-                                    type={'video'}
-                                    ref={uploader}
+                                    onSelect={(name, duration) => {}}
+                                    onUpload={(name, url) => {}}
+                                    type={'image'}
+                                    size="small"
                                 />
                             </Grid>
                             <Spacer space={3} />

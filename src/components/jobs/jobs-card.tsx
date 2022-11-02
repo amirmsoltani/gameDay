@@ -9,6 +9,7 @@ import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import dayjs from 'dayjs';
+import { ShowStatus, useUpdateJobStatusMutation } from 'src/graphql/generated';
 
 type PropsType = {
     active?: boolean;
@@ -16,6 +17,8 @@ type PropsType = {
     onChange: (checked: boolean) => void;
     children?: undefined;
     data: {
+        id: number;
+        status: ShowStatus;
         company?: {
             title?: string;
             iconUrl?: string;
@@ -41,11 +44,13 @@ const IOSSwitch = styled((props: SwitchProps) => (
         margin: 2.5,
 
         transitionDuration: '300ms',
+        color: theme.palette.primary.main,
+
         '&.Mui-checked': {
             transform: 'translateX(16px)',
-            color: 'theme.palette.primary.main',
+            color: theme.palette.common.white,
             '& + .MuiSwitch-track': {
-                backgroundColor: theme.palette.common.white,
+                backgroundColor: theme.palette.primary.main,
                 opacity: 1,
                 border: 0
             },
@@ -71,16 +76,32 @@ const IOSSwitch = styled((props: SwitchProps) => (
     },
     '.MuiSwitch-track': {
         borderRadius: 20 / 2,
-        border: '1px solid #fff',
-        backgroundColor: theme.palette.primary.main,
+        border: `1px solid ${theme.palette.primary.main}`,
+        backgroundColor: theme.palette.common.white,
         opacity: 1,
         transition: theme.transitions.create(['background-color'], {
             duration: 500
         })
+    },
+    '&.active': {
+        '& .MuiSwitch-switchBase': {
+            color: theme.palette.common.white,
+            '&.Mui-checked': {
+                color: theme.palette.primary.main,
+                '& + .MuiSwitch-track': {
+                    backgroundColor: theme.palette.common.white
+                }
+            }
+        },
+        '.MuiSwitch-track': {
+            border: `1px solid ${theme.palette.common.white}`,
+            backgroundColor: theme.palette.primary.main
+        }
     }
 }));
 
 const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
+    const updateJobStatus = useUpdateJobStatusMutation();
     return (
         <S.CardWrapper className={active && 'active'} onClick={onClick}>
             <div className="Jobs-card__row1">
@@ -95,8 +116,18 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                     <FormControlLabel
                         control={
                             <IOSSwitch
-                                defaultChecked
+                                className={active ? 'active' : ''}
+                                defaultChecked={data.status === ShowStatus.Active}
                                 onChange={(event) => {
+                                    updateJobStatus.mutate({
+                                        input: {
+                                            id: data.id,
+                                            status:
+                                                data.status === ShowStatus.Active
+                                                    ? ShowStatus.Inactive
+                                                    : ShowStatus.Active
+                                        }
+                                    });
                                     event.target.checked;
                                 }}
                             />
@@ -104,7 +135,7 @@ const JobsCard: FC<PropsType> = ({ active, data, onClick }) => {
                         labelPlacement="start"
                         label={
                             <Typography className="labelText" variant="caption">
-                                Active
+                                {data.status === ShowStatus.Active ? 'Active' : 'Deactive'}
                             </Typography>
                         }
                     />
