@@ -11,13 +11,12 @@ export const JobLearn = styled.div`
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding:0px 20px;
+    padding:20px 0;
     height: 100%;
     overflow: hidden scroll;
+    position:relative;
 
-    ::-webkit-scrollbar {
-        display: none;
-    }
+   
 
     .table__wrapper{
         display: flex;
@@ -25,6 +24,9 @@ export const JobLearn = styled.div`
         flex: 1;
         height: 100%;
         overflow: hidden scroll;
+        ::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     .job__box-header {
@@ -78,9 +80,6 @@ export const JobLearn = styled.div`
         }
 
         .card-body__item{
-            display:flex;
-            flexDirection:row;
-            textAlign:center;
             align-items: center;
             justify-content:flex-start;
             flex-wrap: nowrap;
@@ -103,9 +102,7 @@ export const JobLearn = styled.div`
             :first-of-type , :last-child{
                 border:none;
             }
-            .detail__item {
-                padding:0px 10px;
-            }
+            
             .user-icon{
                 display:flex;
             flexDirection:row;

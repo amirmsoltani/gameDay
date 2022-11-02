@@ -8,9 +8,14 @@ query message_getUserMessages(
         result(skip: $skip, take: $take, where: $where, order: $order) {
             items {
                 subject
-                conversationId
+                id
                 latestMessageDate
-                user {
+                messages {
+                    photoUrl
+                    messageType
+                    text
+                }
+                firstUser {
                     firstName
                     lastName
                     id
@@ -18,7 +23,7 @@ query message_getUserMessages(
                     email
                     cVFileUrl
                 }
-                unreadCount
+                firstUnreadCount
             }
             totalCount
             pageInfo {

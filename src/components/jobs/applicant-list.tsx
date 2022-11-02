@@ -169,7 +169,7 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                                 </Link>
                             </Grid>
 
-                            <Grid md={2.4} xs={2.4} className="detail__item" item>
+                            <Grid md={2.5} xs={2.4} className="detail__item" item >
                                 <Situation
                                     value={request.status}
                                     onChange={(status) => {
@@ -180,11 +180,7 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                                 />
                             </Grid>
                         </Grid>
-                        <div className="box-btn__btn">
-                            <MButton>
-                                <Grid sx={{ width: 30 }} />
-                            </MButton>
-                        </div>
+                        
                     </div>
                 ))}
             </div>

@@ -12,6 +12,13 @@ enum StatusToInt {
     PENDING = 0
 }
 
+enum StatusToColor {
+    ACCEPTED = '#02C954',
+    INTERVIEW = '#8CE2EE',
+    NOT_QUALIFIED = '#FE3B59',
+    PENDING = '#DCD0F3'
+}
+
 type PropsType = { value: JobStatus; onChange: (status: number) => void };
 const Situation: React.FC<PropsType> = ({ value, onChange }) => {
     const [situation, setSituation] = React.useState(value);
@@ -23,14 +30,12 @@ const Situation: React.FC<PropsType> = ({ value, onChange }) => {
     };
 
     return (
-        <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
-            <InputLabel id="demo-select-small">Situation</InputLabel>
+        <FormControl sx={{ m: 1, width: '100%' }} size="small">
             <Select
-                labelId="demo-select-small"
-                id="demo-select-small"
                 value={situation}
-                label="Situation"
-                onChange={handleChange}>
+                onChange={handleChange}
+                fullWidth
+                sx={{ height: 50, backgroundColor: StatusToColor[situation], border: 'none' }}>
                 <MenuItem value={JobStatus.Accepted}>accepted</MenuItem>
                 <MenuItem value={JobStatus.Interview}>Interview</MenuItem>
                 <MenuItem value={JobStatus.Pending}>pending</MenuItem>
