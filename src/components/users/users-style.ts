@@ -60,6 +60,7 @@ export const ListHeader = styled(Grid)`
         align-items: center;
         justify-content: center;
         font-size: 15px;
+        cursor: pointer;
         &.no-center {
             justify-content: flex-start !important;
         }
@@ -97,10 +98,17 @@ export const ListBodyUser = styled(Grid)`
         &.no-center {
             justify-content: flex-start !important;
         }
-        .user-card__logo {
-            width: 30px;
-            height: 30px;
-        }
+    }
+
+    .user__avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 15px;
+    }
+    * {
+        display: flex;
+        align-items: center;
     }
 
     ${({ theme: { palette } }) => `

@@ -257,7 +257,7 @@ const LessonCard: FC<PropsType> = ({ lesson: propLesson, index, onPlay, ...props
                                     const input = {
                                         lessonId: lesson.current.id,
                                         isMain: index === 0,
-                                        title: 'Topic ' + (index + 1),
+                                        title: newFiles[index].name,
                                         description:
                                             newFiles[index].name + '~' + newFiles[index].duration,
                                         fileUrl: newFiles[index].url

@@ -40,16 +40,57 @@ mutation deleteTopic($id: Int!) {
     }
 }
 
-mutation addCatalog($input:SkillCategoryInput){
-  skillCategory_addSkillCategory(input:$input){
-    result{
-      rate
-      comments{status}
-      lessons{id}
-      createdDate
-      iconUrl
-      id
+mutation addCatalog($input: SkillCategoryInput) {
+    skillCategory_addSkillCategory(input: $input) {
+        result {
+            rate
+            title
+            comments {
+                status
+            }
+            lessons {
+                id
+            }
+            createdDate
+            iconUrl
+            id
+        }
+        status
     }
-    status
-  }
+}
+
+mutation createSkillQuestion($input: SkillQuestionInput!) {
+    skillQuestion_addQuestion(input: $input) {
+        result {
+            id
+        }
+        status
+    }
+}
+
+mutation updateSkillQuestion($id: Int!, $input: SkillQuestionInput!) {
+    skillQuestion_updateQuestion(id: $id, input: $input) {
+        status
+    }
+}
+
+mutation deleteSkillQuestion($id: Int!) {
+    skillQuestion_deleteQuestion(id: $id) {
+        status
+    }
+}
+
+mutation createSkill($input: SkillInput) {
+    skill_addSkill(input: $input) {
+        result {
+            id
+        }
+        status
+    }
+}
+
+mutation updateCatalogSkill($id: Int!, $input: SkillInput!) {
+    skill_updateSkill(id: $id, input: $input) {
+        status
+    }
 }

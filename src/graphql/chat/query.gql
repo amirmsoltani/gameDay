@@ -1,16 +1,21 @@
 query message_getUserMessages(
     $skip: Int
     $take: Int
-    $where: ConversationDtoFilterInput
-    $order: [ConversationDtoSortInput!]
+    $where: ConversationsFilterInput
+    $order: [ConversationsSortInput!]
 ) {
-    message_getUserMessages {
+    message_getAllMessages {
         result(skip: $skip, take: $take, where: $where, order: $order) {
             items {
                 subject
-                conversationId
+                id
                 latestMessageDate
-                user {
+                messages {
+                    photoUrl
+                    messageType
+                    text
+                }
+                firstUser {
                     firstName
                     lastName
                     id
@@ -18,7 +23,7 @@ query message_getUserMessages(
                     email
                     cVFileUrl
                 }
-                unreadCount
+                firstUnreadCount
             }
             totalCount
             pageInfo {

@@ -4,22 +4,47 @@ import React, { useRef, useState } from 'react';
 import * as S from './users-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
-import { GetUsersQuery, useGetUsersQuery } from 'src/graphql/generated';
+import {
+    ActiveStatus,
+    GetAllUsersQuery,
+    SortEnumType,
+    useInfiniteGetAllUsersQuery,
+    UserSortInput
+} from 'src/graphql/generated';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import Link from 'next/link';
 import { UserList } from './user-list';
 import { PrimarySpinner } from '../base/loader/spinner';
+import Loading from '../loading';
+import Sort from '../sort';
 
 function UsersPage() {
-    const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
+    const [sort, setSort] = useState<UserSortInput>({
+        firstName: SortEnumType.Asc,
+        lastName: SortEnumType.Asc
+    });
+    const sorting =
+        (name: keyof UserSortInput | { [key: string]: object | SortEnumType }) => () => {
+            if (typeof name === 'object') {
+                setSort(name);
+                return;
+            }
+            if (sort[name] === SortEnumType.Asc) {
+                setSort({ [name]: SortEnumType.Desc });
+            } else {
+                setSort({ [name]: SortEnumType.Asc });
+            }
+        };
+    const [itemList, setItemList] = useState<GetAllUsersQuery['user_getUsers']['result']['items']>(
+        []
+    );
     const totalItems = useRef<number | null>(null);
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
     const [end, setEnd] = useState(false);
-    const [state, setState] = useState<{ activeCategory?: number } | null>(null);
 
-    const { isLoading, isFetchingNextPage, fetchNextPage } = useGetUsersQuery(
-        { take: 5, skip: 0, where: { title: { contains: finalSearchText } } },
+    const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetAllUsersQuery(
+        { take: 20, skip: 0, where: { email: { contains: finalSearchText } }, order: sort },
 
         {
             refetchOnWindowFocus: false,
@@ -28,17 +53,15 @@ function UsersPage() {
             onSuccess: ({ pages }) => {
                 const length = pages.length;
                 if (length === 1) {
-                    setItemList([...pages[0].job_getJobs.result.items]);
-                    setState({
-                        activeCategory: pages[0].job_getJobs.result.items[0]?.id
-                    });
+                    totalItems.current = pages[0].user_getUsers!.result!.totalCount;
+                    setItemList([...pages[0].user_getUsers.result.items]);
                 } else {
                     setItemList([
                         ...itemList,
-                        ...(pages[length - 1].job_getJobs.result.items || [])
+                        ...(pages[length - 1].user_getUsers.result.items || [])
                     ]);
                 }
-                if (pages[length - 1].job_getJobs.result.pageInfo.hasNextPage === false) {
+                if (pages[length - 1].user_getUsers.result.pageInfo.hasNextPage === false) {
                     setEnd(true);
                 }
             },
@@ -46,12 +69,7 @@ function UsersPage() {
         }
     );
 
-    if (isLoading)
-        return (
-            <S.Content display={'flex'} justifyContent="center" alignItems="center">
-                <PrimarySpinner />
-            </S.Content>
-        );
+    if (isLoading) return <Loading />;
 
     return (
         <S.Content>
@@ -71,31 +89,79 @@ function UsersPage() {
             <S.ListWrapper display={'grid'} gridTemplateRows="repeat(12, 1fr)">
                 <S.ListHeader container gridRow={'span 1'}>
                     <Grid lg={0.5} xs={12} item />
-                    <Grid lg={2.5} xs={12} className={'list-header__item no-center'} item>
-                        Sort by
+                    <Grid
+                        lg={2.5}
+                        xs={12}
+                        className={'list-header__item no-center'}
+                        item
+                        onClick={sorting(
+                            sort.firstName === SortEnumType.Asc
+                                ? { firstName: SortEnumType.Desc, lastName: SortEnumType.Desc }
+                                : { firstName: SortEnumType.Asc, lastName: SortEnumType.Asc }
+                        )}>
+                        User Name
+                        <Sort name="firstName" sortObject={sort} />
                     </Grid>
-                    <Grid lg={2.5} xs={12} className={'list-header__item'} item>
+                    <Grid
+                        lg={2.5}
+                        xs={12}
+                        className={'list-header__item'}
+                        item
+                        onClick={sorting('email')}>
                         User Email
+                        <Sort name="email" sortObject={sort} />
                     </Grid>
-                    <Grid lg={3} xs={12} className={'list-header__item'} item>
+                    <Grid
+                        lg={3}
+                        xs={12}
+                        className={'list-header__item'}
+                        item
+                        onClick={sorting('phoneNumber')}>
                         User Phone number
+                        <Sort name="phoneNumber" sortObject={sort} />
                     </Grid>
-                    <Grid lg={2.5} xs={12} className={'list-header__item'} item>
+                    <Grid
+                        lg={2.5}
+                        xs={12}
+                        className={'list-header__item'}
+                        item
+                        onClick={sorting('activeStatus')}>
                         situation
+                        <Sort name="activeStatus" sortObject={sort} />
                     </Grid>
                     <Grid lg={0.5} xs={12} className={'list-header__item'} item></Grid>
                 </S.ListHeader>
-                <S.ListBody gridRow={'span 11'}>
-                    {itemList.map((item) => (
+                <S.ListBody
+                    gridRow={'span 11'}
+                    onScroll={(event: any) => {
+                        const { scrollTop, scrollHeight, clientHeight } = event.target;
+                        if (
+                            scrollTop + clientHeight >= scrollHeight * 0.5 &&
+                            !end &&
+                            !isFetchingNextPage
+                        ) {
+                            fetchNextPage();
+                        }
+                    }}>
+                    {itemList.map((item, index) => (
                         <UserList
-                            key={item.title}
+                            key={item.id}
+                            onChange={() => {
+                                const newItemList = [...itemList];
+                                newItemList[index] = {
+                                    ...newItemList[index],
+                                    activeStatus: ActiveStatus.Suspend
+                                };
+                                setItemList(newItemList);
+                            }}
                             data={{
                                 firstName: item.firstName,
                                 lastName: item.lastName,
                                 pictureUrl: item.pictureUrl,
                                 phoneNumber: item.phoneNumber,
                                 email: item.email,
-                                activeStatus: item.activeStatus
+                                activeStatus: item.activeStatus,
+                                id: item.id
                             }}
                         />
                     ))}

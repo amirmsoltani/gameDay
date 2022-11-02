@@ -45,6 +45,7 @@ query jobRequestGetJobRequests(
                 cVFileUrl
                 id
                 createdDate
+                status
             }
             pageInfo {
                 hasNextPage

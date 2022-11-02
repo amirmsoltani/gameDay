@@ -258,6 +258,10 @@ export const CatalogSkills = styled.div`
                 display:flex;
                 justify-content:center;
             }
+
+            *{
+                cursor:pointer;
+            }
         }
 
         .catalog-skill__list-body{
@@ -289,6 +293,8 @@ export const CatalogSkills = styled.div`
                 align-items:center;
                 justify-content:center;
                 border-right: 3px solid ${palette.primary.light};
+                font-size:.8vw;
+
 
                 :first-of-type , :last-child{
                     border:none;
@@ -299,7 +305,7 @@ export const CatalogSkills = styled.div`
                 justify-content:flex-start;
                 
                 .title__icon{
-                    height:85px;
+                    height:4.4vw;
                     margin-right:20px;
                 }
 
@@ -308,7 +314,7 @@ export const CatalogSkills = styled.div`
                     display:flex;
                     flex-direction:column;
                     justify-content:space-evenly;
-                    font-size:16px;
+                    font-size:.8vw;
                 }
             }
         }
@@ -365,6 +371,13 @@ export const Header = styled(Grid)`
         .link-button__plus{
             fill:${palette.common.white};
             margin-right:10px;
+
+            
+        }
+
+        &.disabled {
+            pointer-events: none;
+            background-color: ${palette.grey.dark};
         }
     }
     `}

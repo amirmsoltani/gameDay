@@ -55,9 +55,9 @@ query getLesson($where: LessonFilterInput, $take: Int, $skip: Int) {
     }
 }
 
-query getCatalogSkill($where: SkillFilterInput, $take: Int, $skip: Int) {
+query getCatalogSkill($where: SkillFilterInput, $take: Int, $skip: Int, $order: [SkillSortInput!]) {
     skill_getSkills {
-        result(where: $where, take: $take, skip: $skip) {
+        result(where: $where, take: $take, skip: $skip, order: $order) {
             items {
                 id
                 iconUrl
@@ -73,6 +73,27 @@ query getCatalogSkill($where: SkillFilterInput, $take: Int, $skip: Int) {
                 hasNextPage
             }
             totalCount
+        }
+        status
+    }
+}
+
+query getSkillWithQuestions($id: Int!) {
+    skill_getSkill(skillId: $id) {
+        result {
+            id
+            title
+            iconUrl
+            skillCategoryId
+            skillQuestions {
+                title
+                id
+                skillQuestionOptions {
+                    id
+                    title
+                    isCorrect
+                }
+            }
         }
         status
     }

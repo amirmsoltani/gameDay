@@ -262,7 +262,8 @@ export function useVideoUploader(callback) {
         if (!(id in fileRef.current)) {
             fileRef.current.id = file;
         }
-        const blobName = `${id}.mp4`;
+        const split = (file as File).name.split(/\./g);
+        const blobName = `${id}.${split[split.length - 1]}`;
         const blockBlobClient = containerClient.getBlockBlobClient(blobName);
         const size = getSize(file);
         dispatch(

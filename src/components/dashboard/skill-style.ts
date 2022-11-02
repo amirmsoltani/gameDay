@@ -106,6 +106,7 @@ export const ListHeader = styled(Grid)`
         align-items: center;
         justify-content: center;
         font-size: 15px;
+        cursor: pointer;
         &.no-center {
             justify-content: flex-start !important;
         }

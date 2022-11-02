@@ -5,11 +5,11 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTheme } from '@mui/material';
 
-const options = ['None', 'suspended'];
+const options = ['suspended'];
 
 const ITEM_HEIGHT = 20;
-
-export default function MoreMenu() {
+type PropsType = { OnClick: () => void };
+const MoreMenu: React.FC<PropsType> = ({ OnClick }) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -51,11 +51,19 @@ export default function MoreMenu() {
                     }
                 }}>
                 {options.map((option) => (
-                    <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                    <MenuItem
+                        key={option}
+                        onClick={() => {
+                            handleClose();
+                            OnClick();
+                        }}
+                        sx={{ display: 'flex', justifyContent: 'center' }}>
                         {option}
                     </MenuItem>
                 ))}
             </Menu>
         </div>
     );
-}
+};
+
+export default MoreMenu;
