@@ -112,7 +112,7 @@ function CatalogPage() {
                         }}>
                         <PlusIcon className="link-button__plus" /> Add New catalog
                     </button>
-                    <Link href={`/catalog/${state.activeCategory}/course`}>
+                    <Link href={`/catalog/course/?id=${state.activeCategory}`}>
                         <a
                             className={`header__link-button ${
                                 !state.activeCategory ? 'disabled' : ''
@@ -120,7 +120,7 @@ function CatalogPage() {
                             <PlusIcon className="link-button__plus" /> Add New course
                         </a>
                     </Link>
-                    <Link href={`/catalog/${state.activeCategory}/add-skill`}>
+                    <Link href={`/catalog/add-skill/?id=${state.activeCategory}`}>
                         <a
                             className={`header__link-button ${
                                 !state.activeCategory ? 'disabled' : ''

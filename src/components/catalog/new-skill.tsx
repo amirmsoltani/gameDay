@@ -1,7 +1,7 @@
 import { Autocomplete, Grid, TextField } from '@mui/material';
 import { Field, Form, Formik, FormikProps } from 'formik';
 import { useRouter } from 'next/router';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
@@ -34,7 +34,12 @@ const NewSkillPage = () => {
     const [search, setSearch] = useState<string>('');
     const formik = useRef<FormikProps<ValueType>>(null);
     const title = useDebounce(search, 1000);
-    const { query } = useRouter();
+    const { query, replace } = useRouter();
+
+    useEffect(() => {
+        if (!query.id) replace('/catalog');
+    }, []);
+
     const skill = useGetSkillWithQuestionsQuery(
         { id: +query.id },
         {
