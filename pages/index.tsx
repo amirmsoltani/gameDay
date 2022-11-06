@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppLayout from '@/layout/app-layout';
-import { GetServerSideProps } from 'next';
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    return { redirect: { destination: '/dashboard', permanent: false } };
-};
+import { useRouter } from 'next/router';
+import Loading from '@/components/loading';
 
 const Dashboard = () => {
-    return <AppLayout>test</AppLayout>;
+    const router = useRouter();
+    useEffect(() => {
+        router.replace('/dashboard');
+    }, []);
+
+    return (
+        <AppLayout>
+            <Loading />
+        </AppLayout>
+    );
 };
 
 export default Dashboard;

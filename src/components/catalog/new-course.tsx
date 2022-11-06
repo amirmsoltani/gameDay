@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import { HeaderWrapper, NewCourseWrapper } from './new-course-style';
 import LessonCard from './lesson-card';
@@ -14,14 +14,15 @@ import VideoPlayer from '../vide-player';
 
 const NewCoursePage = () => {
     const totalItems = useRef<number | null>(null);
-    const {
-        query: { id }
-    } = useRouter();
+    const router = useRouter();
     const [play, setPlay] = useState<string | null>(null);
     const onPlay = (url) => {
         setPlay(url);
     };
+    useEffect(()=>{
+        if (!router.query.id) router.replace('/catalog');
 
+    },[])
     const [itemList, setItemList] = useState<Array<Partial<Lesson> & { key?: string }>>([]);
 
     const [searchText, setSearchText] = useState<string>('');
@@ -34,7 +35,7 @@ const NewCoursePage = () => {
             take: 10,
             skip: 0,
             where: {
-                skillCategoryId: { eq: +id },
+                skillCategoryId: { eq: +router.query.id },
                 title: { contains: finalSearchText },
                 isDeleted: { eq: false }
             }
@@ -136,7 +137,7 @@ const NewCoursePage = () => {
             {itemList.map((lesson, index) => (
                 <LessonCard
                     lesson={{
-                        categoryId: +id,
+                        categoryId:+router.query.id,
                         topics: lesson.topics,
                         title: lesson.title,
                         description: lesson.description,

@@ -8,11 +8,12 @@ const AddSkill = () => {
     const router = useRouter();
     const createSkill = useCreateSkillMutation({
         onSuccess: (data) => {
-            router.replace(`/catalog/${data.skill_addSkill.result.id}/skill`);
+            router.replace(`/catalog/skill/?id=${data.skill_addSkill.result.id}`);
         }
     });
 
     useEffect(() => {
+        if (!router.query.id) router.replace('/catalog');
         createSkill.mutate({ input: { skillCategoryId: +router.query.id } });
     }, []);
     return (
