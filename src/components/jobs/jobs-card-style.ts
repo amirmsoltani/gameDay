@@ -62,7 +62,7 @@ export const CardWrapper = styled.div`
         &.active {
             background-color:${palette.primary.main};
             margin-top:30px;
-            transform: translateX(2.5vw);
+            transform: translateX(2vw);
             color:${palette.common.white};
         }
         &.active .labelText{

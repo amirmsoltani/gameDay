@@ -1,5 +1,14 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
-import { GetUsersQuery } from 'src/graphql/generated';
+import {
+    ActiveStatus,
+    GetAllUsersQuery,
+    GetUsersQuery,
+    SortEnumType,
+    useInfiniteGetAllUsersQuery,
+    User,
+    UserSortInput,
+    UserType
+} from 'src/graphql/generated';
 import { Grid } from '@mui/material';
 import React, { useRef, useState } from 'react';
 import * as S from './admin-style';
@@ -8,14 +17,69 @@ import SearchInput from '../base/input/search-input';
 import Link from 'next/link';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import AdminManagementList from './admin-list';
+import Loading from '../loading';
+import Sort from '../sort';
 
 function AdminManagement() {
-    const [itemList, setItemList] = useState<GetUsersQuery['user_getUsers']['result']['items']>([]);
+    const [sort, setSort] = useState<UserSortInput>({
+        firstName: SortEnumType.Asc,
+        lastName: SortEnumType.Asc
+    });
+    const sorting =
+        (name: keyof UserSortInput | { [key: string]: object | SortEnumType }) => () => {
+            if (typeof name === 'object') {
+                setSort(name);
+                return;
+            }
+            if (sort[name] === SortEnumType.Asc) {
+                setSort({ [name]: SortEnumType.Desc });
+            } else {
+                setSort({ [name]: SortEnumType.Asc });
+            }
+        };
+    const [itemList, setItemList] = useState<GetAllUsersQuery['user_getUsers']['result']['items']>(
+        []
+    );
     const totalItems = useRef<number | null>(null);
-
     const [searchText, setSearchText] = useState<string>('');
     const finalSearchText = useDebounce(searchText, 500);
+    const [end, setEnd] = useState(false);
 
+    const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetAllUsersQuery(
+        {
+            take: 20,
+            skip: 0,
+            where: {
+                userType: { in: [UserType.Admin, UserType.Admin2Level] },
+                email: { contains: finalSearchText }
+            },
+            order: sort
+        },
+
+        {
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
+            keepPreviousData: true,
+            onSuccess: ({ pages }) => {
+                const length = pages.length;
+                if (length === 1) {
+                    totalItems.current = pages[0].user_getUsers!.result!.totalCount;
+                    setItemList([...pages[0].user_getUsers.result.items]);
+                } else {
+                    setItemList([
+                        ...itemList,
+                        ...(pages[length - 1].user_getUsers.result.items || [])
+                    ]);
+                }
+                if (pages[length - 1].user_getUsers.result.pageInfo.hasNextPage === false) {
+                    setEnd(true);
+                }
+            },
+            getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
+        }
+    );
+
+    if (isLoading) return <Loading />;
     return (
         <S.Content>
             <LayoutHeader>
@@ -39,22 +103,56 @@ function AdminManagement() {
             <S.ListWrapper display={'grid'} gridTemplateRows="repeat(12, 1fr)">
                 <S.ListHeader container gridRow={'span 1'}>
                     <Grid lg={0.5} xs={12} item />
-                    <Grid lg={2.5} xs={12} className={'list-header__item no-center'} item>
-                        Sort by
+                    <Grid
+                        lg={2.5}
+                        xs={12}
+                        className={'list-header__item no-center'}
+                        item
+                        onClick={sorting(
+                            sort.firstName === SortEnumType.Asc
+                                ? { firstName: SortEnumType.Desc, lastName: SortEnumType.Desc }
+                                : { firstName: SortEnumType.Asc, lastName: SortEnumType.Asc }
+                        )}>
+                        User Name
+                        <Sort name="firstName" sortObject={sort} />
                     </Grid>
-                    <Grid lg={2.5} xs={12} className={'list-header__item'} item>
+                    <Grid
+                        lg={2.5}
+                        xs={12}
+                        className={'list-header__item'}
+                        item
+                        onClick={sorting('email')}>
                         User Email
+                        <Sort name="email" sortObject={sort} />
                     </Grid>
-                    <Grid lg={3} xs={12} className={'list-header__item'} item>
+                    <Grid
+                        lg={3}
+                        xs={12}
+                        className={'list-header__item'}
+                        item
+                        onClick={sorting('phoneNumber')}>
                         User Phone number
+                        <Sort name="phoneNumber" sortObject={sort} />
                     </Grid>
                     <Grid lg={2.5} xs={12} className={'list-header__item'} item>
-                        ccess
+                        access
                     </Grid>
                     <Grid lg={0.5} xs={12} className={'list-header__item'} item></Grid>
                 </S.ListHeader>
                 <S.ListBody gridRow={'span 11'}>
-                    <AdminManagementList />
+                    {itemList.map((user, index) => (
+                        <AdminManagementList
+                            data={user as Partial<User>}
+                            onSuspended={() => {
+                                const newItemList = [...itemList];
+                                newItemList[index] = {
+                                    ...newItemList[index],
+                                    activeStatus: ActiveStatus.Suspend
+                                };
+                                setItemList(newItemList);
+                            }}
+                        />
+                    ))}
                 </S.ListBody>
             </S.ListWrapper>
         </S.Content>

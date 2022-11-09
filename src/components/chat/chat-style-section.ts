@@ -24,6 +24,7 @@ export const ChatWrapper = styled.div`
         margin-right: 10px;
     }
     .chat-info {
+        padding-right: 30px;
         .info__user {
             display: flex;
             flex-direction: column;
@@ -80,6 +81,7 @@ export const ChatWrapper = styled.div`
                 fill:${palette.primary.main}B0;
                 text-decoration: none;
                 color:${palette.common.black};
+                padding-right:15px;
 
                 &.file{
                     background-color:${palette.primary.light};

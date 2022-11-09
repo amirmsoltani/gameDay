@@ -27,6 +27,8 @@ query getAllUsers($take: Int, $skip: Int, $where: UserFilterInput, $order: [User
                 phoneNumber
                 email
                 activeStatus
+              	userRoles{role{id,title}},
+              	userType
             }
             pageInfo {
                 hasNextPage

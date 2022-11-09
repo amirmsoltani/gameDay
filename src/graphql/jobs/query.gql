@@ -24,6 +24,41 @@ query getJobs($where: JobFilterInput, $take: Int, $skip: Int) {
     }
 }
 
+query getJob($id:Int!){
+  job_getJob(jobId:$id){
+    result{
+      id,
+      title,
+      jobType,
+      experienceLevel,
+      education,
+      salary,
+      country,
+      city,
+      description,
+      jobCategory{
+        id
+        title,
+      }
+      company{
+        id,
+        title,
+        iconUrl
+      }
+      
+    }
+    status
+  }
+  jobSkill_getJobSkills{
+    result(where:{jobId:{eq:$id}}){
+      items{
+        skill{title iconUrl id}
+      }
+    }
+    status
+  }
+}
+
 query jobRequestGetJobRequests(
     $skip: Int
     $take: Int
