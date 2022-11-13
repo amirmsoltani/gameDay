@@ -77,6 +77,7 @@ export const LeftSide = styled(Grid)`
 `;
 
 export const RightSide = styled(Grid)`
-     height: 100%;
+    padding-left:30px;
+    height: 100%;
     max-height: 100%;
 `;

@@ -63,8 +63,18 @@ export const Header = styled(Grid)`
         border-radius: 6px;
         display: flex;
         align-items: center;
+        justify-content: center;
         text-decoration: none;
         font-size: 14px;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        :disabled {
+            background-color: gray;
+        }
+        svg{
+            height: 30px;
+        }
     }
 
     ${({ theme: { palette } }) => `
@@ -236,6 +246,33 @@ export const Content = styled(Grid)`
 `;
 
 export const ListWrapper = styled(Grid)`
+    .form__container {
+        .form__control {
+            padding-right: 30px;
+
+            .MuiOutlinedInput-notchedOutline {
+                border: none;
+                box-shadow: 0px 2px 4px #1717172e;
+                border-radius: 5px;
+            }
+
+            .MuiAutocomplete-tag {
+                font-size: 18px;
+                background-color: #dcd0f3;
+                padding: 5px 30px;
+                color: #404040;
+                svg {
+                    display: none;
+                }
+            }
+            input,
+            textarea {
+                ::placeholder {
+                    color: #8898aa;
+                }
+            }
+        }
+    }
     /* display: flex; */
     /* flex-direction: row; */
 

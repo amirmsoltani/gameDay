@@ -61,7 +61,17 @@ export const JobLearn = styled.div`
             width: 55px;
             height: 50px;
             background-color: ${palette.primary.main};
-            fill:${palette.common.white};
+            a{
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                width:100%;
+                height:100%;
+                cursor:pointer;
+                fill:${palette.common.white};
+
+               
+            }
         }
     }
 

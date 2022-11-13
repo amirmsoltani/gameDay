@@ -19,7 +19,7 @@ function JobsPage() {
     const [end, setEnd] = useState(false);
     const [state, setState] = useState<{ activeCategory?: number } | null>(null);
     const { isLoading, isFetchingNextPage, fetchNextPage } = useInfiniteGetJobsQuery(
-        { take: 5, skip: 0, where: { title: { contains: finalSearchText } } },
+        { take: 10, skip: 0, where: { title: { contains: finalSearchText } } },
 
         {
             refetchOnWindowFocus: false,

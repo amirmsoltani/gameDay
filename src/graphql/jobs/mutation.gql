@@ -1,32 +1,69 @@
-mutation job_addJob($input: JobInput) {
-    job_addJob(input: $input) {
-        status
+mutation beforeCreateJob($companyInput: CompanyInput!, $categoryInput: JobCategoryInput!) {
+    company_addCompany(input: $companyInput) {
         result {
-            city
-            company {
-                id
-                title
-            }
-            description
-            education
-            experienceLevel
-            salary
-            title
-            jobType
             id
         }
+        status
+    }
+    jobCategory_addJobCategory(input: $categoryInput) {
+        result {
+            id
+        }
+        status
     }
 }
 
-mutation updateJobStatus($input:JobStatusInput!){
-  job_changeStatus(input:$input){
-    status
-  }
+mutation addJob($input: JobInput!) {
+    job_addJob(input: $input) {
+        result {
+            id
+        }
+        status
+    }
 }
 
-mutation updateJobRequestStatus($input:SetStatusJobRequestInput!){
-  jobRequest_setStatusJobRequest(input:$input)
-  {
-    status
-  }
+mutation addJobSkill($input: JobSkillInput) {
+    jobSkill_addJobSkill(input: $input) {
+        result {
+            id
+        }
+        status
+    }
+}
+
+mutation deleteJobSkill($id: Int!) {
+    jobSkill_deleteJobSkill(id: $id) {
+        status
+    }
+}
+
+mutation updateJob(
+    $jobId: Int!
+    $jobInput: JobInput!
+    $companyId: Int!
+    $companyInput: CompanyInput!
+    $categoryId: Int!
+    $categoryInput: JobCategoryInput
+) {
+    job_updateJob(id: $jobId, input: $jobInput) {
+        status
+    }
+    jobCategory_updateJobCategory(id: $categoryId, input: $categoryInput) {
+        status
+    }
+    company_updateCompany(id: $companyId, input: $companyInput) {
+        status
+    }
+}
+
+mutation updateJobStatus($input: JobStatusInput!) {
+    job_changeStatus(input: $input) {
+        status
+    }
+}
+
+mutation updateJobRequestStatus($input: SetStatusJobRequestInput!) {
+    jobRequest_setStatusJobRequest(input: $input) {
+        status
+    }
 }

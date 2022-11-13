@@ -11,8 +11,6 @@ import {
     useUpdateJobRequestStatusMutation
 } from 'src/graphql/generated';
 import { MImage } from '../base/image/MImage';
-import { PrimarySpinner } from '../base/loader/spinner';
-import { MButton } from '../base/MButton';
 import Loading from '../loading';
 import Sort from '../sort';
 import * as S from './applicant-style';
@@ -120,9 +118,11 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                     </Grid>
                 </Grid>
                 <div className="box-btn__btn">
-                    <MButton>
-                        <SaveIcon />
-                    </MButton>
+                    <Link href={`/jobs/add-jobs?id=${id}`}>
+                        <a>
+                            <SaveIcon />
+                        </a>
+                    </Link>
                 </div>
             </div>
 
@@ -137,8 +137,7 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                         fetchNextPage();
                     }
                 }}
-                className="table__wrapper"
-                >
+                className="table__wrapper">
                 {itemList.map((request) => (
                     <div className="jobs__card-body" key={request.id}>
                         <Grid container className="card-body__item">
@@ -169,7 +168,7 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                                 </Link>
                             </Grid>
 
-                            <Grid md={2.5} xs={2.4} className="detail__item" item >
+                            <Grid md={2.5} xs={2.4} className="detail__item" item>
                                 <Situation
                                     value={request.status}
                                     onChange={(status) => {
@@ -180,7 +179,6 @@ const ApplicantList: FC<PropsType> = ({ id }) => {
                                 />
                             </Grid>
                         </Grid>
-                        
                     </div>
                 ))}
             </div>
