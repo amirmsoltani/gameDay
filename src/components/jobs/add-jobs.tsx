@@ -443,7 +443,8 @@ const AddJobs: FC<PropsType> = () => {
                             </Grid>
                             <Grid item lg={13} marginBottom={5} className="form__control">
                                 <label>Soft skills required</label>
-                                {router.query.id !== undefined && job.status === 'success' ? (
+                                {(router.query.id !== undefined && job.status === 'success') ||
+                                router.query.id === undefined ? (
                                     <Autocomplete
                                         isOptionEqualToValue={(option, value) =>
                                             option.value === value.value
