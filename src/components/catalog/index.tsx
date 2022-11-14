@@ -165,9 +165,10 @@ function CatalogPage() {
                                 lesson: item.lessons?.length || 0,
                                 star: item.rate,
                                 title: item.title,
-                                notification: !!item.comments?.find(
-                                    (comment) => comment.status !== CommentStatus.Accepted
-                                )
+                                // notification: !!item.comments?.find(
+                                //     (comment) => comment.status !== CommentStatus.Accepted
+                                // )
+                                notification: false
                             }}
                         />
                     ))}
