@@ -41,7 +41,7 @@ query message_getConversation(
     $where: MessagesFilterInput
     $order: [MessagesSortInput!]
 ) {
-    message_getConversation(conversationId: $conversationId) {
+    message_getFullConversation(conversationId: $conversationId) {
         result(skip: $skip, take: $take, where: $where, order: $order) {
             items {
                 senderId
