@@ -46,15 +46,15 @@ const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
                 onSuccess: ({ pages }) => {
                     const length = pages.length;
                     if (length === 1) {
-                        setItemList([...pages[0].message_getConversation.result.items]);
+                        setItemList([...pages[0].message_getFullConversation.result.items]);
                     } else {
                         setItemList([
                             ...itemList,
-                            ...(pages[length - 1].message_getConversation.result.items || [])
+                            ...(pages[length - 1].message_getFullConversation.result.items || [])
                         ]);
                     }
                     if (
-                        pages[length - 1].message_getConversation.result.pageInfo.hasNextPage ===
+                        pages[length - 1].message_getFullConversation.result.pageInfo.hasNextPage ===
                         false
                     ) {
                         setEnd(true);
