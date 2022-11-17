@@ -3,3 +3,9 @@ mutation changeUserActiveStatus($id: Int!) {
         status
     }
 }
+
+mutation unSuspendUser($id: Int!) {
+    user_resumeAccount(userId: $id) {
+        status
+    }
+}

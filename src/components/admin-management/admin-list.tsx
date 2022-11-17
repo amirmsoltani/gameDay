@@ -7,14 +7,25 @@ import MoreMenu from '../users/user-more-menu';
 import { OutlineDashboardIcon } from 'src/assets/icons/outline-dashboard';
 import { PeopleIcon } from 'src/assets/icons/people';
 import { ViewListIcon } from 'src/assets/icons/view-list';
-import { useChangeUserActiveStatusMutation, User } from 'src/graphql/generated';
+import {
+    ActiveStatus,
+    useChangeUserActiveStatusMutation,
+    User,
+    useUnSuspendUserMutation
+} from 'src/graphql/generated';
 
-type PropsType = { data: Partial<User>; onSuspended: () => void };
+type PropsType = { data: Partial<User>; onSuspended: (status: ActiveStatus) => void };
 
 const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
     const updateUserActiveStatus = useChangeUserActiveStatusMutation({
         onSuccess: () => {
-            onSuspended();
+            onSuspended(ActiveStatus.Suspend);
+        }
+    });
+
+    const unSuspend = useUnSuspendUserMutation({
+        onSuccess: () => {
+            onSuspended(ActiveStatus.Accepted);
         }
     });
 
@@ -47,8 +58,11 @@ const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
                 </Grid>
                 <Grid lg={0.5} xs={12} className={'list-header__item'} item>
                     <MoreMenu
+                        status={data.activeStatus}
                         OnClick={() => {
-                            updateUserActiveStatus.mutate({ id: data.id });
+                            data.activeStatus === ActiveStatus.Accepted
+                                ? updateUserActiveStatus.mutate({ id: data.id })
+                                : unSuspend.mutate({ id: data.id });
                         }}
                     />
                 </Grid>

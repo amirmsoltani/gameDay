@@ -143,11 +143,11 @@ function AdminManagement() {
                     {itemList.map((user, index) => (
                         <AdminManagementList
                             data={user as Partial<User>}
-                            onSuspended={() => {
+                            onSuspended={(status: ActiveStatus) => {
                                 const newItemList = [...itemList];
                                 newItemList[index] = {
                                     ...newItemList[index],
-                                    activeStatus: ActiveStatus.Suspend
+                                    activeStatus: status
                                 };
                                 setItemList(newItemList);
                             }}

@@ -43,12 +43,34 @@ const CatalogCommentsSection: FC<PropsType> = ({ id }) => {
         }
     );
 
+    const onDelete = (index: number) => {
+        const newList = [...itemList];
+        newList.splice(index, 1);
+        setItemList(newList);
+    };
+
     if (comments.isLoading) <Loading />;
     return (
-        <CatalogComment>
+        <CatalogComment
+            onScroll={(event: any) => {
+                const { scrollTop, scrollHeight, clientHeight } = event.target;
+                if (
+                    scrollTop + clientHeight >= scrollHeight * 0.5 &&
+                    !end &&
+                    !comments.isFetchingNextPage
+                ) {
+                    comments.fetchNextPage();
+                }
+            }}>
             <div className="comment__title">Comments</div>
-            {itemList.map((comment) => (
-                <CommentCard key={comment.id} comment={comment as any} setPlay={setPlay} />
+            {itemList.map((comment, index) => (
+                <CommentCard
+                    key={comment.id}
+                    comment={comment as any}
+                    setPlay={setPlay}
+                    index={index}
+                    onDelete={onDelete}
+                />
             ))}
             <VideoPlayer
                 url={play}

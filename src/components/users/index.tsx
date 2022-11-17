@@ -5,16 +5,12 @@ import * as S from './users-style';
 import useDebounce from 'src/hooks/useDebounce';
 import SearchInput from '../base/input/search-input';
 import {
-    ActiveStatus,
     GetAllUsersQuery,
     SortEnumType,
     useInfiniteGetAllUsersQuery,
     UserSortInput
 } from 'src/graphql/generated';
-import { PlusIcon } from 'src/assets/common/PlusIcon';
-import Link from 'next/link';
 import { UserList } from './user-list';
-import { PrimarySpinner } from '../base/loader/spinner';
 import Loading from '../loading';
 import Sort from '../sort';
 
@@ -146,11 +142,11 @@ function UsersPage() {
                     {itemList.map((item, index) => (
                         <UserList
                             key={item.id}
-                            onChange={() => {
+                            onChange={(status) => {
                                 const newItemList = [...itemList];
                                 newItemList[index] = {
                                     ...newItemList[index],
-                                    activeStatus: ActiveStatus.Suspend
+                                    activeStatus: status
                                 };
                                 setItemList(newItemList);
                             }}
