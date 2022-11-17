@@ -25,6 +25,7 @@ import { useCreateAdminMutation } from 'src/graphql/generated';
 import { useRouter } from 'next/router';
 import { fbSignUpToken } from 'src/auth/firebase';
 import { PrimarySpinner } from '../base/loader/spinner';
+import { access } from 'fs';
 
 interface InitailValuesProps {
     name: string;
@@ -135,7 +136,9 @@ function AddAdmin() {
                                         phoneNumber: values.phone,
                                         firstName: values.name,
                                         lastName: values.lastName,
-                                        roleIds: values.access.map((access) => access.id),
+                                        roleIds: values.access
+                                            .filter((access) => access.value)
+                                            .map((access) => access.id),
                                         firebaseToken: response as string
                                     }
                                 });
