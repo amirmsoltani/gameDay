@@ -75,6 +75,16 @@ export const Header = styled(Grid)`
         align-items: center;
         text-decoration: none;
         font-size: 14px;
+        position: relative;
+        width: 125px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+        svg {
+            height: 25px;
+        }
     }
 
     ${({ theme: { palette } }) => `
@@ -112,4 +122,29 @@ export const Content = styled(Grid)`
 export const ListWrapper = styled(Grid)`
     padding: 18px 15px 0 15px;
     height: 100%;
+
+    .admin__access {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 2px 4px #1717172e;
+        padding: 30px;
+        margin-top: 10px;
+    }
+
+    ${({ theme: { palette } }) => `
+
+    .access__input{
+     .MuiFormControlLabel-label {
+        margin-left:20px;
+        display:flex;
+        justify-content:center;
+        fill:${palette.primary.main};
+         color:${palette.primary.main};
+         svg{
+            margin-right:30px;
+         }
+       }
+    }
+    
+    `}
 `;

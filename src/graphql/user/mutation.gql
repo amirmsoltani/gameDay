@@ -9,3 +9,9 @@ mutation unSuspendUser($id: Int!) {
         status
     }
 }
+
+mutation createAdmin($input:CreateAdminInput!){
+  user_createAdmin(input:$input){
+    status
+  }
+}

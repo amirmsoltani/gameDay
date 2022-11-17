@@ -13,6 +13,25 @@ import {
     User,
     useUnSuspendUserMutation
 } from 'src/graphql/generated';
+import DashboardIcon from 'src/assets/icons/dashboard-icon';
+import CatalogIcon from 'src/assets/icons/catalog-icon';
+import JobIcon from 'src/assets/icons/job-icon';
+import CheckResumeIcon from 'src/assets/icons/check-resume-icon';
+import InterviewIcon from 'src/assets/icons/interview-icon';
+import CareerCoachIcon from 'src/assets/icons/career-coach-icon';
+import UserIcon from 'src/assets/icons/user-icon';
+import ManagementIcon from 'src/assets/icons/management-icon';
+
+const MapTextToIcon = {
+    Dashboard: <DashboardIcon key={1} />,
+    Catalogs: <CatalogIcon key={2} />,
+    Jobs: <JobIcon key={3} />,
+    'Check resume': <CheckResumeIcon key={4} />,
+    'Interview Practice': <InterviewIcon key={5} />,
+    'Career Coach': <CareerCoachIcon key={6} />,
+    Users: <UserIcon key={7} />,
+    "Admin Management": <ManagementIcon key={8} />
+};
 
 type PropsType = { data: Partial<User>; onSuspended: (status: ActiveStatus) => void };
 
@@ -40,7 +59,7 @@ const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
                                 resources={{ fallback: '/images/user.jpg', src: data.pictureUrl }}
                                 className="user__avatar"
                             />
-                            {data.firstName}
+                            {data.firstName + ' '}
                             {data.lastName}
                         </span>
                     </Grid>
@@ -52,9 +71,7 @@ const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
                     {data?.phoneNumber || '-'}
                 </Grid>
                 <Grid lg={2.5} xs={12} className={'list-header__item'} item>
-                    <OutlineDashboardIcon />
-                    <PeopleIcon />
-                    <ViewListIcon />
+                    {data.userRoles.map((role) => MapTextToIcon[role.role.title])}
                 </Grid>
                 <Grid lg={0.5} xs={12} className={'list-header__item'} item>
                     <MoreMenu

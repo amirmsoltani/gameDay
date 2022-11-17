@@ -2,7 +2,6 @@ import LayoutHeader from '@/layout/app-layout/layout-header';
 import {
     ActiveStatus,
     GetAllUsersQuery,
-    GetUsersQuery,
     SortEnumType,
     useInfiniteGetAllUsersQuery,
     User,
@@ -142,6 +141,7 @@ function AdminManagement() {
                 <S.ListBody gridRow={'span 11'}>
                     {itemList.map((user, index) => (
                         <AdminManagementList
+                            key={user.id}
                             data={user as Partial<User>}
                             onSuspended={(status: ActiveStatus) => {
                                 const newItemList = [...itemList];
