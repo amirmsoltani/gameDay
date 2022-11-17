@@ -4,12 +4,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useTheme } from '@mui/material';
+import { ActiveStatus } from 'src/graphql/generated';
 
 const options = ['suspended'];
 
 const ITEM_HEIGHT = 20;
-type PropsType = { OnClick: () => void };
-const MoreMenu: React.FC<PropsType> = ({ OnClick }) => {
+type PropsType = { OnClick: () => void ,status:ActiveStatus};
+const MoreMenu: React.FC<PropsType> = ({ OnClick,status }) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -58,7 +59,7 @@ const MoreMenu: React.FC<PropsType> = ({ OnClick }) => {
                             OnClick();
                         }}
                         sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {option}
+                        {status === ActiveStatus.Accepted?"suspended":"unSuspend"}
                     </MenuItem>
                 ))}
             </Menu>

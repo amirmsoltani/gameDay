@@ -94,3 +94,15 @@ mutation updateCatalogSkill($id: Int!, $input: SkillInput!) {
         status
     }
 }
+
+mutation updateComment($id:Int!,$input:UpdateCommentInput!){
+  comment_updateComment(id:$id,input:$input){
+    status
+  }
+}
+
+mutation deleteCmment($id:Int!){
+  comment_deleteComment(id:$id){
+    status
+  }
+}

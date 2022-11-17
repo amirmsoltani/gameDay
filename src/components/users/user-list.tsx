@@ -3,7 +3,11 @@ import React, { FC } from 'react';
 import * as S from './users-style';
 import MoreMenu from './user-more-menu';
 import { MImage } from '../base/image/MImage';
-import { ActiveStatus, useChangeUserActiveStatusMutation } from 'src/graphql/generated';
+import {
+    ActiveStatus,
+    useChangeUserActiveStatusMutation,
+    useUnSuspendUserMutation
+} from 'src/graphql/generated';
 
 type PropsType = {
     data: {
@@ -15,13 +19,19 @@ type PropsType = {
         email?: string;
         activeStatus?: ActiveStatus;
     };
-    onChange: () => void;
+    onChange: (status: ActiveStatus) => void;
 };
 
 export const UserList: FC<PropsType> = ({ data, onChange }) => {
     const updateUserActiveStatus = useChangeUserActiveStatusMutation({
         onSuccess: () => {
-            onChange();
+            onChange(ActiveStatus.Suspend);
+        }
+    });
+
+    const unSuspend = useUnSuspendUserMutation({
+        onSuccess: () => {
+            onChange(ActiveStatus.Accepted);
         }
     });
     return (
@@ -51,12 +61,28 @@ export const UserList: FC<PropsType> = ({ data, onChange }) => {
                         'Normal'
                     ) : (
                         <>
-                            <div style={{width:15,height:15,backgroundColor:'red',borderRadius:'50%',marginRight:15}} /> suspended
+                            <div
+                                style={{
+                                    width: 15,
+                                    height: 15,
+                                    backgroundColor: 'red',
+                                    borderRadius: '50%',
+                                    marginRight: 15
+                                }}
+                            />{' '}
+                            suspended
                         </>
                     )}
                 </Grid>
                 <Grid lg={0.5} xs={12} className={'list-header__item'} item>
-                    <MoreMenu OnClick={() => updateUserActiveStatus.mutate({ id: data.id })} />
+                    <MoreMenu
+                        OnClick={() => {
+                            data.activeStatus === ActiveStatus.Accepted
+                                ? updateUserActiveStatus.mutate({ id: data.id })
+                                : unSuspend.mutate({ id: data.id });
+                        }}
+                        status={data.activeStatus}
+                    />
                 </Grid>
             </S.ListBodyUser>
             <Divider orientation="vertical" flexItem />

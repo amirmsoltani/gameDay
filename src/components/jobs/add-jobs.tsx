@@ -2,25 +2,20 @@ import LayoutHeader from '@/layout/app-layout/layout-header';
 import {
     Education,
     ExperienceLevel,
-    GetUsersQuery,
     JobType,
-    Topic,
     useAddJobMutation,
     useAddJobSkillMutation,
     useBeforeCreateJobMutation,
-    useCreateTopicMutation,
     useGetJobQuery,
     useGetSkillsQuery,
-    useUpdateJobMutation,
-    useUpdateTopicMutation
+    useUpdateJobMutation
 } from 'src/graphql/generated';
-import { Grid, Typography, Alert, Box, Autocomplete, TextField } from '@mui/material';
-import React, { useCallback, useRef, useState, FC } from 'react';
+import { Grid, Autocomplete, TextField } from '@mui/material';
+import React, { useRef, useState, FC } from 'react';
 import * as S from './add-jobs-style';
 import * as Yup from 'yup';
 import { InferType } from 'yup';
 import { MInputFormik } from '@/components/base/input/formik';
-import { Spacer } from '@/components/base/spacer';
 import Link from 'next/link';
 import { LeftArrowIcon } from 'src/assets/common/LeftArrowIcon';
 import { SearchIconExercise } from 'src/assets/exercise/search-icon';
@@ -29,7 +24,6 @@ import { InputTextarea } from '../base/input/input-textarea';
 import UploadComponent from '../upload/upload';
 import { MSelectFormik } from '../base/input/MSelect';
 import useDebounce from 'src/hooks/useDebounce';
-import Skill from 'pages/catalog/skill';
 import { useRouter } from 'next/router';
 import { PrimarySpinner } from '../base/loader/spinner';
 

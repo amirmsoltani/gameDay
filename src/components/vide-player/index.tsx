@@ -14,7 +14,7 @@ const VideoPlayer: FC<PropsType> = ({ url, onClose }) => {
                     onClose();
                 }
             }}>
-            <video controls>
+            <video controls className='player__video'>
                 <source src={url} />
             </video>
         </VideoPlayerWrapper>

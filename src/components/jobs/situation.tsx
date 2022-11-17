@@ -5,13 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { JobStatus, UpdateJobStatusDocument } from 'src/graphql/generated';
 
-enum StatusToInt {
-    ACCEPTED = 1,
-    INTERVIEW = 3,
-    NOT_QUALIFIED = 2,
-    PENDING = 0
-}
-
 enum StatusToColor {
     ACCEPTED = '#02C954',
     INTERVIEW = '#8CE2EE',
@@ -19,14 +12,14 @@ enum StatusToColor {
     PENDING = '#DCD0F3'
 }
 
-type PropsType = { value: JobStatus; onChange: (status: number) => void };
+type PropsType = { value: JobStatus; onChange: (status: JobStatus) => void };
 const Situation: React.FC<PropsType> = ({ value, onChange }) => {
     const [situation, setSituation] = React.useState(value);
 
     const handleChange = (event: SelectChangeEvent) => {
         const status = event.target.value as JobStatus;
         setSituation(status);
-        onChange(StatusToInt[status]);
+        onChange(status);
     };
 
     return (

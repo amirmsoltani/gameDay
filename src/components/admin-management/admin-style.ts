@@ -106,6 +106,7 @@ export const ListBodyUser = styled(Grid)`
         align-items: center;
         justify-content: center;
         font-size: 15px;
+
         &.no-center {
             justify-content: flex-start !important;
         }
@@ -124,6 +125,14 @@ export const ListBodyUser = styled(Grid)`
 
     ${({ theme: { palette } }) => `
     background-color:${palette.common.white};
+
+    .list-header__item{
+        svg{
+            margin: 0 5px;
+            height:24px;
+            fill:${palette.primary.main}
+        }
+    }
 `}
 `;
 
