@@ -98,3 +98,36 @@ query getSkillWithQuestions($id: Int!) {
         status
     }
 }
+
+query getComments($skip: Int, $take: Int, $where: CommentFilterInput, $order: [CommentSortInput!]) {
+    comment_getComments {
+        result(skip: $skip, take: $take, where: $where, order: $order) {
+            items {
+                id
+                rate
+                status
+                replyText
+                text
+                skillCategory {
+                    title
+                }
+                lesson {
+                    topics {
+                        title
+                        description
+                        fileUrl
+                    }
+                }
+                user {
+                    pictureUrl
+                    firstName
+                    lastName
+                }
+            }
+            pageInfo {
+                hasNextPage
+            }
+        }
+        status
+    }
+}

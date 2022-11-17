@@ -10,4 +10,9 @@ export const VideoPlayerWrapper = styled.div`
     display: grid;
     place-content: center;
     backdrop-filter: blur(5px);
+
+    .player__video{
+        max-height:37vmax;
+        max-width:100%;
+    }
 `;

@@ -65,9 +65,11 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                 }
             }}>
             <div className="catalog-learn__box-btn">
-                <MButton className="box-btn__btn">
-                    <CommentIcon />
-                </MButton>
+                <Link href={'/catalog/?comment=true'}>
+                    <a className="box-btn__btn">
+                        <CommentIcon />
+                    </a>
+                </Link>
                 <Link href={`/catalog/course?id=${id}`}>
                     <a className="box-btn__btn">
                         <SaveIcon />

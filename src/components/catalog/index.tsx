@@ -1,7 +1,8 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
 import { Grid } from '@mui/material';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
 import { CloseIcon } from 'src/assets/common/CloseIcon';
 import { PlusIcon } from 'src/assets/common/PlusIcon';
 import {
@@ -16,11 +17,19 @@ import SearchInput from '../base/input/search-input';
 import { PrimarySpinner } from '../base/loader/spinner';
 import UploadComponent from '../upload/upload';
 import CatalogCard from './catalog-card';
+import CatalogCommentsSection from './catalog-comments';
 import CatalogLearnSection from './catalog-learn';
 import CatalogSkillSection from './catalog-skills';
 import * as S from './catalog-style';
 
+const tab = {
+    learn: CatalogLearnSection,
+    skills: CatalogSkillSection,
+    comments: CatalogCommentsSection
+};
+
 function CatalogPage() {
+    const router = useRouter();
     const totalItems = useRef<number | null>(null);
     const [itemList, setItemList] = useState<
         GetCategoriesQuery['skillcategory_getSkillCategories']['result']['items']
@@ -29,9 +38,10 @@ function CatalogPage() {
     const finalSearchText = useDebounce(searchText, 500);
 
     const [end, setEnd] = useState(false);
-    const [state, setState] = useState<{ tab: 'skills' | 'learn'; activeCategory?: number } | null>(
-        null
-    );
+    const [state, setState] = useState<{
+        tab: 'skills' | 'learn' | 'comments';
+        activeCategory?: number;
+    } | null>(null);
     const [isShow, setIsShow] = useState(false);
     const [newCatalog, setNewCatalog] = useState<{
         image?: string;
@@ -86,12 +96,21 @@ function CatalogPage() {
         }
     });
 
+    useEffect(() => {
+        if (state && router.query.comment) {
+            setState({ tab: 'comments', activeCategory: state.activeCategory });
+            router.back();
+        }
+    }, [router.query.comment]);
+
     if (isLoading || !state)
         return (
             <S.Content display={'flex'} justifyContent="center" alignItems="center">
                 <PrimarySpinner />
             </S.Content>
         );
+
+    const Tab = tab[state.tab];
 
     return (
         <S.Content container>
@@ -165,10 +184,9 @@ function CatalogPage() {
                                 lesson: item.lessons?.length || 0,
                                 star: item.rate,
                                 title: item.title,
-                                // notification: !!item.comments?.find(
-                                //     (comment) => comment.status !== CommentStatus.Accepted
-                                // )
-                                notification: false
+                                notification: !!item.comments?.find(
+                                    (comment) => comment.status !== CommentStatus.Accepted
+                                )
                             }}
                         />
                     ))}
@@ -176,11 +194,7 @@ function CatalogPage() {
                 <Grid item xs={0} md={1} className="left-side__column" />
             </S.LeftSide>
             <S.RightSide container item md={7.5} xs={12}>
-                {state.tab === 'learn' ? (
-                    <CatalogLearnSection id={state.activeCategory} />
-                ) : (
-                    <CatalogSkillSection id={state.activeCategory} />
-                )}
+                {<Tab id={state.activeCategory} />}
             </S.RightSide>
             {isShow && (
                 <Grid

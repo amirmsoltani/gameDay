@@ -6,7 +6,7 @@ export const CardWrapper = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 14px 14px;
-    height: 210px;
+    min-height: 210px;
     border-radius: 20px;
     margin-top: 15px;
     font-size: 14px;
