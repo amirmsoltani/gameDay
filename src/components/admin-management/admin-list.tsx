@@ -4,9 +4,6 @@ import * as S from './admin-style';
 
 import { MImage } from '../base/image/MImage';
 import MoreMenu from '../users/user-more-menu';
-import { OutlineDashboardIcon } from 'src/assets/icons/outline-dashboard';
-import { PeopleIcon } from 'src/assets/icons/people';
-import { ViewListIcon } from 'src/assets/icons/view-list';
 import {
     ActiveStatus,
     useChangeUserActiveStatusMutation,
@@ -30,7 +27,7 @@ const MapTextToIcon = {
     'Interview Practice': <InterviewIcon key={5} />,
     'Career Coach': <CareerCoachIcon key={6} />,
     Users: <UserIcon key={7} />,
-    "Admin Management": <ManagementIcon key={8} />
+    'Admin Management': <ManagementIcon key={8} />
 };
 
 type PropsType = { data: Partial<User>; onSuspended: (status: ActiveStatus) => void };

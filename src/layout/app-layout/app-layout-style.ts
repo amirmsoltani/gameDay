@@ -47,7 +47,6 @@ export const Content = styled(Box)`
     background-color: #f8f8f8;
     max-height: 100vh;
     position: relative;
-
 `;
 
 export const Body = styled(Box)`
@@ -96,6 +95,12 @@ export const LogoBox = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    span {
+        margin-left: 12px;
+        text-transform: capitalize;
+    }
 `;
 
 export const Logo = styled(MImage)`

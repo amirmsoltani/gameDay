@@ -7,6 +7,7 @@ export const QuestionPreviewWrapper = styled(Grid)`
     height: 100%;
     overflow: hidden scroll;
     padding: 43px 80px 43px 46px;
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }

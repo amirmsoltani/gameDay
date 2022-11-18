@@ -1,5 +1,4 @@
 import { Grid, TextareaAutosize } from '@mui/material';
-import { stat } from 'fs';
 import React, { FC, useRef, useState } from 'react';
 import { StarFillIcon } from 'src/assets/common/StarIcon';
 import PlayIcon from 'src/assets/icons/play-icon';

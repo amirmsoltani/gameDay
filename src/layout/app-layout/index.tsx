@@ -117,7 +117,11 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
                     <div className="sidebar-header">
                         <S.LogoBox>
                             <S.Logo resources={{ src: '/images/gd-logo.png' }} />
-                            <S.TextLogo resources={{ src: '/images/logo-text.png' }} />
+                            <span>
+                                {(data?.user_login?.result.firstName || '') +
+                                    ' ' +
+                                    (data?.user_login?.result.lastName || '')}
+                            </span>
                         </S.LogoBox>
                     </div>
                     <div className="sidebar-body">

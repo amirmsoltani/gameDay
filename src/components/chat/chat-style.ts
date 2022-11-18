@@ -13,6 +13,7 @@ export const Content = styled(Grid)`
 export const LeftSide = styled(Grid)`
     overflow: hidden scroll;
     height: 100%;
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -43,7 +44,7 @@ export const CatalogLearn = styled.div`
     flex: 1;
     height: 100%;
     overflow: hidden scroll;
-
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -169,7 +170,7 @@ export const CatalogSkills = styled.div`
         .catalog-skill__list-body{
             height:100%;
             overflow: hidden scroll;
-
+            scrollbar-width: none;
             ::-webkit-scrollbar {
                 display: none;
             }

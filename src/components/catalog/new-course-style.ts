@@ -6,7 +6,7 @@ export const NewCourseWrapper = styled.div`
     height: 100%;
     max-height: 100%;
     overflow: hidden scroll;
-
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }

@@ -13,7 +13,7 @@ export const ChatWrapper = styled.div`
     height: calc(100% - 100px);
     max-height: calc(100% - 100px);
     overflow: hidden scroll;
-
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }

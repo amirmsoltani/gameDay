@@ -95,6 +95,7 @@ export const Content = styled(Grid)`
 export const LeftSide = styled(Grid)`
     overflow: hidden scroll;
     height: 100%;
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -128,6 +129,7 @@ export const CatalogLearn = styled.div`
     height: 100%;
     overflow: hidden scroll;
 
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -145,6 +147,7 @@ export const CatalogLearn = styled.div`
             align-items: center;
             width: 50px;
             height: 50px;
+            cursor: pointer;
         }
     }
     .catalog-learn__description-title {
@@ -155,6 +158,13 @@ export const CatalogLearn = styled.div`
         .box-btn__btn{
             background-color: ${palette.primary.main};
             fill:${palette.common.white};
+            &.delete{
+                border:none;
+                background-color:${palette.error.main};
+            }
+            :disabled{
+                background-color:${palette.grey.dark};
+            }
         }
         .catalog-learn__description-text {
             color: ${palette.grey.dark};
@@ -267,7 +277,7 @@ export const CatalogSkills = styled.div`
         .catalog-skill__list-body{
             height:100%;
             overflow: hidden scroll;
-
+            scrollbar-width: none;
             ::-webkit-scrollbar {
                 display: none;
             }
@@ -391,7 +401,7 @@ export const CatalogComment = styled.div`
 
     .comment__title {
     }
-
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
@@ -528,6 +538,7 @@ export const CatalogComment = styled.div`
             }
         }
         .comment__replay-box{
+            padding-right:40px;
             display:flex;
             flex-direction:column;
             align-items:flex-end;

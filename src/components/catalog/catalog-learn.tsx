@@ -5,9 +5,13 @@ import React, { FC, Fragment, useState } from 'react';
 import CommentIcon from 'src/assets/icons/comment-icon';
 import PlayIcon from 'src/assets/icons/play-icon';
 import SaveIcon from 'src/assets/icons/save-icon';
-import { GetLessonQuery, useInfiniteGetLessonQuery } from 'src/graphql/generated';
+import TrashIcon from 'src/assets/icons/trash-icon';
+import {
+    GetLessonQuery,
+    useDeleteCatalogMutation,
+    useInfiniteGetLessonQuery
+} from 'src/graphql/generated';
 import { PrimarySpinner } from '../base/loader/spinner';
-import { MButton } from '../base/MButton';
 import VideoPlayer from '../vide-player';
 import * as S from './catalog-style';
 
@@ -15,10 +19,11 @@ dayjs.extend(duration);
 
 type PropsType = {
     id: number;
+    onDelete: () => void;
 };
 
 type ListType = GetLessonQuery['lesson_getLessons']['result']['items'];
-const CatalogLearnSection: FC<PropsType> = ({ id }) => {
+const CatalogLearnSection: FC<PropsType> = ({ id, onDelete }) => {
     const [play, setPlay] = useState<string | null>(null);
 
     const [itemList, setItemList] = useState<ListType>([]);
@@ -49,6 +54,12 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
         }
     );
 
+    const deleteCatalog = useDeleteCatalogMutation({
+        onSuccess: () => {
+            onDelete();
+        }
+    });
+
     if (isFetching && !isFetchingNextPage)
         return (
             <S.Content display={'flex'} justifyContent="center" alignItems="center">
@@ -65,6 +76,12 @@ const CatalogLearnSection: FC<PropsType> = ({ id }) => {
                 }
             }}>
             <div className="catalog-learn__box-btn">
+                <button
+                    className="box-btn__btn delete"
+                    onClick={() => deleteCatalog.mutate({ id })}
+                    disabled={deleteCatalog.isLoading}>
+                    <TrashIcon />
+                </button>
                 <Link href={'/catalog/?comment=true'}>
                     <a className="box-btn__btn">
                         <CommentIcon />
