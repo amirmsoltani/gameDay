@@ -24,6 +24,7 @@ export const JobLearn = styled.div`
         flex: 1;
         height: 100%;
         overflow: hidden scroll;
+        scrollbar-width: none;
         ::-webkit-scrollbar {
             display: none;
         }
@@ -84,7 +85,7 @@ export const JobLearn = styled.div`
         border-radius:20px;
         padding: 15px 0;
         box-shadow: 1px 1px 10px ${palette.common.black}0D;
-       
+        scrollbar-width: none;
         ::-webkit-scrollbar {
             display: none;
         }
@@ -105,6 +106,7 @@ export const JobLearn = styled.div`
                     justify-content:flex-end;
                 }
             }
+            scrollbar-width: none;
             ::-webkit-scrollbar {
                 display: none;
             }

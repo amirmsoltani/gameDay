@@ -40,6 +40,7 @@ function CatalogPage() {
     const [end, setEnd] = useState(false);
     const [state, setState] = useState<{
         tab: 'skills' | 'learn' | 'comments';
+        index?: number;
         activeCategory?: number;
     } | null>(null);
     const [isShow, setIsShow] = useState(false);
@@ -165,11 +166,11 @@ function CatalogPage() {
                     }
                 }}>
                 <Grid item xs={12} md={11} className="left-side__cards">
-                    {itemList.map((item) => (
+                    {itemList.map((item, index) => (
                         <CatalogCard
                             key={item.title}
                             onChangeTab={(tab) => {
-                                setState({ ...state, tab });
+                                setState({ ...state, tab, index });
                             }}
                             onClick={() => {
                                 if (item.id !== state.activeCategory)
@@ -194,7 +195,17 @@ function CatalogPage() {
                 <Grid item xs={0} md={1} className="left-side__column" />
             </S.LeftSide>
             <S.RightSide container item md={7.5} xs={12}>
-                {<Tab id={state.activeCategory} />}
+                {
+                    <Tab
+                        id={state.activeCategory}
+                        onDelete={() => {
+                            const newItems = [...itemList];
+                            newItems.splice(state.index, 1);
+                            setItemList(newItems);
+                            setState({ tab: 'learn', index: 0, activeCategory: newItems[0]?.id });
+                        }}
+                    />
+                }
             </S.RightSide>
             {isShow && (
                 <Grid

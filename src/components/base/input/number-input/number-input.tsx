@@ -21,6 +21,7 @@ const NumberInput: FC<PropsType> = ({
     min,
     max,
     sign,
+    onChange: inputOnChange,
     ...props
 }) => {
     const input = useRef<HTMLInputElement>(null);
@@ -49,7 +50,15 @@ const NumberInput: FC<PropsType> = ({
                 min={min}
                 max={max}
                 ref={input}
-                disabled={!!sign}
+                onChange={(event) => {
+                    let value = event.target.value;
+                    value = value.replace(/[^0-9]+/g, '');
+                    if (+value > 100) value = '100';
+                    else if (+value < 0) value = '0';
+                    event.target.value = value + '%';
+                    inputOnChange?.(event);
+                }}
+                // disabled={!!sign}
             />
             <div className={buttonWrapperClassName + ' number-input__button-wrapper'}>
                 <button

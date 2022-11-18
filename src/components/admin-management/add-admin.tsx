@@ -90,7 +90,7 @@ function AddAdmin() {
     const router = useRouter();
     const createAdmin = useCreateAdminMutation({
         onSuccess: () => {
-            router.replace('admin-management');
+            router.replace('/admin-management');
         }
     });
     return (

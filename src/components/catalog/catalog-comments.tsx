@@ -49,7 +49,7 @@ const CatalogCommentsSection: FC<PropsType> = ({ id }) => {
         setItemList(newList);
     };
 
-    if (comments.isLoading) <Loading />;
+    if (comments.isLoading) return <Loading />;
     return (
         <CatalogComment
             onScroll={(event: any) => {

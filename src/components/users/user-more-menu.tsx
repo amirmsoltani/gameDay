@@ -59,7 +59,7 @@ const MoreMenu: React.FC<PropsType> = ({ OnClick,status }) => {
                             OnClick();
                         }}
                         sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {status === ActiveStatus.Accepted?"suspended":"unSuspend"}
+                        {status === ActiveStatus.Accepted?"suspended":"Remove Suspension"}
                     </MenuItem>
                 ))}
             </Menu>

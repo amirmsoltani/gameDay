@@ -128,6 +128,7 @@ export const ListHeader = styled(Grid)`
 
 export const ListBody = styled(Grid)`
     overflow-y: scroll;
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }

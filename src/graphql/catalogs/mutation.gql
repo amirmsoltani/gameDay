@@ -59,6 +59,12 @@ mutation addCatalog($input: SkillCategoryInput) {
     }
 }
 
+mutation deleteCatalog($id:Int!){
+  skillCategory_deleteSkillCategory(id:$id){
+    status
+  }
+}
+
 mutation createSkillQuestion($input: SkillQuestionInput!) {
     skillQuestion_addQuestion(input: $input) {
         result {

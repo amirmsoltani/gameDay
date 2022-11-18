@@ -60,6 +60,7 @@ export const Header = styled(Grid)`
 export const LeftSide = styled(Grid)`
     overflow: hidden scroll;
     height: 100%;
+    scrollbar-width: none;
     ::-webkit-scrollbar {
         display: none;
     }
