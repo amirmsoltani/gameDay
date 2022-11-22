@@ -95,12 +95,19 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
         refetchOnReconnect: false,
         keepPreviousData: true
     });
+
     const { asPath, replace } = useRouter();
     const { signOut } = useAuthPage();
 
     useEffect(() => {
         if (!getCookieStorage(ACCESS_TOKEN_KEY)) replace('/login');
-    }, []);
+        const access = data?.user_login.result.userRoles.find((role) =>
+            asPath.includes(role.role.title.toLowerCase().replace(' ', '-'))
+        );
+        if (data && !access) {
+            replace('/403');
+        }
+    }, [data]);
 
     if (status === 'loading') {
         return <AppLoadingPage />;
