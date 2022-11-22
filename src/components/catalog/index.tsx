@@ -1,4 +1,5 @@
 import LayoutHeader from '@/layout/app-layout/layout-header';
+import keyGenerator from '@/utils/key-generator';
 import { Grid } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -66,23 +67,26 @@ function CatalogPage() {
                 if (length === 1) {
                     totalItems.current =
                         pages[0].skillcategory_getSkillCategories!.result!.totalCount;
-                    setItemList([...pages[0].skillcategory_getSkillCategories.result.items]);
+                    setItemList(keyGenerator([...pages[0].skillcategory_getSkillCategories.result.items]));
                     setState({
                         tab: 'learn',
                         activeCategory:
                             pages[0].skillcategory_getSkillCategories.result.items[0]?.id
                     });
                 } else {
-                    setItemList([
+                    setItemList(keyGenerator([
                         ...itemList,
                         ...(pages[length - 1].skillcategory_getSkillCategories.result.items || [])
-                    ]);
+                    ]));
                 }
                 if (
                     pages[length - 1].skillcategory_getSkillCategories.result.pageInfo
                         .hasNextPage === false
                 ) {
                     setEnd(true);
+                }
+                else if (end) {
+                    setEnd(false);
                 }
             },
             getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
@@ -168,7 +172,7 @@ function CatalogPage() {
                 <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item, index) => (
                         <CatalogCard
-                            key={item.title}
+                            key={item.key}
                             onChangeTab={(tab) => {
                                 setState({ ...state, tab, index });
                             }}

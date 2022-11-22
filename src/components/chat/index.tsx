@@ -16,6 +16,7 @@ import SearchInput from '../base/input/search-input';
 import ChatSection from './chat-section';
 import Loading from '../loading';
 import * as S from './chat-style';
+import keyGenerator from '@/utils/key-generator';
 
 const dataSwitch = {
     Practice: 'Interview practice',
@@ -58,23 +59,29 @@ const ChatPage: FC<propsType> = ({ name }) => {
                     const length = pages.length;
                     if (length === 1) {
                         totalItems.current = pages[0].message_getAllMessages!.result!.totalCount;
-                        setItemList([...pages[0].message_getAllMessages.result.items]);
+                        setItemList(
+                            keyGenerator([...pages[0].message_getAllMessages.result.items])
+                        );
                         setState({
                             activeChat: pages[0].message_getAllMessages.result.items[0]?.id,
                             user: pages[0].message_getAllMessages.result.items[0]?.firstUser,
                             date: pages[0].message_getAllMessages.result.items[0]?.latestMessageDate
                         });
                     } else {
-                        setItemList([
-                            ...itemList,
-                            ...(pages[length - 1].message_getAllMessages.result.items || [])
-                        ]);
+                        setItemList(
+                            keyGenerator([
+                                ...itemList,
+                                ...(pages[length - 1].message_getAllMessages.result.items || [])
+                            ])
+                        );
                     }
                     if (
                         pages[length - 1].message_getAllMessages.result.pageInfo.hasNextPage ===
                         false
                     ) {
                         setEnd(true);
+                    } else if (end) {
+                        setEnd(false);
                     }
                 },
                 getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
@@ -126,7 +133,7 @@ const ChatPage: FC<propsType> = ({ name }) => {
                 <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item) => (
                         <PersonCard
-                            key={item.id}
+                            key={item.key}
                             onClick={() => {
                                 if (item.id !== state.activeChat)
                                     setState({
