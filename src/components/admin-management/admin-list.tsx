@@ -30,9 +30,13 @@ const MapTextToIcon = {
     'Admin Management': <ManagementIcon key={8} />
 };
 
-type PropsType = { data: Partial<User>; onSuspended: (status: ActiveStatus) => void };
+type PropsType = {
+    data: Partial<User>;
+    onSuspended: (status: ActiveStatus) => void;
+    self?: boolean;
+};
 
-const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
+const AdminManagementList: FC<PropsType> = ({ data, onSuspended, self = false }) => {
     const updateUserActiveStatus = useChangeUserActiveStatusMutation({
         onSuccess: () => {
             onSuspended(ActiveStatus.Suspend);
@@ -71,14 +75,16 @@ const AdminManagementList: FC<PropsType> = ({ data, onSuspended }) => {
                     {data.userRoles.map((role) => MapTextToIcon[role.role.title])}
                 </Grid>
                 <Grid lg={0.5} xs={12} className={'list-header__item'} item>
-                    <MoreMenu
-                        status={data.activeStatus}
-                        OnClick={() => {
-                            data.activeStatus === ActiveStatus.Accepted
-                                ? updateUserActiveStatus.mutate({ id: data.id })
-                                : unSuspend.mutate({ id: data.id });
-                        }}
-                    />
+                    {!self && (
+                        <MoreMenu
+                            status={data.activeStatus}
+                            OnClick={() => {
+                                data.activeStatus === ActiveStatus.Accepted
+                                    ? updateUserActiveStatus.mutate({ id: data.id })
+                                    : unSuspend.mutate({ id: data.id });
+                            }}
+                        />
+                    )}
                 </Grid>
             </S.ListBodyUser>
             <Divider orientation="vertical" flexItem />

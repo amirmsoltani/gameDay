@@ -20,9 +20,10 @@ type PropsType = {
         activeStatus?: ActiveStatus;
     };
     onChange: (status: ActiveStatus) => void;
+    self?: boolean;
 };
 
-export const UserList: FC<PropsType> = ({ data, onChange }) => {
+export const UserList: FC<PropsType> = ({ data, onChange, self = false }) => {
     const updateUserActiveStatus = useChangeUserActiveStatusMutation({
         onSuccess: () => {
             onChange(ActiveStatus.Suspend);
@@ -75,14 +76,16 @@ export const UserList: FC<PropsType> = ({ data, onChange }) => {
                     )}
                 </Grid>
                 <Grid lg={0.5} xs={12} className={'list-header__item'} item>
-                    <MoreMenu
-                        OnClick={() => {
-                            data.activeStatus === ActiveStatus.Accepted
-                                ? updateUserActiveStatus.mutate({ id: data.id })
-                                : unSuspend.mutate({ id: data.id });
-                        }}
-                        status={data.activeStatus}
-                    />
+                    {!self && (
+                        <MoreMenu
+                            OnClick={() => {
+                                data.activeStatus === ActiveStatus.Accepted
+                                    ? updateUserActiveStatus.mutate({ id: data.id })
+                                    : unSuspend.mutate({ id: data.id });
+                            }}
+                            status={data.activeStatus}
+                        />
+                    )}
                 </Grid>
             </S.ListBodyUser>
             <Divider orientation="vertical" flexItem />

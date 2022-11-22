@@ -17,7 +17,7 @@ if (getApps().length < 1) {
     initializeApp(config.firebase);
 }
 
-export function fbGetToken(): Promise<string> {
+export function fbGetToken(signUp = false): Promise<string> {
     return new Promise(async (resolve, reject) => {
         try {
             const fbUser = await getAuth()?.currentUser;
@@ -28,7 +28,7 @@ export function fbGetToken(): Promise<string> {
                             const idToken = await user?.getIdToken(/* forceRefresh */ true);
                             if (idToken) {
                                 // TODO uncomment bottom line (for silent refresh)
-                                saveCookie(ACCESS_TOKEN_KEY, idToken);
+                                if (!signUp) saveCookie(ACCESS_TOKEN_KEY, idToken);
                                 resolve(idToken);
                             }
                             unsubscribe();
@@ -46,7 +46,7 @@ export function fbGetToken(): Promise<string> {
 
                 if (idToken) {
                     // TODO uncomment bottom line (for silent refresh)
-                    saveCookie(ACCESS_TOKEN_KEY, idToken);
+                    if (!signUp) saveCookie(ACCESS_TOKEN_KEY, idToken);
                     resolve(idToken);
                 }
             }
@@ -86,7 +86,7 @@ export async function fbSignUpToken(email: string, password: string) {
     return new Promise(async (resolve, reject) => {
         try {
             const res = await fbSignUp(email, password);
-            const idToken = await fbGetToken();
+            const idToken = await fbGetToken(true);
             resolve(idToken);
         } catch (err) {
             console.error(err, 'err3');

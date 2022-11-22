@@ -220,9 +220,6 @@ function AddAdmin() {
                                             }
                                             control={
                                                 <Checkbox
-                                                    checked={
-                                                        formik.current?.values.access[index].value
-                                                    }
                                                     onChange={(event) => {
                                                         formik.current.setFieldValue(
                                                             'access.' + index,

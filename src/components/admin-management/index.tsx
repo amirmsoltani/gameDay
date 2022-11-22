@@ -3,6 +3,7 @@ import {
     ActiveStatus,
     GetAllUsersQuery,
     SortEnumType,
+    useGetCurrentUserQuery,
     useInfiniteGetAllUsersQuery,
     User,
     UserSortInput,
@@ -18,6 +19,7 @@ import { PlusIcon } from 'src/assets/common/PlusIcon';
 import AdminManagementList from './admin-list';
 import Loading from '../loading';
 import Sort from '../sort';
+import keyGenerator from '@/utils/key-generator';
 
 function AdminManagement() {
     const [sort, setSort] = useState<UserSortInput>({
@@ -63,20 +65,31 @@ function AdminManagement() {
                 const length = pages.length;
                 if (length === 1) {
                     totalItems.current = pages[0].user_getUsers!.result!.totalCount;
-                    setItemList([...pages[0].user_getUsers.result.items]);
+                    setItemList(keyGenerator([...pages[0].user_getUsers.result.items]));
                 } else {
-                    setItemList([
-                        ...itemList,
-                        ...(pages[length - 1].user_getUsers.result.items || [])
-                    ]);
+                    setItemList(
+                        keyGenerator([
+                            ...itemList,
+                            ...(pages[length - 1].user_getUsers.result.items || [])
+                        ])
+                    );
                 }
                 if (pages[length - 1].user_getUsers.result.pageInfo.hasNextPage === false) {
                     setEnd(true);
+                } else if (!end) {
+                    setEnd(false);
                 }
             },
             getNextPageParam: (_, pages) => ({ skip: pages.length * 10 })
         }
     );
+
+    const self = useGetCurrentUserQuery(undefined, {
+        enabled: false,
+        refetchOnWindowFocus: false,
+        refetchOnReconnect: false,
+        keepPreviousData: true
+    });
 
     if (isLoading) return <Loading />;
     return (
@@ -141,6 +154,7 @@ function AdminManagement() {
                 <S.ListBody gridRow={'span 11'}>
                     {itemList.map((user, index) => (
                         <AdminManagementList
+                            self={self.data?.user_login.result.id === user.id}
                             key={user.id}
                             data={user as Partial<User>}
                             onSuspended={(status: ActiveStatus) => {

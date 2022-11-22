@@ -1,7 +1,5 @@
-import styled from "@emotion/styled";
-import { Grid } from "@mui/material";
-
-
+import styled from '@emotion/styled';
+import { Grid } from '@mui/material';
 
 export const Content = styled(Grid)`
     height: 100%;
@@ -25,6 +23,7 @@ export const ChatWrapper = styled.div`
     }
     .chat-info {
         padding-right: 30px;
+        width: 100%;
         .info__user {
             display: flex;
             flex-direction: column;

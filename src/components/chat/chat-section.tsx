@@ -18,7 +18,7 @@ type PropsType = {
 
 
 
-type ListType = Message_GetConversationQuery['message_getConversation']['result']['items'];
+type ListType = Message_GetConversationQuery['message_getFullConversation']['result']['items'];
 const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [itemList, setItemList] = useState<ListType>([]);
@@ -34,7 +34,7 @@ const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
             keepPreviousData: true
         }
     );
-    const attachments = data?.userInterviewQuestion_getAllByUserId?.result;
+    // const attachments = data?.userInterviewQuestion_getAllByUserId?.result;
 
     const { isFetching, isFetchingNextPage, fetchNextPage } =
         useInfiniteMessage_GetConversationQuery(
@@ -119,21 +119,21 @@ const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
                         make a type specimen book. It has survived not only five centuries, but also
                         the leap into electronic
                     </p> */}
-                    {(attachments?.totalCount || user.cVFileUrl) &&
+                    {/* {(attachments?.totalCount || user.cVFileUrl) &&
                     ['Practice', 'Resume check'].includes(name) ? (
                         <div className="info__attachment">
                             <AttachmentIcon />
                             {attachments?.totalCount} Attachments
                         </div>
-                    ) : null}
-                    {name === 'Practice' && attachments
+                    ) : null} */}
+                    {/* {name === 'Practice' && attachments
                         ? attachments.items?.map((attachment) => (
                               <VideoMessage
                                   key={attachment.createdDate}
                                   videoUrl={attachment.videoUrl}
                               />
                           ))
-                        : null}
+                        : null} */}
                     {name === 'Resume check' && user.cVFileUrl ? (
                         <VideoMessage videoUrl={user.cVFileUrl} messageType={MessageType.File} />
                     ) : null}

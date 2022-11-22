@@ -116,7 +116,7 @@ const CatalogSkillSection: FC<PropsType> = ({ id }) => {
                         className="catalog-skill__card-body"
                         key={skill.id}
                         onClick={() => {
-                            router.push(`/catalog/${skill.id}/skill`);
+                            router.push(`/catalog/skill/?id=${skill.id}`);
                         }}>
                         <Grid md={1} xs={1} className="card-body__item card-body__index" item>
                             {index + 1}

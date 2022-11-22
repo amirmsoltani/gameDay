@@ -11,7 +11,7 @@ export const PersonCardWrapper = styled.div`
     flex-wrap: wrap;
 
     &.attachment {
-        height: 215px;
+        min-height: 215px;
     }
 
     .person-card__avatar {

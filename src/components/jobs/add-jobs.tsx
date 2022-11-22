@@ -443,7 +443,7 @@ const AddJobs: FC<PropsType> = () => {
                                         isOptionEqualToValue={(option, value) =>
                                             option.value === value.value
                                         }
-                                        value={formik.current.values.skills}
+                                        value={formik.current?.values.skills}
                                         multiple
                                         id="skills"
                                         className="category__input"
