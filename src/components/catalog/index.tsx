@@ -67,25 +67,29 @@ function CatalogPage() {
                 if (length === 1) {
                     totalItems.current =
                         pages[0].skillcategory_getSkillCategories!.result!.totalCount;
-                    setItemList(keyGenerator([...pages[0].skillcategory_getSkillCategories.result.items]));
+                    setItemList(
+                        keyGenerator([...pages[0].skillcategory_getSkillCategories.result.items])
+                    );
                     setState({
                         tab: 'learn',
                         activeCategory:
                             pages[0].skillcategory_getSkillCategories.result.items[0]?.id
                     });
                 } else {
-                    setItemList(keyGenerator([
-                        ...itemList,
-                        ...(pages[length - 1].skillcategory_getSkillCategories.result.items || [])
-                    ]));
+                    setItemList(
+                        keyGenerator([
+                            ...itemList,
+                            ...(pages[length - 1].skillcategory_getSkillCategories.result.items ||
+                                [])
+                        ])
+                    );
                 }
                 if (
                     pages[length - 1].skillcategory_getSkillCategories.result.pageInfo
                         .hasNextPage === false
                 ) {
                     setEnd(true);
-                }
-                else if (end) {
+                } else if (end) {
                     setEnd(false);
                 }
             },
@@ -172,7 +176,7 @@ function CatalogPage() {
                 <Grid item xs={12} md={11} className="left-side__cards">
                     {itemList.map((item, index) => (
                         <CatalogCard
-                            key={item.key}
+                            key={item.key + index}
                             onChangeTab={(tab) => {
                                 setState({ ...state, tab, index });
                             }}

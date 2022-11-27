@@ -131,9 +131,9 @@ const ChatPage: FC<propsType> = ({ name }) => {
                     }
                 }}>
                 <Grid item xs={12} md={11} className="left-side__cards">
-                    {itemList.map((item) => (
+                    {itemList.map((item, i) => (
                         <PersonCard
-                            key={item.key}
+                            key={item.key + i}
                             onClick={() => {
                                 if (item.id !== state.activeChat)
                                     setState({

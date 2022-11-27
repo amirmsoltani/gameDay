@@ -93,8 +93,7 @@ const CatalogLearnSection: FC<PropsType> = ({ id, onDelete }) => {
                     </a>
                 </Link>
             </div>
-            <span className="catalog-learn__description-title">Description</span>
-            <p className="catalog-learn__description-text">lorem ipsome</p>
+
             {itemList.map((lesson, index) => (
                 <Fragment key={lesson.title}>
                     <div className="catalog-learn__card-header">

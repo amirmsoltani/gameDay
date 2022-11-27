@@ -107,7 +107,14 @@ const AppLayout: FC<PropsType> = ({ children, headerContent }) => {
                 asPath.includes('catalog')
         );
         if (data && !access) {
-            replace('/403');
+            const userRole = data.user_login.result.userRoles?.[0];
+            if (userRole)
+                replace(
+                    userRole.role.title === 'catalogs'
+                        ? '/catalog'
+                        : userRole.role.title.toLowerCase().replace(/\s/g, '-')
+                );
+            else replace('/403');
         }
     }, [data]);
 

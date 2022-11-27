@@ -35,14 +35,16 @@ function JobsPage() {
                         activeCategory: pages[0].job_getJobs.result.items[0]?.id
                     });
                 } else {
-                    setItemList(keyGenerator([
-                        ...itemList,
-                        ...(pages[length - 1].job_getJobs.result.items || [])
-                    ]));
+                    setItemList(
+                        keyGenerator([
+                            ...itemList,
+                            ...(pages[length - 1].job_getJobs.result.items || [])
+                        ])
+                    );
                 }
                 if (pages[length - 1].job_getJobs.result.pageInfo.hasNextPage === false) {
                     setEnd(true);
-                }else if (end) {
+                } else if (end) {
                     setEnd(false);
                 }
             },
@@ -92,9 +94,9 @@ function JobsPage() {
                     }
                 }}>
                 <Grid item xs={12} md={11} className="left-side__cards">
-                    {itemList.map((item) => (
+                    {itemList.map((item, i) => (
                         <JobsCard
-                            key={item.key}
+                            key={item.key + i}
                             onClick={() => {
                                 if (item.id !== state.activeCategory)
                                     setState({

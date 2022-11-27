@@ -21,7 +21,7 @@ export const CardWrapper = styled.div`
     .catalog-card__colum2 {
         padding-right: 30px;
         .catalog-card__image {
-            width: 105px;
+            max-width: 185px;
             height: 105px;
         }
     }

@@ -48,7 +48,6 @@ const MoreMenu: React.FC<PropsType> = ({ OnClick,status }) => {
                 PaperProps={{
                     style: {
                         maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '15ch'
                     }
                 }}>
                 {options.map((option) => (

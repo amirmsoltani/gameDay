@@ -25,16 +25,7 @@ const ChatSection: FC<PropsType> = ({ conversationId, user, date, name }) => {
     const [end, setEnd] = useState(false);
     const chatDate = dayjs(date);
 
-    const { data } = useGetInterviewVideoQuery(
-        { userId: user.id },
-        {
-            enabled: name === 'Practice',
-            refetchOnWindowFocus: false,
-            refetchOnReconnect: false,
-            keepPreviousData: true
-        }
-    );
-    // const attachments = data?.userInterviewQuestion_getAllByUserId?.result;
+   
 
     const { isFetching, isFetchingNextPage, fetchNextPage } =
         useInfiniteMessage_GetConversationQuery(
