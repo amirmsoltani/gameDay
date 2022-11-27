@@ -106,7 +106,6 @@ const CatalogLearnSection: FC<PropsType> = ({ id, onDelete }) => {
                         </div>
                     </div>
                     {lesson.topics
-                        .filter((topic) => !topic.isDeleted)
                         .map((topic) => (
                             <button
                                 className="catalog-learn__card-lesson"

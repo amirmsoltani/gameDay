@@ -123,6 +123,7 @@ export const RightSide = styled(Grid)`
 `;
 
 export const CatalogLearn = styled.div`
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
     flex: 1;
