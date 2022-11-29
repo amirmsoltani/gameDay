@@ -20,6 +20,8 @@ export const CardWrapper = styled.div`
         justify-content: space-between;
 
         .jobs-card__companyLogo {
+            display: flex;
+            align-items: center;
             .jobs-card__logo {
                 width: 30px;
                 height: 30px;

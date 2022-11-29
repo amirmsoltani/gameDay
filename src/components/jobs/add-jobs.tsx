@@ -84,30 +84,30 @@ const initialValues: ValueType = {
 
 const experience = [
     { option: ExperienceLevel.All, value: 0 },
-    { option: ExperienceLevel.Entry, value: 1 },
-    { option: ExperienceLevel.Junior, value: 2 },
-    { option: ExperienceLevel.Mid, value: 3 },
-    { option: ExperienceLevel.NoExperience, value: 4 },
-    { option: ExperienceLevel.Senior, value: 5 }
+    { option: ExperienceLevel.Junior, value: 1 },
+    { option: ExperienceLevel.Mid, value: 2 },
+    { option: ExperienceLevel.Senior, value: 3 },
+    { option: ExperienceLevel.Entry, value: 4 },
+    { option: ExperienceLevel.NoExperience, value: 5 }
 ];
 
 const jobTypes = [
     { option: JobType.All, value: 0 },
-    { option: JobType.Contract, value: 1 },
-    { option: JobType.Freelance, value: 2 },
-    { option: JobType.FullTime, value: 3 },
-    { option: JobType.Intership, value: 4 },
-    { option: JobType.PartTime, value: 5 },
+    { option: JobType.FullTime, value: 1 },
+    { option: JobType.PartTime, value: 2 },
+    { option: JobType.Contract, value: 3 },
+    { option: JobType.Freelance, value: 4 },
+    { option: JobType.Intership, value: 5 },
     { option: JobType.Temporary, value: 6 }
 ];
 
 const educations = [
     { option: Education.All, value: 0 },
-    { option: Education.Associate, value: 1 },
-    { option: Education.Bachelor, value: 2 },
-    { option: Education.Doctoral, value: 3 },
-    { option: Education.HighSchool, value: 4 },
-    { option: Education.Master, value: 5 }
+    { option: Education.HighSchool, value: 1 },
+    { option: Education.Associate, value: 2 },
+    { option: Education.Bachelor, value: 3 },
+    { option: Education.Master, value: 4 },
+    { option: Education.Doctoral, value: 5 }
 ];
 const renderInput = (props) => <TextField {...props} />;
 
@@ -175,10 +175,10 @@ const AddJobs: FC<PropsType> = () => {
             refetchOnReconnect: false,
             keepPreviousData: true,
             onSuccess: (data) => {
-                const newOptions = data.skill_getSkills.result.items.map((skill) => ({
+                const newOptions = data.skill_getSkills.result.items.map((skill, index) => ({
                     title: skill.title,
                     value: skill.id,
-                    key: skill.title
+                    key: skill.title + index
                 }));
                 setOptions(newOptions);
             }
@@ -250,7 +250,6 @@ const AddJobs: FC<PropsType> = () => {
             });
         }
     });
-    console.log(formik.current?.errors);
 
     return (
         <S.Content>
@@ -337,7 +336,7 @@ const AddJobs: FC<PropsType> = () => {
                         } else {
                             beforeCreateJob.mutate({
                                 categoryInput: { title: values.category },
-                                companyInput: { iconUrl: values.image, title: values.title }
+                                companyInput: { iconUrl: values.image, title: values.company }
                             });
                         }
                     }}
@@ -437,8 +436,10 @@ const AddJobs: FC<PropsType> = () => {
                             </Grid>
                             <Grid item lg={13} marginBottom={5} className="form__control">
                                 <label>Soft skills required</label>
-                                {(router.query.id !== undefined && job.status === 'success') ||
-                                router.query.id === undefined ? (
+                                {(router.query.id !== undefined &&
+                                    job.status === 'success' &&
+                                    options.length) ||
+                                (router.query.id === undefined && options.length) ? (
                                     <Autocomplete
                                         isOptionEqualToValue={(option, value) =>
                                             option.value === value.value
@@ -458,6 +459,8 @@ const AddJobs: FC<PropsType> = () => {
                                         }}
                                         onInputChange={(event: any) => setSkill(event.target.value)}
                                         onChange={(_, value) => {
+                                            console.log(value);
+
                                             formik.current.setFieldValue('skills', value);
                                         }}
                                         filterOptions={() => options || []}
@@ -469,7 +472,7 @@ const AddJobs: FC<PropsType> = () => {
                                 <InputTextarea
                                     label="Job Description"
                                     errorSpaceOn={true}
-                                    name="Job Description"
+                                    name="jobDescription"
                                     rows="5"
                                     placeholder="Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est eopksio laborum. Sed ut perspiciatis unde omnis istpoe natus error sit voluptatem accusantium doloremque"
                                     fullWidth
